@@ -242,11 +242,11 @@ function renderSharedArea() {
         </div>
         <div class="shared-item">
           <i class="fa-solid fa-clock"></i>
-          <span><strong>Cut Started:</strong> ${activeCut.start_time || 'N/A'}</span>
+          <span><strong>Cut Started:</strong> ${formatTimeTo12Hr(activeCut.start_time) || 'N/A'}</span>
         </div>
         <div class="shared-item">
           <i class="fa-solid fa-circle-chevron-right"></i>
-          <span><strong>Est. Restoration:</strong> <span style="color:#67e8f9; font-weight:600;">${activeCut.expected_restoration_time || 'Pending Estimate'}</span></span>
+          <span><strong>Est. Restoration:</strong> <span style="color:#67e8f9; font-weight:600;">${formatTimeTo12Hr(activeCut.expected_restoration_time) || 'Pending Estimate'}</span></span>
         </div>
         <div class="shared-item">
           <div class="status-badge ${badgeClass}">
@@ -342,7 +342,10 @@ function renderPinnedArea() {
     pinnedCard.innerHTML = `
       <div class="pinned-card-header">
         <h3><i class="fa-solid fa-star" style="color: var(--warning-color);"></i> Pinned Locality</h3>
-        <button class="btn-refresh" style="background:none; border:none; color:var(--text-dim); cursor:pointer;" onclick="unpinArea()"><i class="fa-solid fa-trash-can"></i> Unpin</button>
+        <div style="display: flex; gap: 12px; align-items: center;">
+          <button class="btn-refresh" style="background:none; border:none; color:var(--text-dim); cursor:pointer; display:flex; align-items:center; gap:4px;" onclick="shareArea('${pinnedArea.districtId}', '${pinnedArea.districtName}', '${pinnedArea.feeder}', '${pinnedArea.area}')" title="Share live status link"><i class="fa-solid fa-share-nodes"></i> Share</button>
+          <button class="btn-refresh" style="background:none; border:none; color:var(--text-dim); cursor:pointer; display:flex; align-items:center; gap:4px;" onclick="unpinArea()"><i class="fa-solid fa-trash-can"></i> Unpin</button>
+        </div>
       </div>
       <div class="pinned-card-body">
         <div class="pinned-item" style="grid-column: 1 / -1;">
@@ -351,11 +354,11 @@ function renderPinnedArea() {
         </div>
         <div class="pinned-item">
           <i class="fa-solid fa-clock"></i>
-          <span><strong>Cut Started:</strong> ${activeCut.start_time || 'N/A'}</span>
+          <span><strong>Cut Started:</strong> ${formatTimeTo12Hr(activeCut.start_time) || 'N/A'}</span>
         </div>
         <div class="pinned-item">
           <i class="fa-solid fa-circle-chevron-right"></i>
-          <span><strong>Est. Restoration:</strong> <span style="color:#67e8f9; font-weight:600;">${activeCut.expected_restoration_time || 'Pending Estimate'}</span></span>
+          <span><strong>Est. Restoration:</strong> <span style="color:#67e8f9; font-weight:600;">${formatTimeTo12Hr(activeCut.expected_restoration_time) || 'Pending Estimate'}</span></span>
         </div>
         <div class="pinned-item">
           <div class="status-badge ${badgeClass}">
@@ -372,7 +375,10 @@ function renderPinnedArea() {
     pinnedCard.innerHTML = `
       <div class="pinned-card-header">
         <h3><i class="fa-solid fa-star" style="color: var(--warning-color);"></i> Pinned Locality</h3>
-        <button class="btn-refresh" style="background:none; border:none; color:var(--text-dim); cursor:pointer;" onclick="unpinArea()"><i class="fa-solid fa-trash-can"></i> Unpin</button>
+        <div style="display: flex; gap: 12px; align-items: center;">
+          <button class="btn-refresh" style="background:none; border:none; color:var(--text-dim); cursor:pointer; display:flex; align-items:center; gap:4px;" onclick="shareArea('${pinnedArea.districtId}', '${pinnedArea.districtName}', '${pinnedArea.feeder}', '${pinnedArea.area}')" title="Share live status link"><i class="fa-solid fa-share-nodes"></i> Share</button>
+          <button class="btn-refresh" style="background:none; border:none; color:var(--text-dim); cursor:pointer; display:flex; align-items:center; gap:4px;" onclick="unpinArea()"><i class="fa-solid fa-trash-can"></i> Unpin</button>
+        </div>
       </div>
       <div class="pinned-card-body">
         <div class="pinned-item" style="grid-column: 1 / -1; display:flex; align-items:center; gap: 14px;">
@@ -496,9 +502,9 @@ function renderOutages() {
       </td>
       <td style="font-weight: 600; color: #fff;">${item.feeder}</td>
       <td>${item.area}</td>
-      <td>${item.start_time || 'N/A'}</td>
+      <td>${formatTimeTo12Hr(item.start_time) || 'N/A'}</td>
       <td style="font-weight: 500; color: ${item.expected_restoration_time ? '#67e8f9' : 'var(--text-dim)'};">
-        ${item.expected_restoration_time || 'Pending Estimate'}
+        ${formatTimeTo12Hr(item.expected_restoration_time) || 'Pending Estimate'}
       </td>
       <td>
         <div class="status-badge ${badgeClass}" style="margin-bottom: 6px;">
@@ -533,11 +539,11 @@ function renderOutages() {
       </div>
       <div class="mobile-card-row">
         <div class="label">Cut Started</div>
-        <div class="val">${item.start_time || 'N/A'}</div>
+        <div class="val">${formatTimeTo12Hr(item.start_time) || 'N/A'}</div>
       </div>
       <div class="mobile-card-row">
         <div class="label">Expected Back</div>
-        <div class="val" style="font-weight: 600; color: #67e8f9;">${item.expected_restoration_time || 'Pending Estimate'}</div>
+        <div class="val" style="font-weight: 600; color: #67e8f9;">${formatTimeTo12Hr(item.expected_restoration_time) || 'Pending Estimate'}</div>
       </div>
       <div class="mobile-card-row">
         <div class="label">Remarks</div>
@@ -713,11 +719,11 @@ function checkLocalityOutages() {
       </div>
       <div class="local-card-detail">
         <i class="fa-solid fa-clock"></i>
-        <span><strong>Cut Started:</strong> ${item.start_time || 'N/A'}</span>
+        <span><strong>Cut Started:</strong> ${formatTimeTo12Hr(item.start_time) || 'N/A'}</span>
       </div>
       <div class="local-card-detail">
         <i class="fa-solid fa-circle-chevron-right"></i>
-        <span><strong>Est. Restoration:</strong> <span style="color:#67e8f9; font-weight:600;">${item.expected_restoration_time || 'Pending Estimate'}</span></span>
+        <span><strong>Est. Restoration:</strong> <span style="color:#67e8f9; font-weight:600;">${formatTimeTo12Hr(item.expected_restoration_time) || 'Pending Estimate'}</span></span>
       </div>
       <div class="local-card-detail">
         <i class="fa-solid fa-circle-info"></i>
@@ -788,7 +794,7 @@ async function handleLiveRefresh() {
     
     // 6. Update timestamp UI and in-memory date
     const now = new Date();
-    lastUpdatedTime.textContent = "Refreshed Live: " + now.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    lastUpdatedTime.textContent = "Refreshed Live: " + now.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
     
     // 7. Update UI view panels
     updateStats();
@@ -805,4 +811,39 @@ async function handleLiveRefresh() {
     refreshIcon.classList.remove('spin-animation');
     refreshBtnText.textContent = "Refresh Live";
   }
+}
+
+// Helper: Format raw DHBVN API time strings (e.g. "20-Jun-2026 18:03:54") to 12-hour AM/PM format
+function formatTimeTo12Hr(timeStr) {
+  if (!timeStr || timeStr.trim() === "" || timeStr.trim().toUpperCase() === "N/A" || timeStr.trim().toUpperCase() === "PENDING ESTIMATE") {
+    return timeStr;
+  }
+  
+  // Example pattern: "20-Jun-2026 18:03:54" or "20-Jun-2026 18:03"
+  const parts = timeStr.trim().split(/\s+/);
+  if (parts.length < 2) {
+    return timeStr;
+  }
+  
+  const datePart = parts[0]; // e.g. "20-Jun-2026"
+  const timePart = parts[1]; // e.g. "18:03:54"
+  
+  const timeSubparts = timePart.split(':');
+  if (timeSubparts.length < 2) {
+    return timeStr;
+  }
+  
+  let hours = parseInt(timeSubparts[0], 10);
+  const minutes = timeSubparts[1];
+  
+  if (isNaN(hours)) {
+    return timeStr;
+  }
+  
+  const ampm = hours >= 12 ? 'PM' : 'AM';
+  hours = hours % 12;
+  hours = hours ? hours : 12; // 0 becomes 12
+  
+  const formattedHours = hours < 10 ? '0' + hours : hours;
+  return `${datePart} ${formattedHours}:${minutes} ${ampm}`;
 }
