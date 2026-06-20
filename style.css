@@ -794,3 +794,137 @@ body {
     word-break: break-word;
   }
 }
+
+/* ==========================================================================
+   Refresh Live Button Styling
+   ========================================================================== */
+.header-title-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.btn-refresh {
+  background: rgba(6, 182, 212, 0.1);
+  border: 1px solid rgba(6, 182, 212, 0.25);
+  color: var(--primary-color);
+  font-family: var(--font-heading);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all var(--transition-fast);
+}
+
+.btn-refresh:hover:not(:disabled) {
+  background: var(--primary-color);
+  color: #000;
+  box-shadow: 0 0 10px var(--primary-glow);
+}
+
+.btn-refresh:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.spin-animation {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* ==========================================================================
+   Pin Column & Button Styling
+   ========================================================================== */
+.btn-pin {
+  background: none;
+  border: none;
+  color: var(--text-dim);
+  cursor: pointer;
+  padding: 4px;
+  font-size: 14px;
+  transition: all var(--transition-fast);
+}
+
+.btn-pin:hover {
+  color: var(--warning-color);
+  transform: scale(1.15);
+}
+
+.btn-pin.pinned {
+  color: var(--warning-color);
+  text-shadow: 0 0 8px rgba(245, 158, 11, 0.4);
+}
+
+/* ==========================================================================
+   Pinned Dashboard Component
+   ========================================================================== */
+.pinned-dashboard {
+  animation: slide-up 0.4s var(--ease-soft);
+}
+
+.pinned-card {
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(16, 18, 30, 0.8) 100%);
+  box-shadow: 0 8px 32px 0 rgba(16, 185, 129, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.pinned-card.active-outage {
+  border-color: rgba(244, 63, 94, 0.25);
+  background: linear-gradient(135deg, rgba(244, 63, 94, 0.08) 0%, rgba(16, 18, 30, 0.8) 100%);
+  box-shadow: 0 8px 32px 0 rgba(244, 63, 94, 0.06);
+}
+
+.pinned-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding-bottom: 10px;
+}
+
+.pinned-card-header h3 {
+  font-family: var(--font-heading);
+  font-size: 16px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pinned-card-body {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 14px;
+}
+
+.pinned-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.pinned-item i {
+  color: var(--primary-color);
+  margin-top: 3px;
+  width: 14px;
+}
+
+.badge-glow-green {
+  background: rgba(16, 185, 129, 0.15);
+  color: var(--success-color);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.2);
+}

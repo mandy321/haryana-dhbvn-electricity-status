@@ -34,6 +34,13 @@
     <!-- Main Grid -->
     <main class="main-content">
       
+      <!-- Pinned Area Section -->
+      <section id="pinnedSection" class="pinned-dashboard hidden">
+        <div class="pinned-card glass-card" id="pinnedCard">
+          <!-- Dynamically populated pinned area card -->
+        </div>
+      </section>
+      
       <!-- Top Control Section -->
       <section class="control-panel glass-card">
         <h2>Find Your Outages</h2>
@@ -45,18 +52,18 @@
             <i class="fa-solid fa-location-dot select-icon"></i>
             <select id="districtSelect">
               <option value="" disabled selected>Select District...</option>
-              <option value="Bhiwani">Bhiwani</option>
-              <option value="Charkhi Dadri">Charkhi Dadri</option>
-              <option value="Faridabad">Faridabad</option>
-              <option value="Fatehabad">Fatehabad</option>
-              <option value="Gurugram">Gurugram</option>
-              <option value="Hisar">Hisar</option>
-              <option value="Jind">Jind</option>
-              <option value="Mahendrgarh">Mahendrgarh</option>
-              <option value="Nuh">Nuh</option>
-              <option value="Palwal">Palwal</option>
-              <option value="Rewari">Rewari</option>
-              <option value="Sirsa">Sirsa</option>
+              <option value="5">Bhiwani</option>
+              <option value="12">Charkhi Dadri</option>
+              <option value="10">Faridabad</option>
+              <option value="2">Fatehabad</option>
+              <option value="8">Gurugram</option>
+              <option value="4">Hisar</option>
+              <option value="1">Jind</option>
+              <option value="6">Mahendrgarh</option>
+              <option value="9">Nuh</option>
+              <option value="11">Palwal</option>
+              <option value="7">Rewari</option>
+              <option value="3">Sirsa</option>
             </select>
             <i class="fa-solid fa-chevron-down select-arrow"></i>
           </div>
@@ -125,7 +132,13 @@
       <section id="outagesSection" class="outage-list-container hidden">
         <!-- Search and Filter Bar -->
         <div class="list-header-actions">
-          <h2>All Outages for <span id="currentDistrictName">Jind</span></h2>
+          <div class="header-title-row">
+            <h2>All Outages for <span id="currentDistrictName">Jind</span></h2>
+            <button id="refreshBtn" class="btn-refresh" title="Refresh Live Data from DHBVN">
+              <i class="fa-solid fa-arrows-rotate" id="refreshIcon"></i>
+              <span id="refreshBtnText">Refresh Live</span>
+            </button>
+          </div>
           <div class="search-wrapper">
             <i class="fa-solid fa-magnifying-glass search-icon"></i>
             <input type="text" id="searchInput" placeholder="Search area or feeder name...">
@@ -137,6 +150,7 @@
           <table class="outages-table" id="outagesTable">
             <thead>
               <tr>
+                <th style="width: 60px; text-align: center;">Pin</th>
                 <th>Feeder Name</th>
                 <th>Area Name</th>
                 <th>Cut Started At</th>
