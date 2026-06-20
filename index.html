@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="DHBVN Live Outage Tracker - Check electricity power cuts, scheduled maintenance, and estimated restoration times across Haryana districts.">
+  <title>DHBVN Live Power Outage Tracker</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="logo-area">
+        <i class="fa-solid fa-bolt-lightning lightning-logo"></i>
+        <h1>DHBVN Outage Tracker</h1>
+      </div>
+      <div class="live-indicator-container">
+        <span class="live-pulse"></span>
+        <span class="live-text">Live Status</span>
+      </div>
+    </header>
+
+    <!-- Main Grid -->
+    <main class="main-content">
+      
+      <!-- Top Control Section -->
+      <section class="control-panel glass-card">
+        <h2>Find Your Outages</h2>
+        <p class="description">Select your district manually or use your current location to automatically check for power cuts in your locality.</p>
+        
+        <div class="control-actions">
+          <!-- District Dropdown Wrapper -->
+          <div class="select-wrapper">
+            <i class="fa-solid fa-location-dot select-icon"></i>
+            <select id="districtSelect">
+              <option value="" disabled selected>Select District...</option>
+              <option value="Bhiwani">Bhiwani</option>
+              <option value="Charkhi Dadri">Charkhi Dadri</option>
+              <option value="Faridabad">Faridabad</option>
+              <option value="Fatehabad">Fatehabad</option>
+              <option value="Gurugram">Gurugram</option>
+              <option value="Hisar">Hisar</option>
+              <option value="Jind">Jind</option>
+              <option value="Mahendrgarh">Mahendrgarh</option>
+              <option value="Nuh">Nuh</option>
+              <option value="Palwal">Palwal</option>
+              <option value="Rewari">Rewari</option>
+              <option value="Sirsa">Sirsa</option>
+            </select>
+            <i class="fa-solid fa-chevron-down select-arrow"></i>
+          </div>
+
+          <!-- Geolocation button -->
+          <button id="locateBtn" class="btn btn-primary">
+            <i class="fa-solid fa-crosshairs"></i>
+            <span id="locateBtnText">Use My Location</span>
+          </button>
+        </div>
+
+        <!-- Geolocation Feedback Panel -->
+        <div id="geoFeedback" class="geo-feedback hidden">
+          <i class="fa-solid fa-spinner fa-spin geo-loader"></i>
+          <span id="geoFeedbackText">Detecting your location...</span>
+        </div>
+      </section>
+
+      <!-- Stats Dashboard -->
+      <section id="statsPanel" class="stats-dashboard hidden">
+        <div class="stat-card glass-card">
+          <div class="stat-icon-wrapper red-glow">
+            <i class="fa-solid fa-house-laptop"></i>
+          </div>
+          <div class="stat-data">
+            <h3 id="statTotalOutages">0</h3>
+            <p>Total Outages</p>
+          </div>
+        </div>
+
+        <div class="stat-card glass-card">
+          <div class="stat-icon-wrapper orange-glow">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+          </div>
+          <div class="stat-data">
+            <h3 id="statActive">0</h3>
+            <p>Unplanned cuts</p>
+          </div>
+        </div>
+
+        <div class="stat-card glass-card">
+          <div class="stat-icon-wrapper blue-glow">
+            <i class="fa-solid fa-screwdriver-wrench"></i>
+          </div>
+          <div class="stat-data">
+            <h3 id="statPlanned">0</h3>
+            <p>Scheduled Maintenance</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Geo Locality Alerts (Highlighted) -->
+      <section id="localitySection" class="locality-alerts hidden">
+        <div class="alert-banner glass-card">
+          <div class="banner-header">
+            <span class="badge badge-glow-red"><i class="fa-solid fa-location-arrow"></i> Near You</span>
+            <h2 id="localityTitle">Outages detected in your area</h2>
+          </div>
+          <div id="localityCardContainer" class="locality-cards">
+            <!-- Dynamically populated card outages for the user's locality -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Outage List Section -->
+      <section id="outagesSection" class="outage-list-container hidden">
+        <!-- Search and Filter Bar -->
+        <div class="list-header-actions">
+          <h2>All Outages for <span id="currentDistrictName">Jind</span></h2>
+          <div class="search-wrapper">
+            <i class="fa-solid fa-magnifying-glass search-icon"></i>
+            <input type="text" id="searchInput" placeholder="Search area or feeder name...">
+          </div>
+        </div>
+
+        <!-- Desktop Grid View -->
+        <div class="table-responsive glass-card">
+          <table class="outages-table" id="outagesTable">
+            <thead>
+              <tr>
+                <th>Feeder Name</th>
+                <th>Area Name</th>
+                <th>Cut Started At</th>
+                <th>Expected Restoration</th>
+                <th>Outage Type & Remarks</th>
+              </tr>
+            </thead>
+            <tbody id="outagesTableBody">
+              <!-- Dynamically populated table rows -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Mobile Card View -->
+        <div class="mobile-grid-cards" id="mobileCardsContainer">
+          <!-- Dynamically populated mobile cards -->
+        </div>
+
+        <!-- Empty State -->
+        <div id="emptyState" class="empty-state glass-card hidden">
+          <div class="empty-icon-wrapper">
+            <i class="fa-solid fa-circle-check"></i>
+          </div>
+          <h3>All Power Lines Active</h3>
+          <p>No power outages or scheduled maintenance recorded for this district right now.</p>
+        </div>
+      </section>
+
+      <!-- Loading State -->
+      <div id="pageLoader" class="page-loader hidden">
+        <i class="fa-solid fa-spinner fa-spin fa-3x"></i>
+        <p>Loading outages data...</p>
+      </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <p class="timestamp"><i class="fa-regular fa-clock"></i> Data last updated: <span id="lastUpdatedTime">N/A</span></p>
+      <p class="source-info">Realtime data scraped from DHBVN Samadhan portal. This is a static mirror.</p>
+    </footer>
+  </div>
+
+  <!-- Custom JavaScript -->
+  <script src="app.js"></script>
+</body>
+</html>

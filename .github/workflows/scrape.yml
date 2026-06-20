@@ -1,0 +1,44 @@
+name: Scrape DHBVN Outages
+
+on:
+  schedule:
+    - cron: '*/20 * * * *' # Run every 20 minutes
+  workflow_dispatch:      # Allow manual runs
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write     # Allow committing and pushing data
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20
+        cache: 'npm'
+
+    - name: Install Dependencies
+      run: npm ci
+
+    - name: Install Playwright Chromium
+      run: npx playwright install chromium --with-deps
+
+    - name: Run Scraper
+      run: npm run scrape
+
+    - name: Commit and Push outages.json
+      run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+        git add data/outages.json
+        if git diff --quiet && git diff --staged --quiet; then
+          echo "No changes in outages.json"
+        else
+          git commit -m "Update outages details [skip ci]"
+          git push origin main || git push origin master
+        fi
