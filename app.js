@@ -3,6 +3,7 @@ let outagesData = null;
 let currentDistrictId = "";
 let currentDistrictName = "";
 let pinnedArea = null;
+let sharedArea = null;
 
 let userLocalityData = {
   district: "",
@@ -89,6 +90,10 @@ const lastUpdatedTime = document.getElementById('lastUpdatedTime');
 const pinnedSection = document.getElementById('pinnedSection');
 const pinnedCard = document.getElementById('pinnedCard');
 
+// Shared Dashboard Elements
+const sharedSection = document.getElementById('sharedSection');
+const sharedCard = document.getElementById('sharedCard');
+
 // Refresh Button Elements
 const refreshBtn = document.getElementById('refreshBtn');
 const refreshIcon = document.getElementById('refreshIcon');
@@ -102,6 +107,9 @@ async function initApp() {
   try {
     // Load pinned area from LocalStorage
     loadPinnedArea();
+    
+    // Check for query parameters for shared areas
+    parseSharedUrl();
     
     // Fetch data/outages.json (the pre-cached Action database)
     const response = await fetch('data/outages.json');
@@ -127,8 +135,11 @@ async function initApp() {
     locateBtn.addEventListener('click', handleGeolocation);
     refreshBtn.addEventListener('click', handleLiveRefresh);
     
-    // If pinned area is set, render the pinned section and auto-select the pinned district
-    if (pinnedArea) {
+    // Handle initial selections: Shared area takes precedence over Pinned area
+    if (sharedArea) {
+      renderSharedArea();
+      selectDistrict(sharedArea.districtId);
+    } else if (pinnedArea) {
       renderPinnedArea();
       selectDistrict(pinnedArea.districtId);
     }
@@ -148,10 +159,133 @@ function showLoader(show) {
     statsPanel.classList.add('hidden');
     localitySection.classList.add('hidden');
     pinnedSection.classList.add('hidden');
+    sharedSection.classList.add('hidden');
   } else {
     pageLoader.classList.add('hidden');
   }
 }
+
+// Check URL query parameters for shared areas
+function parseSharedUrl() {
+  const params = new URLSearchParams(window.location.search);
+  const distId = params.get('districtId');
+  const feeder = params.get('feeder');
+  const area = params.get('area');
+  
+  if (distId && feeder && area && DISTRICT_ID_TO_NAME[distId]) {
+    sharedArea = {
+      districtId: distId,
+      districtName: DISTRICT_ID_TO_NAME[distId],
+      feeder: decodeURIComponent(feeder),
+      area: decodeURIComponent(area)
+    };
+  } else {
+    sharedArea = null;
+  }
+}
+
+// Share Area Action Handler
+window.shareArea = function(districtId, districtName, feeder, area) {
+  const shareUrl = `${window.location.origin}${window.location.pathname}?districtId=${districtId}&feeder=${encodeURIComponent(feeder)}&area=${encodeURIComponent(area)}`;
+  
+  const textMsg = `Check live electricity outage status for ${area} (${feeder}) under ${districtName} district:`;
+  
+  if (navigator.share) {
+    navigator.share({
+      title: 'DHBVN Electricity Outage Status',
+      text: textMsg,
+      url: shareUrl
+    }).catch(err => {
+      console.log('Share cancelled or failed:', err);
+    });
+  } else {
+    // Clipboard copy fallback
+    navigator.clipboard.writeText(shareUrl).then(() => {
+      alert("Live status link copied to clipboard! Share it on WhatsApp or social media.");
+    }).catch(err => {
+      console.error('Failed to copy link:', err);
+    });
+  }
+};
+
+// Render Shared Area Card
+function renderSharedArea() {
+  if (!sharedArea || !outagesData) {
+    sharedSection.classList.add('hidden');
+    return;
+  }
+  
+  sharedSection.classList.remove('hidden');
+  
+  const list = outagesData.districts[sharedArea.districtName] || [];
+  const activeCut = list.find(item => item.feeder === sharedArea.feeder && item.area === sharedArea.area);
+  
+  sharedCard.className = "shared-card glass-card";
+  
+  if (activeCut) {
+    sharedCard.classList.add('active-outage');
+    const remarks = activeCut.remarks || 'Active Cut';
+    const isPlanned = remarks.toUpperCase().includes('PLANNED') || remarks.toUpperCase().includes('MTC');
+    const badgeClass = isPlanned ? 'badge-warning' : 'badge-danger';
+    const badgeText = isPlanned ? 'Planned Maintenance' : 'Unplanned Cut';
+    const badgeIcon = isPlanned ? 'fa-screwdriver-wrench' : 'fa-triangle-exclamation';
+
+    sharedCard.innerHTML = `
+      <div class="shared-card-header">
+        <h3><i class="fa-solid fa-share-nodes" style="color: var(--primary-color);"></i> Shared Locality Status</h3>
+        <button class="btn-refresh" style="background:none; border:none; color:var(--text-dim); cursor:pointer;" onclick="dismissSharedArea()"><i class="fa-solid fa-xmark"></i> Dismiss</button>
+      </div>
+      <div class="shared-card-body">
+        <div class="shared-item" style="grid-column: 1 / -1;">
+          <i class="fa-solid fa-house-laptop"></i>
+          <span><strong>Outage Detected:</strong> <span style="font-weight:700; color:#fff;">${sharedArea.area} (${sharedArea.feeder})</span></span>
+        </div>
+        <div class="shared-item">
+          <i class="fa-solid fa-clock"></i>
+          <span><strong>Cut Started:</strong> ${activeCut.start_time || 'N/A'}</span>
+        </div>
+        <div class="shared-item">
+          <i class="fa-solid fa-circle-chevron-right"></i>
+          <span><strong>Est. Restoration:</strong> <span style="color:#67e8f9; font-weight:600;">${activeCut.expected_restoration_time || 'Pending Estimate'}</span></span>
+        </div>
+        <div class="shared-item">
+          <div class="status-badge ${badgeClass}">
+            <i class="fa-solid ${badgeIcon}"></i> ${badgeText}
+          </div>
+        </div>
+        <div class="shared-item" style="grid-column: 1 / -1;">
+          <i class="fa-solid fa-circle-info"></i>
+          <span><strong>Remarks:</strong> <span style="font-style:italic;">${remarks}</span></span>
+        </div>
+      </div>
+    `;
+  } else {
+    // Shared area is healthy
+    sharedCard.innerHTML = `
+      <div class="shared-card-header">
+        <h3><i class="fa-solid fa-share-nodes" style="color: var(--primary-color);"></i> Shared Locality Status</h3>
+        <button class="btn-refresh" style="background:none; border:none; color:var(--text-dim); cursor:pointer;" onclick="dismissSharedArea()"><i class="fa-solid fa-xmark"></i> Dismiss</button>
+      </div>
+      <div class="shared-card-body">
+        <div class="shared-item" style="grid-column: 1 / -1; display:flex; align-items:center; gap: 14px;">
+          <div class="status-badge badge-glow-green" style="font-size: 14px; padding: 6px 12px;">
+            <i class="fa-solid fa-circle-check"></i> Power Active & Healthy
+          </div>
+          <span>No outages recorded for <strong>${sharedArea.area} (${sharedArea.feeder})</strong>. Power is currently active!</span>
+        </div>
+      </div>
+    `;
+  }
+}
+
+// Dismiss Shared View & clear url parameters
+window.dismissSharedArea = function() {
+  sharedArea = null;
+  sharedSection.classList.add('hidden');
+  
+  // Remove URL query parameters without reloading
+  window.history.replaceState({}, document.title, window.location.pathname);
+};
 
 // Load Pinned Locality from localStorage
 function loadPinnedArea() {
@@ -175,12 +309,12 @@ function savePinnedArea(districtId, districtName, feeder, area) {
   renderOutages();
 }
 
-function unpinArea() {
+window.unpinArea = function() {
   localStorage.removeItem('pinned_dhbvn_outage');
   pinnedArea = null;
   pinnedSection.classList.add('hidden');
   renderOutages();
-}
+};
 
 // Render Pinned Dashboard Card
 function renderPinnedArea() {
@@ -198,7 +332,6 @@ function renderPinnedArea() {
   pinnedCard.className = "pinned-card glass-card";
   
   if (activeCut) {
-    // Pinned Area has active outage
     pinnedCard.classList.add('active-outage');
     const remarks = activeCut.remarks || 'Active Cut';
     const isPlanned = remarks.toUpperCase().includes('PLANNED') || remarks.toUpperCase().includes('MTC');
@@ -208,7 +341,7 @@ function renderPinnedArea() {
 
     pinnedCard.innerHTML = `
       <div class="pinned-card-header">
-        <h3><i class="fa-solid fa-thumbtack" style="color: var(--warning-color);"></i> Pinned Locality</h3>
+        <h3><i class="fa-solid fa-star" style="color: var(--warning-color);"></i> Pinned Locality</h3>
         <button class="btn-refresh" style="background:none; border:none; color:var(--text-dim); cursor:pointer;" onclick="unpinArea()"><i class="fa-solid fa-trash-can"></i> Unpin</button>
       </div>
       <div class="pinned-card-body">
@@ -236,10 +369,9 @@ function renderPinnedArea() {
       </div>
     `;
   } else {
-    // Pinned Area is healthy (no outages)
     pinnedCard.innerHTML = `
       <div class="pinned-card-header">
-        <h3><i class="fa-solid fa-thumbtack" style="color: var(--warning-color);"></i> Pinned Locality</h3>
+        <h3><i class="fa-solid fa-star" style="color: var(--warning-color);"></i> Pinned Locality</h3>
         <button class="btn-refresh" style="background:none; border:none; color:var(--text-dim); cursor:pointer;" onclick="unpinArea()"><i class="fa-solid fa-trash-can"></i> Unpin</button>
       </div>
       <div class="pinned-card-body">
@@ -247,7 +379,7 @@ function renderPinnedArea() {
           <div class="status-badge badge-glow-green" style="font-size: 14px; padding: 6px 12px;">
             <i class="fa-solid fa-circle-check"></i> Power Active & Healthy
           </div>
-          <span>No outages recorded for <strong>${pinnedArea.area} (${pinnedArea.feeder})</strong> under ${pinnedArea.districtName} district.</span>
+          <span>No outages recorded for <strong>${pinnedArea.area} (${pinnedArea.feeder})</strong>.</span>
         </div>
       </div>
     `;
@@ -281,6 +413,7 @@ function selectDistrict(districtId) {
   renderOutages();
   checkLocalityOutages();
   renderPinnedArea();
+  renderSharedArea();
 }
 
 // Compute Stats Counter Values
@@ -352,8 +485,13 @@ function renderOutages() {
     const tr = document.createElement('tr');
     tr.innerHTML = `
       <td style="text-align: center;">
-        <button class="btn-pin ${pinClass}" onclick="togglePin('${item.feeder}', '${item.area}')" title="Pin area to dashboard">
-          <i class="${pinIcon} fa-thumbtack"></i>
+        <button class="btn-pin ${pinClass}" onclick="togglePin('${item.feeder}', '${item.area}')" title="Star area to dashboard">
+          <i class="${pinIcon} fa-star"></i>
+        </button>
+      </td>
+      <td style="text-align: center;">
+        <button class="btn-share" onclick="shareArea('${currentDistrictId}', '${currentDistrictName}', '${item.feeder}', '${item.area}')" title="Share live status link">
+          <i class="fa-solid fa-share-nodes"></i>
         </button>
       </td>
       <td style="font-weight: 600; color: #fff;">${item.feeder}</td>
@@ -378,7 +516,10 @@ function renderOutages() {
       <div class="mobile-card-row header">
         <div class="mobile-feeder">
           <button class="btn-pin ${pinClass}" onclick="togglePin('${item.feeder}', '${item.area}')" style="margin-right: 8px;">
-            <i class="${pinIcon} fa-thumbtack"></i>
+            <i class="${pinIcon} fa-star"></i>
+          </button>
+          <button class="btn-share" onclick="shareArea('${currentDistrictId}', '${currentDistrictName}', '${item.feeder}', '${item.area}')" style="margin-right: 12px;">
+            <i class="fa-solid fa-share-nodes"></i>
           </button>
           ${item.feeder}
         </div>
@@ -447,7 +588,6 @@ function handleGeolocation() {
       geoFeedbackText.textContent = "Geocoding your coordinates...";
       
       try {
-        // OpenStreetMap Nominatim reverse geocoding lookup
         const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&zoom=14`, {
           headers: { 'Accept-Language': 'en' }
         });
@@ -592,7 +732,6 @@ function checkLocalityOutages() {
 async function handleLiveRefresh() {
   if (!currentDistrictId) return;
   
-  // Set button loading states
   refreshBtn.disabled = true;
   refreshIcon.classList.add('spin-animation');
   refreshBtnText.textContent = "Refreshing...";
@@ -634,7 +773,6 @@ async function handleLiveRefresh() {
     const parser = new DOMParser();
     const xmlDoc = parser.parseFromString(responseText, "text/xml");
     
-    // Find all Rowset nodes
     const rowsets = Array.from(xmlDoc.querySelectorAll('Rowset'));
     
     const list = rowsets.map(row => ({
@@ -657,12 +795,12 @@ async function handleLiveRefresh() {
     renderOutages();
     checkLocalityOutages();
     renderPinnedArea();
+    renderSharedArea();
     
   } catch (err) {
     console.error('On-demand refresh error:', err);
     alert('Failed to refresh data live from DHBVN. Please check your internet connection or try again later.');
   } finally {
-    // Restore button states
     refreshBtn.disabled = false;
     refreshIcon.classList.remove('spin-animation');
     refreshBtnText.textContent = "Refresh Live";

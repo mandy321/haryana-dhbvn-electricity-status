@@ -6,13 +6,27 @@ A premium, interactive web application to track live power outages, scheduled ma
 
 ---
 
+## Visual Previews
+
+### 1. Dashboard Landing (Manual Selection & GPS Geocoding)
+![Dashboard Landing](./assets/dashboard.png)
+
+### 2. Pinned Locality (Star Pinning)
+![Starred Pin State](./assets/pinned_final.png)
+
+### 3. Shared Locality Status (WhatsApp Share Link Handler)
+![Shared Link Handler](./assets/shared_state.png)
+
+---
+
 ## Key Features
 
 1. **Auto-Location Detection (GPS)**: Detects your current coordinates, reverse-lookup matches your district (e.g. Gurugram, Palwal, Jind), and highlights active power cuts in your exact suburb or village name.
 2. **On-Demand Live Refresh**: Instantly updates outages for your selected district directly from the DHBVN servers via a CORS proxy.
-3. **Area Pinning**: Pin your specific feeder or locality to keep its status pinned at the very top of your dashboard. Toggles a green "Healthy & Active" indicator if there are no cuts.
-4. **Automated Scheduled Scraping**: Runs a headless browser crawler via GitHub Actions every 20 minutes to fetch and mirror DHBVN status.
-5. **Premium Responsive UI**: Elegant dark space design with glassmorphism, responsive data grids, stats counters, and smooth layout transformations.
+3. **Area Pinning (Star)**: Star your specific feeder or locality to keep its status pinned at the very top of your dashboard. Toggles a green "Healthy & Active" indicator if there are no cuts.
+4. **WhatsApp Sharing**: Easily share the real-time outage status of any specific area with a one-click generated link. When clicked, the recipient directly sees that area's status highlighted on top.
+5. **Automated Scheduled Scraping**: Runs a headless browser crawler via GitHub Actions every 20 minutes to fetch and mirror DHBVN status.
+6. **Premium Responsive UI**: Elegant dark space design with glassmorphism, responsive data grids, stats counters, and smooth layout transformations.
 
 ---
 
@@ -21,12 +35,16 @@ A premium, interactive web application to track live power outages, scheduled ma
 ```
 ├── .github/workflows/
 │   └── scrape.yml          # GitHub Actions scheduled workflow
+├── assets/
+│   ├── dashboard.png       # Screenshot of dashboard landing
+│   ├── pinned_final.png    # Screenshot of starred pin state
+│   └── shared_state.png    # Screenshot of shared link handler
 ├── data/
 │   └── outages.json        # Compiled outages database (scraped every 20 mins)
 ├── scraper.js              # Playwright Node.js crawler script
 ├── index.html              # Frontend layout structure
 ├── style.css               # Premium dark-theme stylesheet
-├── app.js                  # Frontend geolocation, parsing, and pinning logic
+├── app.js                  # Frontend geolocation, parsing, sharing, and pinning logic
 ├── package.json            # Dependencies and npm scripts
 └── PROJECT_DETAILS.md      # In-depth technical architecture and details
 ```
