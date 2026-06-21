@@ -1,6 +1,6 @@
 # Technical Documentation: Project Details & Architecture
 
-This document provides a detailed breakdown of the technical design, data flows, and algorithms powering the **Haryana DHBVN Electricity Status** application.
+This document provides a detailed breakdown of the technical design, data flows, and algorithms powering the **Palwal(Haryana) Power Outage Tracker — Live DHBVN Updates** application.
 
 ---
 

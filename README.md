@@ -1,4 +1,4 @@
-# Haryana DHBVN Electricity Status
+# Palwal(Haryana) Power Outage Tracker — Live DHBVN Updates
 
 A premium, interactive web application to track live power outages, scheduled maintenance, and estimated restoration times for all 12 districts under the **Dakshin Haryana Bijli Vitran Nigam (DHBVN)**. 
 
