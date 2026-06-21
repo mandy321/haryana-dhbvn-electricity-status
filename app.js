@@ -509,6 +509,72 @@ function selectDistrict(districtId) {
   
   // Sync tab status and render
   switchTab(currentViewTab);
+  
+  // Auto-refresh live data silently in the background so users always see
+  // the latest restoration times, even if the cached JSON is from an earlier scrape.
+  autoRefreshDistrict(districtId);
+}
+
+// Silent background auto-refresh — does not touch the Refresh button UI state
+async function autoRefreshDistrict(districtId) {
+  if (!districtId) return;
+  const districtName = DISTRICT_ID_TO_NAME[districtId];
+  
+  try {
+    const xmlRequest = `<?xml version="1.0"?><Request VERSION="2" LANGUAGE_ID="1" LOCATION=""><Company Company_Id="93" /><Project Project_Id="304" /><User User_Id="Anonymous" /><IUVLogin IUVLogin_Id="Anonymous" /><ROLE ROLE_ID="1595" /><Event Control_Id="130404" /><Child Control_Id="125681" Report="HTML" AC_ID="163944"><Parent Control_Id="130402" Value="${districtId}" Data_Form_Id="" XValue="${districtId}" YValue="" ZValue="" /></Child></Request>`;
+    const base64Payload = btoa(xmlRequest);
+    
+    const url = 'https://corsproxy.io/?' + encodeURIComponent('https://chs.dhbvn.org.in/api/AppsavyServices/GetRelationalDataA');
+    
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'appsavylogin': 'IG7gR27IJYSa+a/dym3wpw==',
+        'formid': 'TYDUFR2Pc592nssOkzMrLQ==',
+        'roleid': 'KnSKi2BRa296VND7xI1XWQ==',
+        'token': 'Wwzpa2LygAJqAK1uM94i8A==',
+        'version': '1',
+        'sourcetype': 'tzoukK4N1FBlaVGohFL/oQ=='
+      },
+      body: JSON.stringify({ inputxml: base64Payload, DocVersion: 1 })
+    });
+    
+    if (!response.ok) return; // fail silently
+    
+    const responseText = await response.text();
+    const parser = new DOMParser();
+    const xmlDoc = parser.parseFromString(responseText, 'text/xml');
+    const rowsets = Array.from(xmlDoc.querySelectorAll('Rowset'));
+    
+    if (rowsets.length === 0) return; // empty response, don't overwrite
+    
+    const list = rowsets.map(row => ({
+      feeder: row.querySelector('FEEDER')?.textContent || '',
+      area: row.querySelector('AREA')?.textContent || '',
+      start_time: row.querySelector('START_TIME')?.textContent || '',
+      expected_restoration_time: row.querySelector('EXPECTED_RESTORATION_TIME')?.textContent || '',
+      remarks: row.querySelector('ADDRESS')?.textContent || ''
+    }));
+    
+    // Overwrite in-memory data for this district
+    outagesData.districts[districtName] = list;
+    outagesData.last_updated = new Date().toISOString();
+    lastUpdatedTime.innerHTML = `<i class="fa-regular fa-clock"></i> Data last updated: ${getLastUpdatedText()}`;
+    
+    // If the user is still on this district, re-render silently
+    if (currentDistrictId === districtId) {
+      updateStats();
+      renderOutages();
+      checkLocalityOutages();
+    }
+    renderPinnedArea();
+    renderSharedArea();
+    
+  } catch (err) {
+    // Auto-refresh failure is silent — user can still manually click Refresh Live
+    console.warn('Auto-refresh failed silently:', err);
+  }
 }
 
 // Compute Stats Counter Values
