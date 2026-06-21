@@ -110,3 +110,30 @@ When a user clicks the **"Use My Location"** button:
   - If yes, it creates a visual "Pinned Area Dashboard" card at the top.
   - It searches the outages dataset (either local cached JSON or live refresh) for a matching `Feeder` and `Area`.
   - If a cut is present, it displays active details in a rose-pink card. If no matching outage exists, it displays an emerald green card: **"Active & Healthy - No Outages Recorded"**.
+
+---
+
+## 6. Outage Severity Classifications
+
+Outages are categorized dynamically on the client side into three severity buckets:
+* **Major**: Outages with an expected duration of 4+ hours, or containing keywords indicating line breakdown or structural grid damage (`breakdown`, `burst`, `damage`, `heavy`, `snapping`).
+* **Moderate**: Outages lasting between 2 and 4 hours, typical of routine maintenance or feeder reconfigurations.
+* **Minor**: Outages lasting under 2 hours, representing momentary feeder trips or fuse repairs.
+
+---
+
+## 7. 14-Day Outage Trend Chart & Client Aggregations
+
+To display historical trend data, the frontend integrates Chart.js:
+1. **Dynamic IST Date Generation**: The chart dynamically computes the past 14 calendar dates in IST (`Asia/Kolkata`) format (`DD/MM`).
+2. **Aggregated Daily Counting**: It traverses the JSON history, parses the `start_time` (or `scraped_at` fallback) in the local Indian timezone, and matches the date labels to populate a daily histogram.
+3. **Responsive Visual Thresholds**: Chart columns are colored dynamically:
+   * **Rose/Red (`#f43f5e`)**: Days with > 5 new outages.
+   * **Amber/Orange (`#f59e0b`)**: Days with <= 5 new outages.
+4. **Memory Cleanups**: Previous chart configurations are garbage-collected and destroyed using `chartInstance.destroy()` prior to rendering a new canvas context, avoiding hover-state duplication or performance slowdowns.
+
+---
+
+## 8. Resolved Outage Filters
+
+To prevent outdated outages (from the last 24 hours) from displaying as active, the application compares the `expected_restoration_time` of each record against the current local time in IST. Outages with expected restoration dates in the past are automatically filtered out from active views (Metrics, Live Board, and Pinned locales) and moved strictly to the **History Archive**, guaranteeing real-time layout accuracy.
