@@ -1209,7 +1209,15 @@ function parseDHBVNDate(dateStr) {
   const minutes = parseInt(timeParts[1], 10);
   const seconds = timeParts[2] ? parseInt(timeParts[2], 10) : 0;
   
-  return new Date(year, month, day, hours, minutes, seconds);
+  // Format as ISO-8601 with explicit IST (+05:30) offset
+  const monthStr2Digit = (month + 1).toString().padStart(2, '0');
+  const dayStr2Digit = day.toString().padStart(2, '0');
+  const hourStr2Digit = hours.toString().padStart(2, '0');
+  const minuteStr2Digit = minutes.toString().padStart(2, '0');
+  const secondStr2Digit = seconds.toString().padStart(2, '0');
+  
+  const isoStr = `${year}-${monthStr2Digit}-${dayStr2Digit}T${hourStr2Digit}:${minuteStr2Digit}:${secondStr2Digit}+05:30`;
+  return new Date(isoStr);
 }
 
 // Render 14-Day Outage Trend Bar Graph
@@ -1218,18 +1226,18 @@ function renderOutageChart(historyData) {
   if (!canvas) return;
   
   // 1. Identify the last 14 days in IST
-  const nowISTStr = new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata' });
-  const nowIST = new Date(nowISTStr);
-  
   const labels = [];
   const dailyCounts = {};
   
   for (let i = 13; i >= 0; i--) {
-    const tempDate = new Date(nowIST.getTime());
-    tempDate.setDate(nowIST.getDate() - i);
-    const day = tempDate.getDate().toString().padStart(2, '0');
-    const month = (tempDate.getMonth() + 1).toString().padStart(2, '0');
-    const dateLabel = `${day}/${month}`;
+    const date = new Date();
+    date.setDate(date.getDate() - i);
+    // Force Asia/Kolkata timezone formatting
+    const dateLabel = date.toLocaleDateString('en-IN', {
+      timeZone: 'Asia/Kolkata',
+      day: '2-digit',
+      month: '2-digit'
+    });
     labels.push(dateLabel);
     dailyCounts[dateLabel] = 0;
   }
@@ -1238,9 +1246,11 @@ function renderOutageChart(historyData) {
   (historyData || []).forEach(item => {
     const dateObj = parseDHBVNDate(item.start_time) || parseDHBVNDate(item.scraped_at);
     if (dateObj) {
-      const day = dateObj.getDate().toString().padStart(2, '0');
-      const month = (dateObj.getMonth() + 1).toString().padStart(2, '0');
-      const dateLabel = `${day}/${month}`;
+      const dateLabel = dateObj.toLocaleDateString('en-IN', {
+        timeZone: 'Asia/Kolkata',
+        day: '2-digit',
+        month: '2-digit'
+      });
       if (dateLabel in dailyCounts) {
         dailyCounts[dateLabel]++;
       }
