@@ -50,6 +50,11 @@ const path = require('path');
 
     console.log(`Found ${selectInfo.districts.length} districts to scrape.`);
 
+    const dataDir = path.join(__dirname, 'data');
+    if (!fs.existsSync(dataDir)) {
+      fs.mkdirSync(dataDir);
+    }
+
     const outagesData = {
       last_updated: new Date().toISOString(),
       districts: {}
@@ -100,7 +105,7 @@ const path = require('path');
         });
 
         // Map rows to clean objects
-        outagesData.districts[dist.text] = rows.map(r => ({
+        const currentActive = rows.map(r => ({
           feeder: r[1] || '',
           area: r[2] || '',
           start_time: r[3] || '',
@@ -108,7 +113,65 @@ const path = require('path');
           remarks: r[6] || ''
         }));
 
-        console.log(`-> Found ${outagesData.districts[dist.text].length} records.`);
+        outagesData.districts[dist.text] = currentActive;
+
+        // Process Outage History (Archive)
+        const historyDir = path.join(dataDir, 'history');
+        if (!fs.existsSync(historyDir)) {
+          fs.mkdirSync(historyDir, { recursive: true });
+        }
+        
+        const historyPath = path.join(historyDir, `${dist.text}.json`);
+        let districtHistory = [];
+        if (fs.existsSync(historyPath)) {
+          try {
+            districtHistory = JSON.parse(fs.readFileSync(historyPath, 'utf8'));
+          } catch (e) {
+            console.log(`Failed to parse history for ${dist.text}, resetting.`);
+          }
+        }
+
+        // Current IST Timestamp
+        const nowISTStr = new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata' });
+        const nowIST = new Date(nowISTStr);
+        const nowISTTimestamp = nowIST.getTime();
+
+        // Merge active outages into history
+        currentActive.forEach(activeItem => {
+          // Find existing item in history with same feeder, area, and start_time
+          const existingIndex = districtHistory.findIndex(histItem => 
+            histItem.feeder === activeItem.feeder &&
+            histItem.area === activeItem.area &&
+            histItem.start_time === activeItem.start_time
+          );
+
+          if (existingIndex > -1) {
+            // Update expectation and remarks, keep original scraped_at
+            districtHistory[existingIndex].expected_restoration_time = activeItem.expected_restoration_time;
+            districtHistory[existingIndex].remarks = activeItem.remarks;
+            districtHistory[existingIndex].last_seen_at = nowISTStr + ' (IST)';
+          } else {
+            // Add new history record
+            districtHistory.push({
+              ...activeItem,
+              scraped_at: nowISTStr + ' (IST)',
+              last_seen_at: nowISTStr + ' (IST)',
+              timestamp: nowISTTimestamp // useful for pruning
+            });
+          }
+        });
+
+        // Prune records older than 14 days (14 * 24 * 60 * 60 * 1000 ms)
+        const fourteenDaysAgo = nowISTTimestamp - (14 * 24 * 60 * 60 * 1000);
+        districtHistory = districtHistory.filter(histItem => {
+          // Fallback if timestamp doesn't exist
+          const itemTime = histItem.timestamp || nowISTTimestamp;
+          return itemTime >= fourteenDaysAgo;
+        });
+
+        // Write updated history to file
+        fs.writeFileSync(historyPath, JSON.stringify(districtHistory, null, 2));
+        console.log(`-> Found ${currentActive.length} active records. Total archived: ${districtHistory.length}.`);
       } catch (err) {
         console.error(`Error scraping district ${dist.text}: ${err.message}`);
         // Keep an empty array for this district so the build does not break
@@ -117,11 +180,6 @@ const path = require('path');
     }
 
     // Write to outages.json
-    const dataDir = path.join(__dirname, 'data');
-    if (!fs.existsSync(dataDir)) {
-      fs.mkdirSync(dataDir);
-    }
-
     const outputPath = path.join(dataDir, 'outages.json');
     fs.writeFileSync(outputPath, JSON.stringify(outagesData, null, 2));
 

@@ -92,6 +92,22 @@
           <i class="fa-solid fa-spinner fa-spin geo-loader"></i>
           <span id="geoFeedbackText">Detecting your location...</span>
         </div>
+      <!-- High-Impact District Status Banner -->
+      <section id="districtStatusHeader" class="district-status-header glass-card hidden">
+        <div class="status-summary">
+          <span class="status-label">District Status:</span>
+          <span id="districtStatusBadge" class="status-badge all-clear">ALL CLEAR</span>
+        </div>
+        <div class="status-metrics">
+          <div class="metric-item">
+            <span class="metric-value" id="statusFeedersDown">0</span>
+            <span class="metric-label">Feeders Down</span>
+          </div>
+          <div class="metric-item">
+            <span class="metric-value" id="statusAreasAffected">0</span>
+            <span class="metric-label">Areas Affected</span>
+          </div>
+        </div>
       </section>
 
       <!-- Stats Dashboard -->
@@ -146,14 +162,52 @@
         <div class="list-header-actions">
           <div class="header-title-row">
             <h2>All Outages for <span id="currentDistrictName">Jind</span></h2>
-            <button id="refreshBtn" class="btn-refresh" title="Refresh Live Data from DHBVN">
-              <i class="fa-solid fa-arrows-rotate" id="refreshIcon"></i>
-              <span id="refreshBtnText">Refresh Live</span>
-            </button>
+            <div class="header-buttons">
+              <button id="refreshBtn" class="btn-refresh" title="Refresh Live Data from DHBVN">
+                <i class="fa-solid fa-arrows-rotate" id="refreshIcon"></i>
+                <span id="refreshBtnText">Refresh Live</span>
+              </button>
+            </div>
           </div>
-          <div class="search-wrapper">
-            <i class="fa-solid fa-magnifying-glass search-icon"></i>
-            <input type="text" id="searchInput" placeholder="Search area or feeder name...">
+          
+          <div class="tabs-and-search-row">
+            <!-- View Tabs -->
+            <div class="view-toggle-tabs">
+              <button id="tabLive" class="tab-btn active"><i class="fa-solid fa-bolt"></i> Live Board</button>
+              <button id="tabHistory" class="tab-btn"><i class="fa-solid fa-clock-rotate-left"></i> History Archive</button>
+            </div>
+            
+            <div class="search-wrapper">
+              <i class="fa-solid fa-magnifying-glass search-icon"></i>
+              <input type="text" id="searchInput" placeholder="Search area or feeder name...">
+            </div>
+          </div>
+
+          <!-- Severity Filters with Info Tooltip -->
+          <div class="severity-filter-bar" id="severityFilterBar">
+            <span class="filter-label">Filter Severity:</span>
+            <div class="filter-chips">
+              <button class="filter-chip active" data-severity="all">All</button>
+              <button class="filter-chip" data-severity="major">
+                <span class="sev-dot major"></span> Major (>= 4h)
+              </button>
+              <button class="filter-chip" data-severity="moderate">
+                <span class="sev-dot moderate"></span> Moderate (2h - 4h)
+              </button>
+              <button class="filter-chip" data-severity="minor">
+                <span class="sev-dot minor"></span> Minor (< 2h)
+              </button>
+            </div>
+            
+            <div class="tooltip-container">
+              <i class="fa-solid fa-circle-info info-icon"></i>
+              <div class="tooltip-content">
+                <h4>Severity Classifications (IST)</h4>
+                <p><strong>Major:</strong> Outages lasting 4+ hours (severe grid faults, transformer damage, or major line patrols).</p>
+                <p><strong>Moderate:</strong> Outages lasting 2 to 4 hours (scheduled maintenance, tree trimming, or feeder shifts).</p>
+                <p><strong>Minor:</strong> Outages lasting under 2 hours (momentary line trips, local fuses, or minor grid tuning).</p>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -192,6 +246,52 @@
         </div>
       </section>
 
+      <!-- History Archive Section -->
+      <section id="historySection" class="outage-list-container hidden">
+        <div class="list-header-actions">
+          <div class="header-title-row">
+            <h2>Archive · <span id="historyDistrictName">Jind</span></h2>
+            <button id="exportCsvBtn" class="btn btn-primary" title="Export History as CSV">
+              <i class="fa-solid fa-file-csv"></i>
+              <span>Export CSV</span>
+            </button>
+          </div>
+          <div class="search-wrapper">
+            <i class="fa-solid fa-magnifying-glass search-icon"></i>
+            <input type="text" id="historySearchInput" placeholder="Search historical area, feeder or remarks...">
+          </div>
+        </div>
+
+        <!-- History Desktop View -->
+        <div class="table-responsive glass-card">
+          <table class="outages-table" id="historyTable">
+            <thead>
+              <tr>
+                <th>Date Recorded (IST)</th>
+                <th>Feeder Name</th>
+                <th>Area Name</th>
+                <th>Cut Started At</th>
+                <th>Expected Restoration</th>
+                <th>Outage Remarks</th>
+                <th>Severity</th>
+              </tr>
+            </thead>
+            <tbody id="historyTableBody">
+              <!-- Dynamically populated from history logs -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Empty State for History -->
+        <div id="historyEmptyState" class="empty-state glass-card hidden">
+          <div class="empty-icon-wrapper">
+            <i class="fa-solid fa-clock-rotate-left"></i>
+          </div>
+          <h3>No Outage History</h3>
+          <p>No outage history recorded yet. Check back after 24 hours.</p>
+        </div>
+      </section>
+
       <!-- Loading State -->
       <div id="pageLoader" class="page-loader hidden">
         <i class="fa-solid fa-spinner fa-spin fa-3x"></i>
@@ -204,6 +304,7 @@
     <footer class="app-footer">
       <p class="timestamp"><i class="fa-regular fa-clock"></i> Data last updated: <span id="lastUpdatedTime">N/A</span></p>
       <p class="source-info">Realtime data scraped from DHBVN Samadhan portal. This is a static mirror.</p>
+      <p class="disclaimer"><i class="fa-solid fa-circle-exclamation"></i> Disclaimer: Not affiliated with or endorsed by DHBVN.</p>
     </footer>
   </div>
 

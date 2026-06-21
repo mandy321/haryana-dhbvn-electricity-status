@@ -4,6 +4,9 @@ let currentDistrictId = "";
 let currentDistrictName = "";
 let pinnedArea = null;
 let sharedArea = null;
+let currentSeverityFilter = "all";
+let currentViewTab = "live";
+let districtHistoryData = null;
 
 let userLocalityData = {
   district: "",
@@ -99,6 +102,25 @@ const refreshBtn = document.getElementById('refreshBtn');
 const refreshIcon = document.getElementById('refreshIcon');
 const refreshBtnText = document.getElementById('refreshBtnText');
 
+// District Status & Severity Elements
+const districtStatusHeader = document.getElementById('districtStatusHeader');
+const districtStatusBadge = document.getElementById('districtStatusBadge');
+const statusFeedersDown = document.getElementById('statusFeedersDown');
+const statusAreasAffected = document.getElementById('statusAreasAffected');
+
+// View Tabs Elements
+const tabLive = document.getElementById('tabLive');
+const tabHistory = document.getElementById('tabHistory');
+
+// History Section Elements
+const historySection = document.getElementById('historySection');
+const historyDistrictName = document.getElementById('historyDistrictName');
+const historySearchInput = document.getElementById('historySearchInput');
+const historyTable = document.getElementById('historyTable');
+const historyTableBody = document.getElementById('historyTableBody');
+const historyEmptyState = document.getElementById('historyEmptyState');
+const exportCsvBtn = document.getElementById('exportCsvBtn');
+
 // Initialize App
 window.addEventListener('DOMContentLoaded', initApp);
 
@@ -130,6 +152,23 @@ async function initApp() {
     searchInput.addEventListener('input', handleSearch);
     locateBtn.addEventListener('click', handleGeolocation);
     refreshBtn.addEventListener('click', handleLiveRefresh);
+    
+    // Setup history/tab listeners
+    tabLive.addEventListener('click', () => switchTab('live'));
+    tabHistory.addEventListener('click', () => switchTab('history'));
+    historySearchInput.addEventListener('input', handleHistorySearch);
+    exportCsvBtn.addEventListener('click', handleExportCsv);
+    
+    // Setup severity chips listeners
+    document.querySelectorAll('.filter-chip').forEach(chip => {
+      chip.addEventListener('click', (e) => {
+        document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+        const targetChip = e.currentTarget;
+        targetChip.classList.add('active');
+        currentSeverityFilter = targetChip.getAttribute('data-severity');
+        renderOutages();
+      });
+    });
     
     // Handle initial selections: Shared area takes precedence over Pinned area
     if (sharedArea) {
@@ -421,25 +460,30 @@ function handleDistrictChange(e) {
 
 // Select a District and Update Views
 function selectDistrict(districtId) {
+  if (!districtId) return;
+  
   currentDistrictId = districtId;
   currentDistrictName = DISTRICT_ID_TO_NAME[districtId];
   
   districtSelect.value = districtId;
   currentDistrictNameSpan.textContent = currentDistrictName;
+  if (historyDistrictName) historyDistrictName.textContent = currentDistrictName;
   
   // Clear search and enable buttons
   searchInput.value = "";
+  if (historySearchInput) historySearchInput.value = "";
   refreshBtn.disabled = false;
   
   // Make panels visible
-  outagesSection.classList.remove('hidden');
   statsPanel.classList.remove('hidden');
   
   updateStats();
-  renderOutages();
   checkLocalityOutages();
   renderPinnedArea();
   renderSharedArea();
+  
+  // Sync tab status and render
+  switchTab(currentViewTab);
 }
 
 // Compute Stats Counter Values
@@ -449,6 +493,7 @@ function updateStats() {
   
   let planned = 0;
   let active = 0;
+  const uniqueFeeders = new Set();
   
   list.forEach(item => {
     const remarks = (item.remarks || '').toUpperCase();
@@ -457,11 +502,29 @@ function updateStats() {
     } else {
       active++;
     }
+    if (item.feeder) {
+      uniqueFeeders.add(item.feeder.trim().toUpperCase());
+    }
   });
   
   statTotalOutages.textContent = total;
   statActive.textContent = active;
   statPlanned.textContent = planned;
+  
+  // Update Status Banner
+  if (districtStatusHeader) {
+    districtStatusHeader.classList.remove('hidden');
+    statusFeedersDown.textContent = uniqueFeeders.size;
+    statusAreasAffected.textContent = total;
+    
+    if (total > 0) {
+      districtStatusBadge.textContent = "ACTIVE";
+      districtStatusBadge.className = "status-badge active-outage";
+    } else {
+      districtStatusBadge.textContent = "ALL CLEAR";
+      districtStatusBadge.className = "status-badge all-clear";
+    }
+  }
 }
 
 // Render Outages List & Setup Pins
@@ -469,11 +532,15 @@ function renderOutages() {
   const districtList = outagesData.districts[currentDistrictName] || [];
   const searchTerm = searchInput.value.toLowerCase().trim();
   
-  // Filter by text search
+  // Filter by text search and severity
   const filteredList = districtList.filter(item => {
     const feeder = (item.feeder || '').toLowerCase();
     const area = (item.area || '').toLowerCase();
-    return feeder.includes(searchTerm) || area.includes(searchTerm);
+    const matchesSearch = feeder.includes(searchTerm) || area.includes(searchTerm);
+    
+    if (!matchesSearch) return false;
+    if (currentSeverityFilter === 'all') return true;
+    return getSeverity(item) === currentSeverityFilter;
   });
   
   outagesTableBody.innerHTML = "";
@@ -497,6 +564,10 @@ function renderOutages() {
     const badgeClass = isPlanned ? 'badge-warning' : 'badge-danger';
     const badgeText = isPlanned ? 'Planned' : 'Unplanned';
     const badgeIcon = isPlanned ? 'fa-screwdriver-wrench' : 'fa-triangle-exclamation';
+
+    // Get severity
+    const severity = getSeverity(item);
+    const severityLabel = severity.toUpperCase();
 
     // Is this row currently pinned?
     const isPinned = pinnedArea && 
@@ -527,8 +598,11 @@ function renderOutages() {
         ${formatTimeTo12Hr(item.expected_restoration_time) || 'Pending Estimate'}
       </td>
       <td>
-        <div class="status-badge ${badgeClass}" style="margin-bottom: 6px;">
-          <i class="fa-solid ${badgeIcon}"></i> ${badgeText}
+        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+          <div class="status-badge ${badgeClass}">
+            <i class="fa-solid ${badgeIcon}"></i> ${badgeText}
+          </div>
+          <span class="sev-tag ${severity}">${severityLabel}</span>
         </div>
         <div style="font-size: 13px; color: var(--text-muted);">${remarks}</div>
       </td>
@@ -549,8 +623,11 @@ function renderOutages() {
           </button>
           ${item.feeder}
         </div>
-        <div class="status-badge ${badgeClass}">
-          <i class="fa-solid ${badgeIcon}"></i> ${badgeText}
+        <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 4px;">
+          <div class="status-badge ${badgeClass}">
+            <i class="fa-solid ${badgeIcon}"></i> ${badgeText}
+          </div>
+          <span class="sev-tag ${severity}" style="font-size: 9px; padding: 2px 4px;">${severityLabel}</span>
         </div>
       </div>
       <div class="mobile-card-row">
@@ -897,4 +974,189 @@ function getLastUpdatedText() {
     timeStyle: 'short',
     hour12: true
   });
+}
+
+// ==========================================================================
+// Tabs & History Feature Implementations
+// ==========================================================================
+
+function switchTab(tab) {
+  currentViewTab = tab;
+  
+  if (tab === 'live') {
+    tabLive.classList.add('active');
+    tabHistory.classList.remove('active');
+    
+    outagesSection.classList.remove('hidden');
+    historySection.classList.add('hidden');
+    
+    renderOutages();
+  } else if (tab === 'history') {
+    tabLive.classList.remove('active');
+    tabHistory.classList.add('active');
+    
+    outagesSection.classList.add('hidden');
+    historySection.classList.remove('hidden');
+    
+    loadHistory();
+  }
+}
+
+async function loadHistory() {
+  if (!currentDistrictName) return;
+  
+  // Show history loading state
+  historyTableBody.innerHTML = `<tr><td colspan="7" style="text-align: center; color: var(--text-dim); padding: 32px;"><i class="fa-solid fa-spinner fa-spin fa-2x" style="margin-bottom: 8px;"></i><br>Loading historical outages archive...</td></tr>`;
+  historyEmptyState.classList.add('hidden');
+  historyTable.parentElement.classList.remove('hidden');
+  
+  try {
+    const res = await fetch(`data/history/${encodeURIComponent(currentDistrictName)}.json`);
+    if (!res.ok) {
+      throw new Error("No history file found");
+    }
+    
+    districtHistoryData = await res.json();
+    
+    // Sort history by scraped_at / timestamp descending
+    districtHistoryData.sort((a, b) => {
+      const timeA = a.timestamp || 0;
+      const timeB = b.timestamp || 0;
+      return timeB - timeA;
+    });
+    
+    renderHistory();
+  } catch (err) {
+    console.log("History fetch failed:", err);
+    districtHistoryData = [];
+    renderHistory();
+  }
+}
+
+function renderHistory() {
+  const searchTerm = historySearchInput.value.toLowerCase().trim();
+  
+  const filtered = (districtHistoryData || []).filter(item => {
+    const feeder = (item.feeder || '').toLowerCase();
+    const area = (item.area || '').toLowerCase();
+    const remarks = (item.remarks || '').toLowerCase();
+    return feeder.includes(searchTerm) || area.includes(searchTerm) || remarks.includes(searchTerm);
+  });
+  
+  historyTableBody.innerHTML = "";
+  
+  if (filtered.length === 0) {
+    historyTable.parentElement.classList.add('hidden');
+    historyEmptyState.classList.remove('hidden');
+    return;
+  }
+  
+  historyTable.parentElement.classList.remove('hidden');
+  historyEmptyState.classList.add('hidden');
+  
+  filtered.forEach(item => {
+    const severity = getSeverity(item);
+    const severityLabel = severity.toUpperCase();
+    
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td style="color: var(--text-dim); font-size: 13px;">${item.scraped_at || 'N/A'}</td>
+      <td style="font-weight: 600; color: #fff;">${item.feeder}</td>
+      <td>${item.area}</td>
+      <td>${formatTimeTo12Hr(item.start_time) || 'N/A'}</td>
+      <td>${formatTimeTo12Hr(item.expected_restoration_time) || 'N/A'}</td>
+      <td style="font-size: 13px;">${item.remarks || ''}</td>
+      <td><span class="sev-tag ${severity}">${severityLabel}</span></td>
+    `;
+    historyTableBody.appendChild(tr);
+  });
+}
+
+function handleHistorySearch() {
+  renderHistory();
+}
+
+function handleExportCsv() {
+  if (!districtHistoryData || districtHistoryData.length === 0) {
+    alert("No history data available to export.");
+    return;
+  }
+  
+  // Columns: Date, District, Feeder, Area, Start Time, Restoration Time, Remarks, Severity
+  const csvHeaders = ["Date Recorded", "District", "Feeder Name", "Area Name", "Cut Started At", "Expected Restoration", "Outage Remarks", "Severity"];
+  
+  const csvRows = [csvHeaders.join(",")];
+  
+  districtHistoryData.forEach(item => {
+    const row = [
+      escapeCsvValue(item.scraped_at || 'N/A'),
+      escapeCsvValue(currentDistrictName),
+      escapeCsvValue(item.feeder || ''),
+      escapeCsvValue(item.area || ''),
+      escapeCsvValue(formatTimeTo12Hr(item.start_time) || 'N/A'),
+      escapeCsvValue(formatTimeTo12Hr(item.expected_restoration_time) || 'N/A'),
+      escapeCsvValue(item.remarks || ''),
+      escapeCsvValue(getSeverity(item).toUpperCase())
+    ];
+    csvRows.push(row.join(","));
+  });
+  
+  const csvContent = "data:text/csv;charset=utf-8," + csvRows.join("\n");
+  const encodedUri = encodeURI(csvContent);
+  const link = document.createElement("a");
+  link.setAttribute("href", encodedUri);
+  link.setAttribute("download", `dhbvn_outage_history_${currentDistrictName.toLowerCase()}.csv`);
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
+
+function escapeCsvValue(val) {
+  if (val === undefined || val === null) return '""';
+  let formatted = val.toString().replace(/"/g, '""'); // escape double quotes
+  if (formatted.includes(",") || formatted.includes("\n") || formatted.includes('"')) {
+    formatted = `"${formatted}"`;
+  }
+  return formatted;
+}
+
+// Helper: Classify Severity of Outage
+function getSeverity(outage) {
+  const remarksLower = (outage.remarks || '').toLowerCase();
+  if (remarksLower.includes('breakdown') || remarksLower.includes('burst') || remarksLower.includes('damage') || remarksLower.includes('heavy') || remarksLower.includes('snapping')) {
+    return 'major';
+  }
+  const start = parseDHBVNDate(outage.start_time);
+  const end = parseDHBVNDate(outage.expected_restoration_time);
+  if (!start || !end) return 'moderate'; // fallback
+  const durationHours = (end - start) / (1000 * 60 * 60);
+  if (durationHours >= 4) return 'major';
+  if (durationHours >= 2) return 'moderate';
+  return 'minor';
+}
+
+// Helper: Parse DHBVN Date strings "21-Jun-2026 05:27:00" or "21-Jun-2026 08:30"
+function parseDHBVNDate(dateStr) {
+  if (!dateStr || dateStr.toLowerCase().includes('pending') || dateStr.toLowerCase().includes('n/a') || dateStr.toLowerCase().includes('estimate')) return null;
+  const parts = dateStr.trim().split(/\s+/);
+  if (parts.length < 2) return null;
+  const dateParts = parts[0].split('-');
+  const timeParts = parts[1].split(':');
+  if (dateParts.length < 3 || timeParts.length < 2) return null;
+  
+  const day = parseInt(dateParts[0], 10);
+  const monthStr = dateParts[1].toLowerCase();
+  const year = parseInt(dateParts[2], 10);
+  
+  const months = {
+    jan: 0, feb: 1, mar: 2, apr: 3, may: 4, jun: 5,
+    jul: 6, aug: 7, sep: 8, oct: 9, nov: 10, dec: 11
+  };
+  const month = months[monthStr.substring(0, 3)] || 0;
+  
+  const hours = parseInt(timeParts[0], 10);
+  const minutes = parseInt(timeParts[1], 10);
+  const seconds = timeParts[2] ? parseInt(timeParts[2], 10) : 0;
+  
+  return new Date(year, month, day, hours, minutes, seconds);
 }
