@@ -109,6 +109,7 @@ const statusFeedersDown = document.getElementById('statusFeedersDown');
 const statusAreasAffected = document.getElementById('statusAreasAffected');
 
 // View Tabs Elements
+const tabNavigationSection = document.getElementById('tabNavigationSection');
 const tabLive = document.getElementById('tabLive');
 const tabHistory = document.getElementById('tabHistory');
 
@@ -253,7 +254,18 @@ function renderSharedArea() {
   sharedSection.classList.remove('hidden');
   
   const list = outagesData.districts[sharedArea.districtName] || [];
-  const activeCut = list.find(item => item.feeder === sharedArea.feeder && item.area === sharedArea.area);
+  const nowISTStr = new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata' });
+  const nowIST = new Date(nowISTStr);
+  const nowTime = nowIST.getTime();
+
+  const activeCut = list.find(item => {
+    if (item.feeder !== sharedArea.feeder || item.area !== sharedArea.area) return false;
+    const end = parseDHBVNDate(item.expected_restoration_time);
+    if (end && end.getTime() < nowTime) {
+      return false; // resolved/past
+    }
+    return true;
+  });
   
   sharedCard.className = "shared-card glass-card";
   
@@ -376,7 +388,18 @@ function renderPinnedArea() {
   
   // Search the district's outages list for this pinned area status
   const list = outagesData.districts[pinnedArea.districtName] || [];
-  const activeCut = list.find(item => item.feeder === pinnedArea.feeder && item.area === pinnedArea.area);
+  const nowISTStr = new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata' });
+  const nowIST = new Date(nowISTStr);
+  const nowTime = nowIST.getTime();
+
+  const activeCut = list.find(item => {
+    if (item.feeder !== pinnedArea.feeder || item.area !== pinnedArea.area) return false;
+    const end = parseDHBVNDate(item.expected_restoration_time);
+    if (end && end.getTime() < nowTime) {
+      return false; // resolved/past
+    }
+    return true;
+  });
   
   pinnedCard.className = "pinned-card glass-card";
   
@@ -476,6 +499,7 @@ function selectDistrict(districtId) {
   
   // Make panels visible
   statsPanel.classList.remove('hidden');
+  if (tabNavigationSection) tabNavigationSection.classList.remove('hidden');
   
   updateStats();
   checkLocalityOutages();
@@ -489,13 +513,26 @@ function selectDistrict(districtId) {
 // Compute Stats Counter Values
 function updateStats() {
   const list = outagesData.districts[currentDistrictName] || [];
-  const total = list.length;
   
+  const nowISTStr = new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata' });
+  const nowIST = new Date(nowISTStr);
+  const nowTime = nowIST.getTime();
+  
+  // Filter active list (exclude resolved in the past)
+  const activeList = list.filter(item => {
+    const end = parseDHBVNDate(item.expected_restoration_time);
+    if (end && end.getTime() < nowTime) {
+      return false; // resolved
+    }
+    return true;
+  });
+  
+  const total = activeList.length;
   let planned = 0;
   let active = 0;
   const uniqueFeeders = new Set();
   
-  list.forEach(item => {
+  activeList.forEach(item => {
     const remarks = (item.remarks || '').toUpperCase();
     if (remarks.includes('PLANNED') || remarks.includes('MTC') || remarks.includes('MAINTENANCE')) {
       planned++;
@@ -532,13 +569,24 @@ function renderOutages() {
   const districtList = outagesData.districts[currentDistrictName] || [];
   const searchTerm = searchInput.value.toLowerCase().trim();
   
-  // Filter by text search and severity
+  // Filter by text search, active status, and severity
+  const nowISTStr = new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata' });
+  const nowIST = new Date(nowISTStr);
+  const nowTime = nowIST.getTime();
+
   const filteredList = districtList.filter(item => {
     const feeder = (item.feeder || '').toLowerCase();
     const area = (item.area || '').toLowerCase();
     const matchesSearch = feeder.includes(searchTerm) || area.includes(searchTerm);
     
     if (!matchesSearch) return false;
+    
+    // Check if resolved
+    const end = parseDHBVNDate(item.expected_restoration_time);
+    if (end && end.getTime() < nowTime) {
+      return false; // resolved/past
+    }
+    
     if (currentSeverityFilter === 'all') return true;
     return getSeverity(item) === currentSeverityFilter;
   });
