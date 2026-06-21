@@ -23,10 +23,15 @@ A premium, interactive web application to track live power outages, scheduled ma
 
 1. **Auto-Location Detection (GPS)**: Detects your current coordinates, reverse-lookup matches your district (e.g. Gurugram, Palwal, Jind), and highlights active power cuts in your exact suburb or village name.
 2. **On-Demand Live Refresh**: Instantly updates outages for your selected district directly from the DHBVN servers via a CORS proxy.
-3. **Area Pinning (Star)**: Star your specific feeder or locality to keep its status pinned at the very top of your dashboard. Toggles a green "Healthy & Active" indicator if there are no cuts.
-4. **WhatsApp Sharing**: Easily share the real-time outage status of any specific area with a one-click generated link. When clicked, the recipient directly sees that area's status highlighted on top.
-5. **Automated Scheduled Scraping**: Runs a headless browser crawler via GitHub Actions every 20 minutes to fetch and mirror DHBVN status.
-6. **Premium Responsive UI**: Elegant dark space design with glassmorphism, responsive data grids, stats counters, and smooth layout transformations.
+3. **High-Impact District Status Banner**: Displays a dynamic status badge ("ACTIVE" pulsing red/orange or "ALL CLEAR" glowing green) along with counters for unique "Feeders Down" and total "Areas Affected".
+4. **Outage Severity Filtering**: Classifies cuts into Major (>=4h), Moderate (2h-4h), and Minor (<2h) with a lightweight, CSS-only hover explanation tooltip.
+5. **14-Day Outage Trend Chart**: Integrates a responsive bar graph (via Chart.js) that visualizes historical daily outage trends. Bars are colored dynamically (rose/red for > 5 outages, amber/orange for <= 5 outages) and support custom dark-theme styled tooltips.
+6. **District Outage Archive**: Keeps an incremental history of resolved outages for each district with a rolling 14-day window.
+7. **CSV Data Exporter**: Allows users to export the historical archive data into an Excel/Sheets-friendly CSV format (Date, District, Feeder, Area, Start, Restoration, Remarks, Severity).
+8. **Area Pinning (Star)**: Star your specific feeder or locality to keep its status pinned at the very top of your dashboard. Shows a green "No Active Outage" card if power is active.
+9. **WhatsApp Sharing**: Easily share the real-time outage status of any specific area with a one-click generated link. When clicked, the recipient directly sees that area's status highlighted on top.
+10. **Automated Scheduled Scraping**: Runs a headless browser crawler via GitHub Actions every 20 minutes to fetch and mirror DHBVN status.
+11. **Premium Responsive UI**: Elegant dark space design with glassmorphism, responsive data grids, stats counters, and smooth layout transformations.
 
 ---
 
