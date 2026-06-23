@@ -709,8 +709,8 @@ function updateStats() {
   // Update Status Banner elements
   if (districtStatusHeader) {
     districtStatusHeader.classList.remove('hidden');
-    statusFeedersDown.textContent = uniqueActiveFeeders.size;
-    statusAreasAffected.textContent = total;
+    statusFeedersDown.textContent = `${uniqueActiveFeeders.size} / ${totalFeedersCount}`;
+    statusAreasAffected.textContent = `${uniqueActiveAreas.size} / ${totalAreasCount}`;
     if (statusPercentUp) {
       statusPercentUp.textContent = `${percentAreasUpStr}%`;
     }

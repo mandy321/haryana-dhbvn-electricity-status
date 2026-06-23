@@ -32,7 +32,7 @@ const shapeMap = {
   'polygon140': 'Kurukshetra',
   'polygon116': 'Kaithal',
   'polygon128': 'Karnal',
-  'polygon148': 'Panipat'
+  'path106': 'Panipat'
 };
 
 const optimizedElements = [];
