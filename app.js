@@ -778,6 +778,13 @@ function renderOutages() {
     }
     
     if (currentSeverityFilter === 'all') return true;
+    
+    const remarks = item.remarks || 'Active Cut';
+    const isPlanned = remarks.toUpperCase().includes('PLANNED') || remarks.toUpperCase().includes('MTC') || remarks.toUpperCase().includes('MAINTENANCE');
+    
+    if (currentSeverityFilter === 'planned') return isPlanned;
+    if (currentSeverityFilter === 'unplanned') return !isPlanned;
+    
     return getSeverity(item) === currentSeverityFilter;
   });
   

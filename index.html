@@ -127,7 +127,15 @@
           </div>
           <div class="metric-item">
             <span class="metric-value" id="statusAreasAffected">0</span>
-            <span class="metric-label">Areas Affected</span>
+            <span class="metric-label" style="display: flex; align-items: center; gap: 4px; justify-content: center;">
+              Areas Affected
+              <span class="tooltip-container" style="display: inline-flex;">
+                <i class="fa-solid fa-circle-info info-icon" style="margin: 0; font-size: 11px;"></i>
+                <span class="tooltip-content" style="font-weight: normal; font-size: 12px; line-height: 1.4;">
+                  <strong>Areas Affected vs Total Outages:</strong> Shows the number of unique neighborhoods experiencing at least one cut. This can be lower than Total Outages because a large area can have multiple separate physical feeder line outages.
+                </span>
+              </span>
+            </span>
           </div>
           <div class="metric-item">
             <span class="metric-value" id="statusPercentUp">100%</span>
@@ -144,7 +152,15 @@
             <i class="fa-solid fa-house-laptop"></i>
           </div>
           <div class="stat-data">
-            <h3 id="statTotalOutages">0</h3>
+            <div style="display: flex; align-items: center; gap: 6px;">
+              <h3 id="statTotalOutages">0</h3>
+              <span class="tooltip-container" style="display: inline-flex;">
+                <i class="fa-solid fa-circle-info info-icon" style="margin: 0; font-size: 12px;"></i>
+                <span class="tooltip-content" style="font-weight: normal; font-size: 12px; line-height: 1.4;">
+                  <strong>Total Outages:</strong> The total count of active physical power cuts on the grid. Multiple feeders can be down in the same area due to different reasons (e.g., breakdown vs. scheduled maintenance) and with different restoration times.
+                </span>
+              </span>
+            </div>
             <p>Total Outages</p>
           </div>
         </div>
@@ -225,7 +241,7 @@
 
           <!-- Severity Filters with Info Tooltip -->
           <div class="severity-filter-bar" id="severityFilterBar">
-            <span class="filter-label">Filter Severity:</span>
+            <span class="filter-label">Filter Outages:</span>
             <div class="filter-chips">
               <button class="filter-chip active" data-severity="all">All</button>
               <button class="filter-chip" data-severity="major">
@@ -237,15 +253,23 @@
               <button class="filter-chip" data-severity="minor">
                 <span class="sev-dot minor"></span> Minor (< 2h)
               </button>
+              <button class="filter-chip" data-severity="planned">
+                <i class="fa-solid fa-screwdriver-wrench" style="font-size: 10px; color: var(--warning-color);"></i> Planned
+              </button>
+              <button class="filter-chip" data-severity="unplanned">
+                <i class="fa-solid fa-triangle-exclamation" style="font-size: 10px; color: var(--danger-color);"></i> Unplanned
+              </button>
             </div>
             
             <div class="tooltip-container">
               <i class="fa-solid fa-circle-info info-icon"></i>
               <div class="tooltip-content">
-                <h4>Severity Classifications (IST)</h4>
-                <p><strong>Major:</strong> Outages lasting 4+ hours (severe grid faults, transformer damage, or major line patrols).</p>
-                <p><strong>Moderate:</strong> Outages lasting 2 to 4 hours (scheduled maintenance, tree trimming, or feeder shifts).</p>
-                <p><strong>Minor:</strong> Outages lasting under 2 hours (momentary line trips, local fuses, or minor grid tuning).</p>
+                <h4>Outage Classifications & Severity (IST)</h4>
+                <p><strong>Planned:</strong> Scheduled maintenance, utility upgrades, or line repairs.</p>
+                <p><strong>Unplanned:</strong> Emergency faults, line trips, breakdowns, or transformer failures.</p>
+                <p><strong>Major:</strong> Outages lasting 4+ hours.</p>
+                <p><strong>Moderate:</strong> Outages lasting 2 to 4 hours.</p>
+                <p><strong>Minor:</strong> Outages lasting under 2 hours.</p>
               </div>
             </div>
           </div>
