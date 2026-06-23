@@ -788,6 +788,38 @@ function renderOutages() {
     return getSeverity(item) === currentSeverityFilter;
   });
   
+  // Sort by user locality proximity if location is set for the current district
+  const searchKeys = (userLocalityData.district && userLocalityData.district === currentDistrictName)
+    ? [
+        userLocalityData.suburb,
+        userLocalityData.neighbourhood,
+        userLocalityData.village,
+        userLocalityData.town
+      ].filter(key => key && key.length > 2)
+       .map(key => key.toLowerCase().trim())
+    : [];
+
+  if (searchKeys.length > 0) {
+    const getLocalityScore = (item) => {
+      const area = (item.area || '').toLowerCase();
+      const feeder = (item.feeder || '').toLowerCase();
+      let score = 0;
+      for (const key of searchKeys) {
+        if (area.includes(key) || key.includes(area)) {
+          score += 10;
+        }
+        if (feeder.includes(key)) {
+          score += 2;
+        }
+      }
+      return score;
+    };
+    
+    filteredList.sort((a, b) => {
+      return getLocalityScore(b) - getLocalityScore(a);
+    });
+  }
+
   outagesTableBody.innerHTML = "";
   mobileCardsContainer.innerHTML = "";
   
