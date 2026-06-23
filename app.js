@@ -323,6 +323,7 @@ function renderSharedArea() {
       <div class="shared-card-header">
         <h3><i class="fa-solid fa-share-nodes" style="color: var(--primary-color);"></i> Shared Locality Status</h3>
         <div style="display: flex; gap: 12px; align-items: center;">
+          <button class="btn-refresh" style="background:rgba(245,158,11,0.15); border:1px solid rgba(245,158,11,0.3); color:var(--warning-color); cursor:pointer; display:flex; align-items:center; gap:4px; padding: 4px 8px; border-radius:6px; font-size:12px;" onclick="subscribeToAlerts('${sharedArea.districtName}', '${sharedArea.feeder}', '${sharedArea.area}')" title="Get live push alerts"><i class="fa-solid fa-bell"></i> Get Alerts</button>
           <button class="btn-refresh shared-refresh-btn" style="background:none; border:none; color:var(--text-dim); cursor:pointer; display:flex; align-items:center; gap:4px;" onclick="handleLiveRefresh('${sharedArea.districtId}')" title="Refresh live status"><i class="fa-solid fa-rotate"></i> Refresh</button>
           <button class="btn-refresh" style="background:none; border:none; color:var(--text-dim); cursor:pointer;" onclick="dismissSharedArea()"><i class="fa-solid fa-xmark"></i> Dismiss</button>
         </div>
@@ -459,6 +460,7 @@ function renderPinnedArea() {
       <div class="pinned-card-header">
         <h3><i class="fa-solid fa-star" style="color: var(--warning-color);"></i> Pinned Locality</h3>
         <div style="display: flex; gap: 12px; align-items: center;">
+          <button class="btn-refresh" style="background:rgba(245,158,11,0.15); border:1px solid rgba(245,158,11,0.3); color:var(--warning-color); cursor:pointer; display:flex; align-items:center; gap:4px; padding: 4px 8px; border-radius:6px; font-size:12px;" onclick="subscribeToAlerts('${pinnedArea.districtName}', '${pinnedArea.feeder}', '${pinnedArea.area}')" title="Get live push alerts"><i class="fa-solid fa-bell"></i> Get Alerts</button>
           <button class="btn-refresh pinned-refresh-btn" style="background:none; border:none; color:var(--text-dim); cursor:pointer; display:flex; align-items:center; gap:4px;" onclick="handleLiveRefresh('${pinnedArea.districtId}')" title="Refresh live status"><i class="fa-solid fa-rotate"></i> Refresh</button>
           <button class="btn-refresh" style="background:none; border:none; color:var(--text-dim); cursor:pointer; display:flex; align-items:center; gap:4px;" onclick="shareArea('${pinnedArea.districtId}', '${pinnedArea.districtName}', '${pinnedArea.feeder}', '${pinnedArea.area}')" title="Share live status link"><i class="fa-solid fa-share-nodes"></i> Share</button>
           <button class="btn-refresh" style="background:none; border:none; color:var(--text-dim); cursor:pointer; display:flex; align-items:center; gap:4px;" onclick="unpinArea()"><i class="fa-solid fa-trash-can"></i> Unpin</button>
