@@ -184,6 +184,24 @@ body {
   color: var(--primary-color);
 }
 
+.complaint-highlight-link {
+  color: var(--warning-color) !important;
+  font-weight: 600;
+  background: rgba(245, 158, 11, 0.12);
+  border: 1px solid rgba(245, 158, 11, 0.25);
+  padding: 4px 8px;
+  border-radius: 6px;
+  box-shadow: 0 0 10px rgba(245, 158, 11, 0.05);
+  transition: all var(--transition-fast) ease;
+}
+
+.complaint-highlight-link:hover {
+  background: var(--warning-color) !important;
+  color: #0c0e17 !important;
+  box-shadow: 0 0 15px rgba(245, 158, 11, 0.45);
+}
+
+
 /* ==========================================================================
    Control Panel Component
    ========================================================================== */
