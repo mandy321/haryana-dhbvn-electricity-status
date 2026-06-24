@@ -652,6 +652,7 @@ async function autoRefreshDistrict(districtId) {
     }
     renderPinnedArea();
     renderSharedArea();
+    colorSVGMap();
     
   } catch (err) {
     // Auto-refresh failure is silent — user can still manually click Refresh Live
@@ -1205,6 +1206,7 @@ window.handleLiveRefresh = async function(targetDistrictId) {
     }
     renderPinnedArea();
     renderSharedArea();
+    colorSVGMap();
     
   } catch (err) {
     console.error('On-demand refresh error:', err);
