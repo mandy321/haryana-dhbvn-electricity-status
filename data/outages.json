@@ -1,14 +1,7 @@
 {
-  "last_updated": "2026-07-14T22:17:58.126Z",
+  "last_updated": "2026-07-14T23:16:43.615Z",
   "districts": {
     "Jind": [
-      {
-        "feeder": "Mohd. Khera AP",
-        "area": "Mohmmad Khera",
-        "start_time": "14-Jul-2026 16:43:32",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
       {
         "feeder": "DANODA DS",
         "area": "Sainthli",
@@ -27,6 +20,27 @@
         "feeder": "Singhpura Village AP",
         "area": "Singhpura",
         "start_time": "13-Jul-2026 16:34:51",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "AHIRKA AP",
+        "area": "Ahirka Village",
+        "start_time": "15-Jul-2026 04:40:08",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "Mohd. Khera AP",
+        "area": "Mohmmad Khera",
+        "start_time": "14-Jul-2026 16:43:32",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "BARODA AP",
+        "area": "Baroda",
+        "start_time": "15-Jul-2026 04:45:17",
         "expected_restoration_time": "",
         "remarks": ""
       },
@@ -66,6 +80,13 @@
         "remarks": ""
       },
       {
+        "feeder": "JALALPURA AP",
+        "area": "Jalalpur Khurd",
+        "start_time": "15-Jul-2026 04:45:47",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
         "feeder": "Dhatrath AP",
         "area": "Dhatrath",
         "start_time": "14-Jul-2026 06:14:59",
@@ -95,14 +116,14 @@
       },
       {
         "feeder": "Chhaper AP",
-        "area": "Chhaper",
+        "area": "Chapper",
         "start_time": "14-Jul-2026 16:01:12",
         "expected_restoration_time": "",
         "remarks": ""
       },
       {
         "feeder": "Chhaper AP",
-        "area": "Chapper",
+        "area": "Chhaper",
         "start_time": "14-Jul-2026 16:01:12",
         "expected_restoration_time": "",
         "remarks": ""
@@ -129,65 +150,23 @@
         "remarks": ""
       },
       {
-        "feeder": "DHAMTAN DS",
-        "area": "Dhamtan",
-        "start_time": "14-Jul-2026 23:53:11",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "Kalta AP",
-        "area": "Kalta",
-        "start_time": "14-Jul-2026 10:02:44",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "Dhankheri AP",
-        "area": "Dhankheri",
-        "start_time": "14-Jul-2026 18:45:45",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "MOHAN GARH AP",
-        "area": "Mohan Garh",
-        "start_time": "15-Jul-2026 00:01:30",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "NIDANI DS",
-        "area": "Padana",
-        "start_time": "13-Jul-2026 16:43:36",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "NIDANI DS",
-        "area": "Nidani",
-        "start_time": "13-Jul-2026 16:43:36",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "Pouli AP",
-        "area": "Pouli",
-        "start_time": "14-Jul-2026 18:44:40",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "BERI KHERA AP",
-        "area": "Beri Khera",
-        "start_time": "14-Jul-2026 19:03:31",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
         "feeder": "REWAR AP",
         "area": "Rewar",
         "start_time": "15-Jul-2026 00:00:40",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "Kuchrana AP No.1",
+        "area": "Kuchrana Khurd",
+        "start_time": "15-Jul-2026 04:46:06",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "Kuchrana AP No.1",
+        "area": "Kuchrana Kalan",
+        "start_time": "15-Jul-2026 04:46:06",
         "expected_restoration_time": "",
         "remarks": ""
       },
@@ -214,14 +193,14 @@
       },
       {
         "feeder": "Rozla AP",
-        "area": "Rozia",
+        "area": "Rozla",
         "start_time": "13-Jul-2026 19:34:03",
         "expected_restoration_time": "",
         "remarks": ""
       },
       {
         "feeder": "Rozla AP",
-        "area": "Rozla",
+        "area": "Rozia",
         "start_time": "13-Jul-2026 19:34:03",
         "expected_restoration_time": "",
         "remarks": ""
@@ -256,13 +235,6 @@
       },
       {
         "feeder": "U/Estate",
-        "area": "Water Booster Near Ramlila Ground",
-        "start_time": "14-Jul-2026 16:10:00",
-        "expected_restoration_time": "14-Jul-2026 17:00:00",
-        "remarks": "CABLE DAMAGE"
-      },
-      {
-        "feeder": "U/Estate",
         "area": "Employs Colony ( Op Jail )",
         "start_time": "14-Jul-2026 16:10:00",
         "expected_restoration_time": "14-Jul-2026 17:00:00",
@@ -270,35 +242,28 @@
       },
       {
         "feeder": "U/Estate",
-        "area": "Chabri Colony",
+        "area": "Gohana Road",
         "start_time": "14-Jul-2026 16:10:00",
         "expected_restoration_time": "14-Jul-2026 17:00:00",
         "remarks": "CABLE DAMAGE"
       },
       {
         "feeder": "U/Estate",
-        "area": "Aprahi Mohalla",
+        "area": "Kundan Cinema",
         "start_time": "14-Jul-2026 16:10:00",
         "expected_restoration_time": "14-Jul-2026 17:00:00",
         "remarks": "CABLE DAMAGE"
       },
       {
         "feeder": "U/Estate",
-        "area": "Defence Colony",
+        "area": "New Bus Stand",
         "start_time": "14-Jul-2026 16:10:00",
         "expected_restoration_time": "14-Jul-2026 17:00:00",
         "remarks": "CABLE DAMAGE"
       },
       {
         "feeder": "U/Estate",
-        "area": "Urban Estate Block A",
-        "start_time": "14-Jul-2026 16:10:00",
-        "expected_restoration_time": "14-Jul-2026 17:00:00",
-        "remarks": "CABLE DAMAGE"
-      },
-      {
-        "feeder": "U/Estate",
-        "area": "Urban Estate Block C",
+        "area": "Employees Colony ( Op. Jail )",
         "start_time": "14-Jul-2026 16:10:00",
         "expected_restoration_time": "14-Jul-2026 17:00:00",
         "remarks": "CABLE DAMAGE"
@@ -326,28 +291,42 @@
       },
       {
         "feeder": "U/Estate",
-        "area": "Employees Colony ( Op. Jail )",
+        "area": "Urban Estate Block A",
         "start_time": "14-Jul-2026 16:10:00",
         "expected_restoration_time": "14-Jul-2026 17:00:00",
         "remarks": "CABLE DAMAGE"
       },
       {
         "feeder": "U/Estate",
-        "area": "Gohana Road",
+        "area": "Urban Estate Block C",
         "start_time": "14-Jul-2026 16:10:00",
         "expected_restoration_time": "14-Jul-2026 17:00:00",
         "remarks": "CABLE DAMAGE"
       },
       {
         "feeder": "U/Estate",
-        "area": "Kundan Cinema",
+        "area": "Aprahi Mohalla",
         "start_time": "14-Jul-2026 16:10:00",
         "expected_restoration_time": "14-Jul-2026 17:00:00",
         "remarks": "CABLE DAMAGE"
       },
       {
         "feeder": "U/Estate",
-        "area": "New Bus Stand",
+        "area": "Defence Colony",
+        "start_time": "14-Jul-2026 16:10:00",
+        "expected_restoration_time": "14-Jul-2026 17:00:00",
+        "remarks": "CABLE DAMAGE"
+      },
+      {
+        "feeder": "U/Estate",
+        "area": "Water Booster Near Ramlila Ground",
+        "start_time": "14-Jul-2026 16:10:00",
+        "expected_restoration_time": "14-Jul-2026 17:00:00",
+        "remarks": "CABLE DAMAGE"
+      },
+      {
+        "feeder": "U/Estate",
+        "area": "Chabri Colony",
         "start_time": "14-Jul-2026 16:10:00",
         "expected_restoration_time": "14-Jul-2026 17:00:00",
         "remarks": "CABLE DAMAGE"
@@ -368,14 +347,7 @@
       },
       {
         "feeder": "33 KV DANODA",
-        "area": "Frain Khurd",
-        "start_time": "14-Jul-2026 09:22:00",
-        "expected_restoration_time": "14-Jul-2026 15:00:00",
-        "remarks": "UNPLANNED"
-      },
-      {
-        "feeder": "33 KV DANODA",
-        "area": "Frain Kalan",
+        "area": "Sacha Khera",
         "start_time": "14-Jul-2026 09:22:00",
         "expected_restoration_time": "14-Jul-2026 15:00:00",
         "remarks": "UNPLANNED"
@@ -389,7 +361,14 @@
       },
       {
         "feeder": "33 KV DANODA",
-        "area": "Sacha Khera",
+        "area": "Frain Kalan",
+        "start_time": "14-Jul-2026 09:22:00",
+        "expected_restoration_time": "14-Jul-2026 15:00:00",
+        "remarks": "UNPLANNED"
+      },
+      {
+        "feeder": "33 KV DANODA",
+        "area": "Frain Khurd",
         "start_time": "14-Jul-2026 09:22:00",
         "expected_restoration_time": "14-Jul-2026 15:00:00",
         "remarks": "UNPLANNED"
@@ -398,13 +377,6 @@
         "feeder": "Ghogrian  AP",
         "area": "Ghoghrian",
         "start_time": "15-Jul-2026 00:01:21",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "PonkeriKheri",
-        "area": "Pokhri Kheri",
-        "start_time": "15-Jul-2026 00:20:41",
         "expected_restoration_time": "",
         "remarks": ""
       },
@@ -424,43 +396,15 @@
       },
       {
         "feeder": "PonkeriKheri",
-        "area": "Baganwala",
+        "area": "Pokhri Kheri",
         "start_time": "15-Jul-2026 00:20:41",
         "expected_restoration_time": "",
         "remarks": ""
       },
       {
-        "feeder": "Akal Garh",
-        "area": "Bhuda Khera",
-        "start_time": "14-Jul-2026 18:43:58",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "Akal Garh",
-        "area": "Kharainti",
-        "start_time": "14-Jul-2026 18:43:58",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "Akal Garh",
-        "area": "Nandgarh",
-        "start_time": "14-Jul-2026 18:43:58",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "Akal Garh",
-        "area": "Malwi",
-        "start_time": "14-Jul-2026 18:43:58",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "Akal Garh",
-        "area": "Sirsa Kheri",
-        "start_time": "14-Jul-2026 18:43:58",
+        "feeder": "PonkeriKheri",
+        "area": "Baganwala",
+        "start_time": "15-Jul-2026 00:20:41",
         "expected_restoration_time": "",
         "remarks": ""
       },
@@ -486,6 +430,41 @@
         "remarks": ""
       },
       {
+        "feeder": "Akal Garh",
+        "area": "Malwi",
+        "start_time": "14-Jul-2026 18:43:58",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "Akal Garh",
+        "area": "Sirsa Kheri",
+        "start_time": "14-Jul-2026 18:43:58",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "Akal Garh",
+        "area": "Kharainti",
+        "start_time": "14-Jul-2026 18:43:58",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "Akal Garh",
+        "area": "Nandgarh",
+        "start_time": "14-Jul-2026 18:43:58",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "Akal Garh",
+        "area": "Bhuda Khera",
+        "start_time": "14-Jul-2026 18:43:58",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
         "feeder": "RODH-AP",
         "area": "Rodh",
         "start_time": "14-Jul-2026 16:00:58",
@@ -493,60 +472,11 @@
         "remarks": ""
       },
       {
-        "feeder": "CITY NO.5",
-        "area": "City or chotta Railway Station (Bsnl Ex )",
-        "start_time": "14-Jul-2026 12:40:00",
-        "expected_restoration_time": "14-Jul-2026 17:00:00",
-        "remarks": "CABLE DAMAGE"
-      },
-      {
-        "feeder": "CITY NO.5",
-        "area": "D.C Colony",
-        "start_time": "14-Jul-2026 12:40:00",
-        "expected_restoration_time": "14-Jul-2026 17:00:00",
-        "remarks": "CABLE DAMAGE"
-      },
-      {
-        "feeder": "CITY NO.5",
-        "area": "Vishwakarma Colony",
-        "start_time": "14-Jul-2026 12:40:00",
-        "expected_restoration_time": "14-Jul-2026 17:00:00",
-        "remarks": "CABLE DAMAGE"
-      },
-      {
-        "feeder": "CITY NO.5",
-        "area": "Chakkar Road",
-        "start_time": "14-Jul-2026 12:40:00",
-        "expected_restoration_time": "14-Jul-2026 17:00:00",
-        "remarks": "CABLE DAMAGE"
-      },
-      {
-        "feeder": "CITY NO.5",
-        "area": "Distt Jail",
-        "start_time": "14-Jul-2026 12:40:00",
-        "expected_restoration_time": "14-Jul-2026 17:00:00",
-        "remarks": "CABLE DAMAGE"
-      },
-      {
-        "feeder": "CITY NO.5",
-        "area": "New Kath Mandi",
-        "start_time": "14-Jul-2026 12:40:00",
-        "expected_restoration_time": "14-Jul-2026 17:00:00",
-        "remarks": "CABLE DAMAGE"
-      },
-      {
-        "feeder": "CITY NO.5",
-        "area": "Police Line",
-        "start_time": "14-Jul-2026 12:40:00",
-        "expected_restoration_time": "14-Jul-2026 17:00:00",
-        "remarks": "CABLE DAMAGE"
-      },
-      {
-        "feeder": "CITY NO.5",
-        "area": "Rani Talab",
-        "start_time": "14-Jul-2026 12:40:00",
-        "expected_restoration_time": "14-Jul-2026 17:00:00",
-        "remarks": "CABLE DAMAGE"
+        "feeder": "ALLAN AP",
+        "area": "Allan Jogi Khera",
+        "start_time": "15-Jul-2026 04:44:38",
+        "expected_restoration_time": "",
+        "remarks": ""
       },
       {
         "feeder": "CITY NO.5",
@@ -578,17 +508,94 @@
       },
       {
         "feeder": "CITY NO.5",
-        "area": "Scheme No -19",
+        "area": "Vishawkarma Colony",
         "start_time": "14-Jul-2026 12:40:00",
         "expected_restoration_time": "14-Jul-2026 17:00:00",
         "remarks": "CABLE DAMAGE"
       },
       {
         "feeder": "CITY NO.5",
-        "area": "Sheoran Colony",
+        "area": "City or chotta Railway Station (Bsnl Ex )",
         "start_time": "14-Jul-2026 12:40:00",
         "expected_restoration_time": "14-Jul-2026 17:00:00",
         "remarks": "CABLE DAMAGE"
+      },
+      {
+        "feeder": "CITY NO.5",
+        "area": "D.C Colony",
+        "start_time": "14-Jul-2026 12:40:00",
+        "expected_restoration_time": "14-Jul-2026 17:00:00",
+        "remarks": "CABLE DAMAGE"
+      },
+      {
+        "feeder": "CITY NO.5",
+        "area": "Vishwakarma Colony",
+        "start_time": "14-Jul-2026 12:40:00",
+        "expected_restoration_time": "14-Jul-2026 17:00:00",
+        "remarks": "CABLE DAMAGE"
+      },
+      {
+        "feeder": "DHAMTAN DS",
+        "area": "Dhamtan",
+        "start_time": "14-Jul-2026 23:53:11",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "Kalta AP",
+        "area": "Kalta",
+        "start_time": "14-Jul-2026 10:02:44",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "Dhankheri AP",
+        "area": "Dhankheri",
+        "start_time": "14-Jul-2026 18:45:45",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "MOHAN GARH AP",
+        "area": "Mohan Garh",
+        "start_time": "15-Jul-2026 00:01:30",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "NIDANI DS",
+        "area": "Nidani",
+        "start_time": "13-Jul-2026 16:43:36",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "NIDANI DS",
+        "area": "Padana",
+        "start_time": "13-Jul-2026 16:43:36",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "Pouli AP",
+        "area": "Pouli",
+        "start_time": "14-Jul-2026 18:44:40",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "BERI KHERA AP",
+        "area": "Beri Khera",
+        "start_time": "14-Jul-2026 19:03:31",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "JIND ROAD",
+        "area": "Industry area Safidon",
+        "start_time": "15-Jul-2026 04:05:21",
+        "expected_restoration_time": "",
+        "remarks": "UNPLANNED"
       },
       {
         "feeder": "CITY NO.5",
@@ -634,7 +641,7 @@
       },
       {
         "feeder": "CITY NO.5",
-        "area": "Shastri Nagar",
+        "area": "Shyam Colony",
         "start_time": "14-Jul-2026 12:40:00",
         "expected_restoration_time": "14-Jul-2026 17:00:00",
         "remarks": "CABLE DAMAGE"
@@ -642,6 +649,55 @@
       {
         "feeder": "CITY NO.5",
         "area": "Old Anaj Mandi",
+        "start_time": "14-Jul-2026 12:40:00",
+        "expected_restoration_time": "14-Jul-2026 17:00:00",
+        "remarks": "CABLE DAMAGE"
+      },
+      {
+        "feeder": "CITY NO.5",
+        "area": "New Kath Mandi",
+        "start_time": "14-Jul-2026 12:40:00",
+        "expected_restoration_time": "14-Jul-2026 17:00:00",
+        "remarks": "CABLE DAMAGE"
+      },
+      {
+        "feeder": "CITY NO.5",
+        "area": "Police Line",
+        "start_time": "14-Jul-2026 12:40:00",
+        "expected_restoration_time": "14-Jul-2026 17:00:00",
+        "remarks": "CABLE DAMAGE"
+      },
+      {
+        "feeder": "CITY NO.5",
+        "area": "Chakkar Road",
+        "start_time": "14-Jul-2026 12:40:00",
+        "expected_restoration_time": "14-Jul-2026 17:00:00",
+        "remarks": "CABLE DAMAGE"
+      },
+      {
+        "feeder": "CITY NO.5",
+        "area": "Distt Jail",
+        "start_time": "14-Jul-2026 12:40:00",
+        "expected_restoration_time": "14-Jul-2026 17:00:00",
+        "remarks": "CABLE DAMAGE"
+      },
+      {
+        "feeder": "CITY NO.5",
+        "area": "Balmiki Basti",
+        "start_time": "14-Jul-2026 12:40:00",
+        "expected_restoration_time": "14-Jul-2026 17:00:00",
+        "remarks": "CABLE DAMAGE"
+      },
+      {
+        "feeder": "CITY NO.5",
+        "area": "City Railway Station Chhota",
+        "start_time": "14-Jul-2026 12:40:00",
+        "expected_restoration_time": "14-Jul-2026 17:00:00",
+        "remarks": "CABLE DAMAGE"
+      },
+      {
+        "feeder": "CITY NO.5",
+        "area": "Shastri Nagar",
         "start_time": "14-Jul-2026 12:40:00",
         "expected_restoration_time": "14-Jul-2026 17:00:00",
         "remarks": "CABLE DAMAGE"
@@ -676,21 +732,7 @@
       },
       {
         "feeder": "CITY NO.5",
-        "area": "Balmiki Basti",
-        "start_time": "14-Jul-2026 12:40:00",
-        "expected_restoration_time": "14-Jul-2026 17:00:00",
-        "remarks": "CABLE DAMAGE"
-      },
-      {
-        "feeder": "CITY NO.5",
-        "area": "City Railway Station Chhota",
-        "start_time": "14-Jul-2026 12:40:00",
-        "expected_restoration_time": "14-Jul-2026 17:00:00",
-        "remarks": "CABLE DAMAGE"
-      },
-      {
-        "feeder": "CITY NO.5",
-        "area": "Shyam Colony",
+        "area": "Rani Talab",
         "start_time": "14-Jul-2026 12:40:00",
         "expected_restoration_time": "14-Jul-2026 17:00:00",
         "remarks": "CABLE DAMAGE"
@@ -704,14 +746,21 @@
       },
       {
         "feeder": "CITY NO.5",
-        "area": "Vishawkarma Colony",
+        "area": "Scheme No -19",
+        "start_time": "14-Jul-2026 12:40:00",
+        "expected_restoration_time": "14-Jul-2026 17:00:00",
+        "remarks": "CABLE DAMAGE"
+      },
+      {
+        "feeder": "CITY NO.5",
+        "area": "Sheoran Colony",
         "start_time": "14-Jul-2026 12:40:00",
         "expected_restoration_time": "14-Jul-2026 17:00:00",
         "remarks": "CABLE DAMAGE"
       },
       {
         "feeder": "GOHANA ROAD (U)",
-        "area": "Bal Bhawan Market",
+        "area": "Happy School Rani Talab Jind",
         "start_time": "14-Jul-2026 13:10:00",
         "expected_restoration_time": "14-Jul-2026 17:00:00",
         "remarks": "CABLE DAMAGE"
@@ -725,7 +774,7 @@
       },
       {
         "feeder": "GOHANA ROAD (U)",
-        "area": "Scheme No. 6",
+        "area": "Rani Talab  Obc Bank",
         "start_time": "14-Jul-2026 13:10:00",
         "expected_restoration_time": "14-Jul-2026 17:00:00",
         "remarks": "CABLE DAMAGE"
@@ -746,21 +795,21 @@
       },
       {
         "feeder": "GOHANA ROAD (U)",
-        "area": "Rani Talab  Obc Bank",
+        "area": "Huda Market",
         "start_time": "14-Jul-2026 13:10:00",
         "expected_restoration_time": "14-Jul-2026 17:00:00",
         "remarks": "CABLE DAMAGE"
       },
       {
         "feeder": "GOHANA ROAD (U)",
-        "area": "New Housing Board Colony",
+        "area": "Scheme No. 6",
         "start_time": "14-Jul-2026 13:10:00",
         "expected_restoration_time": "14-Jul-2026 17:00:00",
         "remarks": "CABLE DAMAGE"
       },
       {
         "feeder": "GOHANA ROAD (U)",
-        "area": "Band Market",
+        "area": "Scheme No. 5",
         "start_time": "14-Jul-2026 13:10:00",
         "expected_restoration_time": "14-Jul-2026 17:00:00",
         "remarks": "CABLE DAMAGE"
@@ -788,21 +837,21 @@
       },
       {
         "feeder": "GOHANA ROAD (U)",
-        "area": "Scheme No. 5",
+        "area": "New Housing Board Colony",
         "start_time": "14-Jul-2026 13:10:00",
         "expected_restoration_time": "14-Jul-2026 17:00:00",
         "remarks": "CABLE DAMAGE"
       },
       {
         "feeder": "GOHANA ROAD (U)",
-        "area": "Happy School Rani Talab Jind",
+        "area": "Band Market",
         "start_time": "14-Jul-2026 13:10:00",
         "expected_restoration_time": "14-Jul-2026 17:00:00",
         "remarks": "CABLE DAMAGE"
       },
       {
         "feeder": "GOHANA ROAD (U)",
-        "area": "Huda Market",
+        "area": "Bal Bhawan Market",
         "start_time": "14-Jul-2026 13:10:00",
         "expected_restoration_time": "14-Jul-2026 17:00:00",
         "remarks": "CABLE DAMAGE"
@@ -846,7 +895,7 @@
       },
       {
         "feeder": "SUCHHA AP",
-        "area": "Plonte",
+        "area": "Phollan",
         "start_time": "14-Jul-2026 11:31:04",
         "expected_restoration_time": "",
         "remarks": ""
@@ -860,21 +909,21 @@
       },
       {
         "feeder": "SUCHHA AP",
-        "area": "Phollan",
+        "area": "Plonte",
         "start_time": "14-Jul-2026 11:31:04",
         "expected_restoration_time": "",
         "remarks": ""
       },
       {
         "feeder": "JANDWALA DS",
-        "area": "Jandwala",
+        "area": "Dayar",
         "start_time": "14-Jul-2026 23:17:35",
         "expected_restoration_time": "",
         "remarks": ""
       },
       {
         "feeder": "JANDWALA DS",
-        "area": "Jandwala Bazar",
+        "area": "Jandwala",
         "start_time": "14-Jul-2026 23:17:35",
         "expected_restoration_time": "",
         "remarks": ""
@@ -888,7 +937,7 @@
       },
       {
         "feeder": "JANDWALA DS",
-        "area": "Dayar",
+        "area": "Jandwala Bazar",
         "start_time": "14-Jul-2026 23:17:35",
         "expected_restoration_time": "",
         "remarks": ""
@@ -911,69 +960,6 @@
         "feeder": "SUKHMANPUR AP",
         "area": "Sukhlam Pur Ap",
         "start_time": "14-Jul-2026 06:02:32",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "GADALI DS",
-        "area": "GADALI",
-        "start_time": "14-Jul-2026 22:20:10",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "PALSAR AP",
-        "area": "Palsar Ap",
-        "start_time": "14-Jul-2026 08:03:58",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "MEHMODKI AP",
-        "area": "Memhadki",
-        "start_time": "14-Jul-2026 16:00:35",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "MEHMODKI AP",
-        "area": "Kahai",
-        "start_time": "14-Jul-2026 16:00:35",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "MEHMODKI AP",
-        "area": "Memhamdiki",
-        "start_time": "14-Jul-2026 16:00:35",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "MEHMODKI AP",
-        "area": "Nagal Dhani",
-        "start_time": "14-Jul-2026 16:00:35",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "MEHMODKI AP",
-        "area": "Khaai",
-        "start_time": "14-Jul-2026 16:00:35",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "MEHMODKI AP",
-        "area": "Nangal Dhani",
-        "start_time": "14-Jul-2026 16:00:35",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "BANAWALI-AP",
-        "area": "Banawali Ap",
-        "start_time": "15-Jul-2026 03:31:11",
         "expected_restoration_time": "",
         "remarks": ""
       },
@@ -1014,7 +1000,14 @@
       },
       {
         "feeder": "HUDA (U)",
-        "area": "Satish Colony",
+        "area": "Huda Sector",
+        "start_time": "13-Jul-2026 19:10:07",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "HUDA (U)",
+        "area": "City-6",
         "start_time": "13-Jul-2026 19:10:07",
         "expected_restoration_time": "",
         "remarks": ""
@@ -1022,6 +1015,13 @@
       {
         "feeder": "HUDA (U)",
         "area": "Huda Sector 3",
+        "start_time": "13-Jul-2026 19:10:07",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "HUDA (U)",
+        "area": "Satish Colony",
         "start_time": "13-Jul-2026 19:10:07",
         "expected_restoration_time": "",
         "remarks": ""
@@ -1042,14 +1042,7 @@
       },
       {
         "feeder": "HUDA (U)",
-        "area": "City-6",
-        "start_time": "13-Jul-2026 19:10:07",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "HUDA (U)",
-        "area": "Shiv Nagar",
+        "area": "Biggar Road",
         "start_time": "13-Jul-2026 19:10:07",
         "expected_restoration_time": "",
         "remarks": ""
@@ -1063,15 +1056,106 @@
       },
       {
         "feeder": "HUDA (U)",
-        "area": "Huda Sector",
+        "area": "Shiv Nagar",
         "start_time": "13-Jul-2026 19:10:07",
         "expected_restoration_time": "",
         "remarks": ""
       },
       {
-        "feeder": "HUDA (U)",
-        "area": "Biggar Road",
-        "start_time": "13-Jul-2026 19:10:07",
+        "feeder": "BHODA DS",
+        "area": "Sarangpur",
+        "start_time": "15-Jul-2026 03:57:23",
+        "expected_restoration_time": "",
+        "remarks": "UNPLANNED"
+      },
+      {
+        "feeder": "BHODA DS",
+        "area": "Khara Keri",
+        "start_time": "15-Jul-2026 03:57:23",
+        "expected_restoration_time": "",
+        "remarks": "UNPLANNED"
+      },
+      {
+        "feeder": "BHODA DS",
+        "area": "Chinder",
+        "start_time": "15-Jul-2026 03:57:23",
+        "expected_restoration_time": "",
+        "remarks": "UNPLANNED"
+      },
+      {
+        "feeder": "BHODA DS",
+        "area": "Khasa Dani",
+        "start_time": "15-Jul-2026 03:57:23",
+        "expected_restoration_time": "",
+        "remarks": "UNPLANNED"
+      },
+      {
+        "feeder": "BHODA DS",
+        "area": "Bhoda",
+        "start_time": "15-Jul-2026 03:57:23",
+        "expected_restoration_time": "",
+        "remarks": "UNPLANNED"
+      },
+      {
+        "feeder": "BHODA DS",
+        "area": "Sahranpur/Bhana/Bhoda/Chinder",
+        "start_time": "15-Jul-2026 03:57:23",
+        "expected_restoration_time": "",
+        "remarks": "UNPLANNED"
+      },
+      {
+        "feeder": "GADALI DS",
+        "area": "GADALI",
+        "start_time": "14-Jul-2026 22:20:10",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "PALSAR AP",
+        "area": "Palsar Ap",
+        "start_time": "14-Jul-2026 08:03:58",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "MEHMODKI AP",
+        "area": "Memhadki",
+        "start_time": "14-Jul-2026 16:00:35",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "MEHMODKI AP",
+        "area": "Nangal Dhani",
+        "start_time": "14-Jul-2026 16:00:35",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "MEHMODKI AP",
+        "area": "Memhamdiki",
+        "start_time": "14-Jul-2026 16:00:35",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "MEHMODKI AP",
+        "area": "Kahai",
+        "start_time": "14-Jul-2026 16:00:35",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "MEHMODKI AP",
+        "area": "Khaai",
+        "start_time": "14-Jul-2026 16:00:35",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "MEHMODKI AP",
+        "area": "Nagal Dhani",
+        "start_time": "14-Jul-2026 16:00:35",
         "expected_restoration_time": "",
         "remarks": ""
       },
@@ -1084,7 +1168,7 @@
       },
       {
         "feeder": "AJIT NAGAR DS",
-        "area": "Malbala",
+        "area": "Saharna",
         "start_time": "14-Jul-2026 15:48:21",
         "expected_restoration_time": "",
         "remarks": "UNPLANNED"
@@ -1092,6 +1176,20 @@
       {
         "feeder": "AJIT NAGAR DS",
         "area": "Murdh",
+        "start_time": "14-Jul-2026 15:48:21",
+        "expected_restoration_time": "",
+        "remarks": "UNPLANNED"
+      },
+      {
+        "feeder": "AJIT NAGAR DS",
+        "area": "Malbala",
+        "start_time": "14-Jul-2026 15:48:21",
+        "expected_restoration_time": "",
+        "remarks": "UNPLANNED"
+      },
+      {
+        "feeder": "AJIT NAGAR DS",
+        "area": "Mudh",
         "start_time": "14-Jul-2026 15:48:21",
         "expected_restoration_time": "",
         "remarks": "UNPLANNED"
@@ -1112,56 +1210,14 @@
       },
       {
         "feeder": "AJIT NAGAR DS",
-        "area": "Mudh",
-        "start_time": "14-Jul-2026 15:48:21",
-        "expected_restoration_time": "",
-        "remarks": "UNPLANNED"
-      },
-      {
-        "feeder": "AJIT NAGAR DS",
         "area": "Ajit Nagar",
         "start_time": "14-Jul-2026 15:48:21",
         "expected_restoration_time": "",
         "remarks": "UNPLANNED"
       },
       {
-        "feeder": "AJIT NAGAR DS",
-        "area": "Saharna",
-        "start_time": "14-Jul-2026 15:48:21",
-        "expected_restoration_time": "",
-        "remarks": "UNPLANNED"
-      },
-      {
-        "feeder": "CITY- I RATIA (U)",
-        "area": "Dashwa",
-        "start_time": "14-Jul-2026 07:37:58",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "CITY- I RATIA (U)",
-        "area": "Dizi Colony",
-        "start_time": "14-Jul-2026 07:37:58",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
         "feeder": "CITY- I RATIA (U)",
         "area": "City 1",
-        "start_time": "14-Jul-2026 07:37:58",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "CITY- I RATIA (U)",
-        "area": "Model Town",
-        "start_time": "14-Jul-2026 07:37:58",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "CITY- I RATIA (U)",
-        "area": "Arora Colony",
         "start_time": "14-Jul-2026 07:37:58",
         "expected_restoration_time": "",
         "remarks": ""
@@ -1175,7 +1231,7 @@
       },
       {
         "feeder": "CITY- I RATIA (U)",
-        "area": "Anaj Mandi",
+        "area": "Fatehabad Road",
         "start_time": "14-Jul-2026 07:37:58",
         "expected_restoration_time": "",
         "remarks": ""
@@ -1196,7 +1252,35 @@
       },
       {
         "feeder": "CITY- I RATIA (U)",
-        "area": "Fatehabad Road",
+        "area": "Arora Colony",
+        "start_time": "14-Jul-2026 07:37:58",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "CITY- I RATIA (U)",
+        "area": "Dashwa",
+        "start_time": "14-Jul-2026 07:37:58",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "CITY- I RATIA (U)",
+        "area": "Dizi Colony",
+        "start_time": "14-Jul-2026 07:37:58",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "CITY- I RATIA (U)",
+        "area": "Ghandi Markit",
+        "start_time": "14-Jul-2026 07:37:58",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "CITY- I RATIA (U)",
+        "area": "Anaj Mandi",
         "start_time": "14-Jul-2026 07:37:58",
         "expected_restoration_time": "",
         "remarks": ""
@@ -1210,7 +1294,7 @@
       },
       {
         "feeder": "CITY- I RATIA (U)",
-        "area": "Ghandi Markit",
+        "area": "Model Town",
         "start_time": "14-Jul-2026 07:37:58",
         "expected_restoration_time": "",
         "remarks": ""
@@ -1224,7 +1308,7 @@
       },
       {
         "feeder": "DHARNIA DS",
-        "area": "Chabla Mori",
+        "area": "Dharnia/Chabla Mori",
         "start_time": "12-Jul-2026 22:46:50",
         "expected_restoration_time": "",
         "remarks": "PLANNED"
@@ -1238,14 +1322,7 @@
       },
       {
         "feeder": "DHARNIA DS",
-        "area": "Dharnia/Chabla Mori",
-        "start_time": "12-Jul-2026 22:46:50",
-        "expected_restoration_time": "",
-        "remarks": "PLANNED"
-      },
-      {
-        "feeder": "DHARNIA DS",
-        "area": "Dharnia",
+        "area": "Chabla Mori",
         "start_time": "12-Jul-2026 22:46:50",
         "expected_restoration_time": "",
         "remarks": "PLANNED"
@@ -1266,6 +1343,13 @@
       },
       {
         "feeder": "DHARNIA DS",
+        "area": "Dharnia",
+        "start_time": "12-Jul-2026 22:46:50",
+        "expected_restoration_time": "",
+        "remarks": "PLANNED"
+      },
+      {
+        "feeder": "DHARNIA DS",
         "area": "Akal",
         "start_time": "12-Jul-2026 22:46:50",
         "expected_restoration_time": "",
@@ -1274,48 +1358,6 @@
       {
         "feeder": "DHIR DS",
         "area": "Boswal",
-        "start_time": "15-Jul-2026 00:14:42",
-        "expected_restoration_time": "",
-        "remarks": "UNPLANNED"
-      },
-      {
-        "feeder": "DHIR DS",
-        "area": "Dhani Bikaneri",
-        "start_time": "15-Jul-2026 00:14:42",
-        "expected_restoration_time": "",
-        "remarks": "UNPLANNED"
-      },
-      {
-        "feeder": "DHIR DS",
-        "area": "Katta Kheri",
-        "start_time": "15-Jul-2026 00:14:42",
-        "expected_restoration_time": "",
-        "remarks": "UNPLANNED"
-      },
-      {
-        "feeder": "DHIR DS",
-        "area": "Dhani Mastian",
-        "start_time": "15-Jul-2026 00:14:42",
-        "expected_restoration_time": "",
-        "remarks": "UNPLANNED"
-      },
-      {
-        "feeder": "DHIR DS",
-        "area": "Dhani Khanpur",
-        "start_time": "15-Jul-2026 00:14:42",
-        "expected_restoration_time": "",
-        "remarks": "UNPLANNED"
-      },
-      {
-        "feeder": "DHIR DS",
-        "area": "Dhani Roop Nagar",
-        "start_time": "15-Jul-2026 00:14:42",
-        "expected_restoration_time": "",
-        "remarks": "UNPLANNED"
-      },
-      {
-        "feeder": "DHIR DS",
-        "area": "Kata Kheri",
         "start_time": "15-Jul-2026 00:14:42",
         "expected_restoration_time": "",
         "remarks": "UNPLANNED"
@@ -1350,6 +1392,20 @@
       },
       {
         "feeder": "DHIR DS",
+        "area": "Dhani Khanpur",
+        "start_time": "15-Jul-2026 00:14:42",
+        "expected_restoration_time": "",
+        "remarks": "UNPLANNED"
+      },
+      {
+        "feeder": "DHIR DS",
+        "area": "Kata Kheri",
+        "start_time": "15-Jul-2026 00:14:42",
+        "expected_restoration_time": "",
+        "remarks": "UNPLANNED"
+      },
+      {
+        "feeder": "DHIR DS",
         "area": "Dhani Tahliwala",
         "start_time": "15-Jul-2026 00:14:42",
         "expected_restoration_time": "",
@@ -1358,6 +1414,34 @@
       {
         "feeder": "DHIR DS",
         "area": "Dhir",
+        "start_time": "15-Jul-2026 00:14:42",
+        "expected_restoration_time": "",
+        "remarks": "UNPLANNED"
+      },
+      {
+        "feeder": "DHIR DS",
+        "area": "Dhani Roop Nagar",
+        "start_time": "15-Jul-2026 00:14:42",
+        "expected_restoration_time": "",
+        "remarks": "UNPLANNED"
+      },
+      {
+        "feeder": "DHIR DS",
+        "area": "Dhani Bikaneri",
+        "start_time": "15-Jul-2026 00:14:42",
+        "expected_restoration_time": "",
+        "remarks": "UNPLANNED"
+      },
+      {
+        "feeder": "DHIR DS",
+        "area": "Katta Kheri",
+        "start_time": "15-Jul-2026 00:14:42",
+        "expected_restoration_time": "",
+        "remarks": "UNPLANNED"
+      },
+      {
+        "feeder": "DHIR DS",
+        "area": "Dhani Mastian",
         "start_time": "15-Jul-2026 00:14:42",
         "expected_restoration_time": "",
         "remarks": "UNPLANNED"
@@ -1379,27 +1463,6 @@
         "remarks": ""
       },
       {
-        "feeder": "JOGIWALA DS",
-        "area": "Gigorani",
-        "start_time": "13-Jul-2026 18:44:33",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "JOGIWALA DS",
-        "area": "Chahrwala",
-        "start_time": "13-Jul-2026 18:44:33",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "PAKKA-DS",
-        "area": "Dharampura",
-        "start_time": "14-Jul-2026 19:12:58",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
         "feeder": "PAKKA-DS",
         "area": "Singpura",
         "start_time": "14-Jul-2026 19:12:58",
@@ -1415,6 +1478,13 @@
       },
       {
         "feeder": "PAKKA-DS",
+        "area": "Dharampura",
+        "start_time": "14-Jul-2026 19:12:58",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "PAKKA-DS",
         "area": "Kewal",
         "start_time": "14-Jul-2026 19:12:58",
         "expected_restoration_time": "",
@@ -1422,7 +1492,14 @@
       },
       {
         "feeder": "SARASWATI COLONY (U)",
-        "area": "Rania Road",
+        "area": "Saraswati Colony",
+        "start_time": "14-Jul-2026 17:01:04",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "SARASWATI COLONY (U)",
+        "area": "Sirsa To Ellenbad Road",
         "start_time": "14-Jul-2026 17:01:04",
         "expected_restoration_time": "",
         "remarks": ""
@@ -1450,15 +1527,99 @@
       },
       {
         "feeder": "SARASWATI COLONY (U)",
-        "area": "Sirsa To Ellenbad Road",
+        "area": "Rania Road",
         "start_time": "14-Jul-2026 17:01:04",
         "expected_restoration_time": "",
         "remarks": ""
       },
       {
-        "feeder": "SARASWATI COLONY (U)",
-        "area": "Saraswati Colony",
-        "start_time": "14-Jul-2026 17:01:04",
+        "feeder": "JOGIWALA DS",
+        "area": "Chahrwala",
+        "start_time": "13-Jul-2026 18:44:33",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "JOGIWALA DS",
+        "area": "Gigorani",
+        "start_time": "13-Jul-2026 18:44:33",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "SECTOR 20",
+        "area": "Huda",
+        "start_time": "15-Jul-2026 04:06:59",
+        "expected_restoration_time": "16-Jul-2026 00:06:59",
+        "remarks": "Issue will be resolved in estimated time"
+      },
+      {
+        "feeder": "SECTOR 20",
+        "area": "Sector 20",
+        "start_time": "15-Jul-2026 04:06:59",
+        "expected_restoration_time": "16-Jul-2026 00:06:59",
+        "remarks": "Issue will be resolved in estimated time"
+      },
+      {
+        "feeder": "SECTOR 20",
+        "area": "Huda",
+        "start_time": "15-Jul-2026 04:06:59",
+        "expected_restoration_time": "16-Jul-2026 00:06:59",
+        "remarks": "Issue will be resolved in estimated time"
+      },
+      {
+        "feeder": "SECTOR 20",
+        "area": "Sector 20",
+        "start_time": "15-Jul-2026 04:06:59",
+        "expected_restoration_time": "16-Jul-2026 00:06:59",
+        "remarks": "Issue will be resolved in estimated time"
+      },
+      {
+        "feeder": "MANDI 132 KV SIRSA",
+        "area": "Cicr Farm",
+        "start_time": "15-Jul-2026 03:54:06",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "MANDI 132 KV SIRSA",
+        "area": "Anaj Mandi",
+        "start_time": "15-Jul-2026 03:54:06",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "MANDI 132 KV SIRSA",
+        "area": "chattergarhpati",
+        "start_time": "15-Jul-2026 03:54:06",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "MANDI 132 KV SIRSA",
+        "area": "Anaj Mandi",
+        "start_time": "15-Jul-2026 03:54:06",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "MANDI 132 KV SIRSA",
+        "area": "Krishi Vigyan Kendra",
+        "start_time": "15-Jul-2026 03:54:06",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "MANDI 132 KV SIRSA",
+        "area": "Janta Bhawan Road",
+        "start_time": "15-Jul-2026 03:54:06",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "MANDI 132 KV SIRSA",
+        "area": "Preeti Vigyan Kendra",
+        "start_time": "15-Jul-2026 03:54:06",
         "expected_restoration_time": "",
         "remarks": ""
       },
@@ -1472,13 +1633,6 @@
       {
         "feeder": "HSIDC",
         "area": "Dehli Pul(Hidc)",
-        "start_time": "15-Jul-2026 01:58:06",
-        "expected_restoration_time": "15-Jul-2026 21:58:06",
-        "remarks": "Issue will be resolved in estimated time"
-      },
-      {
-        "feeder": "HSIDC",
-        "area": "Friends Colony",
         "start_time": "15-Jul-2026 01:58:06",
         "expected_restoration_time": "15-Jul-2026 21:58:06",
         "remarks": "Issue will be resolved in estimated time"
@@ -1503,19 +1657,26 @@
         "start_time": "15-Jul-2026 01:58:06",
         "expected_restoration_time": "15-Jul-2026 21:58:06",
         "remarks": "Issue will be resolved in estimated time"
+      },
+      {
+        "feeder": "HSIDC",
+        "area": "Friends Colony",
+        "start_time": "15-Jul-2026 01:58:06",
+        "expected_restoration_time": "15-Jul-2026 21:58:06",
+        "remarks": "Issue will be resolved in estimated time"
       }
     ],
     "Hisar": [
       {
         "feeder": "KIRORI DS",
-        "area": "KIRORI",
+        "area": "KANOH",
         "start_time": "13-Jul-2026 16:54:42",
         "expected_restoration_time": "",
         "remarks": ""
       },
       {
         "feeder": "KIRORI DS",
-        "area": "KANOH",
+        "area": "KIRORI",
         "start_time": "13-Jul-2026 16:54:42",
         "expected_restoration_time": "",
         "remarks": ""
@@ -1536,7 +1697,7 @@
       },
       {
         "feeder": "I.T.I. J/METAL",
-        "area": "Dayanand Colony",
+        "area": "New Model Town",
         "start_time": "14-Jul-2026 06:07:14",
         "expected_restoration_time": "",
         "remarks": ""
@@ -1550,57 +1711,8 @@
       },
       {
         "feeder": "I.T.I. J/METAL",
-        "area": "New Model Town",
+        "area": "Dayanand Colony",
         "start_time": "14-Jul-2026 06:07:14",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "MUKLAN DS",
-        "area": "Muklan",
-        "start_time": "14-Jul-2026 20:08:05",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "MUKLAN DS",
-        "area": "Devan",
-        "start_time": "14-Jul-2026 20:08:05",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "MUKLAN DS",
-        "area": "BHERIA",
-        "start_time": "14-Jul-2026 20:08:05",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "MUKLAN DS",
-        "area": "Kalwas",
-        "start_time": "14-Jul-2026 20:08:05",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "MUKLAN DS",
-        "area": "Bhariyan",
-        "start_time": "14-Jul-2026 20:08:05",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "PALI  DS",
-        "area": "Pali",
-        "start_time": "14-Jul-2026 00:17:43",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "PALI  DS",
-        "area": "Raj Pura",
-        "start_time": "14-Jul-2026 00:17:43",
         "expected_restoration_time": "",
         "remarks": ""
       },
@@ -1620,20 +1732,6 @@
       },
       {
         "feeder": "NEW TIBBA LINE DS",
-        "area": "Dhansu Gaon",
-        "start_time": "15-Jul-2026 03:17:20",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "NEW TIBBA LINE DS",
-        "area": "Shiv Colony",
-        "start_time": "15-Jul-2026 03:17:20",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "NEW TIBBA LINE DS",
         "area": "Village Dhansu",
         "start_time": "15-Jul-2026 03:17:20",
         "expected_restoration_time": "",
@@ -1647,9 +1745,100 @@
         "remarks": ""
       },
       {
+        "feeder": "NEW TIBBA LINE DS",
+        "area": "Dhansu Gaon",
+        "start_time": "15-Jul-2026 03:17:20",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "NEW TIBBA LINE DS",
+        "area": "Shiv Colony",
+        "start_time": "15-Jul-2026 03:17:20",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
         "feeder": "COLLEGE ROAD",
         "area": "COLLEGE ROAD HANSI",
         "start_time": "14-Jul-2026 19:39:08",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "CHULLI  DS",
+        "area": "Mobhatpur",
+        "start_time": "15-Jul-2026 04:00:47",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "CHULLI  DS",
+        "area": "Mohobatpur village",
+        "start_time": "15-Jul-2026 04:00:47",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "MUKLAN DS",
+        "area": "Muklan",
+        "start_time": "14-Jul-2026 20:08:05",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "MUKLAN DS",
+        "area": "Kalwas",
+        "start_time": "14-Jul-2026 20:08:05",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "MUKLAN DS",
+        "area": "Bhariyan",
+        "start_time": "14-Jul-2026 20:08:05",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "MUKLAN DS",
+        "area": "BHERIA",
+        "start_time": "14-Jul-2026 20:08:05",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "MUKLAN DS",
+        "area": "Devan",
+        "start_time": "14-Jul-2026 20:08:05",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "PUTHI D.S",
+        "area": "Puthi",
+        "start_time": "15-Jul-2026 04:01:42",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "PALI  DS",
+        "area": "Pali",
+        "start_time": "14-Jul-2026 00:17:43",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "PALI  DS",
+        "area": "Raj Pura",
+        "start_time": "14-Jul-2026 00:17:43",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "BEER AP",
+        "area": "Ap Beer",
+        "start_time": "15-Jul-2026 04:05:55",
         "expected_restoration_time": "",
         "remarks": ""
       },
@@ -1669,14 +1858,14 @@
       },
       {
         "feeder": "11 KV D.N CHOWK FEEDER",
-        "area": "Bhamashah Nagar",
+        "area": "Devi Bhawan Road",
         "start_time": "13-Jul-2026 13:55:00",
         "expected_restoration_time": "13-Jul-2026 17:55:00",
         "remarks": "Issue will be resolved in estimated time"
       },
       {
         "feeder": "11 KV D.N CHOWK FEEDER",
-        "area": "Mona Mandi",
+        "area": "DN collage Road",
         "start_time": "13-Jul-2026 13:55:00",
         "expected_restoration_time": "13-Jul-2026 17:55:00",
         "remarks": "Issue will be resolved in estimated time"
@@ -1690,20 +1879,27 @@
       },
       {
         "feeder": "11 KV D.N CHOWK FEEDER",
-        "area": "Devi Bhawan Road",
+        "area": "Bhamashah Nagar",
         "start_time": "13-Jul-2026 13:55:00",
         "expected_restoration_time": "13-Jul-2026 17:55:00",
         "remarks": "Issue will be resolved in estimated time"
       },
       {
         "feeder": "11 KV D.N CHOWK FEEDER",
-        "area": "DN collage Road",
+        "area": "Mona Mandi",
         "start_time": "13-Jul-2026 13:55:00",
         "expected_restoration_time": "13-Jul-2026 17:55:00",
         "remarks": "Issue will be resolved in estimated time"
       }
     ],
     "Bhiwani": [
+      {
+        "feeder": "D/LAXMAN AP",
+        "area": "Dhani Laxman",
+        "start_time": "15-Jul-2026 04:04:05",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
       {
         "feeder": "BAGANWALA DS",
         "area": "Baganbala Dhadam",
@@ -1712,23 +1908,9 @@
         "remarks": "UNPLANNED"
       },
       {
-        "feeder": "PREM NAGAR AP",
-        "area": "Prem Nagar",
-        "start_time": "14-Jul-2026 20:24:42",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "JATU LOHARI DS",
-        "area": "Jattu Lohari",
-        "start_time": "15-Jul-2026 02:30:54",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "KARI ROOPA AP",
-        "area": "R/Roopa",
-        "start_time": "15-Jul-2026 03:30:31",
+        "feeder": "33 KV SIWANI",
+        "area": "Siwani",
+        "start_time": "15-Jul-2026 03:57:15",
         "expected_restoration_time": "",
         "remarks": ""
       },
@@ -1740,16 +1922,23 @@
         "remarks": ""
       },
       {
-        "feeder": "PUR DS",
-        "area": "Pur",
-        "start_time": "15-Jul-2026 02:30:19",
+        "feeder": "PREM NAGAR AP",
+        "area": "Prem Nagar",
+        "start_time": "14-Jul-2026 20:24:42",
         "expected_restoration_time": "",
         "remarks": ""
       },
       {
-        "feeder": "PUR DS",
-        "area": "Siwara",
-        "start_time": "15-Jul-2026 02:30:19",
+        "feeder": "KARI ROOPA AP",
+        "area": "R/Roopa",
+        "start_time": "15-Jul-2026 03:30:31",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "GHANGHALA AP",
+        "area": "Ghanghala",
+        "start_time": "15-Jul-2026 04:00:24",
         "expected_restoration_time": "",
         "remarks": ""
       },
@@ -1762,64 +1951,22 @@
       },
       {
         "feeder": "SORDA ZADID AP",
-        "area": "Sorda kadim",
-        "start_time": "15-Jul-2026 03:30:30",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "SORDA ZADID AP",
         "area": "Dhani Sahajmanpur",
         "start_time": "15-Jul-2026 03:30:30",
         "expected_restoration_time": "",
         "remarks": ""
       },
       {
-        "feeder": "PATODI AP",
-        "area": "11 Kv Sandwa Ap",
-        "start_time": "15-Jul-2026 03:30:10",
+        "feeder": "SORDA ZADID AP",
+        "area": "Sorda kadim",
+        "start_time": "15-Jul-2026 03:30:30",
         "expected_restoration_time": "",
         "remarks": ""
       },
       {
-        "feeder": "PATODI AP",
-        "area": "11 Kv Sahelwala",
-        "start_time": "15-Jul-2026 03:30:10",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "PATODI AP",
-        "area": "11 Kv Kharyabass Ap",
-        "start_time": "15-Jul-2026 03:30:10",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "PATODI AP",
-        "area": "Patodi Khurd",
-        "start_time": "15-Jul-2026 03:30:10",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "REWARI KHERA AP",
-        "area": "Rewari Khera",
-        "start_time": "15-Jul-2026 02:04:00",
-        "expected_restoration_time": "15-Jul-2026 08:20:00",
-        "remarks": "UNPLANNED"
-      },
-      {
-        "feeder": "BIDHNOI AP",
-        "area": "Bidhnoi Old Ap",
-        "start_time": "15-Jul-2026 03:14:56",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "BIDHNOI AP",
-        "area": "Bidhnoi New AP",
-        "start_time": "15-Jul-2026 03:14:56",
+        "feeder": "GARWA AP",
+        "area": "Garwa Ap",
+        "start_time": "15-Jul-2026 04:02:46",
         "expected_restoration_time": "",
         "remarks": ""
       },
@@ -1860,13 +2007,6 @@
       },
       {
         "feeder": "MATANI DS",
-        "area": "Dhani Bhakra",
-        "start_time": "13-Jul-2026 19:14:39",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "MATANI DS",
         "area": "Morka",
         "start_time": "13-Jul-2026 19:14:39",
         "expected_restoration_time": "",
@@ -1876,6 +2016,188 @@
         "feeder": "MATANI DS",
         "area": "Matani",
         "start_time": "13-Jul-2026 19:14:39",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "MATANI DS",
+        "area": "Dhani Bhakra",
+        "start_time": "13-Jul-2026 19:14:39",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "PATODI AP",
+        "area": "11 Kv Sahelwala",
+        "start_time": "15-Jul-2026 03:30:10",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "PATODI AP",
+        "area": "11 Kv Kharyabass Ap",
+        "start_time": "15-Jul-2026 03:30:10",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "PATODI AP",
+        "area": "Patodi Khurd",
+        "start_time": "15-Jul-2026 03:30:10",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "PATODI AP",
+        "area": "11 Kv Sandwa Ap",
+        "start_time": "15-Jul-2026 03:30:10",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "DHANI MAHU AP",
+        "area": "Dhani Mahu Ap",
+        "start_time": "15-Jul-2026 04:06:27",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "BAWANI KHERA (MU)",
+        "area": "Dhani Khupad",
+        "start_time": "15-Jul-2026 04:17:10",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "BAWANI KHERA (MU)",
+        "area": "Gaushala jamalpur road",
+        "start_time": "15-Jul-2026 04:17:10",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "BAWANI KHERA (MU)",
+        "area": "Kheri Road",
+        "start_time": "15-Jul-2026 04:17:10",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "BAWANI KHERA (MU)",
+        "area": "Baliyali Road Dhani",
+        "start_time": "15-Jul-2026 04:17:10",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "BAWANI KHERA (MU)",
+        "area": "Gaushala hansi road",
+        "start_time": "15-Jul-2026 04:17:10",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "BAWANI KHERA (MU)",
+        "area": "Pur Road School Hospital Tehsil Thana",
+        "start_time": "15-Jul-2026 04:17:10",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "BAWANI KHERA (MU)",
+        "area": "Dadi Gauri Mandir",
+        "start_time": "15-Jul-2026 04:17:10",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "BAWANI KHERA (MU)",
+        "area": "Hateri",
+        "start_time": "15-Jul-2026 04:17:10",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "BAWANI KHERA (MU)",
+        "area": "Bawani Khera 1 to 16 Ward",
+        "start_time": "15-Jul-2026 04:17:10",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "BAWANI KHERA (MU)",
+        "area": "Sunder Nahar",
+        "start_time": "15-Jul-2026 04:17:10",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "TALU DS",
+        "area": "Talu",
+        "start_time": "15-Jul-2026 04:17:18",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "REWARI KHERA AP",
+        "area": "Rewari Khera",
+        "start_time": "15-Jul-2026 02:04:00",
+        "expected_restoration_time": "15-Jul-2026 08:20:00",
+        "remarks": "UNPLANNED"
+      },
+      {
+        "feeder": "ALAMPUR AP",
+        "area": "Alampur",
+        "start_time": "15-Jul-2026 04:01:30",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "ALAMPUR AP",
+        "area": "Alampur",
+        "start_time": "15-Jul-2026 04:01:30",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "BIDHNOI AP",
+        "area": "Bidhnoi Old Ap",
+        "start_time": "15-Jul-2026 03:14:56",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "BIDHNOI AP",
+        "area": "Bidhnoi New AP",
+        "start_time": "15-Jul-2026 03:14:56",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "D/MANDI DS",
+        "area": "Dighawa Mandi",
+        "start_time": "15-Jul-2026 04:03:57",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "D/MANDI DS",
+        "area": "Dhigawa Jattan",
+        "start_time": "15-Jul-2026 04:03:57",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "D/MANDI DS",
+        "area": "D/Jattan",
+        "start_time": "15-Jul-2026 04:03:57",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "D/MANDI DS",
+        "area": "D/Jattan",
+        "start_time": "15-Jul-2026 04:03:57",
         "expected_restoration_time": "",
         "remarks": ""
       }
@@ -1897,14 +2219,14 @@
       },
       {
         "feeder": "RATTA AP",
-        "area": "Rata Kala",
+        "area": "Rata Khurd",
         "start_time": "15-Jul-2026 02:30:25",
         "expected_restoration_time": "",
         "remarks": ""
       },
       {
         "feeder": "RATTA AP",
-        "area": "Rata Khurd",
+        "area": "Rata Kala",
         "start_time": "15-Jul-2026 02:30:25",
         "expected_restoration_time": "",
         "remarks": ""
@@ -1927,6 +2249,13 @@
         "feeder": "NIMBHERA AP",
         "area": "Nimbhera",
         "start_time": "15-Jul-2026 03:02:54",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "BASSAI AP",
+        "area": "Bassai",
+        "start_time": "15-Jul-2026 04:00:36",
         "expected_restoration_time": "",
         "remarks": ""
       },
@@ -1973,9 +2302,23 @@
         "remarks": ""
       },
       {
+        "feeder": "NANGAL HARNATH AP",
+        "area": "Nangal Harnath Ap",
+        "start_time": "15-Jul-2026 04:26:18",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
         "feeder": "PALRI AP",
         "area": "Palri Panihara",
         "start_time": "15-Jul-2026 03:02:15",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "KISHAN NAGAR AP",
+        "area": "Kishan Nagar",
+        "start_time": "15-Jul-2026 04:30:50",
         "expected_restoration_time": "",
         "remarks": ""
       },
@@ -1992,6 +2335,90 @@
         "start_time": "14-Jul-2026 21:57:21",
         "expected_restoration_time": "",
         "remarks": "UNPLANNED"
+      },
+      {
+        "feeder": "DEVRALI DS",
+        "area": "Devrali",
+        "start_time": "15-Jul-2026 02:04:43",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "DEVRALI DS",
+        "area": "Rathiwas",
+        "start_time": "15-Jul-2026 02:04:43",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "DEVRALI DS",
+        "area": "Kurahwata",
+        "start_time": "15-Jul-2026 02:04:43",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "NANGLA AP",
+        "area": "Nangla",
+        "start_time": "15-Jul-2026 04:32:46",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "NANGLA AP",
+        "area": "Nangal Mala",
+        "start_time": "15-Jul-2026 04:32:46",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "MADHOGARH -I AP",
+        "area": "Madhogarh",
+        "start_time": "14-Jul-2026 13:06:33",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "JAKHANI AP",
+        "area": "Jakhni",
+        "start_time": "15-Jul-2026 02:45:55",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "NIWAZ NAGAR A.P",
+        "area": "Hazipur",
+        "start_time": "15-Jul-2026 03:13:23",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "NIWAZ NAGAR A.P",
+        "area": "BASS KI DHANI",
+        "start_time": "15-Jul-2026 03:13:23",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "NIWAZ NAGAR A.P",
+        "area": "Hajipur",
+        "start_time": "15-Jul-2026 03:13:23",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "NIWAZ NAGAR A.P",
+        "area": "Mehrampur",
+        "start_time": "15-Jul-2026 03:13:23",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "TIGRA AP",
+        "area": "Tigra",
+        "start_time": "15-Jul-2026 02:28:33",
+        "expected_restoration_time": "",
+        "remarks": ""
       },
       {
         "feeder": "ISHRANA AP",
@@ -2029,6 +2456,20 @@
         "remarks": "UNPLANNED"
       },
       {
+        "feeder": "MUNDIA KHERA AP",
+        "area": "Jhigawan",
+        "start_time": "15-Jul-2026 04:16:32",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "MUNDIA KHERA AP",
+        "area": "Mundia Khera",
+        "start_time": "15-Jul-2026 04:16:32",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
         "feeder": "KARIYA AP",
         "area": "Kariya",
         "start_time": "15-Jul-2026 02:38:43",
@@ -2058,28 +2499,7 @@
       },
       {
         "feeder": "AMARPURA DS",
-        "area": "Amarpura",
-        "start_time": "15-Jul-2026 00:53:15",
-        "expected_restoration_time": "",
-        "remarks": "UNPLANNED"
-      },
-      {
-        "feeder": "AMARPURA DS",
-        "area": "Dhani Badwali",
-        "start_time": "15-Jul-2026 00:53:15",
-        "expected_restoration_time": "",
-        "remarks": "UNPLANNED"
-      },
-      {
-        "feeder": "AMARPURA DS",
         "area": "Dhani Poswal",
-        "start_time": "15-Jul-2026 00:53:15",
-        "expected_restoration_time": "",
-        "remarks": "UNPLANNED"
-      },
-      {
-        "feeder": "AMARPURA DS",
-        "area": "Mala Ki Dhani",
         "start_time": "15-Jul-2026 00:53:15",
         "expected_restoration_time": "",
         "remarks": "UNPLANNED"
@@ -2100,7 +2520,28 @@
       },
       {
         "feeder": "AMARPURA DS",
-        "area": "Bal Ki Dhani",
+        "area": "Amarpura",
+        "start_time": "15-Jul-2026 00:53:15",
+        "expected_restoration_time": "",
+        "remarks": "UNPLANNED"
+      },
+      {
+        "feeder": "AMARPURA DS",
+        "area": "Dhani Badwali",
+        "start_time": "15-Jul-2026 00:53:15",
+        "expected_restoration_time": "",
+        "remarks": "UNPLANNED"
+      },
+      {
+        "feeder": "AMARPURA DS",
+        "area": "Mala Ki Dhani",
+        "start_time": "15-Jul-2026 00:53:15",
+        "expected_restoration_time": "",
+        "remarks": "UNPLANNED"
+      },
+      {
+        "feeder": "AMARPURA DS",
+        "area": "Dhani Sanga Wali",
         "start_time": "15-Jul-2026 00:53:15",
         "expected_restoration_time": "",
         "remarks": "UNPLANNED"
@@ -2114,78 +2555,22 @@
       },
       {
         "feeder": "AMARPURA DS",
-        "area": "Dhani Sanga Wali",
+        "area": "Bal Ki Dhani",
         "start_time": "15-Jul-2026 00:53:15",
         "expected_restoration_time": "",
         "remarks": "UNPLANNED"
       },
       {
-        "feeder": "DEVRALI DS",
-        "area": "Devrali",
-        "start_time": "15-Jul-2026 02:04:43",
+        "feeder": "NIMBI DS",
+        "area": "Budeen",
+        "start_time": "15-Jul-2026 03:36:04",
         "expected_restoration_time": "",
         "remarks": ""
       },
       {
-        "feeder": "DEVRALI DS",
-        "area": "Rathiwas",
-        "start_time": "15-Jul-2026 02:04:43",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "DEVRALI DS",
-        "area": "Kurahwata",
-        "start_time": "15-Jul-2026 02:04:43",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "MADHOGARH -I AP",
-        "area": "Madhogarh",
-        "start_time": "14-Jul-2026 13:06:33",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "JAKHANI AP",
-        "area": "Jakhni",
-        "start_time": "15-Jul-2026 02:45:55",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "NIWAZ NAGAR A.P",
-        "area": "BASS KI DHANI",
-        "start_time": "15-Jul-2026 03:13:23",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "NIWAZ NAGAR A.P",
-        "area": "Mehrampur",
-        "start_time": "15-Jul-2026 03:13:23",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "NIWAZ NAGAR A.P",
-        "area": "Hazipur",
-        "start_time": "15-Jul-2026 03:13:23",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "NIWAZ NAGAR A.P",
-        "area": "Hajipur",
-        "start_time": "15-Jul-2026 03:13:23",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "TIGRA AP",
-        "area": "Tigra",
-        "start_time": "15-Jul-2026 02:28:33",
+        "feeder": "NIMBI DS",
+        "area": "Nimbi",
+        "start_time": "15-Jul-2026 03:36:04",
         "expected_restoration_time": "",
         "remarks": ""
       },
@@ -2212,20 +2597,6 @@
       },
       {
         "feeder": "NIMBI DS",
-        "area": "Budeen",
-        "start_time": "15-Jul-2026 03:36:04",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "NIMBI DS",
-        "area": "Nimbi",
-        "start_time": "15-Jul-2026 03:36:04",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "NIMBI DS",
         "area": "Chajiawas",
         "start_time": "15-Jul-2026 03:36:04",
         "expected_restoration_time": "",
@@ -2240,21 +2611,7 @@
       },
       {
         "feeder": "KOJINDA DS",
-        "area": "Dhani Kojinda",
-        "start_time": "15-Jul-2026 01:34:09",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "KOJINDA DS",
         "area": "Dayal Nagar",
-        "start_time": "15-Jul-2026 01:34:09",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "KOJINDA DS",
-        "area": "Kojinda Ki Dhani",
         "start_time": "15-Jul-2026 01:34:09",
         "expected_restoration_time": "",
         "remarks": ""
@@ -2268,7 +2625,21 @@
       },
       {
         "feeder": "KOJINDA DS",
+        "area": "Kojinda Ki Dhani",
+        "start_time": "15-Jul-2026 01:34:09",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "KOJINDA DS",
         "area": "Dhani Chiragpura",
+        "start_time": "15-Jul-2026 01:34:09",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "KOJINDA DS",
+        "area": "Dhani Kojinda",
         "start_time": "15-Jul-2026 01:34:09",
         "expected_restoration_time": "",
         "remarks": ""
@@ -2282,14 +2653,14 @@
       },
       {
         "feeder": "NANGLI AP",
-        "area": "Nangli Ap",
+        "area": "Nangali",
         "start_time": "15-Jul-2026 00:56:33",
         "expected_restoration_time": "",
         "remarks": ""
       },
       {
         "feeder": "NANGLI AP",
-        "area": "Nangali",
+        "area": "Nangli Ap",
         "start_time": "15-Jul-2026 00:56:33",
         "expected_restoration_time": "",
         "remarks": ""
@@ -2302,11 +2673,25 @@
         "remarks": ""
       },
       {
+        "feeder": "BACHINI AP",
+        "area": "Bachini Ap",
+        "start_time": "15-Jul-2026 04:26:23",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
         "feeder": "BHOJAWAS AP",
         "area": "Bhojawas",
         "start_time": "15-Jul-2026 03:41:19",
         "expected_restoration_time": "",
         "remarks": ""
+      },
+      {
+        "feeder": "GUJJARWAS AP",
+        "area": "Uninda Ki Dhani",
+        "start_time": "15-Jul-2026 02:29:56",
+        "expected_restoration_time": "",
+        "remarks": "UNPLANNED"
       },
       {
         "feeder": "GUJJARWAS AP",
@@ -2324,13 +2709,6 @@
       },
       {
         "feeder": "GUJJARWAS AP",
-        "area": "Uninda Ki Dhani",
-        "start_time": "15-Jul-2026 02:29:56",
-        "expected_restoration_time": "",
-        "remarks": "UNPLANNED"
-      },
-      {
-        "feeder": "GUJJARWAS AP",
         "area": "Shakti Nagar Ki Dhani",
         "start_time": "15-Jul-2026 02:29:56",
         "expected_restoration_time": "",
@@ -2342,13 +2720,6 @@
         "start_time": "15-Jul-2026 02:04:51",
         "expected_restoration_time": "",
         "remarks": ""
-      },
-      {
-        "feeder": "CITY-III [220 KV NNL]",
-        "area": "Shyam Vila Moda Wala Mandir",
-        "start_time": "14-Jul-2026 09:11:00",
-        "expected_restoration_time": "",
-        "remarks": "UNPLANNED"
       },
       {
         "feeder": "CITY-III [220 KV NNL]",
@@ -2373,27 +2744,6 @@
       },
       {
         "feeder": "CITY-III [220 KV NNL]",
-        "area": "Saini Enclave",
-        "start_time": "14-Jul-2026 09:11:00",
-        "expected_restoration_time": "",
-        "remarks": "UNPLANNED"
-      },
-      {
-        "feeder": "CITY-III [220 KV NNL]",
-        "area": "Park Gali",
-        "start_time": "14-Jul-2026 09:11:00",
-        "expected_restoration_time": "",
-        "remarks": "UNPLANNED"
-      },
-      {
-        "feeder": "CITY-III [220 KV NNL]",
-        "area": "Kailash Nagar",
-        "start_time": "14-Jul-2026 09:11:00",
-        "expected_restoration_time": "",
-        "remarks": "UNPLANNED"
-      },
-      {
-        "feeder": "CITY-III [220 KV NNL]",
         "area": "Bhanaram Ki Gali",
         "start_time": "14-Jul-2026 09:11:00",
         "expected_restoration_time": "",
@@ -2408,14 +2758,21 @@
       },
       {
         "feeder": "CITY-III [220 KV NNL]",
-        "area": "Milk Plant",
+        "area": "Shyam Vila Moda Wala Mandir",
         "start_time": "14-Jul-2026 09:11:00",
         "expected_restoration_time": "",
         "remarks": "UNPLANNED"
       },
       {
         "feeder": "CITY-III [220 KV NNL]",
-        "area": "Gausala Market",
+        "area": "Park Gali",
+        "start_time": "14-Jul-2026 09:11:00",
+        "expected_restoration_time": "",
+        "remarks": "UNPLANNED"
+      },
+      {
+        "feeder": "CITY-III [220 KV NNL]",
+        "area": "Kailash Nagar",
         "start_time": "14-Jul-2026 09:11:00",
         "expected_restoration_time": "",
         "remarks": "UNPLANNED"
@@ -2440,9 +2797,114 @@
         "start_time": "14-Jul-2026 09:11:00",
         "expected_restoration_time": "",
         "remarks": "UNPLANNED"
+      },
+      {
+        "feeder": "CITY-III [220 KV NNL]",
+        "area": "Saini Enclave",
+        "start_time": "14-Jul-2026 09:11:00",
+        "expected_restoration_time": "",
+        "remarks": "UNPLANNED"
+      },
+      {
+        "feeder": "CITY-III [220 KV NNL]",
+        "area": "Milk Plant",
+        "start_time": "14-Jul-2026 09:11:00",
+        "expected_restoration_time": "",
+        "remarks": "UNPLANNED"
+      },
+      {
+        "feeder": "CITY-III [220 KV NNL]",
+        "area": "Gausala Market",
+        "start_time": "14-Jul-2026 09:11:00",
+        "expected_restoration_time": "",
+        "remarks": "UNPLANNED"
       }
     ],
     "Rewari": [
+      {
+        "feeder": "RANOLI AP",
+        "area": "Pranpura",
+        "start_time": "14-Jul-2026 07:00:41",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "BAGTHALA AP",
+        "area": "Bagthala",
+        "start_time": "15-Jul-2026 00:29:32",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "BAGTHALA AP",
+        "area": "Bagthla",
+        "start_time": "15-Jul-2026 00:29:32",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "BAGTHALA AP",
+        "area": "Asalwas",
+        "start_time": "15-Jul-2026 00:29:32",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "KHATAWALI AP",
+        "area": "Khatawali",
+        "start_time": "14-Jul-2026 16:24:43",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "NRP BASS DS",
+        "area": "Tatarpur Khalsa",
+        "start_time": "14-Jul-2026 16:25:26",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "NRP BASS DS",
+        "area": "Alwalpur",
+        "start_time": "14-Jul-2026 16:25:26",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "NRP BASS DS",
+        "area": "Bhatsana",
+        "start_time": "14-Jul-2026 16:25:26",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "NRP BASS DS",
+        "area": "Nandram Bass",
+        "start_time": "14-Jul-2026 16:25:26",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "NRP BASS DS",
+        "area": "Nrp Bass",
+        "start_time": "14-Jul-2026 16:25:26",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "KANWALI",
+        "area": "Kanwali",
+        "start_time": "15-Jul-2026 02:57:08",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "BAWWA AP",
+        "area": "Bawwa",
+        "start_time": "15-Jul-2026 03:02:12",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
       {
         "feeder": "GUMINA (GOTHRA)",
         "area": "Gumina",
@@ -2465,30 +2927,65 @@
         "remarks": ""
       },
       {
-        "feeder": "RANOLI AP",
-        "area": "Pranpura",
-        "start_time": "14-Jul-2026 07:00:41",
+        "feeder": "ODHI AP",
+        "area": "Nangliya",
+        "start_time": "14-Jul-2026 17:52:30",
         "expected_restoration_time": "",
         "remarks": ""
       },
       {
-        "feeder": "BAGTHALA AP",
-        "area": "Bagthla",
-        "start_time": "15-Jul-2026 00:29:32",
+        "feeder": "JATUWAS",
+        "area": "Rajgarh Ki Dhani",
+        "start_time": "14-Jul-2026 16:13:13",
         "expected_restoration_time": "",
         "remarks": ""
       },
       {
-        "feeder": "BAGTHALA AP",
-        "area": "Asalwas",
-        "start_time": "15-Jul-2026 00:29:32",
+        "feeder": "BHANDORE",
+        "area": "Harpur",
+        "start_time": "14-Jul-2026 22:01:28",
         "expected_restoration_time": "",
         "remarks": ""
       },
       {
-        "feeder": "BAGTHALA AP",
-        "area": "Bagthala",
-        "start_time": "15-Jul-2026 00:29:32",
+        "feeder": "BHANDORE",
+        "area": "Dhani Bhandor",
+        "start_time": "14-Jul-2026 22:01:28",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "BHANDORE",
+        "area": "Punsik",
+        "start_time": "14-Jul-2026 22:01:28",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "BHANDORE",
+        "area": "Teent",
+        "start_time": "14-Jul-2026 22:01:28",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "BHANDORE",
+        "area": "Kundal",
+        "start_time": "14-Jul-2026 22:01:28",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "BHANDORE",
+        "area": "Bawana Gujjar",
+        "start_time": "14-Jul-2026 22:01:28",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "KAHARI AP",
+        "area": "Kahadi",
+        "start_time": "15-Jul-2026 02:53:25",
         "expected_restoration_time": "",
         "remarks": ""
       },
@@ -2528,125 +3025,6 @@
         "remarks": ""
       },
       {
-        "feeder": "KHATAWALI AP",
-        "area": "Khatawali",
-        "start_time": "14-Jul-2026 16:24:43",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "NRP BASS DS",
-        "area": "Alwalpur",
-        "start_time": "14-Jul-2026 16:25:26",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "NRP BASS DS",
-        "area": "Bhatsana",
-        "start_time": "14-Jul-2026 16:25:26",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "NRP BASS DS",
-        "area": "Tatarpur Khalsa",
-        "start_time": "14-Jul-2026 16:25:26",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "NRP BASS DS",
-        "area": "Nandram Bass",
-        "start_time": "14-Jul-2026 16:25:26",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "NRP BASS DS",
-        "area": "Nrp Bass",
-        "start_time": "14-Jul-2026 16:25:26",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "KANWALI",
-        "area": "Kanwali",
-        "start_time": "15-Jul-2026 02:57:08",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "BAWWA AP",
-        "area": "Bawwa",
-        "start_time": "15-Jul-2026 03:02:12",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "ODHI AP",
-        "area": "Nangliya",
-        "start_time": "14-Jul-2026 17:52:30",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "JATUWAS",
-        "area": "Rajgarh Ki Dhani",
-        "start_time": "14-Jul-2026 16:13:13",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "BHANDORE",
-        "area": "Harpur",
-        "start_time": "14-Jul-2026 22:01:28",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "BHANDORE",
-        "area": "Dhani Bhandor",
-        "start_time": "14-Jul-2026 22:01:28",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "BHANDORE",
-        "area": "Teent",
-        "start_time": "14-Jul-2026 22:01:28",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "BHANDORE",
-        "area": "Kundal",
-        "start_time": "14-Jul-2026 22:01:28",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "BHANDORE",
-        "area": "Bawana Gujjar",
-        "start_time": "14-Jul-2026 22:01:28",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "BHANDORE",
-        "area": "Punsik",
-        "start_time": "14-Jul-2026 22:01:28",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "KAHARI AP",
-        "area": "Kahadi",
-        "start_time": "15-Jul-2026 02:53:25",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
         "feeder": "RALIAWAS",
         "area": "Rattanpur Ki Dhani",
         "start_time": "14-Jul-2026 22:59:56",
@@ -2655,14 +3033,7 @@
       },
       {
         "feeder": "RALIAWAS",
-        "area": "Panchgaon",
-        "start_time": "14-Jul-2026 22:59:56",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "RALIAWAS",
-        "area": "Pithanwas",
+        "area": "Majri Dudha",
         "start_time": "14-Jul-2026 22:59:56",
         "expected_restoration_time": "",
         "remarks": ""
@@ -2683,7 +3054,35 @@
       },
       {
         "feeder": "RALIAWAS",
+        "area": "Panchgaon",
+        "start_time": "14-Jul-2026 22:59:56",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "RALIAWAS",
+        "area": "Pithanwas",
+        "start_time": "14-Jul-2026 22:59:56",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "RALIAWAS",
         "area": "Ashiaki",
+        "start_time": "14-Jul-2026 22:59:56",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "RALIAWAS",
+        "area": "Baliar Khurd",
+        "start_time": "14-Jul-2026 22:59:56",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "RALIAWAS",
+        "area": "Jarthal",
         "start_time": "14-Jul-2026 22:59:56",
         "expected_restoration_time": "",
         "remarks": ""
@@ -2712,27 +3111,6 @@
       {
         "feeder": "RALIAWAS",
         "area": "Sampli",
-        "start_time": "14-Jul-2026 22:59:56",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "RALIAWAS",
-        "area": "Baliar Khurd",
-        "start_time": "14-Jul-2026 22:59:56",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "RALIAWAS",
-        "area": "Jarthal",
-        "start_time": "14-Jul-2026 22:59:56",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "RALIAWAS",
-        "area": "Majri Dudha",
         "start_time": "14-Jul-2026 22:59:56",
         "expected_restoration_time": "",
         "remarks": ""
@@ -2781,14 +3159,14 @@
       },
       {
         "feeder": "MAJRA SHEORAJ DS",
-        "area": "Majra Sheoraj",
+        "area": "Konsiwas",
         "start_time": "15-Jul-2026 02:49:22",
         "expected_restoration_time": "",
         "remarks": "UNPLANNED"
       },
       {
         "feeder": "MAJRA SHEORAJ DS",
-        "area": "Konsiwas",
+        "area": "Majra Sheoraj",
         "start_time": "15-Jul-2026 02:49:22",
         "expected_restoration_time": "",
         "remarks": "UNPLANNED"
@@ -2837,28 +3215,7 @@
       },
       {
         "feeder": "SHIV NAGAR/DELHI ROAD",
-        "area": "Banjarwada",
-        "start_time": "13-Jul-2026 16:52:34",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "SHIV NAGAR/DELHI ROAD",
-        "area": "Kalka Road",
-        "start_time": "13-Jul-2026 16:52:34",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "SHIV NAGAR/DELHI ROAD",
-        "area": "Gheesa Ki Dhani",
-        "start_time": "13-Jul-2026 16:52:34",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "SHIV NAGAR/DELHI ROAD",
-        "area": "Madhu Vihar",
+        "area": "Mahaveer Nagar",
         "start_time": "13-Jul-2026 16:52:34",
         "expected_restoration_time": "",
         "remarks": ""
@@ -2900,7 +3257,7 @@
       },
       {
         "feeder": "SHIV NAGAR/DELHI ROAD",
-        "area": "Ganpat Nagar",
+        "area": "Banjarwada",
         "start_time": "13-Jul-2026 16:52:34",
         "expected_restoration_time": "",
         "remarks": ""
@@ -2914,7 +3271,56 @@
       },
       {
         "feeder": "SHIV NAGAR/DELHI ROAD",
+        "area": "Kalka Road",
+        "start_time": "13-Jul-2026 16:52:34",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "SHIV NAGAR/DELHI ROAD",
         "area": "Vikash Nagar",
+        "start_time": "13-Jul-2026 16:52:34",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "SHIV NAGAR/DELHI ROAD",
+        "area": "Gheesa Ki Dhani",
+        "start_time": "13-Jul-2026 16:52:34",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "SHIV NAGAR/DELHI ROAD",
+        "area": "Madhu Vihar",
+        "start_time": "13-Jul-2026 16:52:34",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "SHIV NAGAR/DELHI ROAD",
+        "area": "Ganpat Nagar",
+        "start_time": "13-Jul-2026 16:52:34",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "SHIV NAGAR/DELHI ROAD",
+        "area": "Anand Nagar",
+        "start_time": "13-Jul-2026 16:52:34",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "SHIV NAGAR/DELHI ROAD",
+        "area": "Arjun Nagar",
+        "start_time": "13-Jul-2026 16:52:34",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "SHIV NAGAR/DELHI ROAD",
+        "area": "Dharuhera Chungi ( Rewari City 2 )",
         "start_time": "13-Jul-2026 16:52:34",
         "expected_restoration_time": "",
         "remarks": ""
@@ -2943,34 +3349,6 @@
       {
         "feeder": "SHIV NAGAR/DELHI ROAD",
         "area": "Shiv Nagar",
-        "start_time": "13-Jul-2026 16:52:34",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "SHIV NAGAR/DELHI ROAD",
-        "area": "Anand Nagar",
-        "start_time": "13-Jul-2026 16:52:34",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "SHIV NAGAR/DELHI ROAD",
-        "area": "Arjun Nagar",
-        "start_time": "13-Jul-2026 16:52:34",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "SHIV NAGAR/DELHI ROAD",
-        "area": "Dharuhera Chungi ( Rewari City 2 )",
-        "start_time": "13-Jul-2026 16:52:34",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "SHIV NAGAR/DELHI ROAD",
-        "area": "Mahaveer Nagar",
         "start_time": "13-Jul-2026 16:52:34",
         "expected_restoration_time": "",
         "remarks": ""
@@ -3027,6 +3405,13 @@
     ],
     "Gurugram": [
       {
+        "feeder": "11 KV Silver Oak",
+        "area": "Dlf Gurugram",
+        "start_time": "15-Jul-2026 04:33:02",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
         "feeder": "DHANAWAS AP",
         "area": "Hamirpur",
         "start_time": "15-Jul-2026 02:05:08",
@@ -3037,34 +3422,6 @@
         "feeder": "B/KALAN  AP",
         "area": "Bhora Kalan",
         "start_time": "14-Jul-2026 18:02:56",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "BAWLA AP",
-        "area": "Nanuka",
-        "start_time": "14-Jul-2026 10:34:20",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "NH8",
-        "area": "Sainipura",
-        "start_time": "15-Jul-2026 03:38:07",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "NH8",
-        "area": "Saini Khera",
-        "start_time": "15-Jul-2026 03:38:07",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "NH8",
-        "area": "Sector 29",
-        "start_time": "15-Jul-2026 03:38:07",
         "expected_restoration_time": "",
         "remarks": ""
       },
@@ -3086,20 +3443,6 @@
         "feeder": "KAROLA AP",
         "area": "Khera Khurampur Road",
         "start_time": "15-Jul-2026 02:03:27",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "TAORU CITY-I (U)",
-        "area": "Taoru",
-        "start_time": "15-Jul-2026 03:44:20",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "TAORU CITY-I (U)",
-        "area": "Tauru",
-        "start_time": "15-Jul-2026 03:44:20",
         "expected_restoration_time": "",
         "remarks": ""
       },
@@ -3133,21 +3476,7 @@
       },
       {
         "feeder": "MAJRI RDS",
-        "area": "Village Dumma",
-        "start_time": "15-Jul-2026 03:21:11",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "MAJRI RDS",
-        "area": "Village Mubarik Pur",
-        "start_time": "15-Jul-2026 03:21:11",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "MAJRI RDS",
-        "area": "Dooma",
+        "area": "Mohammad Pur",
         "start_time": "15-Jul-2026 03:21:11",
         "expected_restoration_time": "",
         "remarks": ""
@@ -3161,7 +3490,21 @@
       },
       {
         "feeder": "MAJRI RDS",
-        "area": "Mohammad Pur",
+        "area": "Dooma",
+        "start_time": "15-Jul-2026 03:21:11",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "MAJRI RDS",
+        "area": "Village Dumma",
+        "start_time": "15-Jul-2026 03:21:11",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "MAJRI RDS",
+        "area": "Village Mubarik Pur",
         "start_time": "15-Jul-2026 03:21:11",
         "expected_restoration_time": "",
         "remarks": ""
@@ -3195,155 +3538,15 @@
         "remarks": ""
       },
       {
-        "feeder": "SECTOR-47",
-        "area": "Sector 47",
-        "start_time": "14-Jul-2026 16:58:52",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "SECTOR-47",
-        "area": "Subhash Chowk",
-        "start_time": "14-Jul-2026 16:58:52",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "11 KV MARLA",
-        "area": "Tikona Park",
-        "start_time": "15-Jul-2026 00:59:00",
-        "expected_restoration_time": "15-Jul-2026 02:20:00",
-        "remarks": "line breakdown"
-      },
-      {
-        "feeder": "11 KV MARLA",
-        "area": "8 Marla",
-        "start_time": "15-Jul-2026 00:59:00",
-        "expected_restoration_time": "15-Jul-2026 02:20:00",
-        "remarks": "line breakdown"
-      },
-      {
-        "feeder": "11 KV MARLA",
-        "area": "4 Marla",
-        "start_time": "15-Jul-2026 00:59:00",
-        "expected_restoration_time": "15-Jul-2026 02:20:00",
-        "remarks": "line breakdown"
-      },
-      {
-        "feeder": "11 KV MARLA",
-        "area": "Shakti Nagar",
-        "start_time": "15-Jul-2026 00:59:00",
-        "expected_restoration_time": "15-Jul-2026 02:20:00",
-        "remarks": "line breakdown"
-      },
-      {
-        "feeder": "11 KV MARLA",
-        "area": "4,8 Marla",
-        "start_time": "15-Jul-2026 00:59:00",
-        "expected_restoration_time": "15-Jul-2026 02:20:00",
-        "remarks": "line breakdown"
-      },
-      {
-        "feeder": "11 KV HSIDC",
-        "area": "Jagmal Ki Dhani",
-        "start_time": "14-Jul-2026 17:15:05",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "11 KV HSIDC",
-        "area": "Sector 99A",
-        "start_time": "14-Jul-2026 17:15:05",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "11 KV S.C-2 G Block",
-        "area": "South City 2 G Block",
-        "start_time": "15-Jul-2026 03:19:35",
-        "expected_restoration_time": "",
-        "remarks": "UNPLANNED"
-      },
-      {
-        "feeder": "BILASPUR AP",
-        "area": "Bilaspur",
-        "start_time": "14-Jul-2026 18:23:48",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "SEWARI AP",
-        "area": "Musidpur",
-        "start_time": "15-Jul-2026 02:03:13",
-        "expected_restoration_time": "",
-        "remarks": "UNPLANNED"
-      },
-      {
-        "feeder": "SEWARI AP",
-        "area": "Palri",
-        "start_time": "15-Jul-2026 02:03:13",
-        "expected_restoration_time": "",
-        "remarks": "UNPLANNED"
-      },
-      {
-        "feeder": "SEWARI AP",
-        "area": "Musedpur",
-        "start_time": "15-Jul-2026 02:03:13",
-        "expected_restoration_time": "",
-        "remarks": "UNPLANNED"
-      },
-      {
-        "feeder": "SEWARI AP",
-        "area": "Karola",
-        "start_time": "15-Jul-2026 02:03:13",
-        "expected_restoration_time": "",
-        "remarks": "UNPLANNED"
-      },
-      {
-        "feeder": "SEWARI AP",
-        "area": "Khera Khurampur Road",
-        "start_time": "15-Jul-2026 02:03:13",
-        "expected_restoration_time": "",
-        "remarks": "UNPLANNED"
-      },
-      {
-        "feeder": "SEWARI AP",
-        "area": "Siwari Dhani",
-        "start_time": "15-Jul-2026 02:03:13",
-        "expected_restoration_time": "",
-        "remarks": "UNPLANNED"
-      },
-      {
-        "feeder": "SEWARI AP",
-        "area": "Sewari",
-        "start_time": "15-Jul-2026 02:03:13",
-        "expected_restoration_time": "",
-        "remarks": "UNPLANNED"
-      },
-      {
-        "feeder": "PATLI AP",
-        "area": "Patli",
-        "start_time": "15-Jul-2026 02:05:01",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "SEWKA AP",
-        "area": "Sewka",
-        "start_time": "14-Jul-2026 10:38:45",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
         "feeder": "DAULTABAD",
-        "area": "Mohamdheri",
+        "area": "Village Babupur",
         "start_time": "15-Jul-2026 02:25:00",
         "expected_restoration_time": "15-Jul-2026 03:30:00",
         "remarks": "line breakdown"
       },
       {
         "feeder": "DAULTABAD",
-        "area": "Babupur",
+        "area": "Mohamdheri",
         "start_time": "15-Jul-2026 02:25:00",
         "expected_restoration_time": "15-Jul-2026 03:30:00",
         "remarks": "line breakdown"
@@ -3357,7 +3560,7 @@
       },
       {
         "feeder": "DAULTABAD",
-        "area": "Village Babupur",
+        "area": "Babupur",
         "start_time": "15-Jul-2026 02:25:00",
         "expected_restoration_time": "15-Jul-2026 03:30:00",
         "remarks": "line breakdown"
@@ -3419,116 +3622,151 @@
         "remarks": ""
       },
       {
-        "feeder": "JYOTI PARK",
-        "area": "New Jyoti Park",
-        "start_time": "15-Jul-2026 00:49:00",
-        "expected_restoration_time": "15-Jul-2026 01:50:00",
-        "remarks": "line breakdown"
-      },
-      {
-        "feeder": "JYOTI PARK",
-        "area": "Jyoti Park",
-        "start_time": "15-Jul-2026 00:49:00",
-        "expected_restoration_time": "15-Jul-2026 01:50:00",
-        "remarks": "line breakdown"
-      },
-      {
-        "feeder": "ARJUN NAGAR",
-        "area": "Gurudwara Road",
-        "start_time": "15-Jul-2026 00:49:00",
-        "expected_restoration_time": "15-Jul-2026 02:20:00",
-        "remarks": "line breakdown"
-      },
-      {
-        "feeder": "ARJUN NAGAR",
-        "area": "Pratap Nagar",
-        "start_time": "15-Jul-2026 00:49:00",
-        "expected_restoration_time": "15-Jul-2026 02:20:00",
-        "remarks": "line breakdown"
-      },
-      {
-        "feeder": "ARJUN NAGAR",
-        "area": "Ganpati Arcade",
-        "start_time": "15-Jul-2026 00:49:00",
-        "expected_restoration_time": "15-Jul-2026 02:20:00",
-        "remarks": "line breakdown"
-      },
-      {
-        "feeder": "ARJUN NAGAR",
-        "area": "Laxmi Bazar",
-        "start_time": "15-Jul-2026 00:49:00",
-        "expected_restoration_time": "15-Jul-2026 02:20:00",
-        "remarks": "line breakdown"
-      },
-      {
-        "feeder": "ARJUN NAGAR",
-        "area": "Civil Line",
-        "start_time": "15-Jul-2026 00:49:00",
-        "expected_restoration_time": "15-Jul-2026 02:20:00",
-        "remarks": "line breakdown"
-      },
-      {
-        "feeder": "ARJUN NAGAR",
-        "area": "Sabji Mandi",
-        "start_time": "15-Jul-2026 00:49:00",
-        "expected_restoration_time": "15-Jul-2026 02:20:00",
-        "remarks": "line breakdown"
-      },
-      {
-        "feeder": "ARJUN NAGAR",
-        "area": "Apna Bazaar",
-        "start_time": "15-Jul-2026 00:49:00",
-        "expected_restoration_time": "15-Jul-2026 02:20:00",
-        "remarks": "line breakdown"
-      },
-      {
-        "feeder": "ARJUN NAGAR",
-        "area": "Bada Bazar",
-        "start_time": "15-Jul-2026 00:49:00",
-        "expected_restoration_time": "15-Jul-2026 02:20:00",
-        "remarks": "line breakdown"
-      },
-      {
-        "feeder": "ARJUN NAGAR",
-        "area": "Trunk Market",
-        "start_time": "15-Jul-2026 00:49:00",
-        "expected_restoration_time": "15-Jul-2026 02:20:00",
-        "remarks": "line breakdown"
-      },
-      {
-        "feeder": "ARJUN NAGAR",
-        "area": "Sohna Chowk Trunk Market Side",
-        "start_time": "15-Jul-2026 00:49:00",
-        "expected_restoration_time": "15-Jul-2026 02:20:00",
-        "remarks": "line breakdown"
-      },
-      {
-        "feeder": "ARJUN NAGAR",
-        "area": "Roshan Pura",
-        "start_time": "15-Jul-2026 00:49:00",
-        "expected_restoration_time": "15-Jul-2026 02:20:00",
-        "remarks": "line breakdown"
-      },
-      {
-        "feeder": "GARHI AP",
-        "area": "Subhe Ki Dhani",
-        "start_time": "15-Jul-2026 02:04:59",
+        "feeder": "SECTOR-47",
+        "area": "Subhash Chowk",
+        "start_time": "14-Jul-2026 16:58:52",
         "expected_restoration_time": "",
         "remarks": ""
       },
       {
-        "feeder": "MARUTI KUNJ (U)",
-        "area": "Maruti Kunj",
-        "start_time": "15-Jul-2026 03:44:45",
+        "feeder": "SECTOR-47",
+        "area": "Sector 47",
+        "start_time": "14-Jul-2026 16:58:52",
         "expected_restoration_time": "",
         "remarks": ""
       },
       {
-        "feeder": "NEW COLONY",
-        "area": "Madanpuri",
-        "start_time": "15-Jul-2026 00:41:00",
-        "expected_restoration_time": "15-Jul-2026 01:50:00",
+        "feeder": "11 KV MARLA",
+        "area": "8 Marla",
+        "start_time": "15-Jul-2026 00:59:00",
+        "expected_restoration_time": "15-Jul-2026 02:20:00",
         "remarks": "line breakdown"
+      },
+      {
+        "feeder": "11 KV MARLA",
+        "area": "Tikona Park",
+        "start_time": "15-Jul-2026 00:59:00",
+        "expected_restoration_time": "15-Jul-2026 02:20:00",
+        "remarks": "line breakdown"
+      },
+      {
+        "feeder": "11 KV MARLA",
+        "area": "4,8 Marla",
+        "start_time": "15-Jul-2026 00:59:00",
+        "expected_restoration_time": "15-Jul-2026 02:20:00",
+        "remarks": "line breakdown"
+      },
+      {
+        "feeder": "11 KV MARLA",
+        "area": "4 Marla",
+        "start_time": "15-Jul-2026 00:59:00",
+        "expected_restoration_time": "15-Jul-2026 02:20:00",
+        "remarks": "line breakdown"
+      },
+      {
+        "feeder": "11 KV MARLA",
+        "area": "Shakti Nagar",
+        "start_time": "15-Jul-2026 00:59:00",
+        "expected_restoration_time": "15-Jul-2026 02:20:00",
+        "remarks": "line breakdown"
+      },
+      {
+        "feeder": "11 KV HSIDC",
+        "area": "Jagmal Ki Dhani",
+        "start_time": "14-Jul-2026 17:15:05",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "11 KV HSIDC",
+        "area": "Sector 99A",
+        "start_time": "14-Jul-2026 17:15:05",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "BILASPUR AP",
+        "area": "Bilaspur",
+        "start_time": "14-Jul-2026 18:23:48",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "NAYAGAON DS",
+        "area": "Nayagaon",
+        "start_time": "15-Jul-2026 04:44:27",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "SEHJAWAS AP",
+        "area": "Dev Nagar",
+        "start_time": "15-Jul-2026 04:20:18",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "KABARCHA DS",
+        "area": "Udyog Vihar Phase 4",
+        "start_time": "15-Jul-2026 04:23:02",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "SEWARI AP",
+        "area": "Musidpur",
+        "start_time": "15-Jul-2026 02:03:13",
+        "expected_restoration_time": "",
+        "remarks": "UNPLANNED"
+      },
+      {
+        "feeder": "SEWARI AP",
+        "area": "Musedpur",
+        "start_time": "15-Jul-2026 02:03:13",
+        "expected_restoration_time": "",
+        "remarks": "UNPLANNED"
+      },
+      {
+        "feeder": "SEWARI AP",
+        "area": "Karola",
+        "start_time": "15-Jul-2026 02:03:13",
+        "expected_restoration_time": "",
+        "remarks": "UNPLANNED"
+      },
+      {
+        "feeder": "SEWARI AP",
+        "area": "Khera Khurampur Road",
+        "start_time": "15-Jul-2026 02:03:13",
+        "expected_restoration_time": "",
+        "remarks": "UNPLANNED"
+      },
+      {
+        "feeder": "SEWARI AP",
+        "area": "Siwari Dhani",
+        "start_time": "15-Jul-2026 02:03:13",
+        "expected_restoration_time": "",
+        "remarks": "UNPLANNED"
+      },
+      {
+        "feeder": "SEWARI AP",
+        "area": "Sewari",
+        "start_time": "15-Jul-2026 02:03:13",
+        "expected_restoration_time": "",
+        "remarks": "UNPLANNED"
+      },
+      {
+        "feeder": "SEWARI AP",
+        "area": "Palri",
+        "start_time": "15-Jul-2026 02:03:13",
+        "expected_restoration_time": "",
+        "remarks": "UNPLANNED"
+      },
+      {
+        "feeder": "PATLI AP",
+        "area": "Patli",
+        "start_time": "15-Jul-2026 02:05:01",
+        "expected_restoration_time": "",
+        "remarks": ""
       },
       {
         "feeder": "NEW COLONY",
@@ -3552,6 +3790,27 @@
         "remarks": "line breakdown"
       },
       {
+        "feeder": "NEW COLONY",
+        "area": "Madanpuri",
+        "start_time": "15-Jul-2026 00:41:00",
+        "expected_restoration_time": "15-Jul-2026 01:50:00",
+        "remarks": "line breakdown"
+      },
+      {
+        "feeder": "11 KV Dayanand Colony",
+        "area": "Guru Nank Market",
+        "start_time": "14-Jul-2026 16:15:00",
+        "expected_restoration_time": "",
+        "remarks": "UNPLANNED"
+      },
+      {
+        "feeder": "11 KV Dayanand Colony",
+        "area": "12 Biswa",
+        "start_time": "14-Jul-2026 16:15:00",
+        "expected_restoration_time": "",
+        "remarks": "UNPLANNED"
+      },
+      {
         "feeder": "11 KV Dayanand Colony",
         "area": "Ashok Puri",
         "start_time": "14-Jul-2026 16:15:00",
@@ -3573,27 +3832,6 @@
         "remarks": "UNPLANNED"
       },
       {
-        "feeder": "11 KV Dayanand Colony",
-        "area": "12 Biswa",
-        "start_time": "14-Jul-2026 16:15:00",
-        "expected_restoration_time": "",
-        "remarks": "UNPLANNED"
-      },
-      {
-        "feeder": "11 KV Dayanand Colony",
-        "area": "Guru Nank Market",
-        "start_time": "14-Jul-2026 16:15:00",
-        "expected_restoration_time": "",
-        "remarks": "UNPLANNED"
-      },
-      {
-        "feeder": "ANSAL (U)",
-        "area": "Ansal",
-        "start_time": "15-Jul-2026 03:37:45",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
         "feeder": "ANSAL (U)",
         "area": "Ansal Arravali Retreat",
         "start_time": "15-Jul-2026 03:37:45",
@@ -3608,11 +3846,25 @@
         "remarks": ""
       },
       {
-        "feeder": "KHORI AP",
-        "area": "Khori",
-        "start_time": "14-Jul-2026 10:34:20",
+        "feeder": "ANSAL (U)",
+        "area": "Ansal",
+        "start_time": "15-Jul-2026 03:37:45",
         "expected_restoration_time": "",
         "remarks": ""
+      },
+      {
+        "feeder": "KHORI AP",
+        "area": "Khori",
+        "start_time": "15-Jul-2026 04:25:21",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "Sector 5",
+        "area": "Sector 5",
+        "start_time": "15-Jul-2026 00:25:00",
+        "expected_restoration_time": "15-Jul-2026 02:20:00",
+        "remarks": "line breakdown"
       },
       {
         "feeder": "Sector 5",
@@ -3629,11 +3881,109 @@
         "remarks": "line breakdown"
       },
       {
-        "feeder": "Sector 5",
-        "area": "Sector 5",
-        "start_time": "15-Jul-2026 00:25:00",
+        "feeder": "JYOTI PARK",
+        "area": "Jyoti Park",
+        "start_time": "15-Jul-2026 00:49:00",
+        "expected_restoration_time": "15-Jul-2026 01:50:00",
+        "remarks": "line breakdown"
+      },
+      {
+        "feeder": "JYOTI PARK",
+        "area": "New Jyoti Park",
+        "start_time": "15-Jul-2026 00:49:00",
+        "expected_restoration_time": "15-Jul-2026 01:50:00",
+        "remarks": "line breakdown"
+      },
+      {
+        "feeder": "ARJUN NAGAR",
+        "area": "Gurudwara Road",
+        "start_time": "15-Jul-2026 00:49:00",
         "expected_restoration_time": "15-Jul-2026 02:20:00",
         "remarks": "line breakdown"
+      },
+      {
+        "feeder": "ARJUN NAGAR",
+        "area": "Ganpati Arcade",
+        "start_time": "15-Jul-2026 00:49:00",
+        "expected_restoration_time": "15-Jul-2026 02:20:00",
+        "remarks": "line breakdown"
+      },
+      {
+        "feeder": "ARJUN NAGAR",
+        "area": "Laxmi Bazar",
+        "start_time": "15-Jul-2026 00:49:00",
+        "expected_restoration_time": "15-Jul-2026 02:20:00",
+        "remarks": "line breakdown"
+      },
+      {
+        "feeder": "ARJUN NAGAR",
+        "area": "Sabji Mandi",
+        "start_time": "15-Jul-2026 00:49:00",
+        "expected_restoration_time": "15-Jul-2026 02:20:00",
+        "remarks": "line breakdown"
+      },
+      {
+        "feeder": "ARJUN NAGAR",
+        "area": "Apna Bazaar",
+        "start_time": "15-Jul-2026 00:49:00",
+        "expected_restoration_time": "15-Jul-2026 02:20:00",
+        "remarks": "line breakdown"
+      },
+      {
+        "feeder": "ARJUN NAGAR",
+        "area": "Pratap Nagar",
+        "start_time": "15-Jul-2026 00:49:00",
+        "expected_restoration_time": "15-Jul-2026 02:20:00",
+        "remarks": "line breakdown"
+      },
+      {
+        "feeder": "ARJUN NAGAR",
+        "area": "Sohna Chowk Trunk Market Side",
+        "start_time": "15-Jul-2026 00:49:00",
+        "expected_restoration_time": "15-Jul-2026 02:20:00",
+        "remarks": "line breakdown"
+      },
+      {
+        "feeder": "ARJUN NAGAR",
+        "area": "Trunk Market",
+        "start_time": "15-Jul-2026 00:49:00",
+        "expected_restoration_time": "15-Jul-2026 02:20:00",
+        "remarks": "line breakdown"
+      },
+      {
+        "feeder": "ARJUN NAGAR",
+        "area": "Civil Line",
+        "start_time": "15-Jul-2026 00:49:00",
+        "expected_restoration_time": "15-Jul-2026 02:20:00",
+        "remarks": "line breakdown"
+      },
+      {
+        "feeder": "ARJUN NAGAR",
+        "area": "Roshan Pura",
+        "start_time": "15-Jul-2026 00:49:00",
+        "expected_restoration_time": "15-Jul-2026 02:20:00",
+        "remarks": "line breakdown"
+      },
+      {
+        "feeder": "ARJUN NAGAR",
+        "area": "Bada Bazar",
+        "start_time": "15-Jul-2026 00:49:00",
+        "expected_restoration_time": "15-Jul-2026 02:20:00",
+        "remarks": "line breakdown"
+      },
+      {
+        "feeder": "GARHI AP",
+        "area": "Subhe Ki Dhani",
+        "start_time": "15-Jul-2026 02:04:59",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "MARUTI KUNJ (U)",
+        "area": "Maruti Kunj",
+        "start_time": "15-Jul-2026 03:44:45",
+        "expected_restoration_time": "",
+        "remarks": ""
       },
       {
         "feeder": "P/VIHAR-I",
@@ -3651,6 +4001,13 @@
       }
     ],
     "Nuh": [
+      {
+        "feeder": "JAISINGHPUR DS",
+        "area": "Jaisinghpur",
+        "start_time": "15-Jul-2026 03:00:47",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
       {
         "feeder": "GHAGAS-I AP",
         "area": "Gumat",
@@ -3680,15 +4037,15 @@
         "remarks": ""
       },
       {
-        "feeder": "PATHKHORI AP",
-        "area": "Nagal",
-        "start_time": "14-Jul-2026 10:38:23",
+        "feeder": "DORAKHI DS",
+        "area": "Biwan",
+        "start_time": "15-Jul-2026 02:57:33",
         "expected_restoration_time": "",
-        "remarks": ""
+        "remarks": "UNPLANNED"
       },
       {
         "feeder": "PATHKHORI AP",
-        "area": "Pathkhori",
+        "area": "Chaipuri",
         "start_time": "14-Jul-2026 10:38:23",
         "expected_restoration_time": "",
         "remarks": ""
@@ -3709,56 +4066,56 @@
       },
       {
         "feeder": "PATHKHORI AP",
-        "area": "Chaipuri",
-        "start_time": "14-Jul-2026 10:38:23",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "PATHKHORI AP",
         "area": "Sidrawat",
         "start_time": "14-Jul-2026 10:38:23",
         "expected_restoration_time": "",
         "remarks": ""
       },
       {
-        "feeder": "GHAGAS-II DS",
-        "area": "Khori",
-        "start_time": "15-Jul-2026 03:23:40",
+        "feeder": "PATHKHORI AP",
+        "area": "Nagal",
+        "start_time": "14-Jul-2026 10:38:23",
         "expected_restoration_time": "",
         "remarks": ""
       },
       {
-        "feeder": "GHAGAS-II DS",
-        "area": "Multhan",
-        "start_time": "15-Jul-2026 03:23:40",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "GHAGAS-II DS",
-        "area": "Mandi Kheri Hospital",
-        "start_time": "15-Jul-2026 03:23:40",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "JAISINGHPUR DS",
-        "area": "Jaisinghpur",
-        "start_time": "15-Jul-2026 03:00:47",
+        "feeder": "PATHKHORI AP",
+        "area": "Pathkhori",
+        "start_time": "14-Jul-2026 10:38:23",
         "expected_restoration_time": "",
         "remarks": ""
       },
       {
         "feeder": "MALLAB DS",
-        "area": "Juglabass",
+        "area": "Dehana",
         "start_time": "14-Jul-2026 09:30:08",
         "expected_restoration_time": "",
         "remarks": ""
       },
       {
         "feeder": "MALLAB DS",
-        "area": "Birsika",
+        "area": "Akera",
+        "start_time": "14-Jul-2026 09:30:08",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "MALLAB DS",
+        "area": "Ranika",
+        "start_time": "14-Jul-2026 09:30:08",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "MALLAB DS",
+        "area": "Gundbass",
+        "start_time": "14-Jul-2026 09:30:08",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "MALLAB DS",
+        "area": "Juglabass",
         "start_time": "14-Jul-2026 09:30:08",
         "expected_restoration_time": "",
         "remarks": ""
@@ -3786,42 +4143,14 @@
       },
       {
         "feeder": "MALLAB DS",
-        "area": "Ranika",
+        "area": "Birsika",
         "start_time": "14-Jul-2026 09:30:08",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "MALLAB DS",
-        "area": "Gundbass",
-        "start_time": "14-Jul-2026 09:30:08",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "MALLAB DS",
-        "area": "Dehana",
-        "start_time": "14-Jul-2026 09:30:08",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "MALLAB DS",
-        "area": "Akera",
-        "start_time": "14-Jul-2026 09:30:08",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "RANIYALA DS",
-        "area": "RANIYALA VILLAGE ROAD",
-        "start_time": "15-Jul-2026 02:24:37",
         "expected_restoration_time": "",
         "remarks": ""
       },
       {
         "feeder": "MEOLI-I AP",
-        "area": "Thekra",
+        "area": "Kurthla",
         "start_time": "14-Jul-2026 14:55:33",
         "expected_restoration_time": "",
         "remarks": ""
@@ -3842,140 +4171,84 @@
       },
       {
         "feeder": "MEOLI-I AP",
-        "area": "Kurthla",
+        "area": "Thekra",
         "start_time": "14-Jul-2026 14:55:33",
         "expected_restoration_time": "",
         "remarks": ""
       },
       {
         "feeder": "BUS STAND ROAD NUH (U)",
+        "area": "Palri",
+        "start_time": "15-Jul-2026 04:39:58",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "BUS STAND ROAD NUH (U)",
         "area": "Bhopawali",
-        "start_time": "15-Jul-2026 03:42:36",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "BUS STAND ROAD NUH (U)",
-        "area": "Kotlaka",
-        "start_time": "15-Jul-2026 03:42:36",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "BUS STAND ROAD NUH (U)",
-        "area": "Palla",
-        "start_time": "15-Jul-2026 03:42:36",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "BUS STAND ROAD NUH (U)",
-        "area": "Nuh",
-        "start_time": "15-Jul-2026 03:42:36",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "BUS STAND ROAD NUH (U)",
-        "area": "Test Area A",
-        "start_time": "15-Jul-2026 03:42:36",
+        "start_time": "15-Jul-2026 04:39:58",
         "expected_restoration_time": "",
         "remarks": ""
       },
       {
         "feeder": "BUS STAND ROAD NUH (U)",
         "area": "Tapkan",
-        "start_time": "15-Jul-2026 03:42:36",
+        "start_time": "15-Jul-2026 04:39:58",
         "expected_restoration_time": "",
         "remarks": ""
       },
       {
         "feeder": "BUS STAND ROAD NUH (U)",
         "area": "66 Kv Nuh",
-        "start_time": "15-Jul-2026 03:42:36",
+        "start_time": "15-Jul-2026 04:39:58",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "BUS STAND ROAD NUH (U)",
+        "area": "Nuh",
+        "start_time": "15-Jul-2026 04:39:58",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "BUS STAND ROAD NUH (U)",
+        "area": "Test Area A",
+        "start_time": "15-Jul-2026 04:39:58",
         "expected_restoration_time": "",
         "remarks": ""
       },
       {
         "feeder": "BUS STAND ROAD NUH (U)",
         "area": "Biwan",
-        "start_time": "15-Jul-2026 03:42:36",
+        "start_time": "15-Jul-2026 04:39:58",
         "expected_restoration_time": "",
         "remarks": ""
       },
       {
         "feeder": "BUS STAND ROAD NUH (U)",
         "area": "Rehna",
-        "start_time": "15-Jul-2026 03:42:36",
+        "start_time": "15-Jul-2026 04:39:58",
         "expected_restoration_time": "",
         "remarks": ""
       },
       {
         "feeder": "BUS STAND ROAD NUH (U)",
-        "area": "Palri",
-        "start_time": "15-Jul-2026 03:42:36",
+        "area": "Kotlaka",
+        "start_time": "15-Jul-2026 04:39:58",
         "expected_restoration_time": "",
         "remarks": ""
       },
       {
-        "feeder": "Jamalgarh-II DS",
-        "area": "Bandholi",
-        "start_time": "14-Jul-2026 19:43:38",
+        "feeder": "BUS STAND ROAD NUH (U)",
+        "area": "Palla",
+        "start_time": "15-Jul-2026 04:39:58",
         "expected_restoration_time": "",
-        "remarks": "UNPLANNED"
-      },
-      {
-        "feeder": "Jamalgarh-II DS",
-        "area": "Badha",
-        "start_time": "14-Jul-2026 19:43:38",
-        "expected_restoration_time": "",
-        "remarks": "UNPLANNED"
-      },
-      {
-        "feeder": "Jamalgarh-II DS",
-        "area": "Dundoli",
-        "start_time": "14-Jul-2026 19:43:38",
-        "expected_restoration_time": "",
-        "remarks": "UNPLANNED"
-      },
-      {
-        "feeder": "Jamalgarh-II DS",
-        "area": "Hasan Gaon",
-        "start_time": "14-Jul-2026 19:43:38",
-        "expected_restoration_time": "",
-        "remarks": "UNPLANNED"
-      },
-      {
-        "feeder": "Jamalgarh-II DS",
-        "area": "Jamalgarh",
-        "start_time": "14-Jul-2026 19:43:38",
-        "expected_restoration_time": "",
-        "remarks": "UNPLANNED"
-      },
-      {
-        "feeder": "Jamalgarh-II DS",
-        "area": "Manota",
-        "start_time": "14-Jul-2026 19:43:38",
-        "expected_restoration_time": "",
-        "remarks": "UNPLANNED"
+        "remarks": ""
       },
       {
         "feeder": "TIGAON AP",
         "area": "Dungeja",
-        "start_time": "15-Jul-2026 01:32:21",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "TIGAON AP",
-        "area": "Ghatwasan",
-        "start_time": "15-Jul-2026 01:32:21",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "TIGAON AP",
-        "area": "Akhpur Pahari",
         "start_time": "15-Jul-2026 01:32:21",
         "expected_restoration_time": "",
         "remarks": ""
@@ -3990,6 +4263,13 @@
       {
         "feeder": "TIGAON AP",
         "area": "Sirasbass",
+        "start_time": "15-Jul-2026 01:32:21",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "TIGAON AP",
+        "area": "Buchaka",
         "start_time": "15-Jul-2026 01:32:21",
         "expected_restoration_time": "",
         "remarks": ""
@@ -4017,7 +4297,14 @@
       },
       {
         "feeder": "TIGAON AP",
-        "area": "Buchaka",
+        "area": "Ghatwasan",
+        "start_time": "15-Jul-2026 01:32:21",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "TIGAON AP",
+        "area": "Akhpur Pahari",
         "start_time": "15-Jul-2026 01:32:21",
         "expected_restoration_time": "",
         "remarks": ""
@@ -4028,13 +4315,6 @@
         "start_time": "15-Jul-2026 01:32:21",
         "expected_restoration_time": "",
         "remarks": ""
-      },
-      {
-        "feeder": "DORAKHI DS",
-        "area": "Biwan",
-        "start_time": "15-Jul-2026 02:57:33",
-        "expected_restoration_time": "",
-        "remarks": "UNPLANNED"
       }
     ],
     "Faridabad": [
@@ -4042,13 +4322,6 @@
         "feeder": "SUNPAID",
         "area": "Sahupura",
         "start_time": "07-Jul-2026 13:47:56",
-        "expected_restoration_time": "",
-        "remarks": "UNPLANNED"
-      },
-      {
-        "feeder": "IRCON",
-        "area": "SAHPUR KHUD INDUSTERIAL AREA",
-        "start_time": "15-Jul-2026 03:26:52",
         "expected_restoration_time": "",
         "remarks": "UNPLANNED"
       },
@@ -4061,42 +4334,7 @@
       },
       {
         "feeder": "GHARORA DS",
-        "area": "Lehdola",
-        "start_time": "14-Jul-2026 17:29:57",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "GHARORA DS",
-        "area": "Mojabad",
-        "start_time": "14-Jul-2026 17:29:57",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "GHARORA DS",
         "area": "Bela",
-        "start_time": "14-Jul-2026 17:29:57",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "GHARORA DS",
-        "area": "Bela",
-        "start_time": "14-Jul-2026 17:29:57",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "GHARORA DS",
-        "area": "Kaboolpur",
-        "start_time": "14-Jul-2026 17:29:57",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "GHARORA DS",
-        "area": "Mandhawali",
         "start_time": "14-Jul-2026 17:29:57",
         "expected_restoration_time": "",
         "remarks": ""
@@ -4124,6 +4362,34 @@
       },
       {
         "feeder": "GHARORA DS",
+        "area": "Mandhawali",
+        "start_time": "14-Jul-2026 17:29:57",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "GHARORA DS",
+        "area": "Bela",
+        "start_time": "14-Jul-2026 17:29:57",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "GHARORA DS",
+        "area": "Mandhawali",
+        "start_time": "14-Jul-2026 17:29:57",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "GHARORA DS",
+        "area": "Kaboolpur",
+        "start_time": "14-Jul-2026 17:29:57",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "GHARORA DS",
         "area": "Raipur",
         "start_time": "14-Jul-2026 17:29:57",
         "expected_restoration_time": "",
@@ -4152,7 +4418,14 @@
       },
       {
         "feeder": "GHARORA DS",
-        "area": "Mandhawali",
+        "area": "Lehdola",
+        "start_time": "14-Jul-2026 17:29:57",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "GHARORA DS",
+        "area": "Mojabad",
         "start_time": "14-Jul-2026 17:29:57",
         "expected_restoration_time": "",
         "remarks": ""
@@ -4223,37 +4496,9 @@
         "remarks": ""
       },
       {
-        "feeder": "GHUGERA DS",
-        "area": "Ghughera",
-        "start_time": "15-Jul-2026 00:07:43",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "SULTANPUR AP",
-        "area": "Village Sultanpur",
-        "start_time": "15-Jul-2026 03:40:20",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "SULTANPUR AP",
-        "area": "Sultapur",
-        "start_time": "15-Jul-2026 03:40:20",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
         "feeder": "DUDHOLA AP",
         "area": "Dudhola",
         "start_time": "14-Jul-2026 16:38:53",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "BAROLI AP",
-        "area": "Baroli",
-        "start_time": "15-Jul-2026 03:48:44",
         "expected_restoration_time": "",
         "remarks": ""
       },
@@ -4272,15 +4517,43 @@
         "remarks": ""
       },
       {
-        "feeder": "CAMP (U)",
-        "area": "Pwd Rest House",
-        "start_time": "14-Jul-2026 19:04:19",
+        "feeder": "TEHERKI AP",
+        "area": "Village Tatarpur",
+        "start_time": "15-Jul-2026 02:32:38",
         "expected_restoration_time": "",
-        "remarks": ""
+        "remarks": "UNPLANNED"
+      },
+      {
+        "feeder": "TEHERKI AP",
+        "area": "Devli",
+        "start_time": "15-Jul-2026 02:32:38",
+        "expected_restoration_time": "",
+        "remarks": "UNPLANNED"
+      },
+      {
+        "feeder": "TEHERKI AP",
+        "area": "Tatarpur",
+        "start_time": "15-Jul-2026 02:32:38",
+        "expected_restoration_time": "",
+        "remarks": "UNPLANNED"
+      },
+      {
+        "feeder": "TEHERKI AP",
+        "area": "Tarka",
+        "start_time": "15-Jul-2026 02:32:38",
+        "expected_restoration_time": "",
+        "remarks": "UNPLANNED"
+      },
+      {
+        "feeder": "TEHERKI AP",
+        "area": "Teharki",
+        "start_time": "15-Jul-2026 02:32:38",
+        "expected_restoration_time": "",
+        "remarks": "UNPLANNED"
       },
       {
         "feeder": "CAMP (U)",
-        "area": "Jawhar Nagar Camp",
+        "area": "Pwd Rest House",
         "start_time": "14-Jul-2026 19:04:19",
         "expected_restoration_time": "",
         "remarks": ""
@@ -4294,14 +4567,7 @@
       },
       {
         "feeder": "CAMP (U)",
-        "area": "Lalwa",
-        "start_time": "14-Jul-2026 19:04:19",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "CAMP (U)",
-        "area": "Camp Colony",
+        "area": "Civil Line 2",
         "start_time": "14-Jul-2026 19:04:19",
         "expected_restoration_time": "",
         "remarks": ""
@@ -4315,7 +4581,21 @@
       },
       {
         "feeder": "CAMP (U)",
-        "area": "Civil Line 2",
+        "area": "Camp Colony",
+        "start_time": "14-Jul-2026 19:04:19",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "CAMP (U)",
+        "area": "Jawhar Nagar Camp",
+        "start_time": "14-Jul-2026 19:04:19",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "CAMP (U)",
+        "area": "Lalwa",
         "start_time": "14-Jul-2026 19:04:19",
         "expected_restoration_time": "",
         "remarks": ""
@@ -4335,15 +4615,36 @@
         "remarks": ""
       },
       {
-        "feeder": "MITROL DS",
-        "area": "Hidayatpur",
-        "start_time": "15-Jul-2026 03:01:35",
+        "feeder": "GANNIKA  DS",
+        "area": "Gannika",
+        "start_time": "15-Jul-2026 04:13:59",
+        "expected_restoration_time": "",
+        "remarks": "UNPLANNED"
+      },
+      {
+        "feeder": "HASSANPUR AP",
+        "area": "Jhundwas",
+        "start_time": "14-Jul-2026 18:30:49",
         "expected_restoration_time": "",
         "remarks": ""
       },
       {
         "feeder": "HASSANPUR AP",
-        "area": "Hasanpur",
+        "area": "Satti Ka Nagla",
+        "start_time": "14-Jul-2026 18:30:49",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "HASSANPUR AP",
+        "area": "Sandholi",
+        "start_time": "14-Jul-2026 18:30:49",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "HASSANPUR AP",
+        "area": "Hassanpur",
         "start_time": "14-Jul-2026 18:30:49",
         "expected_restoration_time": "",
         "remarks": ""
@@ -4371,21 +4672,7 @@
       },
       {
         "feeder": "HASSANPUR AP",
-        "area": "Jhundwas",
-        "start_time": "14-Jul-2026 18:30:49",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "HASSANPUR AP",
-        "area": "Satti Ka Nagla",
-        "start_time": "14-Jul-2026 18:30:49",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "HASSANPUR AP",
-        "area": "Sandholi",
+        "area": "Hasanpur",
         "start_time": "14-Jul-2026 18:30:49",
         "expected_restoration_time": "",
         "remarks": ""
@@ -4406,211 +4693,8 @@
       },
       {
         "feeder": "HASSANPUR AP",
-        "area": "Hassanpur",
-        "start_time": "14-Jul-2026 18:30:49",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "HASSANPUR AP",
         "area": "Satuagarhi",
         "start_time": "14-Jul-2026 18:30:49",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "CITY4",
-        "area": "Meat Market",
-        "start_time": "15-Jul-2026 03:47:54",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "CITY4",
-        "area": "Kanungo",
-        "start_time": "15-Jul-2026 03:47:54",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "CITY4",
-        "area": "New Extention Colony",
-        "start_time": "15-Jul-2026 03:47:54",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "CITY4",
-        "area": "Adarsh Colony",
-        "start_time": "15-Jul-2026 03:47:54",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "CITY4",
-        "area": "Rehrana",
-        "start_time": "15-Jul-2026 03:47:54",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "CITY4",
-        "area": "Judge Resd",
-        "start_time": "15-Jul-2026 03:47:54",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "CITY4",
-        "area": "Some Part Of B-2 Civil Line",
-        "start_time": "15-Jul-2026 03:47:54",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "CITY4",
-        "area": "Kvs School",
-        "start_time": "15-Jul-2026 03:47:54",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "CITY4",
-        "area": "Hathin Road",
-        "start_time": "15-Jul-2026 03:47:54",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "CITY4",
-        "area": "Shamshabad",
-        "start_time": "15-Jul-2026 03:47:54",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "CITY4",
-        "area": "Old Sohna Road Prem Jiwan Hospital Side",
-        "start_time": "15-Jul-2026 03:47:54",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "CITY4",
-        "area": "Mahalaxmi Plant Rehrana",
-        "start_time": "15-Jul-2026 03:47:54",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "CITY4",
-        "area": "Bass Mohalla",
-        "start_time": "15-Jul-2026 03:47:54",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "CITY4",
-        "area": "Arya Nagar",
-        "start_time": "15-Jul-2026 03:47:54",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "CITY4",
-        "area": "Gupta Ganj",
-        "start_time": "15-Jul-2026 03:47:54",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "CITY4",
-        "area": "Kailash Nagar",
-        "start_time": "15-Jul-2026 03:47:54",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "CITY4",
-        "area": "B-1 & B-2 Civil Line",
-        "start_time": "15-Jul-2026 03:47:54",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "CITY4",
-        "area": "Aherwan",
-        "start_time": "15-Jul-2026 03:47:54",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "CITY4",
-        "area": "Ratipur",
-        "start_time": "15-Jul-2026 03:47:54",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "CITY4",
-        "area": "Kasba Mohalla",
-        "start_time": "15-Jul-2026 03:47:54",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "CITY4",
-        "area": "Panni Stta",
-        "start_time": "15-Jul-2026 03:47:54",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "CITY4",
-        "area": "Takipura",
-        "start_time": "15-Jul-2026 03:47:54",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "CITY4",
-        "area": "Sector 12",
-        "start_time": "15-Jul-2026 03:47:54",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "CITY4",
-        "area": "Madiya Mohalla",
-        "start_time": "15-Jul-2026 03:47:54",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "CITY4",
-        "area": "Syed Wada",
-        "start_time": "15-Jul-2026 03:47:54",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "CITY4",
-        "area": "Dher Mohalla",
-        "start_time": "15-Jul-2026 03:47:54",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "CITY4",
-        "area": "Omax City",
-        "start_time": "15-Jul-2026 03:47:54",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "CITY4",
-        "area": "Meat Market",
-        "start_time": "15-Jul-2026 03:47:54",
         "expected_restoration_time": "",
         "remarks": ""
       },
@@ -4645,55 +4729,6 @@
       {
         "feeder": "CHANDHUT AP",
         "area": "Balai",
-        "start_time": "14-Jul-2026 16:41:40",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "CHANDHUT AP",
-        "area": "Village Broli",
-        "start_time": "14-Jul-2026 16:41:40",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "CHANDHUT AP",
-        "area": "Ghori Vill. Thantri",
-        "start_time": "14-Jul-2026 16:41:40",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "CHANDHUT AP",
-        "area": "Village Meesa",
-        "start_time": "14-Jul-2026 16:41:40",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "CHANDHUT AP",
-        "area": "Chandhut",
-        "start_time": "14-Jul-2026 16:41:40",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "CHANDHUT AP",
-        "area": "Sihol",
-        "start_time": "14-Jul-2026 16:41:40",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "CHANDHUT AP",
-        "area": "Sunahri Ka Nagla",
-        "start_time": "14-Jul-2026 16:41:40",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "CHANDHUT AP",
-        "area": "Pehru Ka Nagla",
         "start_time": "14-Jul-2026 16:41:40",
         "expected_restoration_time": "",
         "remarks": ""
@@ -4812,6 +4847,55 @@
       },
       {
         "feeder": "CHANDHUT AP",
+        "area": "Sihol",
+        "start_time": "14-Jul-2026 16:41:40",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "CHANDHUT AP",
+        "area": "Village Broli",
+        "start_time": "14-Jul-2026 16:41:40",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "CHANDHUT AP",
+        "area": "Ghori Vill. Thantri",
+        "start_time": "14-Jul-2026 16:41:40",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "CHANDHUT AP",
+        "area": "Village Meesa",
+        "start_time": "14-Jul-2026 16:41:40",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "CHANDHUT AP",
+        "area": "Chandhut",
+        "start_time": "14-Jul-2026 16:41:40",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "CHANDHUT AP",
+        "area": "Sunahri Ka Nagla",
+        "start_time": "14-Jul-2026 16:41:40",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "CHANDHUT AP",
+        "area": "Pehru Ka Nagla",
+        "start_time": "14-Jul-2026 16:41:40",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "CHANDHUT AP",
         "area": "Baasa Village",
         "start_time": "14-Jul-2026 16:41:40",
         "expected_restoration_time": "",
@@ -4833,17 +4917,24 @@
       },
       {
         "feeder": "CHIRWARI DS",
-        "area": "Chirwari",
+        "area": "Taraka",
         "start_time": "14-Jul-2026 22:06:03",
         "expected_restoration_time": "",
         "remarks": ""
       },
       {
         "feeder": "CHIRWARI DS",
-        "area": "Taraka",
+        "area": "Chirwari",
         "start_time": "14-Jul-2026 22:06:03",
         "expected_restoration_time": "",
         "remarks": ""
+      },
+      {
+        "feeder": "HASSANPUR CITY (U)",
+        "area": "HASSANPUR CITY",
+        "start_time": "15-Jul-2026 04:32:43",
+        "expected_restoration_time": "",
+        "remarks": "UNPLANNED"
       },
       {
         "feeder": "PALWAL AP",
@@ -4851,181 +4942,6 @@
         "start_time": "14-Jul-2026 18:13:39",
         "expected_restoration_time": "",
         "remarks": ""
-      },
-      {
-        "feeder": "KALYAN ENCLAVE",
-        "area": "New Anaj Mandi",
-        "start_time": "15-Jul-2026 03:00:27",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "KALYAN ENCLAVE",
-        "area": "Panna Vihar",
-        "start_time": "15-Jul-2026 03:00:27",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "KALYAN ENCLAVE",
-        "area": "Nangla Lakhi Singh",
-        "start_time": "15-Jul-2026 03:00:27",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "KALYAN ENCLAVE",
-        "area": "Sabji Mandi",
-        "start_time": "15-Jul-2026 03:00:27",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "KALYAN ENCLAVE",
-        "area": "Saraffa Market",
-        "start_time": "15-Jul-2026 03:00:27",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "KALYAN ENCLAVE",
-        "area": "Kalyan Enclave Part-I",
-        "start_time": "15-Jul-2026 03:00:27",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "KALYAN ENCLAVE",
-        "area": "Allalpur Chowk",
-        "start_time": "15-Jul-2026 03:00:27",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "KALYAN ENCLAVE",
-        "area": "Anaz Mandi",
-        "start_time": "15-Jul-2026 03:00:27",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "KALYAN ENCLAVE",
-        "area": "Parkash Vihar",
-        "start_time": "15-Jul-2026 03:00:27",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "KALYAN ENCLAVE",
-        "area": "Lions Club",
-        "start_time": "15-Jul-2026 03:00:27",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "KALYAN ENCLAVE",
-        "area": "Amarpur",
-        "start_time": "15-Jul-2026 03:00:27",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "KALYAN ENCLAVE",
-        "area": "Kalyan Enclave Part-Ii",
-        "start_time": "15-Jul-2026 03:00:27",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "KALYAN ENCLAVE",
-        "area": "Basant Vihar",
-        "start_time": "15-Jul-2026 03:00:27",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "KALYAN ENCLAVE",
-        "area": "Kot Mohalla",
-        "start_time": "15-Jul-2026 03:00:27",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "KALYAN ENCLAVE",
-        "area": "Bus Stop",
-        "start_time": "15-Jul-2026 03:00:27",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "KALYAN ENCLAVE",
-        "area": "Radha Colony",
-        "start_time": "15-Jul-2026 03:00:27",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "KALYAN ENCLAVE",
-        "area": "Dharam Nagar",
-        "start_time": "15-Jul-2026 03:00:27",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "KALYAN ENCLAVE",
-        "area": "Lucky Vihar Colony",
-        "start_time": "15-Jul-2026 03:00:27",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "KALYAN ENCLAVE",
-        "area": "Friends Colony",
-        "start_time": "15-Jul-2026 03:00:27",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "KALINGER DS",
-        "area": "Kalingar",
-        "start_time": "15-Jul-2026 03:35:01",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "TEHERKI AP",
-        "area": "Village Tatarpur",
-        "start_time": "15-Jul-2026 02:32:38",
-        "expected_restoration_time": "",
-        "remarks": "UNPLANNED"
-      },
-      {
-        "feeder": "TEHERKI AP",
-        "area": "Devli",
-        "start_time": "15-Jul-2026 02:32:38",
-        "expected_restoration_time": "",
-        "remarks": "UNPLANNED"
-      },
-      {
-        "feeder": "TEHERKI AP",
-        "area": "Teharki",
-        "start_time": "15-Jul-2026 02:32:38",
-        "expected_restoration_time": "",
-        "remarks": "UNPLANNED"
-      },
-      {
-        "feeder": "TEHERKI AP",
-        "area": "Tatarpur",
-        "start_time": "15-Jul-2026 02:32:38",
-        "expected_restoration_time": "",
-        "remarks": "UNPLANNED"
-      },
-      {
-        "feeder": "TEHERKI AP",
-        "area": "Tarka",
-        "start_time": "15-Jul-2026 02:32:38",
-        "expected_restoration_time": "",
-        "remarks": "UNPLANNED"
       },
       {
         "feeder": "KALYAN ENCLAVE",
@@ -5100,195 +5016,6 @@
       {
         "feeder": "KUSHLIPUR (U)",
         "area": "Rajput Mohalla",
-        "start_time": "22-Jun-2026 09:50:00",
-        "expected_restoration_time": "22-Jun-2026 16:00:00",
-        "remarks": "maintenance of power house"
-      },
-      {
-        "feeder": "MINAR GATE",
-        "area": "Railway Road",
-        "start_time": "22-Jun-2026 09:50:00",
-        "expected_restoration_time": "22-Jun-2026 16:00:00",
-        "remarks": "maintenance of power house"
-      },
-      {
-        "feeder": "CITY4",
-        "area": "Gupta Ganj",
-        "start_time": "22-Jun-2026 09:50:00",
-        "expected_restoration_time": "22-Jun-2026 16:00:00",
-        "remarks": "maintenance of power house"
-      },
-      {
-        "feeder": "MINAR GATE",
-        "area": "Mangla Ji Kothi",
-        "start_time": "22-Jun-2026 09:50:00",
-        "expected_restoration_time": "22-Jun-2026 16:00:00",
-        "remarks": "maintenance of power house"
-      },
-      {
-        "feeder": "KALYAN ENCLAVE",
-        "area": "Kalyan Enclave Part-Ii",
-        "start_time": "22-Jun-2026 09:50:00",
-        "expected_restoration_time": "22-Jun-2026 16:00:00",
-        "remarks": "maintenance of power house"
-      },
-      {
-        "feeder": "MINAR GATE",
-        "area": "Committee Chowk",
-        "start_time": "22-Jun-2026 09:50:00",
-        "expected_restoration_time": "22-Jun-2026 16:00:00",
-        "remarks": "maintenance of power house"
-      },
-      {
-        "feeder": "PATLI GATE (U)",
-        "area": "Thai Mohalla",
-        "start_time": "22-Jun-2026 09:50:00",
-        "expected_restoration_time": "22-Jun-2026 16:00:00",
-        "remarks": "maintenance of power house"
-      },
-      {
-        "feeder": "PATLI GATE (U)",
-        "area": "Chirawta",
-        "start_time": "22-Jun-2026 09:50:00",
-        "expected_restoration_time": "22-Jun-2026 16:00:00",
-        "remarks": "maintenance of power house"
-      },
-      {
-        "feeder": "MINAR GATE",
-        "area": "Bhatia Colony",
-        "start_time": "22-Jun-2026 09:50:00",
-        "expected_restoration_time": "22-Jun-2026 16:00:00",
-        "remarks": "maintenance of power house"
-      },
-      {
-        "feeder": "ADARSH COLONY (U)",
-        "area": "New Bass Mohalla",
-        "start_time": "22-Jun-2026 09:50:00",
-        "expected_restoration_time": "22-Jun-2026 16:00:00",
-        "remarks": "maintenance of power house"
-      },
-      {
-        "feeder": "CITY4",
-        "area": "Kailash Nagar",
-        "start_time": "22-Jun-2026 09:50:00",
-        "expected_restoration_time": "22-Jun-2026 16:00:00",
-        "remarks": "maintenance of power house"
-      },
-      {
-        "feeder": "CITY4",
-        "area": "B-1 & B-2 Civil Line",
-        "start_time": "22-Jun-2026 09:50:00",
-        "expected_restoration_time": "22-Jun-2026 16:00:00",
-        "remarks": "maintenance of power house"
-      },
-      {
-        "feeder": "CAMP (U)",
-        "area": "Lalwa",
-        "start_time": "22-Jun-2026 09:50:00",
-        "expected_restoration_time": "22-Jun-2026 16:00:00",
-        "remarks": "maintenance of power house"
-      },
-      {
-        "feeder": "KUSHLIPUR (U)",
-        "area": "Brij Nagar",
-        "start_time": "22-Jun-2026 09:50:00",
-        "expected_restoration_time": "22-Jun-2026 16:00:00",
-        "remarks": "maintenance of power house"
-      },
-      {
-        "feeder": "MINAR GATE",
-        "area": "Jai Mata Mohalla",
-        "start_time": "22-Jun-2026 09:50:00",
-        "expected_restoration_time": "22-Jun-2026 16:00:00",
-        "remarks": "maintenance of power house"
-      },
-      {
-        "feeder": "PATLI GATE (U)",
-        "area": "Dayanand School",
-        "start_time": "22-Jun-2026 09:50:00",
-        "expected_restoration_time": "22-Jun-2026 16:00:00",
-        "remarks": "maintenance of power house"
-      },
-      {
-        "feeder": "KALYAN ENCLAVE",
-        "area": "Lions Club",
-        "start_time": "22-Jun-2026 09:50:00",
-        "expected_restoration_time": "22-Jun-2026 16:00:00",
-        "remarks": "maintenance of power house"
-      },
-      {
-        "feeder": "MINAR GATE",
-        "area": "Prem Vihar",
-        "start_time": "22-Jun-2026 09:50:00",
-        "expected_restoration_time": "22-Jun-2026 16:00:00",
-        "remarks": "maintenance of power house"
-      },
-      {
-        "feeder": "CITY-III PALWAL (U)",
-        "area": "Old Sohna Road City Side",
-        "start_time": "22-Jun-2026 09:50:00",
-        "expected_restoration_time": "22-Jun-2026 16:00:00",
-        "remarks": "maintenance of power house"
-      },
-      {
-        "feeder": "KUSHLIPUR (U)",
-        "area": "Kushlipur No. 2",
-        "start_time": "22-Jun-2026 09:50:00",
-        "expected_restoration_time": "22-Jun-2026 16:00:00",
-        "remarks": "maintenance of power house"
-      },
-      {
-        "feeder": "CITY4",
-        "area": "Hathin Road",
-        "start_time": "22-Jun-2026 09:50:00",
-        "expected_restoration_time": "22-Jun-2026 16:00:00",
-        "remarks": "maintenance of power house"
-      },
-      {
-        "feeder": "CITY4",
-        "area": "Shamshabad",
-        "start_time": "22-Jun-2026 09:50:00",
-        "expected_restoration_time": "22-Jun-2026 16:00:00",
-        "remarks": "maintenance of power house"
-      },
-      {
-        "feeder": "MAHESH PUR AP",
-        "area": "Joharkhera",
-        "start_time": "22-Jun-2026 09:50:00",
-        "expected_restoration_time": "22-Jun-2026 16:00:00",
-        "remarks": "maintenance of power house"
-      },
-      {
-        "feeder": "CITY4",
-        "area": "Old Sohna Road Prem Jiwan Hospital Side",
-        "start_time": "22-Jun-2026 09:50:00",
-        "expected_restoration_time": "22-Jun-2026 16:00:00",
-        "remarks": "maintenance of power house"
-      },
-      {
-        "feeder": "ADARSH COLONY (U)",
-        "area": "Badha",
-        "start_time": "22-Jun-2026 09:50:00",
-        "expected_restoration_time": "22-Jun-2026 16:00:00",
-        "remarks": "maintenance of power house"
-      },
-      {
-        "feeder": "CITY4",
-        "area": "Mahalaxmi Plant Rehrana",
-        "start_time": "22-Jun-2026 09:50:00",
-        "expected_restoration_time": "22-Jun-2026 16:00:00",
-        "remarks": "maintenance of power house"
-      },
-      {
-        "feeder": "CITY4",
-        "area": "Bass Mohalla",
-        "start_time": "22-Jun-2026 09:50:00",
-        "expected_restoration_time": "22-Jun-2026 16:00:00",
-        "remarks": "maintenance of power house"
-      },
-      {
-        "feeder": "CITY4",
-        "area": "Arya Nagar",
         "start_time": "22-Jun-2026 09:50:00",
         "expected_restoration_time": "22-Jun-2026 16:00:00",
         "remarks": "maintenance of power house"
@@ -5385,99 +5112,92 @@
         "remarks": "maintenance of power house"
       },
       {
-        "feeder": "PATLI GATE (U)",
-        "area": "Lainpura",
-        "start_time": "22-Jun-2026 09:50:00",
-        "expected_restoration_time": "22-Jun-2026 16:00:00",
-        "remarks": "maintenance of power house"
-      },
-      {
-        "feeder": "CITY-III PALWAL (U)",
-        "area": "Hathin Gate",
-        "start_time": "22-Jun-2026 09:50:00",
-        "expected_restoration_time": "22-Jun-2026 16:00:00",
-        "remarks": "maintenance of power house"
-      },
-      {
-        "feeder": "KALYAN ENCLAVE",
-        "area": "Friends Colony",
-        "start_time": "22-Jun-2026 09:50:00",
-        "expected_restoration_time": "22-Jun-2026 16:00:00",
-        "remarks": "maintenance of power house"
-      },
-      {
-        "feeder": "SECTOR-12 (U)",
-        "area": "Hudda Chowk",
-        "start_time": "22-Jun-2026 09:50:00",
-        "expected_restoration_time": "22-Jun-2026 16:00:00",
-        "remarks": "maintenance of power house"
-      },
-      {
         "feeder": "MINAR GATE",
-        "area": "Bada Mohalla",
+        "area": "Railway Road",
         "start_time": "22-Jun-2026 09:50:00",
         "expected_restoration_time": "22-Jun-2026 16:00:00",
         "remarks": "maintenance of power house"
       },
       {
         "feeder": "CITY4",
-        "area": "Madiya Mohalla",
-        "start_time": "22-Jun-2026 09:50:00",
-        "expected_restoration_time": "22-Jun-2026 16:00:00",
-        "remarks": "maintenance of power house"
-      },
-      {
-        "feeder": "KUSHLIPUR (U)",
-        "area": "Kashipur",
-        "start_time": "22-Jun-2026 09:50:00",
-        "expected_restoration_time": "22-Jun-2026 16:00:00",
-        "remarks": "maintenance of power house"
-      },
-      {
-        "feeder": "ADARSH COLONY (U)",
-        "area": "Adarsh Colony",
-        "start_time": "22-Jun-2026 09:50:00",
-        "expected_restoration_time": "22-Jun-2026 16:00:00",
-        "remarks": "maintenance of power house"
-      },
-      {
-        "feeder": "CITY-III PALWAL (U)",
-        "area": "Distt. Judge Complex",
-        "start_time": "22-Jun-2026 09:50:00",
-        "expected_restoration_time": "22-Jun-2026 16:00:00",
-        "remarks": "maintenance of power house"
-      },
-      {
-        "feeder": "SUBSTATION",
-        "area": "Hvpn Power House Area",
-        "start_time": "22-Jun-2026 09:50:00",
-        "expected_restoration_time": "22-Jun-2026 16:00:00",
-        "remarks": "maintenance of power house"
-      },
-      {
-        "feeder": "PATLI GATE (U)",
-        "area": "Panchyat Bhawan",
-        "start_time": "22-Jun-2026 09:50:00",
-        "expected_restoration_time": "22-Jun-2026 16:00:00",
-        "remarks": "maintenance of power house"
-      },
-      {
-        "feeder": "KUSHLIPUR (U)",
-        "area": "Bharat Colony",
-        "start_time": "22-Jun-2026 09:50:00",
-        "expected_restoration_time": "22-Jun-2026 16:00:00",
-        "remarks": "maintenance of power house"
-      },
-      {
-        "feeder": "CITY-III PALWAL (U)",
-        "area": "Khyali Namberdar Ka Area",
+        "area": "Gupta Ganj",
         "start_time": "22-Jun-2026 09:50:00",
         "expected_restoration_time": "22-Jun-2026 16:00:00",
         "remarks": "maintenance of power house"
       },
       {
         "feeder": "MINAR GATE",
-        "area": "Dharam Nagar",
+        "area": "Mangla Ji Kothi",
+        "start_time": "22-Jun-2026 09:50:00",
+        "expected_restoration_time": "22-Jun-2026 16:00:00",
+        "remarks": "maintenance of power house"
+      },
+      {
+        "feeder": "KALYAN ENCLAVE",
+        "area": "Kalyan Enclave Part-Ii",
+        "start_time": "22-Jun-2026 09:50:00",
+        "expected_restoration_time": "22-Jun-2026 16:00:00",
+        "remarks": "maintenance of power house"
+      },
+      {
+        "feeder": "MINAR GATE",
+        "area": "Committee Chowk",
+        "start_time": "22-Jun-2026 09:50:00",
+        "expected_restoration_time": "22-Jun-2026 16:00:00",
+        "remarks": "maintenance of power house"
+      },
+      {
+        "feeder": "PATLI GATE (U)",
+        "area": "Thai Mohalla",
+        "start_time": "22-Jun-2026 09:50:00",
+        "expected_restoration_time": "22-Jun-2026 16:00:00",
+        "remarks": "maintenance of power house"
+      },
+      {
+        "feeder": "PATLI GATE (U)",
+        "area": "Chirawta",
+        "start_time": "22-Jun-2026 09:50:00",
+        "expected_restoration_time": "22-Jun-2026 16:00:00",
+        "remarks": "maintenance of power house"
+      },
+      {
+        "feeder": "MINAR GATE",
+        "area": "Bhatia Colony",
+        "start_time": "22-Jun-2026 09:50:00",
+        "expected_restoration_time": "22-Jun-2026 16:00:00",
+        "remarks": "maintenance of power house"
+      },
+      {
+        "feeder": "ADARSH COLONY (U)",
+        "area": "New Bass Mohalla",
+        "start_time": "22-Jun-2026 09:50:00",
+        "expected_restoration_time": "22-Jun-2026 16:00:00",
+        "remarks": "maintenance of power house"
+      },
+      {
+        "feeder": "CITY4",
+        "area": "Kailash Nagar",
+        "start_time": "22-Jun-2026 09:50:00",
+        "expected_restoration_time": "22-Jun-2026 16:00:00",
+        "remarks": "maintenance of power house"
+      },
+      {
+        "feeder": "CITY4",
+        "area": "B-1 & B-2 Civil Line",
+        "start_time": "22-Jun-2026 09:50:00",
+        "expected_restoration_time": "22-Jun-2026 16:00:00",
+        "remarks": "maintenance of power house"
+      },
+      {
+        "feeder": "CAMP (U)",
+        "area": "Lalwa",
+        "start_time": "22-Jun-2026 09:50:00",
+        "expected_restoration_time": "22-Jun-2026 16:00:00",
+        "remarks": "maintenance of power house"
+      },
+      {
+        "feeder": "KUSHLIPUR (U)",
+        "area": "Brij Nagar",
         "start_time": "22-Jun-2026 09:50:00",
         "expected_restoration_time": "22-Jun-2026 16:00:00",
         "remarks": "maintenance of power house"
@@ -5590,118 +5310,6 @@
       {
         "feeder": "MINAR GATE",
         "area": "Parkesh Colony",
-        "start_time": "22-Jun-2026 09:50:00",
-        "expected_restoration_time": "22-Jun-2026 16:00:00",
-        "remarks": "maintenance of power house"
-      },
-      {
-        "feeder": "PATLI GATE (U)",
-        "area": "Pet Mohalla",
-        "start_time": "22-Jun-2026 09:50:00",
-        "expected_restoration_time": "22-Jun-2026 16:00:00",
-        "remarks": "maintenance of power house"
-      },
-      {
-        "feeder": "PATLI GATE (U)",
-        "area": "Lakhi Vihar",
-        "start_time": "22-Jun-2026 09:50:00",
-        "expected_restoration_time": "22-Jun-2026 16:00:00",
-        "remarks": "maintenance of power house"
-      },
-      {
-        "feeder": "I.T.I (U)",
-        "area": "Bhawan Kund",
-        "start_time": "22-Jun-2026 09:50:00",
-        "expected_restoration_time": "22-Jun-2026 16:00:00",
-        "remarks": "maintenance of power house"
-      },
-      {
-        "feeder": "MINAR GATE",
-        "area": "Main Bazar",
-        "start_time": "22-Jun-2026 09:50:00",
-        "expected_restoration_time": "22-Jun-2026 16:00:00",
-        "remarks": "maintenance of power house"
-      },
-      {
-        "feeder": "MINAR GATE",
-        "area": "Bal Bhawan",
-        "start_time": "22-Jun-2026 09:50:00",
-        "expected_restoration_time": "22-Jun-2026 16:00:00",
-        "remarks": "maintenance of power house"
-      },
-      {
-        "feeder": "CITY-I PALWAL (U)",
-        "area": "Jhabar Nagar",
-        "start_time": "22-Jun-2026 09:50:00",
-        "expected_restoration_time": "22-Jun-2026 16:00:00",
-        "remarks": "maintenance of power house"
-      },
-      {
-        "feeder": "CITY-I PALWAL (U)",
-        "area": "Nuh Road",
-        "start_time": "22-Jun-2026 09:50:00",
-        "expected_restoration_time": "22-Jun-2026 16:00:00",
-        "remarks": "maintenance of power house"
-      },
-      {
-        "feeder": "CITY-III PALWAL (U)",
-        "area": "Jalalpur Khalsa",
-        "start_time": "22-Jun-2026 09:50:00",
-        "expected_restoration_time": "22-Jun-2026 16:00:00",
-        "remarks": "maintenance of power house"
-      },
-      {
-        "feeder": "KUSHLIPUR (U)",
-        "area": "Fci Godam Area (Kushlipur)",
-        "start_time": "22-Jun-2026 09:50:00",
-        "expected_restoration_time": "22-Jun-2026 16:00:00",
-        "remarks": "maintenance of power house"
-      },
-      {
-        "feeder": "CITY-II PALWAL (U)",
-        "area": "City Thana",
-        "start_time": "22-Jun-2026 09:50:00",
-        "expected_restoration_time": "22-Jun-2026 16:00:00",
-        "remarks": "maintenance of power house"
-      },
-      {
-        "feeder": "CITY4",
-        "area": "Kvs School",
-        "start_time": "22-Jun-2026 09:50:00",
-        "expected_restoration_time": "22-Jun-2026 16:00:00",
-        "remarks": "maintenance of power house"
-      },
-      {
-        "feeder": "KUSHLIPUR (U)",
-        "area": "Kushlipur No.1",
-        "start_time": "22-Jun-2026 09:50:00",
-        "expected_restoration_time": "22-Jun-2026 16:00:00",
-        "remarks": "maintenance of power house"
-      },
-      {
-        "feeder": "CAMP (U)",
-        "area": "Bali Nagar",
-        "start_time": "22-Jun-2026 09:50:00",
-        "expected_restoration_time": "22-Jun-2026 16:00:00",
-        "remarks": "maintenance of power house"
-      },
-      {
-        "feeder": "CITY-III PALWAL (U)",
-        "area": "Ekta Nagar",
-        "start_time": "22-Jun-2026 09:50:00",
-        "expected_restoration_time": "22-Jun-2026 16:00:00",
-        "remarks": "maintenance of power house"
-      },
-      {
-        "feeder": "CHIRAWTA DS",
-        "area": "Rajupur",
-        "start_time": "22-Jun-2026 09:50:00",
-        "expected_restoration_time": "22-Jun-2026 16:00:00",
-        "remarks": "maintenance of power house"
-      },
-      {
-        "feeder": "KUSHLIPUR (U)",
-        "area": "Kairaka",
         "start_time": "22-Jun-2026 09:50:00",
         "expected_restoration_time": "22-Jun-2026 16:00:00",
         "remarks": "maintenance of power house"
@@ -5831,9 +5439,324 @@
         "start_time": "22-Jun-2026 09:50:00",
         "expected_restoration_time": "22-Jun-2026 16:00:00",
         "remarks": "maintenance of power house"
+      },
+      {
+        "feeder": "PATLI GATE (U)",
+        "area": "Lainpura",
+        "start_time": "22-Jun-2026 09:50:00",
+        "expected_restoration_time": "22-Jun-2026 16:00:00",
+        "remarks": "maintenance of power house"
+      },
+      {
+        "feeder": "CITY-III PALWAL (U)",
+        "area": "Hathin Gate",
+        "start_time": "22-Jun-2026 09:50:00",
+        "expected_restoration_time": "22-Jun-2026 16:00:00",
+        "remarks": "maintenance of power house"
+      },
+      {
+        "feeder": "KALYAN ENCLAVE",
+        "area": "Friends Colony",
+        "start_time": "22-Jun-2026 09:50:00",
+        "expected_restoration_time": "22-Jun-2026 16:00:00",
+        "remarks": "maintenance of power house"
+      },
+      {
+        "feeder": "SECTOR-12 (U)",
+        "area": "Hudda Chowk",
+        "start_time": "22-Jun-2026 09:50:00",
+        "expected_restoration_time": "22-Jun-2026 16:00:00",
+        "remarks": "maintenance of power house"
+      },
+      {
+        "feeder": "MINAR GATE",
+        "area": "Bada Mohalla",
+        "start_time": "22-Jun-2026 09:50:00",
+        "expected_restoration_time": "22-Jun-2026 16:00:00",
+        "remarks": "maintenance of power house"
+      },
+      {
+        "feeder": "CITY4",
+        "area": "Madiya Mohalla",
+        "start_time": "22-Jun-2026 09:50:00",
+        "expected_restoration_time": "22-Jun-2026 16:00:00",
+        "remarks": "maintenance of power house"
+      },
+      {
+        "feeder": "KUSHLIPUR (U)",
+        "area": "Kashipur",
+        "start_time": "22-Jun-2026 09:50:00",
+        "expected_restoration_time": "22-Jun-2026 16:00:00",
+        "remarks": "maintenance of power house"
+      },
+      {
+        "feeder": "ADARSH COLONY (U)",
+        "area": "Adarsh Colony",
+        "start_time": "22-Jun-2026 09:50:00",
+        "expected_restoration_time": "22-Jun-2026 16:00:00",
+        "remarks": "maintenance of power house"
+      },
+      {
+        "feeder": "CITY-III PALWAL (U)",
+        "area": "Distt. Judge Complex",
+        "start_time": "22-Jun-2026 09:50:00",
+        "expected_restoration_time": "22-Jun-2026 16:00:00",
+        "remarks": "maintenance of power house"
+      },
+      {
+        "feeder": "SUBSTATION",
+        "area": "Hvpn Power House Area",
+        "start_time": "22-Jun-2026 09:50:00",
+        "expected_restoration_time": "22-Jun-2026 16:00:00",
+        "remarks": "maintenance of power house"
+      },
+      {
+        "feeder": "PATLI GATE (U)",
+        "area": "Panchyat Bhawan",
+        "start_time": "22-Jun-2026 09:50:00",
+        "expected_restoration_time": "22-Jun-2026 16:00:00",
+        "remarks": "maintenance of power house"
+      },
+      {
+        "feeder": "KUSHLIPUR (U)",
+        "area": "Bharat Colony",
+        "start_time": "22-Jun-2026 09:50:00",
+        "expected_restoration_time": "22-Jun-2026 16:00:00",
+        "remarks": "maintenance of power house"
+      },
+      {
+        "feeder": "CITY-III PALWAL (U)",
+        "area": "Khyali Namberdar Ka Area",
+        "start_time": "22-Jun-2026 09:50:00",
+        "expected_restoration_time": "22-Jun-2026 16:00:00",
+        "remarks": "maintenance of power house"
+      },
+      {
+        "feeder": "MINAR GATE",
+        "area": "Dharam Nagar",
+        "start_time": "22-Jun-2026 09:50:00",
+        "expected_restoration_time": "22-Jun-2026 16:00:00",
+        "remarks": "maintenance of power house"
+      },
+      {
+        "feeder": "MINAR GATE",
+        "area": "Jai Mata Mohalla",
+        "start_time": "22-Jun-2026 09:50:00",
+        "expected_restoration_time": "22-Jun-2026 16:00:00",
+        "remarks": "maintenance of power house"
+      },
+      {
+        "feeder": "PATLI GATE (U)",
+        "area": "Dayanand School",
+        "start_time": "22-Jun-2026 09:50:00",
+        "expected_restoration_time": "22-Jun-2026 16:00:00",
+        "remarks": "maintenance of power house"
+      },
+      {
+        "feeder": "KALYAN ENCLAVE",
+        "area": "Lions Club",
+        "start_time": "22-Jun-2026 09:50:00",
+        "expected_restoration_time": "22-Jun-2026 16:00:00",
+        "remarks": "maintenance of power house"
+      },
+      {
+        "feeder": "MINAR GATE",
+        "area": "Prem Vihar",
+        "start_time": "22-Jun-2026 09:50:00",
+        "expected_restoration_time": "22-Jun-2026 16:00:00",
+        "remarks": "maintenance of power house"
+      },
+      {
+        "feeder": "CITY-III PALWAL (U)",
+        "area": "Old Sohna Road City Side",
+        "start_time": "22-Jun-2026 09:50:00",
+        "expected_restoration_time": "22-Jun-2026 16:00:00",
+        "remarks": "maintenance of power house"
+      },
+      {
+        "feeder": "KUSHLIPUR (U)",
+        "area": "Kushlipur No. 2",
+        "start_time": "22-Jun-2026 09:50:00",
+        "expected_restoration_time": "22-Jun-2026 16:00:00",
+        "remarks": "maintenance of power house"
+      },
+      {
+        "feeder": "CITY4",
+        "area": "Hathin Road",
+        "start_time": "22-Jun-2026 09:50:00",
+        "expected_restoration_time": "22-Jun-2026 16:00:00",
+        "remarks": "maintenance of power house"
+      },
+      {
+        "feeder": "CITY4",
+        "area": "Shamshabad",
+        "start_time": "22-Jun-2026 09:50:00",
+        "expected_restoration_time": "22-Jun-2026 16:00:00",
+        "remarks": "maintenance of power house"
+      },
+      {
+        "feeder": "MAHESH PUR AP",
+        "area": "Joharkhera",
+        "start_time": "22-Jun-2026 09:50:00",
+        "expected_restoration_time": "22-Jun-2026 16:00:00",
+        "remarks": "maintenance of power house"
+      },
+      {
+        "feeder": "CITY4",
+        "area": "Old Sohna Road Prem Jiwan Hospital Side",
+        "start_time": "22-Jun-2026 09:50:00",
+        "expected_restoration_time": "22-Jun-2026 16:00:00",
+        "remarks": "maintenance of power house"
+      },
+      {
+        "feeder": "ADARSH COLONY (U)",
+        "area": "Badha",
+        "start_time": "22-Jun-2026 09:50:00",
+        "expected_restoration_time": "22-Jun-2026 16:00:00",
+        "remarks": "maintenance of power house"
+      },
+      {
+        "feeder": "CITY4",
+        "area": "Mahalaxmi Plant Rehrana",
+        "start_time": "22-Jun-2026 09:50:00",
+        "expected_restoration_time": "22-Jun-2026 16:00:00",
+        "remarks": "maintenance of power house"
+      },
+      {
+        "feeder": "CITY4",
+        "area": "Bass Mohalla",
+        "start_time": "22-Jun-2026 09:50:00",
+        "expected_restoration_time": "22-Jun-2026 16:00:00",
+        "remarks": "maintenance of power house"
+      },
+      {
+        "feeder": "CITY4",
+        "area": "Arya Nagar",
+        "start_time": "22-Jun-2026 09:50:00",
+        "expected_restoration_time": "22-Jun-2026 16:00:00",
+        "remarks": "maintenance of power house"
+      },
+      {
+        "feeder": "PATLI GATE (U)",
+        "area": "Pet Mohalla",
+        "start_time": "22-Jun-2026 09:50:00",
+        "expected_restoration_time": "22-Jun-2026 16:00:00",
+        "remarks": "maintenance of power house"
+      },
+      {
+        "feeder": "PATLI GATE (U)",
+        "area": "Lakhi Vihar",
+        "start_time": "22-Jun-2026 09:50:00",
+        "expected_restoration_time": "22-Jun-2026 16:00:00",
+        "remarks": "maintenance of power house"
+      },
+      {
+        "feeder": "I.T.I (U)",
+        "area": "Bhawan Kund",
+        "start_time": "22-Jun-2026 09:50:00",
+        "expected_restoration_time": "22-Jun-2026 16:00:00",
+        "remarks": "maintenance of power house"
+      },
+      {
+        "feeder": "MINAR GATE",
+        "area": "Main Bazar",
+        "start_time": "22-Jun-2026 09:50:00",
+        "expected_restoration_time": "22-Jun-2026 16:00:00",
+        "remarks": "maintenance of power house"
+      },
+      {
+        "feeder": "MINAR GATE",
+        "area": "Bal Bhawan",
+        "start_time": "22-Jun-2026 09:50:00",
+        "expected_restoration_time": "22-Jun-2026 16:00:00",
+        "remarks": "maintenance of power house"
+      },
+      {
+        "feeder": "CITY-I PALWAL (U)",
+        "area": "Jhabar Nagar",
+        "start_time": "22-Jun-2026 09:50:00",
+        "expected_restoration_time": "22-Jun-2026 16:00:00",
+        "remarks": "maintenance of power house"
+      },
+      {
+        "feeder": "CITY-I PALWAL (U)",
+        "area": "Nuh Road",
+        "start_time": "22-Jun-2026 09:50:00",
+        "expected_restoration_time": "22-Jun-2026 16:00:00",
+        "remarks": "maintenance of power house"
+      },
+      {
+        "feeder": "CITY-III PALWAL (U)",
+        "area": "Jalalpur Khalsa",
+        "start_time": "22-Jun-2026 09:50:00",
+        "expected_restoration_time": "22-Jun-2026 16:00:00",
+        "remarks": "maintenance of power house"
+      },
+      {
+        "feeder": "KUSHLIPUR (U)",
+        "area": "Fci Godam Area (Kushlipur)",
+        "start_time": "22-Jun-2026 09:50:00",
+        "expected_restoration_time": "22-Jun-2026 16:00:00",
+        "remarks": "maintenance of power house"
+      },
+      {
+        "feeder": "CITY-II PALWAL (U)",
+        "area": "City Thana",
+        "start_time": "22-Jun-2026 09:50:00",
+        "expected_restoration_time": "22-Jun-2026 16:00:00",
+        "remarks": "maintenance of power house"
+      },
+      {
+        "feeder": "CITY4",
+        "area": "Kvs School",
+        "start_time": "22-Jun-2026 09:50:00",
+        "expected_restoration_time": "22-Jun-2026 16:00:00",
+        "remarks": "maintenance of power house"
+      },
+      {
+        "feeder": "KUSHLIPUR (U)",
+        "area": "Kushlipur No.1",
+        "start_time": "22-Jun-2026 09:50:00",
+        "expected_restoration_time": "22-Jun-2026 16:00:00",
+        "remarks": "maintenance of power house"
+      },
+      {
+        "feeder": "CAMP (U)",
+        "area": "Bali Nagar",
+        "start_time": "22-Jun-2026 09:50:00",
+        "expected_restoration_time": "22-Jun-2026 16:00:00",
+        "remarks": "maintenance of power house"
+      },
+      {
+        "feeder": "CITY-III PALWAL (U)",
+        "area": "Ekta Nagar",
+        "start_time": "22-Jun-2026 09:50:00",
+        "expected_restoration_time": "22-Jun-2026 16:00:00",
+        "remarks": "maintenance of power house"
+      },
+      {
+        "feeder": "CHIRAWTA DS",
+        "area": "Rajupur",
+        "start_time": "22-Jun-2026 09:50:00",
+        "expected_restoration_time": "22-Jun-2026 16:00:00",
+        "remarks": "maintenance of power house"
+      },
+      {
+        "feeder": "KUSHLIPUR (U)",
+        "area": "Kairaka",
+        "start_time": "22-Jun-2026 09:50:00",
+        "expected_restoration_time": "22-Jun-2026 16:00:00",
+        "remarks": "maintenance of power house"
       }
     ],
     "Charkhi Dadri": [
+      {
+        "feeder": "MANKAWAS AP",
+        "area": "Mankawas",
+        "start_time": "14-Jul-2026 15:14:57",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
       {
         "feeder": "NANDHA-I AP",
         "area": "Nandhi Hariya",
@@ -5842,9 +5765,44 @@
         "remarks": ""
       },
       {
+        "feeder": "PICHOPA KALAN  AP",
+        "area": "Pichopa Ap",
+        "start_time": "15-Jul-2026 04:16:52",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "PICHOPA KALAN  AP",
+        "area": "Pichopa Ap",
+        "start_time": "15-Jul-2026 04:16:52",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
         "feeder": "KUBJA NAGAR-I AP",
         "area": "Kubja Nager Ap",
         "start_time": "14-Jul-2026 14:14:16",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "KADMA AP",
+        "area": "Kadma Ap",
+        "start_time": "15-Jul-2026 04:02:00",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "KADMA AP",
+        "area": "Kadma Ap",
+        "start_time": "15-Jul-2026 04:02:00",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "KANHRA AP",
+        "area": "Kanhra Ap",
+        "start_time": "15-Jul-2026 04:01:48",
         "expected_restoration_time": "",
         "remarks": ""
       },
@@ -5870,25 +5828,144 @@
         "remarks": ""
       },
       {
-        "feeder": "CHIRYA ROAD-II",
-        "area": "Chirya Road",
-        "start_time": "14-Jul-2026 23:02:07",
-        "expected_restoration_time": "15-Jul-2026 02:12:07",
+        "feeder": "DHANI GANESHI AP",
+        "area": "Dhani Ganeshi Ap",
+        "start_time": "15-Jul-2026 04:01:53",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "DHANI GANESHI AP",
+        "area": "Dhani khubi",
+        "start_time": "15-Jul-2026 04:01:53",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "DHANI AP (NANDHA)",
+        "area": "Dhani Nandha",
+        "start_time": "13-Jul-2026 17:45:28",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "IND P.H.NO.3 TO 6",
+        "area": "Ph No 3 To 6",
+        "start_time": "14-Jul-2026 06:00:56",
+        "expected_restoration_time": "",
+        "remarks": ""
+      },
+      {
+        "feeder": "ACHINA DS",
+        "area": "Village Acheena",
+        "start_time": "14-Jul-2026 23:24:00",
+        "expected_restoration_time": "15-Jul-2026 09:10:00",
+        "remarks": "UNPLANNED"
+      },
+      {
+        "feeder": "ACHINA DS",
+        "area": "Achina",
+        "start_time": "14-Jul-2026 23:24:00",
+        "expected_restoration_time": "15-Jul-2026 09:10:00",
+        "remarks": "UNPLANNED"
+      },
+      {
+        "feeder": "ACHINA DS",
+        "area": "Bhageshwari",
+        "start_time": "14-Jul-2026 23:24:00",
+        "expected_restoration_time": "15-Jul-2026 09:10:00",
+        "remarks": "UNPLANNED"
+      },
+      {
+        "feeder": "BUS STAND ROAD",
+        "area": "Loharu Chowk To bhairvi",
+        "start_time": "15-Jul-2026 01:38:46",
+        "expected_restoration_time": "15-Jul-2026 04:48:46",
         "remarks": "Issue will be resolved in estimated time"
       },
       {
-        "feeder": "MANKAWAS AP",
-        "area": "Mankawas",
-        "start_time": "14-Jul-2026 15:14:57",
-        "expected_restoration_time": "",
-        "remarks": ""
+        "feeder": "BUS STAND ROAD",
+        "area": "Mittal Petrol Pump",
+        "start_time": "15-Jul-2026 01:38:46",
+        "expected_restoration_time": "15-Jul-2026 04:48:46",
+        "remarks": "Issue will be resolved in estimated time"
       },
       {
-        "feeder": "MANHERU/SANWAR DS",
-        "area": "Village Manheru",
-        "start_time": "15-Jul-2026 00:46:39",
-        "expected_restoration_time": "",
-        "remarks": ""
+        "feeder": "BUS STAND ROAD",
+        "area": "Near Rohilla Tent House",
+        "start_time": "15-Jul-2026 01:38:46",
+        "expected_restoration_time": "15-Jul-2026 04:48:46",
+        "remarks": "Issue will be resolved in estimated time"
+      },
+      {
+        "feeder": "BUS STAND ROAD",
+        "area": "Ex Mla Satpal Sangwan",
+        "start_time": "15-Jul-2026 01:38:46",
+        "expected_restoration_time": "15-Jul-2026 04:48:46",
+        "remarks": "Issue will be resolved in estimated time"
+      },
+      {
+        "feeder": "BUS STAND ROAD",
+        "area": "Opp Mittal Petrol Pump Gali",
+        "start_time": "15-Jul-2026 01:38:46",
+        "expected_restoration_time": "15-Jul-2026 04:48:46",
+        "remarks": "Issue will be resolved in estimated time"
+      },
+      {
+        "feeder": "BUS STAND ROAD",
+        "area": "Opp Satpal Sangwan Colony",
+        "start_time": "15-Jul-2026 01:38:46",
+        "expected_restoration_time": "15-Jul-2026 04:48:46",
+        "remarks": "Issue will be resolved in estimated time"
+      },
+      {
+        "feeder": "BUS STAND ROAD",
+        "area": "Jaisingh Hospital",
+        "start_time": "15-Jul-2026 01:38:46",
+        "expected_restoration_time": "15-Jul-2026 04:48:46",
+        "remarks": "Issue will be resolved in estimated time"
+      },
+      {
+        "feeder": "BUS STAND ROAD",
+        "area": "Ramdass Nagar",
+        "start_time": "15-Jul-2026 01:38:46",
+        "expected_restoration_time": "15-Jul-2026 04:48:46",
+        "remarks": "Issue will be resolved in estimated time"
+      },
+      {
+        "feeder": "BUS STAND ROAD",
+        "area": "Sbi Bank",
+        "start_time": "15-Jul-2026 01:38:46",
+        "expected_restoration_time": "15-Jul-2026 04:48:46",
+        "remarks": "Issue will be resolved in estimated time"
+      },
+      {
+        "feeder": "BUS STAND ROAD",
+        "area": "Mejban Chowk",
+        "start_time": "15-Jul-2026 01:38:46",
+        "expected_restoration_time": "15-Jul-2026 04:48:46",
+        "remarks": "Issue will be resolved in estimated time"
+      },
+      {
+        "feeder": "BUS STAND ROAD",
+        "area": "Mp Dharambir",
+        "start_time": "15-Jul-2026 01:38:46",
+        "expected_restoration_time": "15-Jul-2026 04:48:46",
+        "remarks": "Issue will be resolved in estimated time"
+      },
+      {
+        "feeder": "BUS STAND ROAD",
+        "area": "Back Side Jangra Market",
+        "start_time": "15-Jul-2026 01:38:46",
+        "expected_restoration_time": "15-Jul-2026 04:48:46",
+        "remarks": "Issue will be resolved in estimated time"
+      },
+      {
+        "feeder": "BUS STAND ROAD",
+        "area": "Near Vijay Nursing",
+        "start_time": "15-Jul-2026 01:38:46",
+        "expected_restoration_time": "15-Jul-2026 04:48:46",
+        "remarks": "Issue will be resolved in estimated time"
       },
       {
         "feeder": "MANHERU/SANWAR DS",
@@ -5905,25 +5982,11 @@
         "remarks": ""
       },
       {
-        "feeder": "DADRI (U)",
-        "area": "Old Anaj Mandi",
-        "start_time": "13-Jul-2026 12:52:00",
-        "expected_restoration_time": "14-Jul-2026 06:04:00",
-        "remarks": "Issue will be resolved in estimated time"
-      },
-      {
-        "feeder": "DADRI (U)",
-        "area": "Railway Road",
-        "start_time": "13-Jul-2026 12:52:00",
-        "expected_restoration_time": "14-Jul-2026 06:04:00",
-        "remarks": "Issue will be resolved in estimated time"
-      },
-      {
-        "feeder": "DADRI (U)",
-        "area": "Dadri City",
-        "start_time": "13-Jul-2026 12:52:00",
-        "expected_restoration_time": "14-Jul-2026 06:04:00",
-        "remarks": "Issue will be resolved in estimated time"
+        "feeder": "MANHERU/SANWAR DS",
+        "area": "Village Manheru",
+        "start_time": "15-Jul-2026 00:46:39",
+        "expected_restoration_time": "",
+        "remarks": ""
       },
       {
         "feeder": "DADRI (U)",
@@ -5934,7 +5997,7 @@
       },
       {
         "feeder": "DADRI (U)",
-        "area": "Charkhi Dadri",
+        "area": "Dadri City",
         "start_time": "13-Jul-2026 12:52:00",
         "expected_restoration_time": "14-Jul-2026 06:04:00",
         "remarks": "Issue will be resolved in estimated time"
@@ -5961,6 +6024,27 @@
         "remarks": "Issue will be resolved in estimated time"
       },
       {
+        "feeder": "DADRI (U)",
+        "area": "Railway Road",
+        "start_time": "13-Jul-2026 12:52:00",
+        "expected_restoration_time": "14-Jul-2026 06:04:00",
+        "remarks": "Issue will be resolved in estimated time"
+      },
+      {
+        "feeder": "DADRI (U)",
+        "area": "Old Anaj Mandi",
+        "start_time": "13-Jul-2026 12:52:00",
+        "expected_restoration_time": "14-Jul-2026 06:04:00",
+        "remarks": "Issue will be resolved in estimated time"
+      },
+      {
+        "feeder": "DADRI (U)",
+        "area": "Charkhi Dadri",
+        "start_time": "13-Jul-2026 12:52:00",
+        "expected_restoration_time": "14-Jul-2026 06:04:00",
+        "remarks": "Issue will be resolved in estimated time"
+      },
+      {
         "feeder": "SAMASPUR AP",
         "area": "Samaspur",
         "start_time": "15-Jul-2026 00:06:29",
@@ -5982,57 +6066,43 @@
         "remarks": ""
       },
       {
-        "feeder": "DHANI AP (NANDHA)",
-        "area": "Dhani Nandha",
-        "start_time": "13-Jul-2026 17:45:28",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "IND P.H.NO.3 TO 6",
-        "area": "Ph No 3 To 6",
-        "start_time": "14-Jul-2026 06:00:56",
-        "expected_restoration_time": "",
-        "remarks": ""
-      },
-      {
-        "feeder": "ACHINA DS",
-        "area": "Bhageshwari",
-        "start_time": "14-Jul-2026 23:24:00",
-        "expected_restoration_time": "15-Jul-2026 09:10:00",
-        "remarks": "UNPLANNED"
-      },
-      {
-        "feeder": "ACHINA DS",
-        "area": "Achina",
-        "start_time": "14-Jul-2026 23:24:00",
-        "expected_restoration_time": "15-Jul-2026 09:10:00",
-        "remarks": "UNPLANNED"
-      },
-      {
-        "feeder": "ACHINA DS",
-        "area": "Village Acheena",
-        "start_time": "14-Jul-2026 23:24:00",
-        "expected_restoration_time": "15-Jul-2026 09:10:00",
-        "remarks": "UNPLANNED"
-      },
-      {
         "feeder": "BUS STAND ROAD",
-        "area": "Near Warehouse",
+        "area": "Paras Wali Gali",
         "start_time": "15-Jul-2026 01:38:46",
         "expected_restoration_time": "15-Jul-2026 04:48:46",
         "remarks": "Issue will be resolved in estimated time"
       },
       {
         "feeder": "BUS STAND ROAD",
-        "area": "Near Roam Bagh",
+        "area": "Near Mc Kuldeep Gandhi",
         "start_time": "15-Jul-2026 01:38:46",
         "expected_restoration_time": "15-Jul-2026 04:48:46",
         "remarks": "Issue will be resolved in estimated time"
       },
       {
         "feeder": "BUS STAND ROAD",
-        "area": "Mpdharambir",
+        "area": "Ashok Gas Agency Office",
+        "start_time": "15-Jul-2026 01:38:46",
+        "expected_restoration_time": "15-Jul-2026 04:48:46",
+        "remarks": "Issue will be resolved in estimated time"
+      },
+      {
+        "feeder": "BUS STAND ROAD",
+        "area": "Back Side Rose Garden",
+        "start_time": "15-Jul-2026 01:38:46",
+        "expected_restoration_time": "15-Jul-2026 04:48:46",
+        "remarks": "Issue will be resolved in estimated time"
+      },
+      {
+        "feeder": "BUS STAND ROAD",
+        "area": "Jai Hind Hospital",
+        "start_time": "15-Jul-2026 01:38:46",
+        "expected_restoration_time": "15-Jul-2026 04:48:46",
+        "remarks": "Issue will be resolved in estimated time"
+      },
+      {
+        "feeder": "BUS STAND ROAD",
+        "area": "Old Market",
         "start_time": "15-Jul-2026 01:38:46",
         "expected_restoration_time": "15-Jul-2026 04:48:46",
         "remarks": "Issue will be resolved in estimated time"
@@ -6053,13 +6123,6 @@
       },
       {
         "feeder": "BUS STAND ROAD",
-        "area": "All Judge Houses",
-        "start_time": "15-Jul-2026 01:38:46",
-        "expected_restoration_time": "15-Jul-2026 04:48:46",
-        "remarks": "Issue will be resolved in estimated time"
-      },
-      {
-        "feeder": "BUS STAND ROAD",
         "area": "Back Side Of Sbi Bank",
         "start_time": "15-Jul-2026 01:38:46",
         "expected_restoration_time": "15-Jul-2026 04:48:46",
@@ -6067,98 +6130,112 @@
       },
       {
         "feeder": "BUS STAND ROAD",
-        "area": "Old Market",
+        "area": "Near Warehouse",
         "start_time": "15-Jul-2026 01:38:46",
         "expected_restoration_time": "15-Jul-2026 04:48:46",
         "remarks": "Issue will be resolved in estimated time"
       },
       {
         "feeder": "BUS STAND ROAD",
-        "area": "Near Vijay Nursing",
+        "area": "All Judge Houses",
         "start_time": "15-Jul-2026 01:38:46",
         "expected_restoration_time": "15-Jul-2026 04:48:46",
         "remarks": "Issue will be resolved in estimated time"
       },
       {
         "feeder": "BUS STAND ROAD",
-        "area": "Near Mc Kuldeep Gandhi",
+        "area": "Mpdharambir",
         "start_time": "15-Jul-2026 01:38:46",
         "expected_restoration_time": "15-Jul-2026 04:48:46",
         "remarks": "Issue will be resolved in estimated time"
       },
       {
         "feeder": "BUS STAND ROAD",
-        "area": "PNB Bank",
+        "area": "Near Roam Bagh",
         "start_time": "15-Jul-2026 01:38:46",
         "expected_restoration_time": "15-Jul-2026 04:48:46",
         "remarks": "Issue will be resolved in estimated time"
       },
       {
         "feeder": "BUS STAND ROAD",
-        "area": "Rose Garden",
+        "area": "Loharwara",
         "start_time": "15-Jul-2026 01:38:46",
         "expected_restoration_time": "15-Jul-2026 04:48:46",
         "remarks": "Issue will be resolved in estimated time"
       },
       {
         "feeder": "BUS STAND ROAD",
-        "area": "Back Side Jangra Market",
+        "area": "Ex Mla Raghubir Chhilar",
         "start_time": "15-Jul-2026 01:38:46",
         "expected_restoration_time": "15-Jul-2026 04:48:46",
         "remarks": "Issue will be resolved in estimated time"
       },
       {
         "feeder": "BUS STAND ROAD",
-        "area": "Paras Wali Gali",
+        "area": "Market Committee",
         "start_time": "15-Jul-2026 01:38:46",
         "expected_restoration_time": "15-Jul-2026 04:48:46",
         "remarks": "Issue will be resolved in estimated time"
       },
       {
         "feeder": "BUS STAND ROAD",
-        "area": "Loharu Chowk To bhairvi",
+        "area": "Bajaj Agency Loharu Chowk",
         "start_time": "15-Jul-2026 01:38:46",
         "expected_restoration_time": "15-Jul-2026 04:48:46",
         "remarks": "Issue will be resolved in estimated time"
       },
       {
         "feeder": "BUS STAND ROAD",
-        "area": "Mittal Petrol Pump",
+        "area": "Bus Stand Road",
         "start_time": "15-Jul-2026 01:38:46",
         "expected_restoration_time": "15-Jul-2026 04:48:46",
         "remarks": "Issue will be resolved in estimated time"
       },
       {
         "feeder": "BUS STAND ROAD",
-        "area": "Near Rohilla Tent House",
+        "area": "Bus Stand Road",
         "start_time": "15-Jul-2026 01:38:46",
         "expected_restoration_time": "15-Jul-2026 04:48:46",
         "remarks": "Issue will be resolved in estimated time"
       },
       {
         "feeder": "BUS STAND ROAD",
-        "area": "Dagar Wali",
+        "area": "Near Bus Stand",
         "start_time": "15-Jul-2026 01:38:46",
         "expected_restoration_time": "15-Jul-2026 04:48:46",
         "remarks": "Issue will be resolved in estimated time"
       },
       {
         "feeder": "BUS STAND ROAD",
-        "area": "Dharmbir Kothi",
+        "area": "Near Ram Bagh",
         "start_time": "15-Jul-2026 01:38:46",
         "expected_restoration_time": "15-Jul-2026 04:48:46",
         "remarks": "Issue will be resolved in estimated time"
       },
       {
         "feeder": "BUS STAND ROAD",
-        "area": "Axis Bank",
+        "area": "Bus Stand Road",
         "start_time": "15-Jul-2026 01:38:46",
         "expected_restoration_time": "15-Jul-2026 04:48:46",
         "remarks": "Issue will be resolved in estimated time"
       },
       {
         "feeder": "BUS STAND ROAD",
-        "area": "Jaisingh Hospital",
+        "area": "Old LIC Gaon",
+        "start_time": "15-Jul-2026 01:38:46",
+        "expected_restoration_time": "15-Jul-2026 04:48:46",
+        "remarks": "Issue will be resolved in estimated time"
+      },
+      {
+        "feeder": "BUS STAND ROAD",
+        "area": "Easy Day",
+        "start_time": "15-Jul-2026 01:38:46",
+        "expected_restoration_time": "15-Jul-2026 04:48:46",
+        "remarks": "Issue will be resolved in estimated time"
+      },
+      {
+        "feeder": "BUS STAND ROAD",
+        "area": "Back Side Rtl Academy",
         "start_time": "15-Jul-2026 01:38:46",
         "expected_restoration_time": "15-Jul-2026 04:48:46",
         "remarks": "Issue will be resolved in estimated time"
@@ -6193,14 +6270,14 @@
       },
       {
         "feeder": "BUS STAND ROAD",
-        "area": "BUS STAND ROAD",
+        "area": "Lal Kothi",
         "start_time": "15-Jul-2026 01:38:46",
         "expected_restoration_time": "15-Jul-2026 04:48:46",
         "remarks": "Issue will be resolved in estimated time"
       },
       {
         "feeder": "BUS STAND ROAD",
-        "area": "Lal Kothi",
+        "area": "Dharmbir Kothi",
         "start_time": "15-Jul-2026 01:38:46",
         "expected_restoration_time": "15-Jul-2026 04:48:46",
         "remarks": "Issue will be resolved in estimated time"
@@ -6214,84 +6291,21 @@
       },
       {
         "feeder": "BUS STAND ROAD",
-        "area": "Ex Mla Satpal Sangwan",
+        "area": "PNB Bank",
         "start_time": "15-Jul-2026 01:38:46",
         "expected_restoration_time": "15-Jul-2026 04:48:46",
         "remarks": "Issue will be resolved in estimated time"
       },
       {
         "feeder": "BUS STAND ROAD",
-        "area": "Market Committee",
+        "area": "Rose Garden",
         "start_time": "15-Jul-2026 01:38:46",
         "expected_restoration_time": "15-Jul-2026 04:48:46",
         "remarks": "Issue will be resolved in estimated time"
       },
       {
         "feeder": "BUS STAND ROAD",
-        "area": "Near Bus Stand",
-        "start_time": "15-Jul-2026 01:38:46",
-        "expected_restoration_time": "15-Jul-2026 04:48:46",
-        "remarks": "Issue will be resolved in estimated time"
-      },
-      {
-        "feeder": "BUS STAND ROAD",
-        "area": "Near Ram Bagh",
-        "start_time": "15-Jul-2026 01:38:46",
-        "expected_restoration_time": "15-Jul-2026 04:48:46",
-        "remarks": "Issue will be resolved in estimated time"
-      },
-      {
-        "feeder": "BUS STAND ROAD",
-        "area": "Old LIC Gaon",
-        "start_time": "15-Jul-2026 01:38:46",
-        "expected_restoration_time": "15-Jul-2026 04:48:46",
-        "remarks": "Issue will be resolved in estimated time"
-      },
-      {
-        "feeder": "BUS STAND ROAD",
-        "area": "Bus Stand Road",
-        "start_time": "15-Jul-2026 01:38:46",
-        "expected_restoration_time": "15-Jul-2026 04:48:46",
-        "remarks": "Issue will be resolved in estimated time"
-      },
-      {
-        "feeder": "BUS STAND ROAD",
-        "area": "Easy Day",
-        "start_time": "15-Jul-2026 01:38:46",
-        "expected_restoration_time": "15-Jul-2026 04:48:46",
-        "remarks": "Issue will be resolved in estimated time"
-      },
-      {
-        "feeder": "BUS STAND ROAD",
-        "area": "Back Side Rtl Academy",
-        "start_time": "15-Jul-2026 01:38:46",
-        "expected_restoration_time": "15-Jul-2026 04:48:46",
-        "remarks": "Issue will be resolved in estimated time"
-      },
-      {
-        "feeder": "BUS STAND ROAD",
-        "area": "Loharwara",
-        "start_time": "15-Jul-2026 01:38:46",
-        "expected_restoration_time": "15-Jul-2026 04:48:46",
-        "remarks": "Issue will be resolved in estimated time"
-      },
-      {
-        "feeder": "BUS STAND ROAD",
-        "area": "Ashok Gas Agency Office",
-        "start_time": "15-Jul-2026 01:38:46",
-        "expected_restoration_time": "15-Jul-2026 04:48:46",
-        "remarks": "Issue will be resolved in estimated time"
-      },
-      {
-        "feeder": "BUS STAND ROAD",
-        "area": "Back Side Rose Garden",
-        "start_time": "15-Jul-2026 01:38:46",
-        "expected_restoration_time": "15-Jul-2026 04:48:46",
-        "remarks": "Issue will be resolved in estimated time"
-      },
-      {
-        "feeder": "BUS STAND ROAD",
-        "area": "Jai Hind Hospital",
+        "area": "Axis Bank",
         "start_time": "15-Jul-2026 01:38:46",
         "expected_restoration_time": "15-Jul-2026 04:48:46",
         "remarks": "Issue will be resolved in estimated time"
@@ -6305,70 +6319,14 @@
       },
       {
         "feeder": "BUS STAND ROAD",
-        "area": "Opp Mittal Petrol Pump Gali",
+        "area": "Dagar Wali",
         "start_time": "15-Jul-2026 01:38:46",
         "expected_restoration_time": "15-Jul-2026 04:48:46",
         "remarks": "Issue will be resolved in estimated time"
       },
       {
         "feeder": "BUS STAND ROAD",
-        "area": "Opp Satpal Sangwan Colony",
-        "start_time": "15-Jul-2026 01:38:46",
-        "expected_restoration_time": "15-Jul-2026 04:48:46",
-        "remarks": "Issue will be resolved in estimated time"
-      },
-      {
-        "feeder": "BUS STAND ROAD",
-        "area": "Mejban Chowk",
-        "start_time": "15-Jul-2026 01:38:46",
-        "expected_restoration_time": "15-Jul-2026 04:48:46",
-        "remarks": "Issue will be resolved in estimated time"
-      },
-      {
-        "feeder": "BUS STAND ROAD",
-        "area": "Mp Dharambir",
-        "start_time": "15-Jul-2026 01:38:46",
-        "expected_restoration_time": "15-Jul-2026 04:48:46",
-        "remarks": "Issue will be resolved in estimated time"
-      },
-      {
-        "feeder": "BUS STAND ROAD",
-        "area": "Ex Mla Raghubir Chhilar",
-        "start_time": "15-Jul-2026 01:38:46",
-        "expected_restoration_time": "15-Jul-2026 04:48:46",
-        "remarks": "Issue will be resolved in estimated time"
-      },
-      {
-        "feeder": "BUS STAND ROAD",
-        "area": "Bajaj Agency Loharu Chowk",
-        "start_time": "15-Jul-2026 01:38:46",
-        "expected_restoration_time": "15-Jul-2026 04:48:46",
-        "remarks": "Issue will be resolved in estimated time"
-      },
-      {
-        "feeder": "BUS STAND ROAD",
-        "area": "Bus Stand Road",
-        "start_time": "15-Jul-2026 01:38:46",
-        "expected_restoration_time": "15-Jul-2026 04:48:46",
-        "remarks": "Issue will be resolved in estimated time"
-      },
-      {
-        "feeder": "BUS STAND ROAD",
-        "area": "Bus Stand Road",
-        "start_time": "15-Jul-2026 01:38:46",
-        "expected_restoration_time": "15-Jul-2026 04:48:46",
-        "remarks": "Issue will be resolved in estimated time"
-      },
-      {
-        "feeder": "BUS STAND ROAD",
-        "area": "Ramdass Nagar",
-        "start_time": "15-Jul-2026 01:38:46",
-        "expected_restoration_time": "15-Jul-2026 04:48:46",
-        "remarks": "Issue will be resolved in estimated time"
-      },
-      {
-        "feeder": "BUS STAND ROAD",
-        "area": "Sbi Bank",
+        "area": "BUS STAND ROAD",
         "start_time": "15-Jul-2026 01:38:46",
         "expected_restoration_time": "15-Jul-2026 04:48:46",
         "remarks": "Issue will be resolved in estimated time"
