@@ -180,5 +180,96 @@
         "trend": 100
       }
     }
+  },
+  {
+    "id": "07-2026",
+    "name": "July 2026",
+    "url": "reports/july-2026.html",
+    "districts": {
+      "Bhiwani": {
+        "outages": 8756,
+        "art": 8,
+        "worst_feeder": "CITY (U)",
+        "worst_week": "Week 3 (15th - 21st)",
+        "trend": 52
+      },
+      "Charkhi Dadri": {
+        "outages": 6447,
+        "art": 7.6,
+        "worst_feeder": "DADRI URBAN (U)",
+        "worst_week": "Week 4 (22nd - 28th)",
+        "trend": 84
+      },
+      "Faridabad": {
+        "outages": 15323,
+        "art": 1.9,
+        "worst_feeder": "MOHNA ROAD (U)",
+        "worst_week": "Week 4 (22nd - 28th)",
+        "trend": 123
+      },
+      "Fatehabad": {
+        "outages": 4262,
+        "art": 3.1,
+        "worst_feeder": "GAJUWALA DS",
+        "worst_week": "Week 3 (15th - 21st)",
+        "trend": 49
+      },
+      "Gurugram": {
+        "outages": 7553,
+        "art": 2.9,
+        "worst_feeder": "SHIVAJI NAGAR",
+        "worst_week": "Week 4 (22nd - 28th)",
+        "trend": 117
+      },
+      "Hisar": {
+        "outages": 7478,
+        "art": 2.6,
+        "worst_feeder": "I.T.I. BEER",
+        "worst_week": "Week 3 (15th - 21st)",
+        "trend": 8
+      },
+      "Jind": {
+        "outages": 5658,
+        "art": 2.8,
+        "worst_feeder": "CITY NO.3",
+        "worst_week": "Week 4 (22nd - 28th)",
+        "trend": 37
+      },
+      "Mahendrgarh": {
+        "outages": 9988,
+        "art": 3.1,
+        "worst_feeder": "CITY-VI",
+        "worst_week": "Week 4 (22nd - 28th)",
+        "trend": 30
+      },
+      "Nuh": {
+        "outages": 6118,
+        "art": 2,
+        "worst_feeder": "UJJINA DS",
+        "worst_week": "Week 4 (22nd - 28th)",
+        "trend": 32
+      },
+      "Palwal": {
+        "outages": 4517,
+        "art": 6.2,
+        "worst_feeder": "CHANDHUT AP",
+        "worst_week": "Week 4 (22nd - 28th)",
+        "trend": -3
+      },
+      "Rewari": {
+        "outages": 5960,
+        "art": 3.1,
+        "worst_feeder": "CITY NO. - I [220 KV REWARI]",
+        "worst_week": "Week 4 (22nd - 28th)",
+        "trend": 32
+      },
+      "Sirsa": {
+        "outages": 4016,
+        "art": 5,
+        "worst_feeder": "SHIV CHOWK",
+        "worst_week": "Week 3 (15th - 21st)",
+        "trend": 38
+      }
+    }
   }
 ]
