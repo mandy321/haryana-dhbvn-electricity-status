@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DHBVN Outages Health Report — August 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --bg-dark: #090a0f;
+      --card-bg: rgba(30, 41, 59, 0.4);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --primary: #06b6d4;
+      --text-muted: #94a3b8;
+      --success: #10b981;
+      --danger: #f43f5e;
+    }
+    body {
+      background: var(--bg-dark);
+      color: #f8fafc;
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+    }
+    .container {
+      max-width: 1100px;
+      width: 100%;
+      padding: 40px 20px;
+    }
+    header {
+      border-bottom: 1px solid var(--card-border);
+      padding-bottom: 24px;
+      margin-bottom: 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 32px;
+      margin: 0;
+      color: #fff;
+      font-weight: 700;
+    }
+    .back-btn {
+      background: rgba(6, 182, 212, 0.1);
+      border: 1px solid rgba(6, 182, 212, 0.2);
+      color: var(--primary);
+      padding: 8px 16px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+    .back-btn:hover {
+      background: var(--primary);
+      color: #000;
+    }
+    .report-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 24px;
+    }
+    .district-report-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 20px;
+      backdrop-filter: blur(16px);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+    }
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      padding-bottom: 12px;
+      margin-bottom: 16px;
+    }
+    .card-header h3 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 20px;
+      font-weight: 600;
+      margin: 0;
+      color: #fff;
+    }
+    .trend-badge {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 8px;
+      border-radius: 20px;
+    }
+    .trend-up { background: rgba(244, 63, 94, 0.15); color: var(--danger); }
+    .trend-down { background: rgba(16, 185, 129, 0.15); color: var(--success); }
+    .trend-stable { background: rgba(148, 163, 184, 0.15); color: var(--text-muted); }
+    
+    .stat-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .stat-row:last-child {
+      margin-bottom: 0;
+    }
+    .label {
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+    .val {
+      font-weight: 600;
+      font-size: 14px;
+      color: #f1f5f9;
+    }
+    .val.highlight {
+      font-size: 18px;
+      color: var(--primary);
+      text-shadow: 0 0 10px rgba(6, 182, 212, 0.2);
+    }
+    .val.worst-item {
+      max-width: 60%;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+      color: #fda4af;
+    }
+    footer {
+      margin-top: 60px;
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-muted);
+      border-top: 1px solid var(--card-border);
+      padding-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div>
+        <h1>DHBVN Outages Health Report</h1>
+        <p style="margin: 4px 0 0 0; color: var(--text-muted); font-size: 14px;">Summary analysis of grid reliability for the month of <strong>August 2026</strong>.</p>
+      </div>
+      <a href="../index.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Dashboard</a>
+    </header>
+    
+    <div class="report-grid">
+      
+    <div class="district-report-card">
+      <div class="card-header">
+        <h3>Bhiwani</h3>
+        <span class="trend-badge trend-down">-12% vs last month</span>
+      </div>
+      <div class="card-body">
+        <div class="stat-row">
+          <span class="label">Total Outages:</span>
+          <span class="val highlight">7677</span>
+        </div>
+        <div class="stat-row">
+          <span class="label">Avg. Fix Time:</span>
+          <span class="val">7.8 hrs</span>
+        </div>
+        <div class="stat-row">
+          <span class="label">Worst Feeder:</span>
+          <span class="val worst-item" title="JHANWARY AP">JHANWARY AP</span>
+        </div>
+        <div class="stat-row">
+          <span class="label">Worst Week:</span>
+          <span class="val" style="font-size: 12px; font-weight: 500;">Week 4 (22nd - 28th)</span>
+        </div>
+      </div>
+    </div>
+  
+    <div class="district-report-card">
+      <div class="card-header">
+        <h3>Charkhi Dadri</h3>
+        <span class="trend-badge trend-down">-18% vs last month</span>
+      </div>
+      <div class="card-body">
+        <div class="stat-row">
+          <span class="label">Total Outages:</span>
+          <span class="val highlight">5284</span>
+        </div>
+        <div class="stat-row">
+          <span class="label">Avg. Fix Time:</span>
+          <span class="val">8.1 hrs</span>
+        </div>
+        <div class="stat-row">
+          <span class="label">Worst Feeder:</span>
+          <span class="val worst-item" title="DADRI URBAN (U)">DADRI URBAN (U)</span>
+        </div>
+        <div class="stat-row">
+          <span class="label">Worst Week:</span>
+          <span class="val" style="font-size: 12px; font-weight: 500;">Week 4 (22nd - 28th)</span>
+        </div>
+      </div>
+    </div>
+  
+    <div class="district-report-card">
+      <div class="card-header">
+        <h3>Faridabad</h3>
+        <span class="trend-badge trend-up">+9% vs last month</span>
+      </div>
+      <div class="card-body">
+        <div class="stat-row">
+          <span class="label">Total Outages:</span>
+          <span class="val highlight">16645</span>
+        </div>
+        <div class="stat-row">
+          <span class="label">Avg. Fix Time:</span>
+          <span class="val">1.9 hrs</span>
+        </div>
+        <div class="stat-row">
+          <span class="label">Worst Feeder:</span>
+          <span class="val worst-item" title="MOHNA ROAD (U)">MOHNA ROAD (U)</span>
+        </div>
+        <div class="stat-row">
+          <span class="label">Worst Week:</span>
+          <span class="val" style="font-size: 12px; font-weight: 500;">Week 4 (22nd - 28th)</span>
+        </div>
+      </div>
+    </div>
+  
+    <div class="district-report-card">
+      <div class="card-header">
+        <h3>Fatehabad</h3>
+        <span class="trend-badge trend-down">-9% vs last month</span>
+      </div>
+      <div class="card-body">
+        <div class="stat-row">
+          <span class="label">Total Outages:</span>
+          <span class="val highlight">3869</span>
+        </div>
+        <div class="stat-row">
+          <span class="label">Avg. Fix Time:</span>
+          <span class="val">1.8 hrs</span>
+        </div>
+        <div class="stat-row">
+          <span class="label">Worst Feeder:</span>
+          <span class="val worst-item" title="DHANI GURNAM  DS">DHANI GURNAM  DS</span>
+        </div>
+        <div class="stat-row">
+          <span class="label">Worst Week:</span>
+          <span class="val" style="font-size: 12px; font-weight: 500;">Week 4 (22nd - 28th)</span>
+        </div>
+      </div>
+    </div>
+  
+    <div class="district-report-card">
+      <div class="card-header">
+        <h3>Gurugram</h3>
+        <span class="trend-badge trend-up">+17% vs last month</span>
+      </div>
+      <div class="card-body">
+        <div class="stat-row">
+          <span class="label">Total Outages:</span>
+          <span class="val highlight">8816</span>
+        </div>
+        <div class="stat-row">
+          <span class="label">Avg. Fix Time:</span>
+          <span class="val">2.5 hrs</span>
+        </div>
+        <div class="stat-row">
+          <span class="label">Worst Feeder:</span>
+          <span class="val worst-item" title="SHIVAJI NAGAR">SHIVAJI NAGAR</span>
+        </div>
+        <div class="stat-row">
+          <span class="label">Worst Week:</span>
+          <span class="val" style="font-size: 12px; font-weight: 500;">Week 4 (22nd - 28th)</span>
+        </div>
+      </div>
+    </div>
+  
+    <div class="district-report-card">
+      <div class="card-header">
+        <h3>Hisar</h3>
+        <span class="trend-badge trend-up">+8% vs last month</span>
+      </div>
+      <div class="card-body">
+        <div class="stat-row">
+          <span class="label">Total Outages:</span>
+          <span class="val highlight">8043</span>
+        </div>
+        <div class="stat-row">
+          <span class="label">Avg. Fix Time:</span>
+          <span class="val">3 hrs</span>
+        </div>
+        <div class="stat-row">
+          <span class="label">Worst Feeder:</span>
+          <span class="val worst-item" title="I.T.I. BEER">I.T.I. BEER</span>
+        </div>
+        <div class="stat-row">
+          <span class="label">Worst Week:</span>
+          <span class="val" style="font-size: 12px; font-weight: 500;">Week 4 (22nd - 28th)</span>
+        </div>
+      </div>
+    </div>
+  
+    <div class="district-report-card">
+      <div class="card-header">
+        <h3>Jind</h3>
+        <span class="trend-badge trend-down">-12% vs last month</span>
+      </div>
+      <div class="card-body">
+        <div class="stat-row">
+          <span class="label">Total Outages:</span>
+          <span class="val highlight">4976</span>
+        </div>
+        <div class="stat-row">
+          <span class="label">Avg. Fix Time:</span>
+          <span class="val">4.7 hrs</span>
+        </div>
+        <div class="stat-row">
+          <span class="label">Worst Feeder:</span>
+          <span class="val worst-item" title="Nagahetra">Nagahetra</span>
+        </div>
+        <div class="stat-row">
+          <span class="label">Worst Week:</span>
+          <span class="val" style="font-size: 12px; font-weight: 500;">Week 4 (22nd - 28th)</span>
+        </div>
+      </div>
+    </div>
+  
+    <div class="district-report-card">
+      <div class="card-header">
+        <h3>Mahendrgarh</h3>
+        <span class="trend-badge trend-down">-7% vs last month</span>
+      </div>
+      <div class="card-body">
+        <div class="stat-row">
+          <span class="label">Total Outages:</span>
+          <span class="val highlight">9294</span>
+        </div>
+        <div class="stat-row">
+          <span class="label">Avg. Fix Time:</span>
+          <span class="val">2.6 hrs</span>
+        </div>
+        <div class="stat-row">
+          <span class="label">Worst Feeder:</span>
+          <span class="val worst-item" title="CITY-VI">CITY-VI</span>
+        </div>
+        <div class="stat-row">
+          <span class="label">Worst Week:</span>
+          <span class="val" style="font-size: 12px; font-weight: 500;">Week 4 (22nd - 28th)</span>
+        </div>
+      </div>
+    </div>
+  
+    <div class="district-report-card">
+      <div class="card-header">
+        <h3>Nuh</h3>
+        <span class="trend-badge trend-down">-2% vs last month</span>
+      </div>
+      <div class="card-body">
+        <div class="stat-row">
+          <span class="label">Total Outages:</span>
+          <span class="val highlight">6026</span>
+        </div>
+        <div class="stat-row">
+          <span class="label">Avg. Fix Time:</span>
+          <span class="val">--</span>
+        </div>
+        <div class="stat-row">
+          <span class="label">Worst Feeder:</span>
+          <span class="val worst-item" title="UJJINA DS">UJJINA DS</span>
+        </div>
+        <div class="stat-row">
+          <span class="label">Worst Week:</span>
+          <span class="val" style="font-size: 12px; font-weight: 500;">Week 4 (22nd - 28th)</span>
+        </div>
+      </div>
+    </div>
+  
+    <div class="district-report-card">
+      <div class="card-header">
+        <h3>Palwal</h3>
+        <span class="trend-badge trend-up">+21% vs last month</span>
+      </div>
+      <div class="card-body">
+        <div class="stat-row">
+          <span class="label">Total Outages:</span>
+          <span class="val highlight">5484</span>
+        </div>
+        <div class="stat-row">
+          <span class="label">Avg. Fix Time:</span>
+          <span class="val">2.4 hrs</span>
+        </div>
+        <div class="stat-row">
+          <span class="label">Worst Feeder:</span>
+          <span class="val worst-item" title="CHANDHUT AP">CHANDHUT AP</span>
+        </div>
+        <div class="stat-row">
+          <span class="label">Worst Week:</span>
+          <span class="val" style="font-size: 12px; font-weight: 500;">Week 4 (22nd - 28th)</span>
+        </div>
+      </div>
+    </div>
+  
+    <div class="district-report-card">
+      <div class="card-header">
+        <h3>Rewari</h3>
+        <span class="trend-badge trend-down">-3% vs last month</span>
+      </div>
+      <div class="card-body">
+        <div class="stat-row">
+          <span class="label">Total Outages:</span>
+          <span class="val highlight">5767</span>
+        </div>
+        <div class="stat-row">
+          <span class="label">Avg. Fix Time:</span>
+          <span class="val">3.8 hrs</span>
+        </div>
+        <div class="stat-row">
+          <span class="label">Worst Feeder:</span>
+          <span class="val worst-item" title="KISHANPUR DS">KISHANPUR DS</span>
+        </div>
+        <div class="stat-row">
+          <span class="label">Worst Week:</span>
+          <span class="val" style="font-size: 12px; font-weight: 500;">Week 4 (22nd - 28th)</span>
+        </div>
+      </div>
+    </div>
+  
+    <div class="district-report-card">
+      <div class="card-header">
+        <h3>Sirsa</h3>
+        <span class="trend-badge trend-up">+1% vs last month</span>
+      </div>
+      <div class="card-body">
+        <div class="stat-row">
+          <span class="label">Total Outages:</span>
+          <span class="val highlight">4052</span>
+        </div>
+        <div class="stat-row">
+          <span class="label">Avg. Fix Time:</span>
+          <span class="val">6.4 hrs</span>
+        </div>
+        <div class="stat-row">
+          <span class="label">Worst Feeder:</span>
+          <span class="val worst-item" title="SHIV CHOWK">SHIV CHOWK</span>
+        </div>
+        <div class="stat-row">
+          <span class="label">Worst Week:</span>
+          <span class="val" style="font-size: 12px; font-weight: 500;">Week 4 (22nd - 28th)</span>
+        </div>
+      </div>
+    </div>
+  
+    </div>
+    
+    <footer>
+      <p>Report compiled dynamically from historical logs by DHBVN Outage Tracker.</p>
+    </footer>
+  </div>
+</body>
+</html>
