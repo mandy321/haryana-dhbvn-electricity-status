@@ -1,25 +1,5 @@
 [
   {
-    "feeder": "MOTHER DAIRY (U)",
-    "area": "60 GAJ",
-    "start_time": "05-Oct-2026 05:21:58",
-    "expected_restoration_time": "",
-    "remarks": "",
-    "scraped_at": "10/5/2026, 7:38:50 AM (IST)",
-    "last_seen_at": "10/5/2026, 7:38:50 AM (IST)",
-    "timestamp": 1791185930000
-  },
-  {
-    "feeder": "METRO FEEDER  (U)",
-    "area": "Metro Colony",
-    "start_time": "05-Oct-2026 07:30:22",
-    "expected_restoration_time": "",
-    "remarks": "",
-    "scraped_at": "10/5/2026, 7:38:50 AM (IST)",
-    "last_seen_at": "10/5/2026, 7:38:50 AM (IST)",
-    "timestamp": 1791185930000
-  },
-  {
     "feeder": "SECTOR-14 MKT  (U)",
     "area": "Sector 14",
     "start_time": "05-Oct-2026 10:08:09",
@@ -21638,5 +21618,55 @@
     "scraped_at": "10/19/2026, 1:50:10 AM (IST)",
     "last_seen_at": "10/19/2026, 1:50:10 AM (IST)",
     "timestamp": 1792374610000
+  },
+  {
+    "feeder": "IND MCF BHUNDENA",
+    "area": "Village Budhana",
+    "start_time": "19-Oct-2026 10:23:23",
+    "expected_restoration_time": "",
+    "remarks": "UNPLANNED",
+    "scraped_at": "10/19/2026, 10:49:54 AM (IST)",
+    "last_seen_at": "10/19/2026, 10:49:54 AM (IST)",
+    "timestamp": 1792406994000
+  },
+  {
+    "feeder": "TIGAON DS",
+    "area": "Bhwapur",
+    "start_time": "19-Oct-2026 10:47:00",
+    "expected_restoration_time": "19-Oct-2026 16:00:00",
+    "remarks": "CABLE CHANGE",
+    "scraped_at": "10/19/2026, 10:49:54 AM (IST)",
+    "last_seen_at": "10/19/2026, 10:49:54 AM (IST)",
+    "timestamp": 1792406994000
+  },
+  {
+    "feeder": "A-5 COLONY",
+    "area": "Nathu Colony",
+    "start_time": "19-Oct-2026 08:51:00",
+    "expected_restoration_time": "19-Oct-2026 11:00:00",
+    "remarks": "LINE BREAKDOWN",
+    "scraped_at": "10/19/2026, 10:49:54 AM (IST)",
+    "last_seen_at": "10/19/2026, 10:49:54 AM (IST)",
+    "timestamp": 1792406994000
+  },
+  {
+    "feeder": "NEEMKA DS",
+    "area": "Shahabad",
+    "start_time": "19-Oct-2026 10:47:00",
+    "expected_restoration_time": "19-Oct-2026 16:00:00",
+    "remarks": "CABLE CHANGE",
+    "scraped_at": "10/19/2026, 10:49:54 AM (IST)",
+    "last_seen_at": "10/19/2026, 10:49:54 AM (IST)",
+    "timestamp": 1792406994000
+  },
+  {
+    "feeder": "PALI (U)",
+    "area": "Bhakri",
+    "start_time": "19-Oct-2026 08:52:00",
+    "expected_restoration_time": "19-Oct-2026 16:00:00",
+    "remarks": "transformer change",
+    "scraped_at": "10/19/2026, 10:49:54 AM (IST)",
+    "last_seen_at": "10/19/2026, 10:49:54 AM (IST)",
+    "timestamp": 1792406994000
   }
 ]
