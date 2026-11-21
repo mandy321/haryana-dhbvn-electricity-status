@@ -1363,7 +1363,18 @@ window.handleLiveRefresh = async function(eOrDistrictId) {
   if (!isTargetedRefresh) {
     refreshBtn.disabled = false;
     refreshIcon.classList.remove('spin-animation');
-    refreshBtnText.textContent = "Refresh Live";
+    if (liveDataLoaded) {
+      refreshBtnText.textContent = "Refreshed ✓";
+      refreshBtn.style.borderColor = "var(--success-color)";
+      refreshBtn.style.color = "var(--success-color)";
+      setTimeout(() => {
+        refreshBtnText.textContent = "Refresh Live";
+        refreshBtn.style.borderColor = "";
+        refreshBtn.style.color = "";
+      }, 2500);
+    } else {
+      refreshBtnText.textContent = "Refresh Live";
+    }
   }
   pinnedRefreshIcons.forEach(icon => icon.classList.remove('fa-spin'));
 };
