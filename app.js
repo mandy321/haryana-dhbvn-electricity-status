@@ -819,9 +819,10 @@ function renderOutages() {
   const nowTime = nowIST.getTime();
 
   const filteredList = districtList.filter(item => {
-    const feeder = (item.feeder || '').toLowerCase();
-    const area = (item.area || '').toLowerCase();
-    const matchesSearch = feeder.includes(searchTerm) || area.includes(searchTerm);
+    const feeder = item.feeder || '';
+    const area = item.area || '';
+    const remarks = item.remarks || '';
+    const matchesSearch = isFuzzyMatch(`${feeder} ${area} ${remarks}`, searchTerm);
     
     if (!matchesSearch) return false;
     
@@ -1609,10 +1610,10 @@ function renderHistory() {
   const searchTerm = historySearchInput.value.toLowerCase().trim();
   
   const filtered = (districtHistoryData || []).filter(item => {
-    const feeder = (item.feeder || '').toLowerCase();
-    const area = (item.area || '').toLowerCase();
-    const remarks = (item.remarks || '').toLowerCase();
-    return feeder.includes(searchTerm) || area.includes(searchTerm) || remarks.includes(searchTerm);
+    const feeder = item.feeder || '';
+    const area = item.area || '';
+    const remarks = item.remarks || '';
+    return isFuzzyMatch(`${feeder} ${area} ${remarks}`, searchTerm);
   });
   
   historyTableBody.innerHTML = "";
@@ -1690,6 +1691,45 @@ function escapeCsvValue(val) {
     formatted = `"${formatted}"`;
   }
   return formatted;
+}
+
+// Helper: Levenshtein Distance for Typo-Tolerant Search
+function getLevenshteinDistance(a, b) {
+  if (a === b) return 0;
+  if (!a.length) return b.length;
+  if (!b.length) return a.length;
+  const track = Array(b.length + 1).fill(null).map((_, i) => i);
+  for (let i = 0; i < a.length; i++) {
+    let prev = i + 1;
+    for (let j = 0; j < b.length; j++) {
+      const cur = a[i] === b[j] ? track[j] : 1 + Math.min(track[j + 1], track[j], prev);
+      track[j] = prev;
+      prev = cur;
+    }
+    track[b.length] = prev;
+  }
+  return track[b.length];
+}
+
+// Helper: Multi-Field Fuzzy Matcher (tolerates spelling mistakes, word order, and hyphens)
+function isFuzzyMatch(combinedText, query) {
+  if (!query) return true;
+  if (!combinedText) return false;
+  const t = combinedText.toLowerCase();
+  const q = query.toLowerCase().trim();
+  if (t.includes(q)) return true; // Direct substring match
+
+  const queryTokens = q.split(/\s+/).filter(Boolean);
+  const textTokens = t.split(/[\s,.\-_/()]+/).filter(Boolean);
+
+  // Every word typed by user must match or closely resemble at least one word in the text
+  return queryTokens.every(qToken => {
+    return textTokens.some(tToken => {
+      if (tToken.includes(qToken) || qToken.includes(tToken)) return true;
+      const allowedDistance = qToken.length <= 4 ? 1 : 2;
+      return getLevenshteinDistance(tToken, qToken) <= allowedDistance;
+    });
+  });
 }
 
 // Helper: Check if outage is planned maintenance (strictly excluding UNPLANNED)
