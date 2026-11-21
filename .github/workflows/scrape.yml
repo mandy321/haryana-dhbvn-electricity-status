@@ -2,8 +2,11 @@ name: Scrape DHBVN Outages
 
 on:
   schedule:
-    - cron: '*/20 * * * *' # Run every 20 minutes
-  workflow_dispatch:      # Allow manual runs
+    # Multiple staggered crons help avoid congested top-of-hour GitHub scheduler delays
+    - cron: '3,23,43 * * * *'
+  workflow_dispatch:      # Allow manual and webhook-based triggers
+  repository_dispatch:    # Allow external cron services (cron-job.org / curl) to trigger on demand
+    types: [scrape_dhbvn]
 
 jobs:
   scrape:
