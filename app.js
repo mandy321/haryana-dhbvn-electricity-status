@@ -1725,9 +1725,18 @@ function isFuzzyMatch(combinedText, query) {
   // Every word typed by user must match or closely resemble at least one word in the text
   return queryTokens.every(qToken => {
     return textTokens.some(tToken => {
-      if (tToken.includes(qToken) || qToken.includes(tToken)) return true;
-      const allowedDistance = qToken.length <= 4 ? 1 : 2;
-      return getLevenshteinDistance(tToken, qToken) <= allowedDistance;
+      // Substring match: require token length >= 3 to avoid single characters like 'u' matching 'huda'
+      if (tToken.includes(qToken)) return true;
+      if (tToken.length >= 3 && qToken.includes(tToken)) return true;
+      
+      // Levenshtein fuzzy match only for words of length >= 3 and similar length
+      if (qToken.length >= 3 && tToken.length >= 3) {
+        const allowedDistance = qToken.length <= 4 ? 1 : 2;
+        if (Math.abs(tToken.length - qToken.length) <= allowedDistance) {
+          return getLevenshteinDistance(tToken, qToken) <= allowedDistance;
+        }
+      }
+      return false;
     });
   });
 }
