@@ -118,9 +118,12 @@ const districtStatusBadge = document.getElementById('districtStatusBadge');
 const statusFeedersDown = document.getElementById('statusFeedersDown');
 const statusAreasAffected = document.getElementById('statusAreasAffected');
 const statusPercentUp = document.getElementById('statusPercentUp');
+const statusDomesticUp = document.getElementById('statusDomesticUp');
+const statusAgriUp = document.getElementById('statusAgriUp');
 const healthPercentText = document.getElementById('healthPercentText');
 const districtHealthBar = document.getElementById('districtHealthBar');
 const statAvgFixTime = document.getElementById('statAvgFixTime');
+const statAgriFixTime = document.getElementById('statAgriFixTime');
 const statArtGlow = document.getElementById('statArtGlow');
 const leaderboardContent = document.getElementById('leaderboardContent');
 const localityLeaderboardContent = document.getElementById('localityLeaderboardContent');
@@ -688,6 +691,8 @@ function updateStats() {
   let active = 0;
   const uniqueActiveFeeders = new Set();
   const uniqueActiveAreas = new Set();
+  const domesticActiveFeeders = new Set();
+  const agriActiveFeeders = new Set();
   
   activeList.forEach(item => {
     const remarks = (item.remarks || '').toUpperCase();
@@ -697,7 +702,13 @@ function updateStats() {
       active++;
     }
     if (item.feeder) {
-      uniqueActiveFeeders.add(item.feeder.trim().toUpperCase());
+      const feederTrimmed = item.feeder.trim().toUpperCase();
+      uniqueActiveFeeders.add(feederTrimmed);
+      if (getFeederCategory(item.feeder) === 'agri') {
+        agriActiveFeeders.add(feederTrimmed);
+      } else {
+        domesticActiveFeeders.add(feederTrimmed);
+      }
     }
     if (item.area) {
       uniqueActiveAreas.add(item.area.trim().toUpperCase());
@@ -722,6 +733,16 @@ function updateStats() {
   const totalFeedersCount = baselineFeeders.size || 1; // avoid division by zero
   const totalAreasCount = baselineAreas.size || 1;
   
+  // Categorized baselines
+  let baselineDomesticCount = 0;
+  let baselineAgriCount = 0;
+  baselineFeeders.forEach(f => {
+    if (getFeederCategory(f) === 'agri') baselineAgriCount++;
+    else baselineDomesticCount++;
+  });
+  baselineDomesticCount = baselineDomesticCount || 1;
+  baselineAgriCount = baselineAgriCount || 1;
+
   // 3. Compute Percentages
   const percentFeedersDown = ((uniqueActiveFeeders.size / totalFeedersCount) * 100);
   const percentFeedersUp = 100 - percentFeedersDown;
@@ -731,6 +752,10 @@ function updateStats() {
   
   const percentAreasUpStr = percentAreasUp.toFixed(1);
   const percentAreasDownStr = percentAreasDown.toFixed(1);
+
+  // Domestic vs Agri uptime percentages
+  const domesticUpPct = Math.max(0, 100 - ((domesticActiveFeeders.size / baselineDomesticCount) * 100)).toFixed(1);
+  const agriUpPct = Math.max(0, 100 - ((agriActiveFeeders.size / baselineAgriCount) * 100)).toFixed(1);
   
   // Update Status Banner elements
   if (districtStatusHeader) {
@@ -739,6 +764,12 @@ function updateStats() {
     statusAreasAffected.textContent = `${uniqueActiveAreas.size} / ${totalAreasCount} (${percentAreasDownStr}%)`;
     if (statusPercentUp) {
       statusPercentUp.textContent = `${percentAreasUpStr}%`;
+    }
+    if (statusDomesticUp) {
+      statusDomesticUp.textContent = `${domesticUpPct}%`;
+    }
+    if (statusAgriUp) {
+      statusAgriUp.textContent = `${agriUpPct}%`;
     }
     
     if (healthPercentText) {
@@ -1354,11 +1385,15 @@ async function fetchDistrictHistoryForStats(districtName) {
 function updateArtAndLeaderboard() {
   if (!currentDistrictHistory || currentDistrictHistory.length === 0) {
     if (statAvgFixTime) statAvgFixTime.textContent = "--";
+    if (statAgriFixTime) statAgriFixTime.textContent = "--";
     if (statArtGlow) {
       statArtGlow.className = "stat-icon-wrapper green-glow";
     }
     if (leaderboardContent) {
       leaderboardContent.innerHTML = `<p style="color: var(--text-dim); text-align: center; padding: 16px;">No historical data available.</p>`;
+    }
+    if (localityLeaderboardContent) {
+      localityLeaderboardContent.innerHTML = `<p style="color: var(--text-dim); text-align: center; padding: 16px;">No historical data available.</p>`;
     }
     return;
   }
@@ -1367,9 +1402,11 @@ function updateArtAndLeaderboard() {
   const sevenDaysAgo = nowTime - (7 * 24 * 60 * 60 * 1000);
   const fourteenDaysAgo = nowTime - (14 * 24 * 60 * 60 * 1000);
 
-  // 1. Calculate Average Restoration Time (ART) over the last 14 days
-  let totalDurationMs = 0;
-  let validOutageCount = 0;
+  // 1. Calculate Average Restoration Time (ART) separately for Domestic & Agricultural
+  let domDurationMs = 0;
+  let domCount = 0;
+  let agriDurationMs = 0;
+  let agriCount = 0;
 
   currentDistrictHistory.forEach(item => {
     const timestamp = item.timestamp || (item.start_time ? parseDHBVNDate(item.start_time)?.getTime() : null);
@@ -1395,34 +1432,47 @@ function updateArtAndLeaderboard() {
 
     // Filter out anomalous durations (under 1 min or over 72 hours)
     if (diff > 60 * 1000 && diff < 72 * 60 * 60 * 1000) {
-      totalDurationMs += diff;
-      validOutageCount++;
+      const cat = getFeederCategory(item.feeder);
+      if (cat === 'agri') {
+        agriDurationMs += diff;
+        agriCount++;
+      } else {
+        domDurationMs += diff;
+        domCount++;
+      }
     }
   });
 
-  if (validOutageCount > 0) {
-    const avgHours = (totalDurationMs / validOutageCount) / (1000 * 60 * 60);
+  // Domestic ART
+  if (domCount > 0) {
+    const avgDomHours = (domDurationMs / domCount) / (1000 * 60 * 60);
     if (statAvgFixTime) {
-      statAvgFixTime.textContent = `${avgHours.toFixed(1)} hrs`;
+      statAvgFixTime.textContent = `${avgDomHours.toFixed(1)} hrs`;
     }
 
-    // Color code: Green (< 2 hrs), Amber (2-5 hrs), Red (> 5 hrs)
+    // Color code: Green (< 2 hrs), Amber (2-4 hrs), Red (> 4 hrs)
     if (statArtGlow) {
-      if (avgHours < 2) {
+      if (avgDomHours < 2) {
         statArtGlow.className = "stat-icon-wrapper green-glow";
-      } else if (avgHours <= 5) {
+      } else if (avgDomHours <= 4) {
         statArtGlow.className = "stat-icon-wrapper orange-glow";
       } else {
         statArtGlow.className = "stat-icon-wrapper red-glow";
       }
     }
   } else {
-    if (statAvgFixTime) {
-      statAvgFixTime.textContent = "--";
+    if (statAvgFixTime) statAvgFixTime.textContent = "--";
+    if (statArtGlow) statArtGlow.className = "stat-icon-wrapper green-glow";
+  }
+
+  // Agri AP ART / Cycle
+  if (agriCount > 0) {
+    const avgAgriHours = (agriDurationMs / agriCount) / (1000 * 60 * 60);
+    if (statAgriFixTime) {
+      statAgriFixTime.textContent = `${avgAgriHours.toFixed(1)} hrs`;
     }
-    if (statArtGlow) {
-      statArtGlow.className = "stat-icon-wrapper green-glow";
-    }
+  } else {
+    if (statAgriFixTime) statAgriFixTime.textContent = "--";
   }
 
   // 2. Hotspot Feeder Leaderboard (last 14 days)

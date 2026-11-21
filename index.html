@@ -140,7 +140,7 @@
         <div class="district-health-bar-container">
           <div class="district-health-bar" id="districtHealthBar" style="width: 100%;"></div>
         </div>
-        <div class="status-metrics">
+        <div class="status-metrics" style="grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));">
           <div class="metric-item">
             <span class="metric-value" id="statusFeedersDown">0</span>
             <span class="metric-label">Feeders Down</span>
@@ -152,14 +152,18 @@
               <span class="tooltip-container" style="display: inline-flex;">
                 <i class="fa-solid fa-circle-info info-icon" style="margin: 0; font-size: 11px;"></i>
                 <span class="tooltip-content" style="font-weight: normal; font-size: 12px; line-height: 1.4;">
-                  <strong>Areas Affected vs Total Outages:</strong> Shows the number of unique neighborhoods experiencing at least one cut. This can be lower than Total Outages because a large area can have multiple separate physical feeder line outages.
+                  <strong>Areas Affected vs Total Outages:</strong> Shows the number of unique neighborhoods experiencing at least one cut.
                 </span>
               </span>
             </span>
           </div>
           <div class="metric-item">
-            <span class="metric-value" id="statusPercentUp">100%</span>
-            <span class="metric-label">Electricity Up</span>
+            <span class="metric-value" id="statusDomesticUp" style="color: #38bdf8;">100%</span>
+            <span class="metric-label"><i class="fa-solid fa-house-chimney" style="font-size: 10px;"></i> Domestic & City Up</span>
+          </div>
+          <div class="metric-item">
+            <span class="metric-value" id="statusAgriUp" style="color: #4ade80;">100%</span>
+            <span class="metric-label"><i class="fa-solid fa-wheat-awn" style="font-size: 10px;"></i> Agri Tubewell Up</span>
           </div>
         </div>
       </section>
@@ -207,11 +211,21 @@
 
         <div class="stat-card glass-card">
           <div class="stat-icon-wrapper green-glow" id="statArtGlow">
-            <i class="fa-solid fa-hourglass-half"></i>
+            <i class="fa-solid fa-house-chimney-user"></i>
           </div>
           <div class="stat-data">
             <h3 id="statAvgFixTime">--</h3>
-            <p>Avg. Fix Time (7d)</p>
+            <p>City/Domestic Fix Time (14d)</p>
+          </div>
+        </div>
+
+        <div class="stat-card glass-card">
+          <div class="stat-icon-wrapper" style="background: rgba(74, 222, 128, 0.1); border: 1px solid rgba(74, 222, 128, 0.25); color: #4ade80;">
+            <i class="fa-solid fa-wheat-awn"></i>
+          </div>
+          <div class="stat-data">
+            <h3 id="statAgriFixTime" style="color: #4ade80;">--</h3>
+            <p>Agri AP Fix/Cycle Time</p>
           </div>
         </div>
       </section>
