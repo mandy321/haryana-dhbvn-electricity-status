@@ -1,3 +1,7 @@
+// DHBVN Direct Live Proxy URL (Configure custom Cloudflare Worker or CORS proxy endpoint)
+// Default fallback order if direct endpoint is configured
+const DHBVN_PROXY_URL = window.DHBVN_CUSTOM_PROXY || 'https://dhbvn-cors-proxy.workers.dev';
+
 // State variables
 let outagesData = null;
 let currentDistrictId = "";
@@ -606,7 +610,7 @@ async function autoRefreshDistrict(districtId) {
     const xmlRequest = `<?xml version="1.0"?><Request VERSION="2" LANGUAGE_ID="1" LOCATION=""><Company Company_Id="93" /><Project Project_Id="304" /><User User_Id="Anonymous" /><IUVLogin IUVLogin_Id="Anonymous" /><ROLE ROLE_ID="1595" /><Event Control_Id="130404" /><Child Control_Id="125681" Report="HTML" AC_ID="163944"><Parent Control_Id="130402" Value="${districtId}" Data_Form_Id="" XValue="${districtId}" YValue="" ZValue="" /></Child></Request>`;
     const base64Payload = btoa(xmlRequest);
     
-    const url = 'https://corsproxy.io/?' + encodeURIComponent('https://chs.dhbvn.org.in/api/AppsavyServices/GetRelationalDataA');
+    const url = DHBVN_PROXY_URL;
     
     const response = await fetch(url, {
       method: 'POST',
@@ -1150,8 +1154,8 @@ window.handleLiveRefresh = async function(targetDistrictId) {
     // 2. Base64 encode XML payload
     const base64Payload = btoa(xmlRequest);
     
-    // 3. POST request through corsproxy.io
-    const url = 'https://corsproxy.io/?' + encodeURIComponent('https://chs.dhbvn.org.in/api/AppsavyServices/GetRelationalDataA');
+    // 3. POST request through configured Cloudflare Worker or CORS proxy
+    const url = DHBVN_PROXY_URL;
     
     const response = await fetch(url, {
       method: 'POST',
