@@ -1,0 +1,22 @@
+{
+  "name": "Haryana DHBVN Power Outage Tracker",
+  "short_name": "DHBVN Tracker",
+  "description": "Real-time electricity power cuts and outages tracker for all 12 DHBVN Haryana districts.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0d1117",
+  "theme_color": "#0d1117",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "assets/icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "assets/icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}

@@ -3,8 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Track live electricity power cuts and outages in Palwal, Haryana — real-time DHBVN updates every 20 minutes covering all 12 DHBVN districts.">
-  <title>Palwal(Haryana) Power Outage Tracker — Live DHBVN Updates</title>
+  <meta name="description" content="Track live electricity power cuts and outages across all 12 DHBVN districts in Haryana — real-time updates, scheduled maintenance, and feeder reliability.">
+  <meta name="theme-color" content="#0d1117">
+  <title>Haryana (DHBVN) Power Outage Tracker — Live Electricity Updates</title>
+
+  <!-- PWA Manifest & Icons -->
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/icon-192.png">
+  <link rel="apple-touch-icon" href="assets/icon-192.png">
   
   <!-- Chart.js CDN -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -27,7 +33,7 @@
       <div class="logo-area">
         <i class="fa-solid fa-bolt-lightning lightning-logo"></i>
         <div style="display: flex; flex-direction: column; gap: 2px;">
-          <h1>Palwal(Haryana) Power Outage Tracker</h1>
+          <h1 id="mainAppHeaderTitle">Haryana (DHBVN) Power Outage Tracker</h1>
           <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-top: 4px;">
             <a href="https://chs.dhbvn.org.in/UI/Form?FormId=11996" target="_blank" rel="noopener noreferrer" class="gov-link" title="Official DHBVN Outages Portal">
               <i class="fa-solid fa-arrow-up-right-from-square"></i> DHBVN Live Outages
@@ -267,9 +273,10 @@
           </div>
           
           <div class="tabs-and-search-row">
-            <div class="search-wrapper">
+            <div class="search-wrapper" style="position: relative;">
               <i class="fa-solid fa-magnifying-glass search-icon"></i>
               <input type="text" id="searchInput" placeholder="Search area or feeder name...">
+              <span id="searchResultCount" class="search-count-pill hidden"></span>
             </div>
           </div>
 
@@ -422,9 +429,10 @@
             </div>
           </div>
 
-          <div class="search-wrapper">
+          <div class="search-wrapper" style="position: relative;">
             <i class="fa-solid fa-magnifying-glass search-icon"></i>
             <input type="text" id="historySearchInput" placeholder="Search historical area, feeder or remarks...">
+            <span id="historySearchResultCount" class="search-count-pill hidden"></span>
           </div>
         </div>
 

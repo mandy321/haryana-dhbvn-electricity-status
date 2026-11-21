@@ -91,7 +91,9 @@ const localityTitle = document.getElementById('localityTitle');
 const localityCardContainer = document.getElementById('localityCardContainer');
 const outagesSection = document.getElementById('outagesSection');
 const currentDistrictNameSpan = document.getElementById('currentDistrictName');
+const mainAppHeaderTitle = document.getElementById('mainAppHeaderTitle');
 const searchInput = document.getElementById('searchInput');
+const searchResultCount = document.getElementById('searchResultCount');
 const outagesTable = document.getElementById('outagesTable');
 const outagesTableBody = document.getElementById('outagesTableBody');
 const mobileCardsContainer = document.getElementById('mobileCardsContainer');
@@ -143,6 +145,7 @@ const tabHistory = document.getElementById('tabHistory');
 const historySection = document.getElementById('historySection');
 const historyDistrictName = document.getElementById('historyDistrictName');
 const historySearchInput = document.getElementById('historySearchInput');
+const historySearchResultCount = document.getElementById('historySearchResultCount');
 const historyTable = document.getElementById('historyTable');
 const historyTableBody = document.getElementById('historyTableBody');
 const historyEmptyState = document.getElementById('historyEmptyState');
@@ -230,7 +233,21 @@ async function initApp() {
       selectDistrict("11");
     }
 
-    
+    // Register Service Worker for PWA Offline / Standalone Capability
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./sw.js').catch(err => {
+        console.warn('PWA Service Worker registration skipped:', err);
+      });
+    }
+
+    // Automatic In-Page Polling every 5 minutes (300,000 ms)
+    setInterval(() => {
+      console.log('[Auto-Poll] Triggering background live refresh...');
+      if (typeof window.handleLiveRefresh === 'function') {
+        window.handleLiveRefresh();
+      }
+    }, 5 * 60 * 1000);
+
   } catch (error) {
     console.error('Initialization error:', error);
     showLoader(false);
@@ -580,6 +597,14 @@ function selectDistrict(districtId) {
   }
 
   
+  // Update Document & App Header Title to reflect active district
+  if (currentDistrictName) {
+    document.title = `${currentDistrictName} (Haryana) Power Outage Tracker — Live DHBVN Updates`;
+    if (mainAppHeaderTitle) {
+      mainAppHeaderTitle.textContent = `${currentDistrictName} (Haryana) Power Outage Tracker`;
+    }
+  }
+
   // Clear search and enable buttons
   searchInput.value = "";
   if (historySearchInput) historySearchInput.value = "";
@@ -882,6 +907,16 @@ function renderOutages() {
   outagesTableBody.innerHTML = "";
   mobileCardsContainer.innerHTML = "";
   
+  // Update Live Search Result Count Badge
+  if (searchResultCount) {
+    if (searchTerm) {
+      searchResultCount.textContent = `${filteredList.length} found`;
+      searchResultCount.classList.remove('hidden');
+    } else {
+      searchResultCount.classList.add('hidden');
+    }
+  }
+
   if (filteredList.length === 0) {
     outagesTable.parentElement.classList.add('hidden');
     mobileCardsContainer.classList.add('hidden');
@@ -925,6 +960,11 @@ function renderOutages() {
       categoryBadge = '<span class="category-tag rural"><i class="fa-solid fa-house-chimney"></i> Domestic</span>';
     }
 
+    // Highlight matched search terms if query present
+    const displayFeeder = highlightMatch(item.feeder, searchTerm);
+    const displayArea = highlightMatch(item.area, searchTerm);
+    const displayRemarks = highlightMatch(remarks, searchTerm);
+
     // 1. Desktop Row Builder
     const tr = document.createElement('tr');
     tr.innerHTML = `
@@ -939,10 +979,10 @@ function renderOutages() {
         </button>
       </td>
       <td>
-        <div style="font-weight: 600; color: #fff; margin-bottom: 4px;">${item.feeder}</div>
+        <div style="font-weight: 600; color: #fff; margin-bottom: 4px;">${displayFeeder}</div>
         <div>${categoryBadge}</div>
       </td>
-      <td>${item.area}</td>
+      <td>${displayArea}</td>
       <td>${formatTimeTo12Hr(item.start_time) || 'N/A'}</td>
       <td style="font-weight: 500; color: ${item.expected_restoration_time ? '#67e8f9' : 'var(--text-dim)'};">
         ${formatTimeTo12Hr(item.expected_restoration_time) || 'Pending Estimate'}
@@ -954,7 +994,7 @@ function renderOutages() {
           </div>
           <span class="sev-tag ${severity}">${severityLabel}</span>
         </div>
-        <div style="font-size: 13px; color: var(--text-muted);">${remarks}</div>
+        <div style="font-size: 13px; color: var(--text-muted);">${displayRemarks}</div>
       </td>
     `;
     outagesTableBody.appendChild(tr);
@@ -972,7 +1012,7 @@ function renderOutages() {
             <i class="fa-solid fa-share-nodes"></i>
           </button>
           <div>
-            <div style="font-weight: 600; color: #fff;">${item.feeder}</div>
+            <div style="font-weight: 600; color: #fff;">${displayFeeder}</div>
             <div style="margin-top: 3px;">${categoryBadge}</div>
           </div>
         </div>
@@ -985,7 +1025,7 @@ function renderOutages() {
       </div>
       <div class="mobile-card-row">
         <div class="label">Area Name</div>
-        <div class="val" style="font-weight: 500; color: #fff;">${item.area}</div>
+        <div class="val" style="font-weight: 500; color: #fff;">${displayArea}</div>
       </div>
       <div class="mobile-card-row">
         <div class="label">Cut Started</div>
@@ -997,7 +1037,7 @@ function renderOutages() {
       </div>
       <div class="mobile-card-row">
         <div class="label">Remarks</div>
-        <div class="val" style="font-style: italic;">${remarks}</div>
+        <div class="val" style="font-style: italic;">${displayRemarks}</div>
       </div>
     `;
     mobileCardsContainer.appendChild(card);
@@ -1618,6 +1658,16 @@ function renderHistory() {
   
   historyTableBody.innerHTML = "";
   
+  // Update History Search Result Count Badge
+  if (historySearchResultCount) {
+    if (searchTerm) {
+      historySearchResultCount.textContent = `${filtered.length} found`;
+      historySearchResultCount.classList.remove('hidden');
+    } else {
+      historySearchResultCount.classList.add('hidden');
+    }
+  }
+
   if (filtered.length === 0) {
     historyTable.parentElement.classList.add('hidden');
     historyEmptyState.classList.remove('hidden');
@@ -1630,15 +1680,18 @@ function renderHistory() {
   filtered.forEach(item => {
     const severity = getSeverity(item);
     const severityLabel = severity.toUpperCase();
+    const displayFeeder = highlightMatch(item.feeder, searchTerm);
+    const displayArea = highlightMatch(item.area, searchTerm);
+    const displayRemarks = highlightMatch(item.remarks || '', searchTerm);
     
     const tr = document.createElement('tr');
     tr.innerHTML = `
       <td style="color: var(--text-dim); font-size: 13px;">${item.scraped_at || 'N/A'}</td>
-      <td style="font-weight: 600; color: #fff;">${item.feeder}</td>
-      <td>${item.area}</td>
+      <td style="font-weight: 600; color: #fff;">${displayFeeder}</td>
+      <td>${displayArea}</td>
       <td>${formatTimeTo12Hr(item.start_time) || 'N/A'}</td>
       <td>${formatTimeTo12Hr(item.expected_restoration_time) || 'N/A'}</td>
-      <td style="font-size: 13px;">${item.remarks || ''}</td>
+      <td style="font-size: 13px;">${displayRemarks}</td>
       <td><span class="sev-tag ${severity}">${severityLabel}</span></td>
     `;
     historyTableBody.appendChild(tr);
@@ -1739,6 +1792,22 @@ function isFuzzyMatch(combinedText, query) {
       return false;
     });
   });
+}
+
+// Helper: Highlight matched search keywords inside text
+function highlightMatch(text, query) {
+  if (!text) return '';
+  if (!query || !query.trim()) return text;
+  const terms = query.trim().split(/\s+/).filter(t => t.length >= 2);
+  if (terms.length === 0) return text;
+
+  try {
+    const escaped = terms.map(t => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+    const regex = new RegExp(`(${escaped.join('|')})`, 'gi');
+    return text.replace(regex, '<mark class="search-highlight">$1</mark>');
+  } catch (e) {
+    return text;
+  }
 }
 
 // Helper: Check if outage is planned maintenance (strictly excluding UNPLANNED)
