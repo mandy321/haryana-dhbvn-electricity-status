@@ -215,8 +215,11 @@ async function initApp() {
           complaintInput.focus();
           return;
         }
-        // Launch official WhatsApp bot with pre-filled STATUS command
-        const waUrl = `https://wa.me/918813999708?text=STATUS%20${encodeURIComponent(ticket)}`;
+        // Detect if running on desktop/laptop or mobile
+        const isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
+        const waUrl = isMobile
+          ? `https://wa.me/918813999708?text=STATUS%20${encodeURIComponent(ticket)}`
+          : `https://web.whatsapp.com/send?phone=918813999708&text=STATUS%20${encodeURIComponent(ticket)}`;
         window.open(waUrl, '_blank');
       };
       trackComplaintBtn.addEventListener('click', runTrack);
