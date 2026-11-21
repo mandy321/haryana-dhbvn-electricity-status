@@ -203,6 +203,27 @@ async function initApp() {
     locateBtn.addEventListener('click', handleGeolocation);
     refreshBtn.addEventListener('click', handleLiveRefresh);
 
+    // Complaint Tracker Handler
+    const trackComplaintBtn = document.getElementById('trackComplaintBtn');
+    const complaintInput = document.getElementById('complaintInput');
+    if (trackComplaintBtn && complaintInput) {
+      const runTrack = () => {
+        const ticket = complaintInput.value.trim().toUpperCase();
+        if (!ticket) {
+          alert('Please enter your DHBVN Complaint Number (e.g. DS21112601393)');
+          complaintInput.focus();
+          return;
+        }
+        // Launch official WhatsApp bot with pre-filled STATUS command
+        const waUrl = `https://wa.me/918813999708?text=STATUS%20${encodeURIComponent(ticket)}`;
+        window.open(waUrl, '_blank');
+      };
+      trackComplaintBtn.addEventListener('click', runTrack);
+      complaintInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') runTrack();
+      });
+    }
+
     
     // Setup history/tab listeners
     tabLive.addEventListener('click', () => switchTab('live'));

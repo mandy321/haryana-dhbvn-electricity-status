@@ -120,6 +120,25 @@
               <span id="locateBtnText">Use My Location</span>
             </button>
 
+            <!-- Live Complaint Tracker Widget -->
+            <div class="complaint-tracker-widget glass-card" style="margin-top: 10px; padding: 14px; width: 100%; border: 1px solid rgba(56, 189, 248, 0.25); background: rgba(56, 189, 248, 0.05);">
+              <h3 style="font-family: var(--font-heading); font-size: 13px; font-weight: 600; margin-bottom: 8px; color: #fff; display: flex; align-items: center; justify-content: space-between;">
+                <span style="display: flex; align-items: center; gap: 6px;">
+                  <i class="fa-solid fa-file-circle-check" style="color: #38bdf8;"></i> Track Your DHBVN Complaint
+                </span>
+                <span style="font-size: 10px; color: var(--text-dim); font-weight: normal;">Live ETR / Status</span>
+              </h3>
+              <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+                <input type="text" id="complaintInput" placeholder="Enter ticket e.g. DS21112601393" style="flex: 1; min-width: 170px; background: rgba(0, 0, 0, 0.35); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 8px; padding: 8px 12px; color: #fff; font-size: 12px; outline: none; font-family: monospace;">
+                <button id="trackComplaintBtn" class="btn" style="background: #38bdf8; color: #0c0e17; font-weight: 600; font-size: 12px; padding: 8px 14px; border-radius: 8px; border: none; cursor: pointer; display: flex; align-items: center; gap: 4px; transition: transform 0.15s ease;">
+                  <i class="fa-solid fa-bolt"></i> Track Status
+                </button>
+              </div>
+              <p style="font-size: 11px; color: var(--text-dim); margin-top: 6px; margin-bottom: 0;">
+                <i class="fa-solid fa-circle-info"></i> Direct lookup via DHBVN CHS & WhatsApp automated dispatch.
+              </p>
+            </div>
+
             <!-- All Districts Status List -->
             <div class="all-districts-status-card glass-card" style="margin-top: 10px; padding: 14px; width: 100%;">
               <h3 style="font-family: var(--font-heading); font-size: 13px; font-weight: 600; margin-bottom: 12px; color: #fff; display: flex; align-items: center; gap: 6px;">
