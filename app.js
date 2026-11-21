@@ -1402,11 +1402,9 @@ function updateArtAndLeaderboard() {
   const sevenDaysAgo = nowTime - (7 * 24 * 60 * 60 * 1000);
   const fourteenDaysAgo = nowTime - (14 * 24 * 60 * 60 * 1000);
 
-  // 1. Calculate Average Restoration Time (ART) separately for Domestic & Agricultural
-  let domDurationMs = 0;
-  let domCount = 0;
-  let agriDurationMs = 0;
-  let agriCount = 0;
+  // 1. Calculate Typical (Median) Restoration Time separately for Domestic & Agricultural
+  const domDurations = [];
+  const agriDurations = [];
 
   currentDistrictHistory.forEach(item => {
     const timestamp = item.timestamp || (item.start_time ? parseDHBVNDate(item.start_time)?.getTime() : null);
@@ -1432,29 +1430,36 @@ function updateArtAndLeaderboard() {
 
     // Filter out anomalous durations (under 1 min or over 72 hours)
     if (diff > 60 * 1000 && diff < 72 * 60 * 60 * 1000) {
+      const hours = diff / (1000 * 60 * 60);
       const cat = getFeederCategory(item.feeder);
       if (cat === 'agri') {
-        agriDurationMs += diff;
-        agriCount++;
+        agriDurations.push(hours);
       } else {
-        domDurationMs += diff;
-        domCount++;
+        domDurations.push(hours);
       }
     }
   });
 
-  // Domestic ART
-  if (domCount > 0) {
-    const avgDomHours = (domDurationMs / domCount) / (1000 * 60 * 60);
+  // Calculate Median helper
+  const getMedian = (arr) => {
+    if (!arr || arr.length === 0) return 0;
+    const sorted = [...arr].sort((a, b) => a - b);
+    const mid = Math.floor(sorted.length / 2);
+    return sorted.length % 2 !== 0 ? sorted[mid] : (sorted[mid - 1] + sorted[mid]) / 2;
+  };
+
+  // Domestic Typical (Median) ART
+  if (domDurations.length > 0) {
+    const medianDomHours = getMedian(domDurations);
     if (statAvgFixTime) {
-      statAvgFixTime.textContent = `${avgDomHours.toFixed(1)} hrs`;
+      statAvgFixTime.textContent = `${medianDomHours.toFixed(1)} hrs`;
     }
 
     // Color code: Green (< 2 hrs), Amber (2-4 hrs), Red (> 4 hrs)
     if (statArtGlow) {
-      if (avgDomHours < 2) {
+      if (medianDomHours < 2) {
         statArtGlow.className = "stat-icon-wrapper green-glow";
-      } else if (avgDomHours <= 4) {
+      } else if (medianDomHours <= 4) {
         statArtGlow.className = "stat-icon-wrapper orange-glow";
       } else {
         statArtGlow.className = "stat-icon-wrapper red-glow";
@@ -1465,11 +1470,11 @@ function updateArtAndLeaderboard() {
     if (statArtGlow) statArtGlow.className = "stat-icon-wrapper green-glow";
   }
 
-  // Agri AP ART / Cycle
-  if (agriCount > 0) {
-    const avgAgriHours = (agriDurationMs / agriCount) / (1000 * 60 * 60);
+  // Agri AP Typical (Median) Cycle
+  if (agriDurations.length > 0) {
+    const medianAgriHours = getMedian(agriDurations);
     if (statAgriFixTime) {
-      statAgriFixTime.textContent = `${avgAgriHours.toFixed(1)} hrs`;
+      statAgriFixTime.textContent = `${medianAgriHours.toFixed(1)} hrs`;
     }
   } else {
     if (statAgriFixTime) statAgriFixTime.textContent = "--";
