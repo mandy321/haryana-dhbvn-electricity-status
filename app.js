@@ -140,7 +140,11 @@ const monthlyReportSelect = document.getElementById('monthlyReportSelect');
 // View Tabs Elements
 const tabNavigationSection = document.getElementById('tabNavigationSection');
 const tabLive = document.getElementById('tabLive');
+const tabProtocol = document.getElementById('tabProtocol');
 const tabHistory = document.getElementById('tabHistory');
+const protocolSection = document.getElementById('protocolSection');
+const jeSearchInput = document.getElementById('jeSearchInput');
+const jeTableBody = document.getElementById('jeTableBody');
 
 // History Section Elements
 const historySection = document.getElementById('historySection');
@@ -160,17 +164,17 @@ async function initApp() {
   try {
     // Load pinned area from LocalStorage
     loadPinnedArea();
-    
+
     // Check for query parameters for shared areas
     parseSharedUrl();
-    
+
     // Fetch data/outages.json (the pre-cached Action database)
     const response = await fetch('data/outages.json');
     if (!response.ok) {
       throw new Error('Outages data file not found.');
     }
     outagesData = await response.json();
-    
+
     // Fetch feeder master baseline data
     try {
       const masterRes = await fetch('data/feeder_master.json');
@@ -181,23 +185,23 @@ async function initApp() {
       console.warn('Failed to load feeder master baseline:', err);
     }
 
-    
+
     // Set last updated time
     if (outagesData.last_updated) {
       lastUpdatedTime.textContent = getLastUpdatedText();
     }
-    
+
     // Fetch and inject SVG Map
     await loadSVGMap();
-    
+
     // Color-code the map
     colorSVGMap();
-    
+
     // Load monthly reports dropdown
     await loadMonthlyReportsList();
-    
+
     showLoader(false);
-    
+
     // Setup event listeners
     districtSelect.addEventListener('change', handleDistrictChange);
     searchInput.addEventListener('input', handleSearch);
@@ -228,13 +232,32 @@ async function initApp() {
       });
     }
 
-    
+
     // Setup history/tab listeners
     tabLive.addEventListener('click', () => switchTab('live'));
+    if (tabProtocol) {
+      tabProtocol.addEventListener('click', () => switchTab('protocol'));
+    }
     tabHistory.addEventListener('click', () => switchTab('history'));
     historySearchInput.addEventListener('input', handleHistorySearch);
     exportCsvBtn.addEventListener('click', handleExportCsv);
-    
+
+    // Setup JE directory filter listener
+    if (jeSearchInput && jeTableBody) {
+      jeSearchInput.addEventListener('input', (e) => {
+        const q = e.target.value.toLowerCase().trim();
+        const rows = jeTableBody.querySelectorAll('tr');
+        rows.forEach(r => {
+          const text = r.innerText.toLowerCase();
+          if (!q || text.includes(q)) {
+            r.style.display = '';
+          } else {
+            r.style.display = 'none';
+          }
+        });
+      });
+    }
+
     // Setup severity chips listeners
     document.querySelectorAll('.filter-chip').forEach(chip => {
       chip.addEventListener('click', (e) => {
@@ -245,7 +268,7 @@ async function initApp() {
         renderOutages();
       });
     });
-    
+
     // Handle initial selections: Shared area takes precedence over Pinned area
     if (sharedArea) {
       renderSharedArea();
@@ -300,7 +323,7 @@ function parseSharedUrl() {
   const distId = params.get('districtId');
   const feeder = params.get('feeder');
   const area = params.get('area');
-  
+
   if (distId && feeder && area && DISTRICT_ID_TO_NAME[distId]) {
     sharedArea = {
       districtId: distId,
@@ -314,11 +337,11 @@ function parseSharedUrl() {
 }
 
 // Share Area Action Handler
-window.shareArea = function(districtId, districtName, feeder, area) {
+window.shareArea = function (districtId, districtName, feeder, area) {
   const shareUrl = `${window.location.origin}${window.location.pathname}?districtId=${districtId}&feeder=${encodeURIComponent(feeder)}&area=${encodeURIComponent(area)}`;
-  
+
   const textMsg = `Check live electricity outage status for ${area} (${feeder}) under ${districtName} district:`;
-  
+
   if (navigator.share) {
     navigator.share({
       title: 'DHBVN Electricity Outage Status',
@@ -343,9 +366,9 @@ function renderSharedArea() {
     sharedSection.classList.add('hidden');
     return;
   }
-  
+
   sharedSection.classList.remove('hidden');
-  
+
   const list = outagesData.districts[sharedArea.districtName] || [];
   const nowISTStr = new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata' });
   const nowIST = new Date(nowISTStr);
@@ -359,9 +382,9 @@ function renderSharedArea() {
     }
     return true;
   });
-  
+
   sharedCard.className = "shared-card glass-card";
-  
+
   if (activeCut) {
     sharedCard.classList.add('active-outage');
     const remarks = activeCut.remarks || '';
@@ -436,10 +459,10 @@ function renderSharedArea() {
 }
 
 // Dismiss Shared View & clear url parameters
-window.dismissSharedArea = function() {
+window.dismissSharedArea = function () {
   sharedArea = null;
   sharedSection.classList.add('hidden');
-  
+
   // Remove URL query parameters without reloading
   window.history.replaceState({}, document.title, window.location.pathname);
 };
@@ -466,7 +489,7 @@ function savePinnedArea(districtId, districtName, feeder, area) {
   renderOutages();
 }
 
-window.unpinArea = function() {
+window.unpinArea = function () {
   localStorage.removeItem('pinned_dhbvn_outage');
   pinnedArea = null;
   pinnedSection.classList.add('hidden');
@@ -479,9 +502,9 @@ function renderPinnedArea() {
     pinnedSection.classList.add('hidden');
     return;
   }
-  
+
   pinnedSection.classList.remove('hidden');
-  
+
   // Search the district's outages list for this pinned area status
   const list = outagesData.districts[pinnedArea.districtName] || [];
   const nowISTStr = new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata' });
@@ -496,9 +519,9 @@ function renderPinnedArea() {
     }
     return true;
   });
-  
+
   pinnedCard.className = "pinned-card glass-card";
-  
+
   if (activeCut) {
     pinnedCard.classList.add('active-outage');
     const remarks = activeCut.remarks || '';
@@ -583,14 +606,14 @@ function handleDistrictChange(e) {
 // Select a District and Update Views
 function selectDistrict(districtId) {
   if (!districtId) return;
-  
+
   currentDistrictId = districtId;
   currentDistrictName = DISTRICT_ID_TO_NAME[districtId];
-  
+
   districtSelect.value = districtId;
   currentDistrictNameSpan.textContent = currentDistrictName;
   if (historyDistrictName) historyDistrictName.textContent = currentDistrictName;
-  
+
   // Highlight map district selected state
   if (mapContainer) {
     const districts = mapContainer.querySelectorAll('.map-district');
@@ -603,7 +626,7 @@ function selectDistrict(districtId) {
       }
     });
   }
-  
+
   // Highlight active row in status list
   const statusGrid = document.getElementById('allDistrictsStatusGrid');
   if (statusGrid) {
@@ -621,7 +644,7 @@ function selectDistrict(districtId) {
     });
   }
 
-  
+
   // Update Document & App Header Title to reflect active district
   if (currentDistrictName) {
     document.title = `${currentDistrictName} (Haryana) Power Outage Tracker — Live DHBVN Updates`;
@@ -634,22 +657,22 @@ function selectDistrict(districtId) {
   searchInput.value = "";
   if (historySearchInput) historySearchInput.value = "";
   refreshBtn.disabled = false;
-  
+
   // Make panels visible
   statsPanel.classList.remove('hidden');
   if (tabNavigationSection) tabNavigationSection.classList.remove('hidden');
-  
+
   updateStats();
   checkLocalityOutages();
   renderPinnedArea();
   renderSharedArea();
-  
+
   // Fetch history for stats in background
   fetchDistrictHistoryForStats(currentDistrictName);
-  
+
   // Sync tab status and render
   switchTab(currentViewTab);
-  
+
   // Auto-refresh live data silently in the background so users always see
   // the latest restoration times, even if the cached JSON is from an earlier scrape.
   autoRefreshDistrict(districtId);
@@ -660,13 +683,13 @@ function selectDistrict(districtId) {
 async function autoRefreshDistrict(districtId) {
   if (!districtId) return;
   const districtName = DISTRICT_ID_TO_NAME[districtId];
-  
+
   try {
     const xmlRequest = `<?xml version="1.0"?><Request VERSION="2" LANGUAGE_ID="1" LOCATION=""><Company Company_Id="93" /><Project Project_Id="304" /><User User_Id="Anonymous" /><IUVLogin IUVLogin_Id="Anonymous" /><ROLE ROLE_ID="1595" /><Event Control_Id="130404" /><Child Control_Id="125681" Report="HTML" AC_ID="163944"><Parent Control_Id="130402" Value="${districtId}" Data_Form_Id="" XValue="${districtId}" YValue="" ZValue="" /></Child></Request>`;
     const base64Payload = btoa(xmlRequest);
-    
+
     const url = DHBVN_PROXY_URL;
-    
+
     const response = await fetch(url, {
       method: 'POST',
       headers: {
@@ -680,16 +703,16 @@ async function autoRefreshDistrict(districtId) {
       },
       body: JSON.stringify({ inputxml: base64Payload, DocVersion: 1 })
     });
-    
+
     if (!response.ok) return; // fail silently
-    
+
     const responseText = await response.text();
     const parser = new DOMParser();
     const xmlDoc = parser.parseFromString(responseText, 'text/xml');
     const rowsets = Array.from(xmlDoc.querySelectorAll('Rowset'));
-    
+
     if (rowsets.length === 0) return; // empty response, don't overwrite
-    
+
     const list = rowsets.map(row => ({
       feeder: row.querySelector('FEEDER')?.textContent || '',
       area: row.querySelector('AREA')?.textContent || '',
@@ -698,12 +721,12 @@ async function autoRefreshDistrict(districtId) {
       dt: row.querySelector('DT')?.textContent || '',
       remarks: row.querySelector('ADDRESS')?.textContent || ''
     }));
-    
+
     // Overwrite in-memory data for this district
     outagesData.districts[districtName] = list;
     outagesData.last_updated = new Date().toISOString();
     lastUpdatedTime.innerHTML = `<i class="fa-regular fa-clock"></i> Data last updated: ${getLastUpdatedText()}`;
-    
+
     // If the user is still on this district, re-render silently
     if (currentDistrictId === districtId) {
       updateStats();
@@ -713,7 +736,7 @@ async function autoRefreshDistrict(districtId) {
     renderPinnedArea();
     renderSharedArea();
     colorSVGMap();
-    
+
   } catch (err) {
     // Auto-refresh failure is silent — user can still manually click Refresh Live
     console.warn('Auto-refresh failed silently:', err);
@@ -723,11 +746,11 @@ async function autoRefreshDistrict(districtId) {
 // Compute Stats Counter Values
 function updateStats() {
   const list = outagesData.districts[currentDistrictName] || [];
-  
+
   const nowISTStr = new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata' });
   const nowIST = new Date(nowISTStr);
   const nowTime = nowIST.getTime();
-  
+
   // Filter active list (exclude resolved in the past)
   const activeList = list.filter(item => {
     const end = parseDHBVNDate(item.expected_restoration_time);
@@ -736,7 +759,7 @@ function updateStats() {
     }
     return true;
   });
-  
+
   const total = activeList.length;
   let planned = 0;
   let active = 0;
@@ -744,7 +767,7 @@ function updateStats() {
   const uniqueActiveAreas = new Set();
   const domesticActiveFeeders = new Set();
   const agriActiveFeeders = new Set();
-  
+
   activeList.forEach(item => {
     if (isPlannedOutage(item.remarks)) {
       planned++;
@@ -764,11 +787,11 @@ function updateStats() {
       uniqueActiveAreas.add(item.area.trim().toUpperCase());
     }
   });
-  
+
   statTotalOutages.textContent = total;
   statActive.textContent = active;
   statPlanned.textContent = planned;
-  
+
   if (statEstimatedComplaints) {
     // Total physical outages currently active across entire Haryana grid
     let totalStatewideOutages = 0;
@@ -781,21 +804,21 @@ function updateStats() {
     const estimatedDailyCalls = Math.max(1400, Math.round(totalStatewideOutages * 0.85));
     statEstimatedComplaints.textContent = `${estimatedDailyCalls.toLocaleString()}+`;
   }
-  
+
   // 1. Get baseline (Method 2: master list)
   const masterFeeders = (feederMasterData && feederMasterData[currentDistrictName]?.feeders) || [];
   const masterAreas = (feederMasterData && feederMasterData[currentDistrictName]?.areas) || [];
-  
+
   const baselineFeeders = new Set(masterFeeders.map(f => f.trim().toUpperCase()));
   const baselineAreas = new Set(masterAreas.map(a => a.trim().toUpperCase()));
-  
+
   // 2. Dynamic expansion (Method 1: fallbacks for new/commissioned feeders or areas)
   uniqueActiveFeeders.forEach(f => baselineFeeders.add(f));
   uniqueActiveAreas.forEach(a => baselineAreas.add(a));
-  
+
   const totalFeedersCount = baselineFeeders.size || 1; // avoid division by zero
   const totalAreasCount = baselineAreas.size || 1;
-  
+
   // Categorized baselines
   let baselineDomesticCount = 0;
   let baselineAgriCount = 0;
@@ -809,17 +832,17 @@ function updateStats() {
   // 3. Compute Percentages
   const percentFeedersDown = ((uniqueActiveFeeders.size / totalFeedersCount) * 100);
   const percentFeedersUp = 100 - percentFeedersDown;
-  
+
   const percentAreasDown = ((uniqueActiveAreas.size / totalAreasCount) * 100);
   const percentAreasUp = 100 - percentAreasDown;
-  
+
   const percentAreasUpStr = percentAreasUp.toFixed(1);
   const percentAreasDownStr = percentAreasDown.toFixed(1);
 
   // Domestic vs Agri uptime percentages
   const domesticUpPct = Math.max(0, 100 - ((domesticActiveFeeders.size / baselineDomesticCount) * 100)).toFixed(1);
   const agriUpPct = Math.max(0, 100 - ((agriActiveFeeders.size / baselineAgriCount) * 100)).toFixed(1);
-  
+
   // Update Status Banner elements
   if (districtStatusHeader) {
     districtStatusHeader.classList.remove('hidden');
@@ -834,10 +857,10 @@ function updateStats() {
     if (statusAgriUp) {
       statusAgriUp.textContent = `${agriUpPct}%`;
     }
-    
+
     if (healthPercentText) {
       healthPercentText.textContent = `${percentAreasUpStr}% Power Up`;
-      
+
       // Color coding text dynamically
       if (percentAreasUp >= 95) {
         healthPercentText.style.color = 'var(--success-color)';
@@ -847,10 +870,10 @@ function updateStats() {
         healthPercentText.style.color = 'var(--danger-color)';
       }
     }
-    
+
     if (districtHealthBar) {
       districtHealthBar.style.width = `${percentAreasUpStr}%`;
-      
+
       // Color coding progress bar dynamically
       if (percentAreasUp >= 95) {
         districtHealthBar.style.background = 'linear-gradient(90deg, var(--success-color), #34d399)';
@@ -860,7 +883,7 @@ function updateStats() {
         districtHealthBar.style.background = 'linear-gradient(90deg, var(--danger-color), #f43f5e)';
       }
     }
-    
+
     if (total > 0) {
       districtStatusBadge.textContent = "ACTIVE";
       districtStatusBadge.className = "status-badge active-outage";
@@ -876,7 +899,7 @@ function updateStats() {
 function renderOutages() {
   const districtList = outagesData.districts[currentDistrictName] || [];
   const searchTerm = searchInput.value.toLowerCase().trim();
-  
+
   // Filter by text search, active status, and severity
   const nowISTStr = new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata' });
   const nowIST = new Date(nowISTStr);
@@ -887,39 +910,39 @@ function renderOutages() {
     const area = item.area || '';
     const remarks = item.remarks || '';
     const matchesSearch = isFuzzyMatch(`${feeder} ${area} ${remarks}`, searchTerm);
-    
+
     if (!matchesSearch) return false;
-    
+
     // Check if resolved
     const end = parseDHBVNDate(item.expected_restoration_time);
     if (end && end.getTime() < nowTime) {
       return false; // resolved/past
     }
-    
+
     if (currentSeverityFilter === 'all') return true;
-    
+
     // Feeder category filters
     if (currentSeverityFilter === 'urban' || currentSeverityFilter === 'rural' || currentSeverityFilter === 'agri') {
       return getFeederCategory(item.feeder) === currentSeverityFilter;
     }
-    
+
     const isPlanned = isPlannedOutage(item.remarks);
-    
+
     if (currentSeverityFilter === 'planned') return isPlanned;
     if (currentSeverityFilter === 'unplanned') return !isPlanned;
-    
+
     return getSeverity(item) === currentSeverityFilter;
   });
-  
+
   // Sort by user locality proximity if location is set for the current district
   const searchKeys = (userLocalityData.district && userLocalityData.district === currentDistrictName)
     ? [
-        userLocalityData.suburb,
-        userLocalityData.neighbourhood,
-        userLocalityData.village,
-        userLocalityData.town
-      ].filter(key => key && key.length > 2)
-       .map(key => key.toLowerCase().trim())
+      userLocalityData.suburb,
+      userLocalityData.neighbourhood,
+      userLocalityData.village,
+      userLocalityData.town
+    ].filter(key => key && key.length > 2)
+      .map(key => key.toLowerCase().trim())
     : [];
 
   if (searchKeys.length > 0) {
@@ -937,7 +960,7 @@ function renderOutages() {
       }
       return score;
     };
-    
+
     filteredList.sort((a, b) => {
       return getLocalityScore(b) - getLocalityScore(a);
     });
@@ -945,7 +968,7 @@ function renderOutages() {
 
   outagesTableBody.innerHTML = "";
   mobileCardsContainer.innerHTML = "";
-  
+
   // Update Live Search Result Count Badge
   if (searchResultCount) {
     if (searchTerm) {
@@ -962,15 +985,15 @@ function renderOutages() {
     emptyState.classList.remove('hidden');
     return;
   }
-  
+
   outagesTable.parentElement.classList.remove('hidden');
   mobileCardsContainer.classList.remove('hidden');
   emptyState.classList.add('hidden');
-  
+
   filteredList.forEach(item => {
     const remarks = item.remarks || '';
     const isPlanned = isPlannedOutage(remarks);
-    
+
     const badgeClass = isPlanned ? 'badge-warning' : 'badge-danger';
     const badgeText = isPlanned ? 'Planned' : 'Unplanned';
     const badgeIcon = isPlanned ? 'fa-screwdriver-wrench' : 'fa-triangle-exclamation';
@@ -980,11 +1003,11 @@ function renderOutages() {
     const severityLabel = severity.toUpperCase();
 
     // Is this row currently pinned?
-    const isPinned = pinnedArea && 
-                     pinnedArea.districtName === currentDistrictName && 
-                     pinnedArea.feeder === item.feeder && 
-                     pinnedArea.area === item.area;
-                     
+    const isPinned = pinnedArea &&
+      pinnedArea.districtName === currentDistrictName &&
+      pinnedArea.feeder === item.feeder &&
+      pinnedArea.area === item.area;
+
     const pinClass = isPinned ? 'pinned' : '';
     const pinIcon = isPinned ? 'fa-solid' : 'fa-regular';
 
@@ -1087,12 +1110,12 @@ function renderOutages() {
 }
 
 // Toggle Pin Click Event
-window.togglePin = function(feeder, area) {
-  const isPinned = pinnedArea && 
-                   pinnedArea.districtName === currentDistrictName && 
-                   pinnedArea.feeder === feeder && 
-                   pinnedArea.area === area;
-  
+window.togglePin = function (feeder, area) {
+  const isPinned = pinnedArea &&
+    pinnedArea.districtName === currentDistrictName &&
+    pinnedArea.feeder === feeder &&
+    pinnedArea.area === area;
+
   if (isPinned) {
     unpinArea();
   } else {
@@ -1112,37 +1135,37 @@ function handleGeolocation() {
     alert("Geolocation is not supported by your browser.");
     return;
   }
-  
+
   localitySection.classList.add('hidden');
   geoFeedback.classList.remove('hidden');
   geoFeedbackText.textContent = "Requesting GPS coordinates...";
   locateBtn.disabled = true;
-  
+
   navigator.geolocation.getCurrentPosition(
     async (position) => {
       const lat = position.coords.latitude;
       const lon = position.coords.longitude;
-      
+
       geoFeedbackText.textContent = "Geocoding your coordinates...";
-      
+
       try {
         const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&zoom=14`, {
           headers: { 'Accept-Language': 'en' }
         });
-        
+
         if (!response.ok) {
           throw new Error('Reverse geocoding lookup failure.');
         }
-        
+
         const data = await response.json();
         const address = data.address || {};
         console.log('Address Details:', address);
-        
+
         userLocalityData.suburb = address.suburb || "";
         userLocalityData.neighbourhood = address.neighbourhood || address.residential || "";
         userLocalityData.village = address.village || address.hamlet || "";
         userLocalityData.town = address.town || address.suburb || "";
-        
+
         // Find mapped District ID
         let detectedDistrictId = "";
         const possibleDistKeys = [
@@ -1151,7 +1174,7 @@ function handleGeolocation() {
           address.city,
           address.district
         ];
-        
+
         for (const rawKey of possibleDistKeys) {
           if (!rawKey) continue;
           const cleanKey = rawKey.replace(/district/gi, "").trim().toLowerCase();
@@ -1160,21 +1183,21 @@ function handleGeolocation() {
             break;
           }
         }
-        
+
         if (!detectedDistrictId) {
           throw new Error("Unable to map your locality to a DHBVN district.");
         }
-        
+
         userLocalityData.district = DISTRICT_ID_TO_NAME[detectedDistrictId];
         const localDisplay = userLocalityData.suburb || userLocalityData.village || 'Local Area';
         geoFeedbackText.textContent = `Located: ${userLocalityData.district} (${localDisplay})`;
-        
+
         setTimeout(() => {
           geoFeedback.classList.add('hidden');
           locateBtn.disabled = false;
           selectDistrict(detectedDistrictId);
         }, 1500);
-        
+
       } catch (err) {
         console.error('Reverse lookup error:', err);
         geoFeedbackText.textContent = "Reverse geocoding failed.";
@@ -1208,37 +1231,37 @@ function checkLocalityOutages() {
     localitySection.classList.add('hidden');
     return;
   }
-  
+
   const searchKeys = [
     userLocalityData.suburb,
     userLocalityData.neighbourhood,
     userLocalityData.village,
     userLocalityData.town
   ].filter(key => key.length > 2)
-   .map(key => key.toLowerCase().trim());
-   
+    .map(key => key.toLowerCase().trim());
+
   if (searchKeys.length === 0) {
     localitySection.classList.add('hidden');
     return;
   }
-  
+
   const list = outagesData.districts[currentDistrictName] || [];
   const localOutages = list.filter(item => {
     const area = (item.area || '').toLowerCase();
     return searchKeys.some(key => area.includes(key) || key.includes(area));
   });
-  
+
   if (localOutages.length === 0) {
     localitySection.classList.add('hidden');
     return;
   }
-  
+
   localityCardContainer.innerHTML = "";
   localitySection.classList.remove('hidden');
-  
+
   const userPlaceName = userLocalityData.suburb || userLocalityData.village || userLocalityData.neighbourhood || 'your area';
   localityTitle.innerHTML = `Active power cuts detected in <span style="color: var(--danger-color);">${userPlaceName}</span>`;
-  
+
   localOutages.forEach(item => {
     const remarks = item.remarks || 'Active Cut';
     const card = document.createElement('div');
@@ -1267,24 +1290,24 @@ function checkLocalityOutages() {
 }
 
 // Live On-Demand Refresh
-window.handleLiveRefresh = async function(eOrDistrictId) {
+window.handleLiveRefresh = async function (eOrDistrictId) {
   // Determine if called from event listener or programmatic call
   const targetDistrictId = (typeof eOrDistrictId === 'string' && eOrDistrictId) ? eOrDistrictId : currentDistrictId;
   const districtId = targetDistrictId || currentDistrictId;
   if (!districtId) return;
-  
+
   const isTargetedRefresh = (typeof eOrDistrictId === 'string' && !!eOrDistrictId);
   const districtName = DISTRICT_ID_TO_NAME[districtId];
-  
+
   if (!isTargetedRefresh) {
     refreshBtn.disabled = true;
     refreshIcon.classList.add('spin-animation');
     refreshBtnText.textContent = "Checking...";
   }
-  
+
   const pinnedRefreshIcons = document.querySelectorAll('.pinned-refresh-btn i, .shared-refresh-btn i');
   pinnedRefreshIcons.forEach(icon => icon.classList.add('fa-spin'));
-  
+
   let liveDataLoaded = false;
 
   // Try Path A: If custom Cloudflare Worker proxy is configured and alive
@@ -1292,7 +1315,7 @@ window.handleLiveRefresh = async function(eOrDistrictId) {
     try {
       const xmlRequest = `<?xml version="1.0"?><Request VERSION="2" LANGUAGE_ID="1" LOCATION=""><Company Company_Id="93" /><Project Project_Id="304" /><User User_Id="Anonymous" /><IUVLogin IUVLogin_Id="Anonymous" /><ROLE ROLE_ID="1595" /><Event Control_Id="130404" /><Child Control_Id="125681" Report="HTML" AC_ID="163944"><Parent Control_Id="130402" Value="${districtId}" Data_Form_Id="" XValue="${districtId}" YValue="" ZValue="" /></Child></Request>`;
       const base64Payload = btoa(xmlRequest);
-      
+
       const response = await fetch(DHBVN_PROXY_URL, {
         method: 'POST',
         headers: {
@@ -1312,7 +1335,7 @@ window.handleLiveRefresh = async function(eOrDistrictId) {
         const parser = new DOMParser();
         const xmlDoc = parser.parseFromString(responseText, "text/xml");
         const rowsets = Array.from(xmlDoc.querySelectorAll('Rowset'));
-        
+
         const list = rowsets.map(row => ({
           feeder: row.querySelector('FEEDER')?.textContent || '',
           area: row.querySelector('AREA')?.textContent || '',
@@ -1387,32 +1410,32 @@ function formatTimeTo12Hr(timeStr) {
   if (!timeStr || timeStr.trim() === "" || timeStr.trim().toUpperCase() === "N/A" || timeStr.trim().toUpperCase() === "PENDING ESTIMATE") {
     return timeStr;
   }
-  
+
   // Example pattern: "20-Jun-2026 18:03:54" or "20-Jun-2026 18:03"
   const parts = timeStr.trim().split(/\s+/);
   if (parts.length < 2) {
     return timeStr;
   }
-  
+
   const datePart = parts[0]; // e.g. "20-Jun-2026"
   const timePart = parts[1]; // e.g. "18:03:54"
-  
+
   const timeSubparts = timePart.split(':');
   if (timeSubparts.length < 2) {
     return timeStr;
   }
-  
+
   let hours = parseInt(timeSubparts[0], 10);
   const minutes = timeSubparts[1];
-  
+
   if (isNaN(hours)) {
     return timeStr;
   }
-  
+
   const ampm = hours >= 12 ? 'PM' : 'AM';
   hours = hours % 12;
   hours = hours ? hours : 12; // 0 becomes 12
-  
+
   const formattedHours = hours < 10 ? '0' + hours : hours;
   return `${datePart} ${formattedHours}:${minutes} ${ampm}`;
 }
@@ -1439,22 +1462,34 @@ function getLastUpdatedText() {
 
 function switchTab(tab) {
   currentViewTab = tab;
-  
+
   if (tab === 'live') {
     tabLive.classList.add('active');
+    if (tabProtocol) tabProtocol.classList.remove('active');
     tabHistory.classList.remove('active');
-    
+
     outagesSection.classList.remove('hidden');
+    if (protocolSection) protocolSection.classList.add('hidden');
     historySection.classList.add('hidden');
-    
+
     renderOutages();
+  } else if (tab === 'protocol') {
+    tabLive.classList.remove('active');
+    if (tabProtocol) tabProtocol.classList.add('active');
+    tabHistory.classList.remove('active');
+
+    outagesSection.classList.add('hidden');
+    if (protocolSection) protocolSection.classList.remove('hidden');
+    historySection.classList.add('hidden');
   } else if (tab === 'history') {
     tabLive.classList.remove('active');
+    if (tabProtocol) tabProtocol.classList.remove('active');
     tabHistory.classList.add('active');
-    
+
     outagesSection.classList.add('hidden');
+    if (protocolSection) protocolSection.classList.add('hidden');
     historySection.classList.remove('hidden');
-    
+
     loadHistory();
   }
 }
@@ -1660,12 +1695,12 @@ function updateArtAndLeaderboard() {
 
 async function loadHistory() {
   if (!currentDistrictName) return;
-  
+
   // Show history loading state
   historyTableBody.innerHTML = `<tr><td colspan="7" style="text-align: center; color: var(--text-dim); padding: 32px;"><i class="fa-solid fa-spinner fa-spin fa-2x" style="margin-bottom: 8px;"></i><br>Loading historical outages archive...</td></tr>`;
   historyEmptyState.classList.add('hidden');
   historyTable.parentElement.classList.remove('hidden');
-  
+
   try {
     // Reuse background fetched history if present
     if (currentDistrictHistory && currentDistrictHistory.length > 0) {
@@ -1678,14 +1713,14 @@ async function loadHistory() {
       districtHistoryData = await res.json();
       currentDistrictHistory = [...districtHistoryData];
     }
-    
+
     // Sort history by scraped_at / timestamp descending
     districtHistoryData.sort((a, b) => {
       const timeA = a.timestamp || 0;
       const timeB = b.timestamp || 0;
       return timeB - timeA;
     });
-    
+
     renderHistory();
     renderOutageChart(districtHistoryData);
     renderHourlyRiskChart(districtHistoryData);
@@ -1702,16 +1737,16 @@ async function loadHistory() {
 
 function renderHistory() {
   const searchTerm = historySearchInput.value.toLowerCase().trim();
-  
+
   const filtered = (districtHistoryData || []).filter(item => {
     const feeder = item.feeder || '';
     const area = item.area || '';
     const remarks = item.remarks || '';
     return isFuzzyMatch(`${feeder} ${area} ${remarks}`, searchTerm);
   });
-  
+
   historyTableBody.innerHTML = "";
-  
+
   // Update History Search Result Count Badge
   if (historySearchResultCount) {
     if (searchTerm) {
@@ -1727,10 +1762,10 @@ function renderHistory() {
     historyEmptyState.classList.remove('hidden');
     return;
   }
-  
+
   historyTable.parentElement.classList.remove('hidden');
   historyEmptyState.classList.add('hidden');
-  
+
   filtered.forEach(item => {
     const severity = getSeverity(item);
     const severityLabel = severity.toUpperCase();
@@ -1738,7 +1773,7 @@ function renderHistory() {
     const displayArea = highlightMatch(item.area, searchTerm);
     const displayRemarks = highlightMatch(item.remarks || '', searchTerm);
     const dtBadge = item.dt && item.dt.trim() ? `<span class="dt-tag" style="margin-top: 4px;" title="Transformer Unit"><i class="fa-solid fa-bolt"></i> DT: ${item.dt.trim()}</span>` : '';
-    
+
     const tr = document.createElement('tr');
     tr.innerHTML = `
       <td style="color: var(--text-dim); font-size: 13px;">${item.scraped_at || 'N/A'}</td>
@@ -1765,12 +1800,12 @@ function handleExportCsv() {
     alert("No history data available to export.");
     return;
   }
-  
+
   // Columns: Date, District, Feeder, Area, Start Time, Restoration Time, Remarks, Severity
   const csvHeaders = ["Date Recorded", "District", "Feeder Name", "Area Name", "Cut Started At", "Expected Restoration", "Outage Remarks", "Severity"];
-  
+
   const csvRows = [csvHeaders.join(",")];
-  
+
   districtHistoryData.forEach(item => {
     const row = [
       escapeCsvValue(item.scraped_at || 'N/A'),
@@ -1784,7 +1819,7 @@ function handleExportCsv() {
     ];
     csvRows.push(row.join(","));
   });
-  
+
   const csvContent = "data:text/csv;charset=utf-8," + csvRows.join("\n");
   const encodedUri = encodeURI(csvContent);
   const link = document.createElement("a");
@@ -1839,7 +1874,7 @@ function isFuzzyMatch(combinedText, query) {
       // Substring match: require token length >= 3 to avoid single characters like 'u' matching 'huda'
       if (tToken.includes(qToken)) return true;
       if (tToken.length >= 3 && qToken.includes(tToken)) return true;
-      
+
       // Levenshtein fuzzy match only for words of length >= 3 and similar length
       if (qToken.length >= 3 && tToken.length >= 3) {
         const allowedDistance = qToken.length <= 4 ? 1 : 2;
@@ -1912,28 +1947,28 @@ function parseDHBVNDate(dateStr) {
   const dateParts = parts[0].split('-');
   const timeParts = parts[1].split(':');
   if (dateParts.length < 3 || timeParts.length < 2) return null;
-  
+
   const day = parseInt(dateParts[0], 10);
   const monthStr = dateParts[1].toLowerCase();
   const year = parseInt(dateParts[2], 10);
-  
+
   const months = {
     jan: 0, feb: 1, mar: 2, apr: 3, may: 4, jun: 5,
     jul: 6, aug: 7, sep: 8, oct: 9, nov: 10, dec: 11
   };
   const month = months[monthStr.substring(0, 3)] || 0;
-  
+
   const hours = parseInt(timeParts[0], 10);
   const minutes = parseInt(timeParts[1], 10);
   const seconds = timeParts[2] ? parseInt(timeParts[2], 10) : 0;
-  
+
   // Format as ISO-8601 with explicit IST (+05:30) offset
   const monthStr2Digit = (month + 1).toString().padStart(2, '0');
   const dayStr2Digit = day.toString().padStart(2, '0');
   const hourStr2Digit = hours.toString().padStart(2, '0');
   const minuteStr2Digit = minutes.toString().padStart(2, '0');
   const secondStr2Digit = seconds.toString().padStart(2, '0');
-  
+
   const isoStr = `${year}-${monthStr2Digit}-${dayStr2Digit}T${hourStr2Digit}:${minuteStr2Digit}:${secondStr2Digit}+05:30`;
   return new Date(isoStr);
 }
@@ -1942,11 +1977,11 @@ function parseDHBVNDate(dateStr) {
 function renderOutageChart(historyData) {
   const canvas = document.getElementById('outageTrendChart');
   if (!canvas) return;
-  
+
   // 1. Identify the last 14 days in IST
   const labels = [];
   const dailyCounts = {};
-  
+
   for (let i = 13; i >= 0; i--) {
     const date = new Date();
     date.setDate(date.getDate() - i);
@@ -1959,7 +1994,7 @@ function renderOutageChart(historyData) {
     labels.push(dateLabel);
     dailyCounts[dateLabel] = 0;
   }
-  
+
   // 2. Aggregate history data based on start_time or fallback to scraped_at
   (historyData || []).forEach(item => {
     const dateObj = parseDHBVNDate(item.start_time) || parseDHBVNDate(item.scraped_at);
@@ -1974,18 +2009,18 @@ function renderOutageChart(historyData) {
       }
     }
   });
-  
+
   const counts = labels.map(lbl => dailyCounts[lbl]);
-  
+
   // 3. Dynamic Bar Colors: > 5 rose/red (#f43f5e), <= 5 amber/orange (#f59e0b)
   const backgroundColors = counts.map(c => c > 5 ? 'rgba(244, 63, 94, 0.75)' : 'rgba(245, 158, 11, 0.75)');
   const borderColors = counts.map(c => c > 5 ? '#f43f5e' : '#f59e0b');
-  
+
   // 4. Destroy existing chart instance to prevent canvas rendering overlap
   if (outageTrendChartInstance) {
     outageTrendChartInstance.destroy();
   }
-  
+
   // 5. Build Chart.js bar chart
   const ctx = canvas.getContext('2d');
   outageTrendChartInstance = new Chart(ctx, {
@@ -2025,7 +2060,7 @@ function renderOutageChart(historyData) {
           padding: 10,
           displayColors: false,
           callbacks: {
-            label: function(context) {
+            label: function (context) {
               return `New Outages: ${context.parsed.y}`;
             }
           }
@@ -2130,10 +2165,10 @@ function renderHourlyRiskChart(historyData) {
           borderWidth: 1,
           padding: 10,
           callbacks: {
-            title: function(items) {
+            title: function (items) {
               return `Hour Window: ${items[0].label}`;
             },
-            label: function(context) {
+            label: function (context) {
               return `Outages Started: ${context.parsed.y}`;
             }
           }
@@ -2175,18 +2210,18 @@ async function loadSVGMap() {
     if (!res.ok) throw new Error('SVG map file not found.');
     const svgText = await res.text();
     mapContainer.innerHTML = svgText;
-    
+
     // Wire up events on the newly injected elements
     const districts = mapContainer.querySelectorAll('.map-district');
     districts.forEach(dist => {
       const distName = dist.getAttribute('data-district');
-      
+
       // Hover event listeners
       dist.addEventListener('mousemove', (e) => {
         showMapTooltip(e, distName);
       });
       dist.addEventListener('mouseleave', hideMapTooltip);
-      
+
       // Click event listener
       dist.addEventListener('click', () => {
         const distId = DISTRICT_NAME_TO_ID[distName];
@@ -2211,9 +2246,9 @@ async function loadSVGMap() {
 
 function showMapTooltip(e, districtName) {
   if (!mapTooltip || !outagesData) return;
-  
+
   const list = outagesData.districts[districtName] || [];
-  
+
   // Calculate active outages in district
   const nowISTStr = new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata' });
   const nowIST = new Date(nowISTStr);
@@ -2222,14 +2257,14 @@ function showMapTooltip(e, districtName) {
     const end = parseDHBVNDate(item.expected_restoration_time);
     return !end || end.getTime() >= nowTime;
   });
-  
+
   const outageCount = activeCuts.length;
-  
+
   let statusHTML = '';
-  
+
   // Is this district supported by DHBVN?
   const isDHBVN = DISTRICT_NAME_TO_ID[districtName] !== undefined;
-  
+
   if (!isDHBVN) {
     statusHTML = `<span class="status" style="color: var(--text-dim);"><i class="fa-solid fa-circle-minus"></i> Non-DHBVN (UHBVN)</span>`;
   } else if (outageCount === 0) {
@@ -2240,13 +2275,13 @@ function showMapTooltip(e, districtName) {
     const statusIcon = colorClass === 'level-major' ? 'fa-triangle-exclamation' : 'fa-circle-exclamation';
     statusHTML = `<span class="status" style="color: ${statusColor};"><i class="fa-solid ${statusIcon}"></i> ${outageCount} Active Outage${outageCount > 1 ? 's' : ''}</span>`;
   }
-  
+
   mapTooltip.style.display = 'block';
   mapTooltip.innerHTML = `
     <strong>${districtName}</strong>
     ${statusHTML}
   `;
-  
+
   // Position the tooltip near the cursor
   const tooltipHeight = mapTooltip.offsetHeight || 40;
   mapTooltip.style.left = `${e.pageX + 12}px`;
@@ -2265,17 +2300,17 @@ function colorSVGMap() {
   districts.forEach(dist => {
     const distName = dist.getAttribute('data-district');
     const isDHBVN = DISTRICT_NAME_TO_ID[distName] !== undefined;
-    
+
     // Clear previous classes
     dist.classList.remove('level-clear', 'level-minor', 'level-major', 'disabled', 'selected');
-    
+
     if (!isDHBVN) {
       dist.classList.add('disabled');
       dist.style.opacity = '0.35';
       dist.style.cursor = 'not-allowed';
       return;
     }
-    
+
     const list = outagesData.districts[distName] || [];
     const nowISTStr = new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata' });
     const nowIST = new Date(nowISTStr);
@@ -2284,7 +2319,7 @@ function colorSVGMap() {
       const end = parseDHBVNDate(item.expected_restoration_time);
       return !end || end.getTime() >= nowTime;
     });
-    
+
     const count = activeCuts.length;
     if (count === 0) {
       dist.classList.add('level-clear');
@@ -2293,7 +2328,7 @@ function colorSVGMap() {
     } else {
       dist.classList.add('level-major');
     }
-    
+
     // Sync with currently selected district
     if (distName === currentDistrictName) {
       dist.classList.add('selected');
@@ -2304,7 +2339,7 @@ function colorSVGMap() {
   const statusGrid = document.getElementById('allDistrictsStatusGrid');
   if (statusGrid) {
     statusGrid.innerHTML = '';
-    
+
     const dhbvnDistricts = Object.keys(DISTRICT_NAME_TO_ID);
     const districtsWithPct = dhbvnDistricts.map(distName => {
       const list = outagesData.districts[distName] || [];
@@ -2315,22 +2350,22 @@ function colorSVGMap() {
         const end = parseDHBVNDate(item.expected_restoration_time);
         return !end || end.getTime() >= nowTime;
       });
-      
+
       const masterAreas = (feederMasterData && feederMasterData[distName]?.areas) || [];
       const baselineAreas = new Set(masterAreas.map(a => a.trim().toUpperCase()));
-      
+
       const uniqueActiveAreas = new Set();
       activeCuts.forEach(c => {
         if (c.area) {
           uniqueActiveAreas.add(c.area.trim().toUpperCase());
         }
       });
-      
+
       uniqueActiveAreas.forEach(a => baselineAreas.add(a));
       const totalAreasCount = baselineAreas.size || 1;
       const percentAreasDown = ((uniqueActiveAreas.size / totalAreasCount) * 100);
       const percentAreasUp = 100 - percentAreasDown;
-      
+
       return {
         name: distName,
         percentUp: percentAreasUp,
@@ -2349,7 +2384,7 @@ function colorSVGMap() {
     districtsWithPct.forEach(dist => {
       const row = document.createElement('div');
       row.className = `district-status-row ${dist.name === currentDistrictName ? 'active-dist' : ''}`;
-      
+
       let pctColor = 'var(--success-color)';
       if (dist.percentUp < 95) {
         pctColor = 'var(--warning-color)';
@@ -2357,19 +2392,19 @@ function colorSVGMap() {
       if (dist.percentUp < 85) {
         pctColor = 'var(--danger-color)';
       }
-      
+
       row.innerHTML = `
         <span style="font-weight: 500; color: #fff;">${dist.name}</span>
         <span style="font-weight: 600; color: ${pctColor};">${dist.percentUpStr}% Up</span>
       `;
-      
+
       row.addEventListener('click', () => {
         const distId = DISTRICT_NAME_TO_ID[dist.name];
         if (distId) {
           selectDistrict(distId);
         }
       });
-      
+
       statusGrid.appendChild(row);
     });
   }
@@ -2384,10 +2419,10 @@ async function loadMonthlyReportsList() {
     const res = await fetch('reports/manifest.json');
     if (!res.ok) return;
     const manifest = await res.json();
-    
+
     // Clear dropdown and set placeholder
     monthlyReportSelect.innerHTML = '<option value="" disabled selected>Monthly Report...</option>';
-    
+
     // Populate options from manifest in reverse chronological order
     const sorted = [...manifest].reverse();
     sorted.forEach(report => {
@@ -2396,7 +2431,7 @@ async function loadMonthlyReportsList() {
       opt.textContent = report.name;
       monthlyReportSelect.appendChild(opt);
     });
-    
+
     monthlyReportSelect.addEventListener('change', (e) => {
       const url = e.target.value;
       if (url) {
@@ -2412,12 +2447,12 @@ async function loadMonthlyReportsList() {
 // -----------------------------------------------------------------------------
 // Browser Push Alerts Subscriptions (ntfy.sh Topic Routing)
 // -----------------------------------------------------------------------------
-window.subscribeToAlerts = function(districtName, feeder, area) {
+window.subscribeToAlerts = function (districtName, feeder, area) {
   const cleanDist = districtName.toLowerCase().replace(/\s+/g, '_');
   const topic = `dhbvn_outages_${cleanDist}`;
   const filterQuery = encodeURIComponent(area);
   const ntfyUrl = `https://ntfy.sh/${topic}?subscribe=1&filter=${filterQuery}`;
-  
+
   const msg = `We use ntfy.sh (a free, open-source notification service) to deliver live push notifications.\n\nClicking OK will open ntfy.sh where you can subscribe to alerts specifically filtered for "${area}" in one click.`;
   if (confirm(msg)) {
     window.open(ntfyUrl, '_blank');
