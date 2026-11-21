@@ -322,8 +322,8 @@ function renderSharedArea() {
   
   if (activeCut) {
     sharedCard.classList.add('active-outage');
-    const remarks = activeCut.remarks || 'Active Cut';
-    const isPlanned = remarks.toUpperCase().includes('PLANNED') || remarks.toUpperCase().includes('MTC');
+    const remarks = activeCut.remarks || '';
+    const isPlanned = isPlannedOutage(remarks);
     const badgeClass = isPlanned ? 'badge-warning' : 'badge-danger';
     const badgeText = isPlanned ? 'Planned Maintenance' : 'Unplanned Cut';
     const badgeIcon = isPlanned ? 'fa-screwdriver-wrench' : 'fa-triangle-exclamation';
@@ -459,8 +459,8 @@ function renderPinnedArea() {
   
   if (activeCut) {
     pinnedCard.classList.add('active-outage');
-    const remarks = activeCut.remarks || 'Active Cut';
-    const isPlanned = remarks.toUpperCase().includes('PLANNED') || remarks.toUpperCase().includes('MTC');
+    const remarks = activeCut.remarks || '';
+    const isPlanned = isPlannedOutage(remarks);
     const badgeClass = isPlanned ? 'badge-warning' : 'badge-danger';
     const badgeText = isPlanned ? 'Planned Maintenance' : 'Unplanned Cut';
     const badgeIcon = isPlanned ? 'fa-screwdriver-wrench' : 'fa-triangle-exclamation';
@@ -695,8 +695,7 @@ function updateStats() {
   const agriActiveFeeders = new Set();
   
   activeList.forEach(item => {
-    const remarks = (item.remarks || '').toUpperCase();
-    if (remarks.includes('PLANNED') || remarks.includes('MTC') || remarks.includes('MAINTENANCE')) {
+    if (isPlannedOutage(item.remarks)) {
       planned++;
     } else {
       active++;
@@ -839,8 +838,7 @@ function renderOutages() {
       return getFeederCategory(item.feeder) === currentSeverityFilter;
     }
     
-    const remarks = item.remarks || 'Active Cut';
-    const isPlanned = remarks.toUpperCase().includes('PLANNED') || remarks.toUpperCase().includes('MTC') || remarks.toUpperCase().includes('MAINTENANCE');
+    const isPlanned = isPlannedOutage(item.remarks);
     
     if (currentSeverityFilter === 'planned') return isPlanned;
     if (currentSeverityFilter === 'unplanned') return !isPlanned;
@@ -895,8 +893,8 @@ function renderOutages() {
   emptyState.classList.add('hidden');
   
   filteredList.forEach(item => {
-    const remarks = item.remarks || 'Active Cut';
-    const isPlanned = remarks.toUpperCase().includes('PLANNED') || remarks.toUpperCase().includes('MTC') || remarks.toUpperCase().includes('MAINTENANCE');
+    const remarks = item.remarks || '';
+    const isPlanned = isPlannedOutage(remarks);
     
     const badgeClass = isPlanned ? 'badge-warning' : 'badge-danger';
     const badgeText = isPlanned ? 'Planned' : 'Unplanned';
@@ -1692,6 +1690,14 @@ function escapeCsvValue(val) {
     formatted = `"${formatted}"`;
   }
   return formatted;
+}
+
+// Helper: Check if outage is planned maintenance (strictly excluding UNPLANNED)
+function isPlannedOutage(remarks) {
+  if (!remarks) return false;
+  const rem = remarks.toUpperCase();
+  if (rem.includes('UNPLANNED')) return false;
+  return rem.includes('PLANNED') || rem.includes('MTC') || rem.includes('MAINTENANCE') || rem.includes('MAINTANCE');
 }
 
 // Helper: Classify Feeder Category (Urban, Rural/Domestic, Agricultural)
