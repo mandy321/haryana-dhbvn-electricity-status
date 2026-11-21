@@ -12,6 +12,7 @@ let currentSeverityFilter = "all";
 let currentViewTab = "live";
 let districtHistoryData = null;
 let outageTrendChartInstance = null;
+let hourlyRiskChartInstance = null;
 let feederMasterData = null;
 let currentDistrictHistory = [];
 
@@ -122,6 +123,7 @@ const districtHealthBar = document.getElementById('districtHealthBar');
 const statAvgFixTime = document.getElementById('statAvgFixTime');
 const statArtGlow = document.getElementById('statArtGlow');
 const leaderboardContent = document.getElementById('leaderboardContent');
+const localityLeaderboardContent = document.getElementById('localityLeaderboardContent');
 const mapContainer = document.getElementById('mapContainer');
 const mapTooltip = document.getElementById('mapTooltip');
 const monthlyReportSelect = document.getElementById('monthlyReportSelect');
@@ -801,6 +803,11 @@ function renderOutages() {
     
     if (currentSeverityFilter === 'all') return true;
     
+    // Feeder category filters
+    if (currentSeverityFilter === 'urban' || currentSeverityFilter === 'rural' || currentSeverityFilter === 'agri') {
+      return getFeederCategory(item.feeder) === currentSeverityFilter;
+    }
+    
     const remarks = item.remarks || 'Active Cut';
     const isPlanned = remarks.toUpperCase().includes('PLANNED') || remarks.toUpperCase().includes('MTC') || remarks.toUpperCase().includes('MAINTENANCE');
     
@@ -877,6 +884,17 @@ function renderOutages() {
     const pinClass = isPinned ? 'pinned' : '';
     const pinIcon = isPinned ? 'fa-solid' : 'fa-regular';
 
+    // Feeder category badge
+    const category = getFeederCategory(item.feeder);
+    let categoryBadge = '';
+    if (category === 'urban') {
+      categoryBadge = '<span class="category-tag urban"><i class="fa-solid fa-city"></i> Urban</span>';
+    } else if (category === 'agri') {
+      categoryBadge = '<span class="category-tag agri"><i class="fa-solid fa-wheat-awn"></i> Agri AP</span>';
+    } else {
+      categoryBadge = '<span class="category-tag rural"><i class="fa-solid fa-house-chimney"></i> Domestic</span>';
+    }
+
     // 1. Desktop Row Builder
     const tr = document.createElement('tr');
     tr.innerHTML = `
@@ -890,7 +908,10 @@ function renderOutages() {
           <i class="fa-solid fa-share-nodes"></i>
         </button>
       </td>
-      <td style="font-weight: 600; color: #fff;">${item.feeder}</td>
+      <td>
+        <div style="font-weight: 600; color: #fff; margin-bottom: 4px;">${item.feeder}</div>
+        <div>${categoryBadge}</div>
+      </td>
       <td>${item.area}</td>
       <td>${formatTimeTo12Hr(item.start_time) || 'N/A'}</td>
       <td style="font-weight: 500; color: ${item.expected_restoration_time ? '#67e8f9' : 'var(--text-dim)'};">
@@ -920,7 +941,10 @@ function renderOutages() {
           <button class="btn-share" onclick="shareArea('${currentDistrictId}', '${currentDistrictName}', '${item.feeder}', '${item.area}')" style="margin-right: 12px;">
             <i class="fa-solid fa-share-nodes"></i>
           </button>
-          ${item.feeder}
+          <div>
+            <div style="font-weight: 600; color: #fff;">${item.feeder}</div>
+            <div style="margin-top: 3px;">${categoryBadge}</div>
+          </div>
         </div>
         <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 4px;">
           <div class="status-badge ${badgeClass}">
@@ -1334,25 +1358,36 @@ function updateArtAndLeaderboard() {
   const sevenDaysAgo = nowTime - (7 * 24 * 60 * 60 * 1000);
   const fourteenDaysAgo = nowTime - (14 * 24 * 60 * 60 * 1000);
 
-  // 1. Calculate Average Restoration Time (ART) over the last 7 days
+  // 1. Calculate Average Restoration Time (ART) over the last 14 days
   let totalDurationMs = 0;
   let validOutageCount = 0;
 
   currentDistrictHistory.forEach(item => {
     const timestamp = item.timestamp || (item.start_time ? parseDHBVNDate(item.start_time)?.getTime() : null);
-    if (!timestamp || timestamp < sevenDaysAgo) return;
+    if (!timestamp || timestamp < fourteenDaysAgo) return;
 
+    let diff = 0;
+    // Method A: Check explicit expected restoration time if given
     if (item.start_time && item.expected_restoration_time) {
       const start = parseDHBVNDate(item.start_time);
       const end = parseDHBVNDate(item.expected_restoration_time);
-      if (start && end) {
-        const diff = end.getTime() - start.getTime();
-        // filter out anomalous durations (under 1 min or over 24 hours)
-        if (diff > 60 * 1000 && diff < 24 * 60 * 60 * 1000) {
-          totalDurationMs += diff;
-          validOutageCount++;
-        }
+      if (start && end && end > start) {
+        diff = end.getTime() - start.getTime();
       }
+    }
+    // Method B: Calculate actual tracking duration from start_time to last_seen_at
+    if (diff === 0 && item.start_time && item.last_seen_at) {
+      const start = parseDHBVNDate(item.start_time) || new Date(item.start_time);
+      const end = parseDHBVNDate(item.last_seen_at) || new Date(item.last_seen_at);
+      if (start && end && end.getTime() > start.getTime()) {
+        diff = end.getTime() - start.getTime();
+      }
+    }
+
+    // Filter out anomalous durations (under 1 min or over 72 hours)
+    if (diff > 60 * 1000 && diff < 72 * 60 * 60 * 1000) {
+      totalDurationMs += diff;
+      validOutageCount++;
     }
   });
 
@@ -1362,11 +1397,11 @@ function updateArtAndLeaderboard() {
       statAvgFixTime.textContent = `${avgHours.toFixed(1)} hrs`;
     }
 
-    // Color code: Green (< 2 hrs), Amber (2-4 hrs), Red (> 4 hrs)
+    // Color code: Green (< 2 hrs), Amber (2-5 hrs), Red (> 5 hrs)
     if (statArtGlow) {
       if (avgHours < 2) {
         statArtGlow.className = "stat-icon-wrapper green-glow";
-      } else if (avgHours <= 4) {
+      } else if (avgHours <= 5) {
         statArtGlow.className = "stat-icon-wrapper orange-glow";
       } else {
         statArtGlow.className = "stat-icon-wrapper red-glow";
@@ -1383,6 +1418,8 @@ function updateArtAndLeaderboard() {
 
   // 2. Hotspot Feeder Leaderboard (last 14 days)
   const feederCounts = {};
+  const localityCounts = {};
+
   currentDistrictHistory.forEach(item => {
     const timestamp = item.timestamp || (item.start_time ? parseDHBVNDate(item.start_time)?.getTime() : null);
     if (!timestamp || timestamp < fourteenDaysAgo) return;
@@ -1390,6 +1427,10 @@ function updateArtAndLeaderboard() {
     if (item.feeder) {
       const feederName = item.feeder.trim();
       feederCounts[feederName] = (feederCounts[feederName] || 0) + 1;
+    }
+    if (item.area && item.area.trim()) {
+      const areaName = item.area.trim();
+      localityCounts[areaName] = (localityCounts[areaName] || 0) + 1;
     }
   });
 
@@ -1407,18 +1448,55 @@ function updateArtAndLeaderboard() {
       sortedFeeders.forEach(([feeder, count], index) => {
         const rank = index + 1;
         const rankDisplay = rank === 1 ? `<i class="fa-solid fa-trophy"></i>` : `#${rank}`;
+        const cat = getFeederCategory(feeder);
+        let catBadge = '';
+        if (cat === 'urban') catBadge = '<span class="category-tag urban" style="font-size: 9px; padding: 1px 4px;"><i class="fa-solid fa-city"></i> Urban</span>';
+        else if (cat === 'agri') catBadge = '<span class="category-tag agri" style="font-size: 9px; padding: 1px 4px;"><i class="fa-solid fa-wheat-awn"></i> Agri</span>';
+        else catBadge = '<span class="category-tag rural" style="font-size: 9px; padding: 1px 4px;"><i class="fa-solid fa-house-chimney"></i> Dom</span>';
+
         html += `
           <div class="leaderboard-item">
             <div class="leaderboard-feeder-info">
               <span class="leaderboard-rank">${rankDisplay}</span>
-              <span class="leaderboard-feeder-name" title="${feeder}">${feeder}</span>
+              <div style="overflow: hidden;">
+                <span class="leaderboard-feeder-name" title="${feeder}">${feeder}</span>
+                <div style="margin-top: 2px;">${catBadge}</div>
+              </div>
             </div>
-            <span class="leaderboard-count-badge">${count} outages</span>
+            <span class="leaderboard-count-badge">${count} cuts</span>
           </div>
         `;
       });
       html += `</div>`;
       leaderboardContent.innerHTML = html;
+    }
+  }
+
+  // 3. Most Affected Localities (Repeat Offenders)
+  const sortedLocalities = Object.entries(localityCounts)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 5);
+
+  if (localityLeaderboardContent) {
+    if (sortedLocalities.length === 0) {
+      localityLeaderboardContent.innerHTML = `<p style="color: var(--text-dim); text-align: center; padding: 16px;">No locality history recorded.</p>`;
+    } else {
+      let locHtml = `<div class="leaderboard-list">`;
+      sortedLocalities.forEach(([area, count], index) => {
+        const rank = index + 1;
+        const rankDisplay = rank === 1 ? `<i class="fa-solid fa-triangle-exclamation" style="color: #ec4899;"></i>` : `#${rank}`;
+        locHtml += `
+          <div class="leaderboard-item">
+            <div class="leaderboard-feeder-info">
+              <span class="leaderboard-rank">${rankDisplay}</span>
+              <span class="leaderboard-feeder-name" title="${area}">${area}</span>
+            </div>
+            <span class="leaderboard-count-badge" style="background: rgba(236, 72, 153, 0.1); color: #f472b6; border-color: rgba(236, 72, 153, 0.25);">${count} hits</span>
+          </div>
+        `;
+      });
+      locHtml += `</div>`;
+      localityLeaderboardContent.innerHTML = locHtml;
     }
   }
 }
@@ -1453,12 +1531,14 @@ async function loadHistory() {
     
     renderHistory();
     renderOutageChart(districtHistoryData);
+    renderHourlyRiskChart(districtHistoryData);
     updateArtAndLeaderboard();
   } catch (err) {
     console.log("History fetch failed:", err);
     districtHistoryData = [];
     renderHistory();
     renderOutageChart(districtHistoryData);
+    renderHourlyRiskChart(districtHistoryData);
   }
 }
 
@@ -1548,6 +1628,19 @@ function escapeCsvValue(val) {
     formatted = `"${formatted}"`;
   }
   return formatted;
+}
+
+// Helper: Classify Feeder Category (Urban, Rural/Domestic, Agricultural)
+function getFeederCategory(feederName) {
+  if (!feederName) return 'rural';
+  const name = feederName.toUpperCase();
+  if (name.includes(' AP') || name.includes('(AP)') || name.endsWith('AP') || name.includes('TUBEWELL') || name.includes('AGRICULTURE')) {
+    return 'agri';
+  }
+  if (name.includes('(U)') || name.includes(' URBAN') || name.includes('(URBAN)') || name.includes('CITY') || name.includes('TOWN')) {
+    return 'urban';
+  }
+  return 'rural';
 }
 
 // Helper: Classify Severity of Outage
@@ -1716,6 +1809,108 @@ function renderOutageChart(historyData) {
               family: 'Inter',
               size: 11
             },
+            precision: 0
+          }
+        }
+      }
+    }
+  });
+}
+
+// Render Hourly Outage Risk Distribution (Heatmap Bar)
+function renderHourlyRiskChart(historyData) {
+  const canvas = document.getElementById('hourlyRiskChart');
+  if (!canvas) return;
+
+  // 24 Hour slots (0 to 23) in IST
+  const hourLabels = [
+    '12 AM', '1 AM', '2 AM', '3 AM', '4 AM', '5 AM',
+    '6 AM', '7 AM', '8 AM', '9 AM', '10 AM', '11 AM',
+    '12 PM', '1 PM', '2 PM', '3 PM', '4 PM', '5 PM',
+    '6 PM', '7 PM', '8 PM', '9 PM', '10 PM', '11 PM'
+  ];
+  const hourlyCounts = Array(24).fill(0);
+
+  (historyData || []).forEach(item => {
+    const dateObj = parseDHBVNDate(item.start_time);
+    if (dateObj && !isNaN(dateObj.getTime())) {
+      const h = dateObj.getHours();
+      if (h >= 0 && h < 24) {
+        hourlyCounts[h]++;
+      }
+    }
+  });
+
+  const maxVal = Math.max(...hourlyCounts, 1);
+
+  // Dynamic Heatmap colors based on intensity
+  const bgColors = hourlyCounts.map(count => {
+    const ratio = count / maxVal;
+    if (ratio > 0.65) return 'rgba(244, 63, 94, 0.85)'; // High Risk (Red)
+    if (ratio > 0.35) return 'rgba(245, 158, 11, 0.80)'; // Moderate Risk (Amber)
+    if (ratio > 0.10) return 'rgba(56, 189, 248, 0.65)'; // Mild (Blue)
+    return 'rgba(148, 163, 184, 0.35)'; // Low / Normal
+  });
+
+  if (hourlyRiskChartInstance) {
+    hourlyRiskChartInstance.destroy();
+  }
+
+  const ctx = canvas.getContext('2d');
+  hourlyRiskChartInstance = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: hourLabels,
+      datasets: [{
+        label: 'Cuts Initiated',
+        data: hourlyCounts,
+        backgroundColor: bgColors,
+        borderRadius: 4,
+        barPercentage: 0.75
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: 'rgba(16, 18, 30, 0.95)',
+          titleColor: '#fff',
+          titleFont: { family: 'Outfit', weight: '600' },
+          bodyColor: '#e5e7eb',
+          bodyFont: { family: 'Inter' },
+          borderColor: 'rgba(255, 255, 255, 0.08)',
+          borderWidth: 1,
+          padding: 10,
+          callbacks: {
+            title: function(items) {
+              return `Hour Window: ${items[0].label}`;
+            },
+            label: function(context) {
+              return `Outages Started: ${context.parsed.y}`;
+            }
+          }
+        }
+      },
+      scales: {
+        x: {
+          grid: { display: false },
+          ticks: {
+            color: '#9ca3af',
+            font: { family: 'Inter', size: 10 },
+            maxRotation: 45,
+            minRotation: 0,
+            autoSkip: true,
+            maxTicksLimit: 12
+          }
+        },
+        y: {
+          beginAtZero: true,
+          grid: { color: 'rgba(255, 255, 255, 0.08)' },
+          ticks: {
+            color: '#9ca3af',
+            font: { family: 'Inter', size: 10 },
             precision: 0
           }
         }

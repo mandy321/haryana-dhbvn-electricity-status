@@ -259,19 +259,28 @@
             </div>
           </div>
 
-          <!-- Severity Filters with Info Tooltip -->
+          <!-- Severity & Category Filters with Info Tooltip -->
           <div class="severity-filter-bar" id="severityFilterBar">
             <span class="filter-label">Filter Outages:</span>
             <div class="filter-chips">
               <button class="filter-chip active" data-severity="all">All</button>
+              <button class="filter-chip" data-severity="urban">
+                <i class="fa-solid fa-city" style="font-size: 10px; color: #38bdf8;"></i> Urban / City
+              </button>
+              <button class="filter-chip" data-severity="rural">
+                <i class="fa-solid fa-house-chimney" style="font-size: 10px; color: #a78bfa;"></i> Domestic / Rural
+              </button>
+              <button class="filter-chip" data-severity="agri">
+                <i class="fa-solid fa-wheat-awn" style="font-size: 10px; color: #4ade80;"></i> Agricultural (AP)
+              </button>
               <button class="filter-chip" data-severity="major">
-                <span class="sev-dot major"></span> Major (>= 4h)
+                <span class="sev-dot major"></span> Major (&ge; 4h)
               </button>
               <button class="filter-chip" data-severity="moderate">
                 <span class="sev-dot moderate"></span> Moderate (2h - 4h)
               </button>
               <button class="filter-chip" data-severity="minor">
-                <span class="sev-dot minor"></span> Minor (< 2h)
+                <span class="sev-dot minor"></span> Minor (&lt; 2h)
               </button>
               <button class="filter-chip" data-severity="planned">
                 <i class="fa-solid fa-screwdriver-wrench" style="font-size: 10px; color: var(--warning-color);"></i> Planned
@@ -284,9 +293,10 @@
             <div class="tooltip-container">
               <i class="fa-solid fa-circle-info info-icon"></i>
               <div class="tooltip-content">
-                <h4>Outage Classifications & Severity (IST)</h4>
-                <p><strong>Planned:</strong> Scheduled maintenance, utility upgrades, or line repairs.</p>
-                <p><strong>Unplanned:</strong> Emergency faults, line trips, breakdowns, or transformer failures.</p>
+                <h4>Outage Classifications & Feeders</h4>
+                <p><strong>Urban:</strong> City / Domestic Urban feeders (U) supplying town centers and high-density residential grids.</p>
+                <p><strong>Domestic / Rural:</strong> Domestic Supply (DS) feeders for residential towns and villages.</p>
+                <p><strong>Agricultural:</strong> Tubewell / Farm supply lines (AP) usually subject to rotational power rationing.</p>
                 <p><strong>Major:</strong> Outages lasting 4+ hours.</p>
                 <p><strong>Moderate:</strong> Outages lasting 2 to 4 hours.</p>
                 <p><strong>Minor:</strong> Outages lasting under 2 hours.</p>
@@ -332,23 +342,49 @@
 
       <!-- History Archive Section -->
       <section id="historySection" class="outage-list-container hidden">
-        <!-- 14-Day Outage Trend Chart Card -->
-        <div class="glass-card chart-container-card" style="margin-bottom: 24px; padding: 20px;">
-          <h3 style="font-family: var(--font-heading); font-size: 16px; font-weight: 600; margin-bottom: 16px; color: #fff; display: flex; align-items: center; gap: 8px;">
-            <i class="fa-solid fa-chart-simple" style="color: var(--primary-color);"></i> 14-Day Outage Trend
-          </h3>
-          <div style="position: relative; height: 260px; width: 100%;">
-            <canvas id="outageTrendChart"></canvas>
+        <!-- Analytics & Insights Grid -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; margin-bottom: 24px;">
+          <!-- 14-Day Outage Trend Chart Card -->
+          <div class="glass-card chart-container-card" style="padding: 20px;">
+            <h3 style="font-family: var(--font-heading); font-size: 16px; font-weight: 600; margin-bottom: 16px; color: #fff; display: flex; align-items: center; gap: 8px;">
+              <i class="fa-solid fa-chart-simple" style="color: var(--primary-color);"></i> 14-Day Outage Trend
+            </h3>
+            <div style="position: relative; height: 240px; width: 100%;">
+              <canvas id="outageTrendChart"></canvas>
+            </div>
+          </div>
+
+          <!-- Peak Outage Hours (Hourly Risk Index) -->
+          <div class="glass-card chart-container-card" style="padding: 20px;">
+            <h3 style="font-family: var(--font-heading); font-size: 16px; font-weight: 600; margin-bottom: 16px; color: #fff; display: flex; align-items: center; gap: 8px;">
+              <i class="fa-solid fa-clock" style="color: #f59e0b;"></i> Peak Outage Hours (Risk Index)
+            </h3>
+            <div style="position: relative; height: 240px; width: 100%;">
+              <canvas id="hourlyRiskChart"></canvas>
+            </div>
           </div>
         </div>
 
-        <!-- Most Unreliable Feeders (Hotspot Leaderboard) -->
-        <div class="glass-card chart-container-card" style="margin-bottom: 24px; padding: 20px;">
-          <h3 style="font-family: var(--font-heading); font-size: 16px; font-weight: 600; margin-bottom: 16px; color: #fff; display: flex; align-items: center; gap: 8px;">
-            <i class="fa-solid fa-fire" style="color: var(--danger-color);"></i> Most Unreliable Feeders (Last 14 Days)
-          </h3>
-          <div id="leaderboardContent">
-            <!-- Dynamically populated top 5 list -->
+        <!-- Leaderboards Grid: Feeders & Repeat Offender Localities -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; margin-bottom: 24px;">
+          <!-- Most Unreliable Feeders -->
+          <div class="glass-card chart-container-card" style="padding: 20px;">
+            <h3 style="font-family: var(--font-heading); font-size: 16px; font-weight: 600; margin-bottom: 16px; color: #fff; display: flex; align-items: center; gap: 8px;">
+              <i class="fa-solid fa-fire" style="color: var(--danger-color);"></i> Most Unreliable Feeders (14 Days)
+            </h3>
+            <div id="leaderboardContent">
+              <!-- Dynamically populated top 5 list -->
+            </div>
+          </div>
+
+          <!-- Most Affected Localities (Repeat Offender Score) -->
+          <div class="glass-card chart-container-card" style="padding: 20px;">
+            <h3 style="font-family: var(--font-heading); font-size: 16px; font-weight: 600; margin-bottom: 16px; color: #fff; display: flex; align-items: center; gap: 8px;">
+              <i class="fa-solid fa-triangle-exclamation" style="color: #ec4899;"></i> Most Affected Localities (Repeat Offenders)
+            </h3>
+            <div id="localityLeaderboardContent">
+              <!-- Dynamically populated top 5 repeat offender localities -->
+            </div>
           </div>
         </div>
 
