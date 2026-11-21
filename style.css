@@ -210,12 +210,27 @@ body {
   border-radius: 6px;
   box-shadow: 0 0 10px rgba(37, 211, 102, 0.1);
   transition: all var(--transition-fast) ease;
+  cursor: pointer;
 }
 
 .whatsapp-highlight-link:hover {
   background: #25D366 !important;
   color: #0c0e17 !important;
   box-shadow: 0 0 15px rgba(37, 211, 102, 0.4);
+  transform: translateY(-1px);
+}
+
+.phone-link {
+  color: #67e8f9 !important;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color var(--transition-fast) ease;
+}
+
+.phone-link:hover {
+  color: #fff !important;
+  text-decoration: underline;
 }
 
 .dt-tag {
