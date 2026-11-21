@@ -670,6 +670,7 @@ async function autoRefreshDistrict(districtId) {
       area: row.querySelector('AREA')?.textContent || '',
       start_time: row.querySelector('START_TIME')?.textContent || '',
       expected_restoration_time: row.querySelector('EXPECTED_RESTORATION_TIME')?.textContent || '',
+      dt: row.querySelector('DT')?.textContent || '',
       remarks: row.querySelector('ADDRESS')?.textContent || ''
     }));
     
@@ -960,6 +961,9 @@ function renderOutages() {
       categoryBadge = '<span class="category-tag rural"><i class="fa-solid fa-house-chimney"></i> Domestic</span>';
     }
 
+    // Transformer (DT) fault badge if DT data exists
+    const dtBadge = item.dt && item.dt.trim() ? `<span class="dt-tag" title="Transformer Unit"><i class="fa-solid fa-bolt"></i> DT: ${item.dt.trim()}</span>` : '';
+
     // Highlight matched search terms if query present
     const displayFeeder = highlightMatch(item.feeder, searchTerm);
     const displayArea = highlightMatch(item.area, searchTerm);
@@ -980,7 +984,7 @@ function renderOutages() {
       </td>
       <td>
         <div style="font-weight: 600; color: #fff; margin-bottom: 4px;">${displayFeeder}</div>
-        <div>${categoryBadge}</div>
+        <div style="display: flex; gap: 6px; align-items: center; flex-wrap: wrap;">${categoryBadge} ${dtBadge}</div>
       </td>
       <td>${displayArea}</td>
       <td>${formatTimeTo12Hr(item.start_time) || 'N/A'}</td>
@@ -1013,7 +1017,7 @@ function renderOutages() {
           </button>
           <div>
             <div style="font-weight: 600; color: #fff;">${displayFeeder}</div>
-            <div style="margin-top: 3px;">${categoryBadge}</div>
+            <div style="margin-top: 3px; display: flex; gap: 6px; align-items: center; flex-wrap: wrap;">${categoryBadge} ${dtBadge}</div>
           </div>
         </div>
         <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 4px;">
@@ -1276,6 +1280,7 @@ window.handleLiveRefresh = async function(eOrDistrictId) {
           area: row.querySelector('AREA')?.textContent || '',
           start_time: row.querySelector('START_TIME')?.textContent || '',
           expected_restoration_time: row.querySelector('EXPECTED_RESTORATION_TIME')?.textContent || '',
+          dt: row.querySelector('DT')?.textContent || '',
           remarks: row.querySelector('ADDRESS')?.textContent || ''
         }));
 
@@ -1683,11 +1688,15 @@ function renderHistory() {
     const displayFeeder = highlightMatch(item.feeder, searchTerm);
     const displayArea = highlightMatch(item.area, searchTerm);
     const displayRemarks = highlightMatch(item.remarks || '', searchTerm);
+    const dtBadge = item.dt && item.dt.trim() ? `<span class="dt-tag" style="margin-top: 4px;" title="Transformer Unit"><i class="fa-solid fa-bolt"></i> DT: ${item.dt.trim()}</span>` : '';
     
     const tr = document.createElement('tr');
     tr.innerHTML = `
       <td style="color: var(--text-dim); font-size: 13px;">${item.scraped_at || 'N/A'}</td>
-      <td style="font-weight: 600; color: #fff;">${displayFeeder}</td>
+      <td style="font-weight: 600; color: #fff;">
+        <div>${displayFeeder}</div>
+        ${dtBadge ? `<div>${dtBadge}</div>` : ''}
+      </td>
       <td>${displayArea}</td>
       <td>${formatTimeTo12Hr(item.start_time) || 'N/A'}</td>
       <td>${formatTimeTo12Hr(item.expected_restoration_time) || 'N/A'}</td>

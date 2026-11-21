@@ -121,6 +121,7 @@ const path = require('path');
           area: r[2] || '',
           start_time: r[3] || '',
           expected_restoration_time: r[4] || '',
+          dt: r[5] || '',
           remarks: r[6] || ''
         }));
 
