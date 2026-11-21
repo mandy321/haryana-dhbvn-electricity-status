@@ -1154,79 +1154,87 @@ function checkLocalityOutages() {
   });
 }
 
-// Live On-Demand Refresh via CORS Proxy
-window.handleLiveRefresh = async function(targetDistrictId) {
+// Live On-Demand Refresh
+window.handleLiveRefresh = async function(eOrDistrictId) {
+  // Determine if called from event listener or programmatic call
+  const targetDistrictId = (typeof eOrDistrictId === 'string' && eOrDistrictId) ? eOrDistrictId : currentDistrictId;
   const districtId = targetDistrictId || currentDistrictId;
   if (!districtId) return;
   
-  const isTargetedRefresh = !!targetDistrictId;
+  const isTargetedRefresh = (typeof eOrDistrictId === 'string' && !!eOrDistrictId);
   const districtName = DISTRICT_ID_TO_NAME[districtId];
   
   if (!isTargetedRefresh) {
     refreshBtn.disabled = true;
     refreshIcon.classList.add('spin-animation');
-    refreshBtnText.textContent = "Refreshing...";
+    refreshBtnText.textContent = "Checking...";
   }
   
   const pinnedRefreshIcons = document.querySelectorAll('.pinned-refresh-btn i, .shared-refresh-btn i');
   pinnedRefreshIcons.forEach(icon => icon.classList.add('fa-spin'));
   
-  try {
-    // 1. Build request XML string with selected district's numeric ID
-    const xmlRequest = `<?xml version="1.0"?><Request VERSION="2" LANGUAGE_ID="1" LOCATION=""><Company Company_Id="93" /><Project Project_Id="304" /><User User_Id="Anonymous" /><IUVLogin IUVLogin_Id="Anonymous" /><ROLE ROLE_ID="1595" /><Event Control_Id="130404" /><Child Control_Id="125681" Report="HTML" AC_ID="163944"><Parent Control_Id="130402" Value="${districtId}" Data_Form_Id="" XValue="${districtId}" YValue="" ZValue="" /></Child></Request>`;
-    
-    // 2. Base64 encode XML payload
-    const base64Payload = btoa(xmlRequest);
-    
-    // 3. POST request through configured Cloudflare Worker or CORS proxy
-    const url = DHBVN_PROXY_URL;
-    
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'appsavylogin': 'IG7gR27IJYSa+a/dym3wpw==',
-        'formid': 'TYDUFR2Pc592nssOkzMrLQ==',
-        'roleid': 'KnSKi2BRa296VND7xI1XWQ==',
-        'token': 'Wwzpa2LygAJqAK1uM94i8A==',
-        'version': '1',
-        'sourcetype': 'tzoukK4N1FBlaVGohFL/oQ=='
-      },
-      body: JSON.stringify({
-        inputxml: base64Payload,
-        DocVersion: 1
-      })
-    });
-    
-    if (!response.ok) {
-      throw new Error(`Server responded with status: ${response.status}`);
+  let liveDataLoaded = false;
+
+  // Try Path A: If custom Cloudflare Worker proxy is configured and alive
+  if (DHBVN_PROXY_URL && !DHBVN_PROXY_URL.includes('dhbvn-cors-proxy.workers.dev')) {
+    try {
+      const xmlRequest = `<?xml version="1.0"?><Request VERSION="2" LANGUAGE_ID="1" LOCATION=""><Company Company_Id="93" /><Project Project_Id="304" /><User User_Id="Anonymous" /><IUVLogin IUVLogin_Id="Anonymous" /><ROLE ROLE_ID="1595" /><Event Control_Id="130404" /><Child Control_Id="125681" Report="HTML" AC_ID="163944"><Parent Control_Id="130402" Value="${districtId}" Data_Form_Id="" XValue="${districtId}" YValue="" ZValue="" /></Child></Request>`;
+      const base64Payload = btoa(xmlRequest);
+      
+      const response = await fetch(DHBVN_PROXY_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'appsavylogin': 'IG7gR27IJYSa+a/dym3wpw==',
+          'formid': 'TYDUFR2Pc592nssOkzMrLQ==',
+          'roleid': 'KnSKi2BRa296VND7xI1XWQ==',
+          'token': 'Wwzpa2LygAJqAK1uM94i8A==',
+          'version': '1',
+          'sourcetype': 'tzoukK4N1FBlaVGohFL/oQ=='
+        },
+        body: JSON.stringify({ inputxml: base64Payload, DocVersion: 1 })
+      });
+
+      if (response.ok) {
+        const responseText = await response.text();
+        const parser = new DOMParser();
+        const xmlDoc = parser.parseFromString(responseText, "text/xml");
+        const rowsets = Array.from(xmlDoc.querySelectorAll('Rowset'));
+        
+        const list = rowsets.map(row => ({
+          feeder: row.querySelector('FEEDER')?.textContent || '',
+          area: row.querySelector('AREA')?.textContent || '',
+          start_time: row.querySelector('START_TIME')?.textContent || '',
+          expected_restoration_time: row.querySelector('EXPECTED_RESTORATION_TIME')?.textContent || '',
+          remarks: row.querySelector('ADDRESS')?.textContent || ''
+        }));
+
+        outagesData.districts[districtName] = list;
+        outagesData.last_updated = new Date().toISOString();
+        liveDataLoaded = true;
+      }
+    } catch (err) {
+      console.warn('Direct proxy fetch failed, falling back to cache sync:', err);
     }
-    
-    const responseText = await response.text();
-    
-    // 4. Parse XML response
-    const parser = new DOMParser();
-    const xmlDoc = parser.parseFromString(responseText, "text/xml");
-    
-    const rowsets = Array.from(xmlDoc.querySelectorAll('Rowset'));
-    
-    const list = rowsets.map(row => ({
-      feeder: row.querySelector('FEEDER')?.textContent || '',
-      area: row.querySelector('AREA')?.textContent || '',
-      start_time: row.querySelector('START_TIME')?.textContent || '',
-      expected_restoration_time: row.querySelector('EXPECTED_RESTORATION_TIME')?.textContent || '',
-      remarks: row.querySelector('ADDRESS')?.textContent || ''
-    }));
-    
-    // 5. Overwrite the in-memory array for this district
-    outagesData.districts[districtName] = list;
-    
-    // 6. Update timestamp UI and in-memory date
-    const now = new Date();
-    outagesData.last_updated = now.toISOString();
+  }
+
+  // Path B (Always reliable fallback): Fetch latest outages.json directly from GitHub Pages / repository with cache-busting
+  if (!liveDataLoaded) {
+    try {
+      const cacheBust = Date.now();
+      const res = await fetch(`data/outages.json?_t=${cacheBust}`, { cache: 'no-store' });
+      if (res.ok) {
+        const freshData = await res.json();
+        outagesData = freshData;
+        liveDataLoaded = true;
+      }
+    } catch (err) {
+      console.error('Fallback sync failed:', err);
+    }
+  }
+
+  if (liveDataLoaded) {
     lastUpdatedTime.innerHTML = `<i class="fa-regular fa-clock"></i> Data last updated: ${getLastUpdatedText()}`;
-    
-    // 7. Update UI view panels
     if (currentDistrictId === districtId) {
       updateStats();
       renderOutages();
@@ -1235,19 +1243,20 @@ window.handleLiveRefresh = async function(targetDistrictId) {
     renderPinnedArea();
     renderSharedArea();
     colorSVGMap();
-    
-  } catch (err) {
-    console.error('On-demand refresh error:', err);
-    alert('Failed to refresh data live from DHBVN. Please check your internet connection or try again later.');
-  } finally {
-    if (!isTargetedRefresh) {
-      refreshBtn.disabled = false;
-      refreshIcon.classList.remove('spin-animation');
-      refreshBtnText.textContent = "Refresh Live";
+    if (currentDistrictName) {
+      fetchDistrictHistoryForStats(currentDistrictName);
     }
-    pinnedRefreshIcons.forEach(icon => icon.classList.remove('fa-spin'));
+  } else {
+    alert('Unable to refresh data at this moment. Please check your internet connection or try again shortly.');
   }
-}
+
+  if (!isTargetedRefresh) {
+    refreshBtn.disabled = false;
+    refreshIcon.classList.remove('spin-animation');
+    refreshBtnText.textContent = "Refresh Live";
+  }
+  pinnedRefreshIcons.forEach(icon => icon.classList.remove('fa-spin'));
+};
 
 // Helper: Format raw DHBVN API time strings (e.g. "20-Jun-2026 18:03:54") to 12-hour AM/PM format
 function formatTimeTo12Hr(timeStr) {
