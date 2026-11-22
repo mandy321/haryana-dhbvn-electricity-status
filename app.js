@@ -209,7 +209,7 @@ async function initApp() {
     districtSelect.addEventListener('change', handleDistrictChange);
     searchInput.addEventListener('input', handleSearch);
     locateBtn.addEventListener('click', handleGeolocation);
-    refreshBtn.addEventListener('click', handleLiveRefresh);
+    refreshBtn.addEventListener('click', (e) => window.handleLiveRefresh(e));
 
     // Complaint Tracker Handler
     const trackComplaintBtn = document.getElementById('trackComplaintBtn');
@@ -523,6 +523,9 @@ window.unpinArea = function () {
   renderOutages();
 };
 
+// Alias for backward compatibility
+window.renderPinnedArea = renderPinnedAreas;
+
 // Render Multiple Pinned Dashboard Cards
 function renderPinnedAreas() {
   if (!pinnedAreas || pinnedAreas.length === 0 || !outagesData) {
@@ -702,7 +705,7 @@ function selectDistrict(districtId) {
 
   updateStats();
   checkLocalityOutages();
-  renderPinnedArea();
+  renderPinnedAreas();
   renderSharedArea();
 
   // Fetch history for stats in background
@@ -771,7 +774,7 @@ async function autoRefreshDistrict(districtId) {
       renderOutages();
       checkLocalityOutages();
     }
-    renderPinnedArea();
+    renderPinnedAreas();
     renderSharedArea();
     colorSVGMap();
 
@@ -1416,7 +1419,7 @@ window.handleLiveRefresh = async function (eOrDistrictId) {
       renderOutages();
       checkLocalityOutages();
     }
-    renderPinnedArea();
+    renderPinnedAreas();
     renderSharedArea();
     colorSVGMap();
     if (currentDistrictName) {
