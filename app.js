@@ -1574,6 +1574,8 @@ function updateArtAndLeaderboard() {
   const fourteenDaysAgo = nowTime - (14 * 24 * 60 * 60 * 1000);
 
   // 1. Calculate Typical (Median) Restoration Time separately for Urban/City, Rural/Domestic & Agricultural
+  // We deduplicate by (feeder + start_time) and filter out currently ongoing (unresolved) cuts so that
+  // long active cuts don't inflate the historical resolution metric.
   const urbanDurations = [];
   const ruralDurations = [];
   const agriDurations = [];
@@ -1581,9 +1583,26 @@ function updateArtAndLeaderboard() {
   const statUrbanFixTime = document.getElementById('statUrbanFixTime');
   const statUrbanArtGlow = document.getElementById('statUrbanArtGlow');
 
+  // Identify latest scrape timestamp to exclude currently active/ongoing outages
+  const latestScrapes = new Set();
+  currentDistrictHistory.forEach(item => {
+    if (item.last_seen_at) latestScrapes.add(item.last_seen_at);
+  });
+  const sortedScrapes = [...latestScrapes];
+  const mostRecentScrape = sortedScrapes[sortedScrapes.length - 1];
+
+  const uniqueResolvedEvents = {};
+
   currentDistrictHistory.forEach(item => {
     const timestamp = item.timestamp || (item.start_time ? parseDHBVNDate(item.start_time)?.getTime() : null);
     if (!timestamp || timestamp < fourteenDaysAgo) return;
+
+    // Skip currently active/ongoing cuts (cuts still seen in the most recent scrape)
+    if (mostRecentScrape && item.last_seen_at === mostRecentScrape) return;
+
+    const eventKey = `${item.feeder}___${item.start_time}`;
+    if (uniqueResolvedEvents[eventKey]) return; // count 1 event once, not 20 times for 20 affected colonies
+    uniqueResolvedEvents[eventKey] = true;
 
     let diff = 0;
     // Method A: Check explicit expected restoration time if given
@@ -1604,14 +1623,14 @@ function updateArtAndLeaderboard() {
     }
 
     // Filter out anomalous durations (under 1 min or over 72 hours)
-    if (diff > 60 * 1000 && diff < 72 * 60 * 60 * 1000) {
+    if (diff > 60 * 1000 && diff < 36 * 60 * 60 * 1000) {
       const hours = diff / (1000 * 60 * 60);
       const feederUpper = (item.feeder || '').toUpperCase();
       const areaUpper = (item.area || '').toUpperCase();
 
       if (feederUpper.includes(' AP') || feederUpper.includes('(AP)') || feederUpper.endsWith('AP') || feederUpper.includes('TUBEWELL') || feederUpper.includes('AGRICULTURE')) {
         agriDurations.push(hours);
-      } else if (feederUpper.includes('(U)') || feederUpper.includes(' URBAN') || feederUpper.includes('(URBAN)') || feederUpper.includes('CITY') || feederUpper.includes('TOWN') || areaUpper.includes('COLONY') || areaUpper.includes('SECTOR') || areaUpper.includes('NAGAR') || areaUpper.includes('ENCLAVE') || areaUpper.includes('VIHAR') || areaUpper.includes('CAMP') || areaUpper.includes('BAZAR') || areaUpper.includes('GATE')) {
+      } else if (feederUpper.includes('(U)') || feederUpper.includes(' URBAN') || feederUpper.includes('(URBAN)') || feederUpper.includes('CITY') || feederUpper.includes('TOWN') || feederUpper.includes('CAMP') || feederUpper.includes('GATE') || feederUpper.includes('ENCLAVE') || areaUpper.includes('COLONY') || areaUpper.includes('SECTOR') || areaUpper.includes('NAGAR') || areaUpper.includes('VIHAR')) {
         urbanDurations.push(hours);
       } else {
         ruralDurations.push(hours);
