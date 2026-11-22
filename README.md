@@ -43,7 +43,8 @@ A premium, interactive web application to track live power outages, scheduled ma
 11. **Area Pinning (Star) & Web Push Notifications**: Star your specific feeder or locality to keep its status pinned at the very top of your dashboard. Supports one-click browser push alerts subscription for pinned areas utilizing a free, serverless broker (`ntfy.sh`).
 12. **WhatsApp Sharing**: Easily share the real-time outage status of any specific area with a one-click generated link. When clicked, the recipient directly sees that area's status highlighted on top.
 13. **Automated Scheduled Scraping**: Runs a headless browser crawler via GitHub Actions every 20 minutes to fetch and mirror DHBVN status.
-14. **Premium Responsive UI**: Elegant dark space design with glassmorphism, responsive data grids, stats counters, and smooth layout transformations.
+14. **Official Escalation & Complaint Desks Directory**: Quick-dial emergency contacts including 24x7 DHBVN toll-free helplines, Palwal Circle control room, official Sub-Division complaint desks, and State HQ escalation.
+15. **Premium Responsive UI**: Elegant dark space design with glassmorphism, responsive data grids, stats counters, and smooth layout transformations.
 
 ---
 

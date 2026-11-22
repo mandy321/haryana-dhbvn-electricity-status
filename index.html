@@ -77,6 +77,38 @@
           <!-- Dynamically populated shared area card -->
         </div>
       </section>
+
+      <!-- Instant Power Check & Community Report Section (Quick Search) -->
+      <section class="quick-check-section glass-card" style="margin-bottom: 24px; position: relative;">
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 12px; flex-wrap: wrap;">
+          <div>
+            <h2 style="font-family: var(--font-heading); font-size: 18px; font-weight: 700; color: #fff; margin: 0; display: flex; align-items: center; gap: 8px;">
+              <i class="fa-solid fa-magnifying-glass-location" style="color: #38bdf8;"></i> Is My Power Out?
+            </h2>
+            <p style="font-size: 13px; color: var(--text-dim); margin: 4px 0 0 0;">
+              Instant fuzzy search across all DHBVN localities, feeders, and live crowd reports.
+            </p>
+          </div>
+          <div style="display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--text-dim); background: rgba(255,255,255,0.04); padding: 4px 10px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.08);">
+            <span class="live-pulse" style="width: 6px; height: 6px;"></span>
+            <span>Live Community Sync Active</span>
+          </div>
+        </div>
+
+        <div class="quick-search-box" style="position: relative;">
+          <i class="fa-solid fa-magnifying-glass" style="position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: var(--text-dim); font-size: 14px;"></i>
+          <input type="text" id="quickLocalitySearch" placeholder="Type colony, sector, or village (e.g. Shiv Colony, Sector 2, Adarsh Nagar)..." autocomplete="off" style="width: 100%; box-sizing: border-box; background: rgba(0,0,0,0.4); border: 1px solid rgba(56, 189, 248, 0.35); border-radius: 12px; padding: 14px 44px 14px 44px; color: #fff; font-size: 14px; outline: none; transition: border-color 0.2s, box-shadow 0.2s;">
+          <button id="clearQuickSearchBtn" class="hidden" style="position: absolute; right: 14px; top: 50%; transform: translateY(-50%); background: transparent; border: none; color: var(--text-dim); cursor: pointer; font-size: 14px; padding: 4px;">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+          
+          <!-- Auto-suggestion dropdown -->
+          <div id="quickSearchResultsDropdown" class="quick-search-dropdown hidden"></div>
+        </div>
+
+        <!-- Selected Result Card (Official + Community Reporting) -->
+        <div id="quickSearchCard" class="quick-status-card hidden" style="margin-top: 16px;"></div>
+      </section>
       
       <!-- Top Control Section -->
       <section class="control-panel glass-card">
@@ -358,9 +390,6 @@
               <div style="display: flex; gap: 8px; flex-wrap: wrap;">
                 <a href="tel:01722560547" class="btn" style="display: inline-flex; align-items: center; gap: 6px; background: rgba(192, 132, 252, 0.15); border: 1px solid rgba(192, 132, 252, 0.35); color: #c084fc; font-size: 12px; padding: 6px 10px; border-radius: 6px; text-decoration: none;">
                   <i class="fa-solid fa-phone"></i> 0172-2560547
-                </a>
-                <a href="https://cmharyanacell.nic.in" target="_blank" class="btn" style="display: inline-flex; align-items: center; gap: 6px; background: rgba(192, 132, 252, 0.15); border: 1px solid rgba(192, 132, 252, 0.35); color: #c084fc; font-size: 12px; padding: 6px 10px; border-radius: 6px; text-decoration: none;">
-                  <i class="fa-solid fa-arrow-up-right-from-square"></i> CM Window
                 </a>
               </div>
             </div>
@@ -660,8 +689,32 @@
   <!-- Floating Map Tooltip -->
   <div id="mapTooltip" class="map-tooltip"></div>
 
+  <!-- Firebase App & Firestore SDKs (Modular via esm.sh or CDN) -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getFirestore, doc, getDoc, setDoc, updateDoc, increment, serverTimestamp, onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDUvozq9duTY_WzMxz_mtgtLYUXXSFSl7s",
+      authDomain: "dhbvn-outage-tracker.firebaseapp.com",
+      projectId: "dhbvn-outage-tracker",
+      storageBucket: "dhbvn-outage-tracker.firebasestorage.app",
+      messagingSenderId: "379117237966",
+      appId: "1:379117237966:web:b74bad0bb87cd439acc29f"
+    };
+
+    try {
+      const fbApp = initializeApp(firebaseConfig);
+      const db = getFirestore(fbApp);
+      window.communityDB = { db, doc, getDoc, setDoc, updateDoc, increment, serverTimestamp, onSnapshot };
+      console.log("Firebase Firestore initialized for Community Reports.");
+    } catch (e) {
+      console.warn("Firebase initialization skipped or error:", e);
+    }
+  </script>
+
   <!-- Custom JavaScript -->
-  <script src="app.js?v=1.0.1"></script>
+  <script src="app.js?v=1.1.0"></script>
 </body>
 </html>
 

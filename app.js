@@ -200,6 +200,9 @@ async function initApp() {
     // Load monthly reports dropdown
     await loadMonthlyReportsList();
 
+    // Initialize Quick Locality Fuzzy Search & Community Reporting Engine
+    setupQuickSearchEngine();
+
     showLoader(false);
 
     // Setup event listeners
@@ -2443,6 +2446,367 @@ async function loadMonthlyReportsList() {
     console.warn('Failed to load monthly reports manifest:', err);
   }
 }
+
+// -----------------------------------------------------------------------------
+// Quick Locality Fuzzy Search & Community Reporting (Phase 1 & 2)
+// -----------------------------------------------------------------------------
+let quickSearchLocalityIndex = [];
+let currentSelectedQuickLocality = null;
+let communityUnsubscribe = null;
+
+function setupQuickSearchEngine() {
+  const input = document.getElementById('quickLocalitySearch');
+  const dropdown = document.getElementById('quickSearchResultsDropdown');
+  const clearBtn = document.getElementById('clearQuickSearchBtn');
+  const card = document.getElementById('quickSearchCard');
+  if (!input || !dropdown) return;
+
+  // Build searchable index from feederMasterData
+  buildQuickSearchIndex();
+
+  input.addEventListener('input', () => {
+    const query = input.value.trim().toLowerCase();
+    if (query.length > 0) {
+      clearBtn.classList.remove('hidden');
+    } else {
+      clearBtn.classList.add('hidden');
+      dropdown.classList.add('hidden');
+      return;
+    }
+
+    if (query.length < 2) {
+      dropdown.classList.add('hidden');
+      return;
+    }
+
+    renderQuickSearchResults(query);
+  });
+
+  clearBtn.addEventListener('click', () => {
+    input.value = '';
+    clearBtn.classList.add('hidden');
+    dropdown.classList.add('hidden');
+    card.classList.add('hidden');
+    currentSelectedQuickLocality = null;
+    if (communityUnsubscribe) {
+      communityUnsubscribe();
+      communityUnsubscribe = null;
+    }
+  });
+
+  // Hide dropdown on click outside
+  document.addEventListener('click', (e) => {
+    if (!input.contains(e.target) && !dropdown.contains(e.target)) {
+      dropdown.classList.add('hidden');
+    }
+  });
+}
+
+function buildQuickSearchIndex() {
+  quickSearchLocalityIndex = [];
+  if (!feederMasterData) return;
+
+  for (const [district, data] of Object.entries(feederMasterData)) {
+    if (data.areas && Array.isArray(data.areas)) {
+      data.areas.forEach(areaName => {
+        quickSearchLocalityIndex.push({
+          name: areaName,
+          type: 'area',
+          district: district,
+          searchKey: `${areaName} ${district}`.toLowerCase()
+        });
+      });
+    }
+    if (data.feeders && Array.isArray(data.feeders)) {
+      data.feeders.forEach(feederName => {
+        quickSearchLocalityIndex.push({
+          name: feederName,
+          type: 'feeder',
+          district: district,
+          searchKey: `${feederName} ${district}`.toLowerCase()
+        });
+      });
+    }
+  }
+}
+
+function renderQuickSearchResults(query) {
+  const dropdown = document.getElementById('quickSearchResultsDropdown');
+  if (!dropdown) return;
+
+  // Simple tokenized score matching
+  const tokens = query.split(/\s+/).filter(Boolean);
+  const matches = [];
+
+  for (const item of quickSearchLocalityIndex) {
+    let score = 0;
+    const nameLower = item.name.toLowerCase();
+    
+    // Exact or prefix matches get top boost
+    if (nameLower === query) score += 100;
+    else if (nameLower.startsWith(query)) score += 50;
+    else if (nameLower.includes(query)) score += 25;
+
+    let allTokens = true;
+    for (const t of tokens) {
+      if (item.searchKey.includes(t)) {
+        score += 10;
+      } else {
+        allTokens = false;
+        break;
+      }
+    }
+
+    if (allTokens || score > 0) {
+      matches.push({ ...item, score });
+    }
+  }
+
+  // Sort descending by score
+  matches.sort((a, b) => b.score - a.score);
+  const topResults = matches.slice(0, 8);
+
+  if (topResults.length === 0) {
+    dropdown.innerHTML = `
+      <div style="padding: 12px 16px; color: var(--text-dim); font-size: 13px;">
+        <i class="fa-solid fa-circle-question"></i> No matching locality or feeder found. Check spelling or try a nearby sector.
+      </div>`;
+    dropdown.classList.remove('hidden');
+    return;
+  }
+
+  dropdown.innerHTML = topResults.map(item => `
+    <div class="quick-search-item" onclick="selectQuickSearchResult('${encodeURIComponent(item.name)}', '${encodeURIComponent(item.district)}', '${item.type}')">
+      <div>
+        <div style="font-weight: 600; color: #fff; font-size: 13px;">
+          <i class="${item.type === 'feeder' ? 'fa-solid fa-bolt' : 'fa-solid fa-location-dot'}" style="color: #38bdf8; margin-right: 6px; font-size: 11px;"></i>
+          ${highlightKeyword(item.name, query)}
+        </div>
+        <div style="font-size: 11px; color: var(--text-dim); margin-top: 2px;">
+          ${item.type === 'feeder' ? 'Feeder' : 'Locality / Area'} &bull; District: <strong style="color: #94a3b8;">${item.district}</strong>
+        </div>
+      </div>
+      <i class="fa-solid fa-arrow-right" style="color: rgba(255,255,255,0.2); font-size: 12px;"></i>
+    </div>
+  `).join('');
+
+  dropdown.classList.remove('hidden');
+}
+
+window.selectQuickSearchResult = function (encName, encDistrict, type) {
+  const name = decodeURIComponent(encName);
+  const district = decodeURIComponent(encDistrict);
+  const input = document.getElementById('quickLocalitySearch');
+  const dropdown = document.getElementById('quickSearchResultsDropdown');
+  if (input) input.value = name;
+  if (dropdown) dropdown.classList.add('hidden');
+
+  currentSelectedQuickLocality = { name, district, type };
+  renderQuickStatusCard(name, district, type);
+};
+
+function renderQuickStatusCard(name, district, type) {
+  const card = document.getElementById('quickSearchCard');
+  if (!card) return;
+
+  // Check active DHBVN status
+  let officialOutage = null;
+  if (outagesData && outagesData[district]) {
+    const list = outagesData[district];
+    officialOutage = list.find(r => {
+      const a = (r.area || '').toLowerCase();
+      const f = (r.feeder || '').toLowerCase();
+      const n = name.toLowerCase();
+      return a.includes(n) || n.includes(a) || f === n;
+    });
+  }
+
+  // Generate safe storage/firestore document key
+  const docKey = `${district}_${name}`.replace(/[^a-zA-Z0-9_]/g, '_').toLowerCase();
+
+  // Initial Card Shell
+  card.className = `quick-status-card ${officialOutage ? 'status-active-cut' : 'status-normal'}`;
+  card.innerHTML = `
+    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; flex-wrap: wrap;">
+      <div>
+        <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+          <h3 style="font-size: 16px; font-weight: 700; color: #fff; margin: 0;">${name}</h3>
+          <span style="font-size: 11px; background: rgba(255,255,255,0.08); padding: 2px 8px; border-radius: 6px; color: #94a3b8;">${district}</span>
+          <span style="font-size: 11px; background: rgba(56, 189, 248, 0.15); color: #38bdf8; padding: 2px 8px; border-radius: 6px;">${type === 'feeder' ? 'Feeder' : 'Locality'}</span>
+        </div>
+        <p style="font-size: 12px; color: var(--text-dim); margin: 4px 0 0 0;">
+          Direct grid assessment for this area
+        </p>
+      </div>
+
+      <!-- Quick Actions (Star / WhatsApp) -->
+      <div style="display: flex; gap: 8px;">
+        <button onclick="pinArea('${name.replace(/'/g, "\\'")}', '${(officialOutage ? officialOutage.feeder : name).replace(/'/g, "\\'")}', '${district}')" class="btn" style="background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.35); color: #fbbf24; font-size: 11px; padding: 6px 10px; border-radius: 6px;">
+          <i class="fa-solid fa-star"></i> Star Area
+        </button>
+        <button onclick="shareLocalityStatus('${name.replace(/'/g, "\\'")}', '${district}', ${officialOutage ? 'true' : 'false'})" class="btn" style="background: rgba(37, 211, 102, 0.15); border: 1px solid rgba(37, 211, 102, 0.35); color: #25D366; font-size: 11px; padding: 6px 10px; border-radius: 6px;">
+          <i class="fa-brands fa-whatsapp"></i> Share
+        </button>
+      </div>
+    </div>
+
+    <!-- Official DHBVN Status Banner -->
+    <div style="margin-top: 14px; padding: 12px; border-radius: 10px; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.06);">
+      <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span style="font-size: 16px;">${officialOutage ? '🔴' : '🟢'}</span>
+          <div>
+            <div style="font-size: 13px; font-weight: 700; color: #fff;">
+              DHBVN Portal: ${officialOutage ? 'Active Power Cut Reported' : 'All Clear / Grid Normal'}
+            </div>
+            <div style="font-size: 11px; color: var(--text-dim); margin-top: 2px;">
+              ${officialOutage ? `Feeder: <strong>${officialOutage.feeder}</strong> | Cut Started: ${officialOutage.start_time || 'Recent'}` : 'No official feeder tripping reported in latest DHBVN sync.'}
+            </div>
+          </div>
+        </div>
+        ${officialOutage ? `
+          <div style="font-size: 12px; font-weight: 600; color: #f87171; background: rgba(239,68,68,0.15); padding: 4px 10px; border-radius: 6px;">
+            Est. Restoration: ${officialOutage.expected_restoration_time || '~1.5 to 5 hours'}
+          </div>
+        ` : ''}
+      </div>
+    </div>
+
+    <!-- Community Crowdsource Reporting Section -->
+    <div id="communityStatusRow_${docKey}" style="margin-top: 12px; padding: 12px; border-radius: 10px; background: rgba(0,0,0,0.2); border: 1px dashed rgba(255,255,255,0.1);">
+      <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+        <div>
+          <div style="font-size: 12px; font-weight: 600; color: #fff; display: flex; align-items: center; gap: 6px;">
+            <i class="fa-solid fa-users" style="color: #38bdf8;"></i> Local Crowd Status:
+            <span id="communityCountLabel_${docKey}" style="color: #94a3b8; font-weight: normal;">Checking live reports...</span>
+          </div>
+          <div id="communitySubLabel_${docKey}" style="font-size: 11px; color: var(--text-dim); margin-top: 2px;">
+            Has power gone out recently at your home?
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div style="display: flex; gap: 8px; align-items: center;" id="communityActionBtns_${docKey}">
+          <button onclick="handleCommunityVote('${docKey}', '${name.replace(/'/g, "\\'")}', '${district}', 'no_power')" class="community-btn" style="background: rgba(239, 68, 68, 0.2); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.4);">
+            <i class="fa-solid fa-bolt-slash"></i> Power Cut
+          </button>
+          <button onclick="handleCommunityVote('${docKey}', '${name.replace(/'/g, "\\'")}', '${district}', 'has_power')" class="community-btn" style="background: rgba(34, 197, 94, 0.2); color: #4ade80; border: 1px solid rgba(34, 197, 94, 0.4);">
+            <i class="fa-solid fa-lightbulb"></i> Light Hai
+          </button>
+        </div>
+      </div>
+    </div>
+  `;
+
+  card.classList.remove('hidden');
+
+  // Attach live Firestore listener
+  listenToCommunityReports(docKey, officialOutage);
+}
+
+function listenToCommunityReports(docKey, officialOutage) {
+  if (communityUnsubscribe) {
+    communityUnsubscribe();
+    communityUnsubscribe = null;
+  }
+
+  const countLabel = document.getElementById(`communityCountLabel_${docKey}`);
+  const subLabel = document.getElementById(`communitySubLabel_${docKey}`);
+  const card = document.getElementById('quickSearchCard');
+
+  if (!window.communityDB) {
+    if (countLabel) countLabel.innerHTML = `<span style="color: #4ade80;">0 recent reports</span>`;
+    return;
+  }
+
+  const { db, doc, onSnapshot } = window.communityDB;
+  const reportRef = doc(db, 'power_reports', docKey);
+
+  communityUnsubscribe = onSnapshot(reportRef, (snap) => {
+    if (!snap.exists()) {
+      if (countLabel) countLabel.innerHTML = `<span style="color: #4ade80;">0 reports (All quiet)</span>`;
+      if (subLabel) subLabel.textContent = `No active user complaints in this area over the past hour.`;
+      return;
+    }
+
+    const data = snap.data();
+    const cuts = data.cut_count || 0;
+    const restored = data.restored_count || 0;
+    const lastReportTime = data.last_updated ? data.last_updated.toDate() : new Date();
+    const minsAgo = Math.max(1, Math.round((new Date() - lastReportTime) / 60000));
+
+    // Calculate effective active reports
+    const netReports = Math.max(0, cuts - restored);
+
+    if (netReports > 0) {
+      if (countLabel) {
+        countLabel.innerHTML = `<strong style="color: #fbbf24;">${netReports} locals reported power cut</strong> (${minsAgo}m ago)`;
+      }
+      if (subLabel) {
+        subLabel.innerHTML = `⚠️ Community Alert: Multiple users reported power outage.`;
+      }
+      if (!officialOutage && card) {
+        card.className = 'quick-status-card status-community-alert';
+      }
+    } else {
+      if (countLabel) countLabel.innerHTML = `<span style="color: #4ade80;">0 reports active</span>`;
+      if (subLabel) subLabel.textContent = `No power cuts reported by community members.`;
+      if (!officialOutage && card) {
+        card.className = 'quick-status-card status-normal';
+      }
+    }
+  }, (err) => {
+    console.warn("Firestore onSnapshot error:", err);
+  });
+}
+
+window.handleCommunityVote = async function (docKey, name, district, type) {
+  // Check local cooldown
+  const lastVoteKey = `voted_${docKey}_${type}`;
+  const lastVoted = localStorage.getItem(lastVoteKey);
+  const now = Date.now();
+
+  if (lastVoted && now - parseInt(lastVoted, 10) < 30 * 60 * 1000) {
+    const remMins = Math.ceil((30 * 60 * 1000 - (now - parseInt(lastVoted, 10))) / 60000);
+    alert(`Thank you! You already submitted a status for ${name}. You can submit an update in ${remMins} minutes.`);
+    return;
+  }
+
+  if (!window.communityDB) {
+    localStorage.setItem(lastVoteKey, now.toString());
+    alert(`Status recorded locally for ${name}! Thank you for keeping your community updated.`);
+    return;
+  }
+
+  const { db, doc, setDoc, increment, serverTimestamp } = window.communityDB;
+  const reportRef = doc(db, 'power_reports', docKey);
+
+  try {
+    const isCut = type === 'no_power';
+    await setDoc(reportRef, {
+      area_name: name,
+      district: district,
+      cut_count: isCut ? increment(1) : increment(0),
+      restored_count: isCut ? increment(0) : increment(1),
+      last_updated: serverTimestamp()
+    }, { merge: true });
+
+    localStorage.setItem(lastVoteKey, now.toString());
+    alert(isCut 
+      ? `Report recorded! Your neighbours will now see that power is out in ${name}.` 
+      : `Marked! Thanks for confirming power is restored in ${name}.`);
+  } catch (err) {
+    console.error("Error submitting community report:", err);
+    alert("Could not sync with database. Please try again.");
+  }
+};
+
+window.shareLocalityStatus = function (name, district, isOutage) {
+  const currentUrl = window.location.origin + window.location.pathname;
+  const statusEmoji = isOutage ? '🔴 POWER OUT' : '🟢 POWER NORMAL';
+  const text = encodeURIComponent(`⚡ DHBVN Grid Status for ${name} (${district}): ${statusEmoji}\nCheck live status, feeder and community reports here: ${currentUrl}?shared=${encodeURIComponent(name)}&district=${encodeURIComponent(district)}`);
+  window.open(`https://wa.me/?text=${text}`, '_blank');
+};
 
 // -----------------------------------------------------------------------------
 // Browser Push Alerts Subscriptions (ntfy.sh Topic Routing)
