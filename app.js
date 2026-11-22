@@ -302,7 +302,7 @@ async function initApp() {
   } catch (error) {
     console.error('Initialization error:', error);
     showLoader(false);
-    alert('Failed to load outages database. Please try refreshing or check back later.');
+    alert(`Failed to load outages database (${error && error.message ? error.message : error}). Please try refreshing or check back later.`);
   }
 }
 
