@@ -2454,6 +2454,16 @@ let quickSearchLocalityIndex = [];
 let currentSelectedQuickLocality = null;
 let communityUnsubscribe = null;
 
+function escapeHtml(str) {
+  if (!str) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
 function setupQuickSearchEngine() {
   const input = document.getElementById('quickLocalitySearch');
   const dropdown = document.getElementById('quickSearchResultsDropdown');
@@ -2580,7 +2590,7 @@ function renderQuickSearchResults(query) {
       <div>
         <div style="font-weight: 600; color: #fff; font-size: 13px;">
           <i class="${item.type === 'feeder' ? 'fa-solid fa-bolt' : 'fa-solid fa-location-dot'}" style="color: #38bdf8; margin-right: 6px; font-size: 11px;"></i>
-          ${highlightKeyword(item.name, query)}
+          ${escapeHtml(item.name)}
         </div>
         <div style="font-size: 11px; color: var(--text-dim); margin-top: 2px;">
           ${item.type === 'feeder' ? 'Feeder' : 'Locality / Area'} &bull; District: <strong style="color: #94a3b8;">${item.district}</strong>
