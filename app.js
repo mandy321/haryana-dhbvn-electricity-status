@@ -6,7 +6,7 @@ const DHBVN_PROXY_URL = window.DHBVN_CUSTOM_PROXY || 'https://dhbvn-cors-proxy.w
 let outagesData = null;
 let currentDistrictId = "";
 let currentDistrictName = "";
-let pinnedArea = null;
+let pinnedAreas = [];
 let sharedArea = null;
 let currentSeverityFilter = "all";
 let currentViewTab = "live";
@@ -103,7 +103,7 @@ const lastUpdatedTime = document.getElementById('lastUpdatedTime');
 
 // Pinned Dashboard Elements
 const pinnedSection = document.getElementById('pinnedSection');
-const pinnedCard = document.getElementById('pinnedCard');
+const pinnedCardsContainer = document.getElementById('pinnedCardsContainer');
 
 // Shared Dashboard Elements
 const sharedSection = document.getElementById('sharedSection');
@@ -276,9 +276,9 @@ async function initApp() {
     if (sharedArea) {
       renderSharedArea();
       selectDistrict(sharedArea.districtId);
-    } else if (pinnedArea) {
-      renderPinnedArea();
-      selectDistrict(pinnedArea.districtId);
+    } else if (pinnedAreas && pinnedAreas.length > 0) {
+      renderPinnedAreas();
+      selectDistrict(pinnedAreas[0].districtId);
     } else {
       // Default to Palwal (District ID 11) on launch
       selectDistrict("11");
@@ -470,143 +470,168 @@ window.dismissSharedArea = function () {
   window.history.replaceState({}, document.title, window.location.pathname);
 };
 
-// Load Pinned Locality from localStorage
+// Load Pinned Localities from localStorage
 function loadPinnedArea() {
-  const raw = localStorage.getItem('pinned_dhbvn_outage');
+  const raw = localStorage.getItem('pinned_dhbvn_outages');
   if (raw) {
     try {
-      pinnedArea = JSON.parse(raw);
+      const parsed = JSON.parse(raw);
+      pinnedAreas = Array.isArray(parsed) ? parsed : [parsed];
     } catch (e) {
-      pinnedArea = null;
+      pinnedAreas = [];
     }
   } else {
-    pinnedArea = null;
+    // Migration: Check legacy single pin key
+    const legacyRaw = localStorage.getItem('pinned_dhbvn_outage');
+    if (legacyRaw) {
+      try {
+        const legacy = JSON.parse(legacyRaw);
+        if (legacy && legacy.area) pinnedAreas = [legacy];
+      } catch (e) {}
+    } else {
+      pinnedAreas = [];
+    }
   }
 }
 
-// Save/Unpin area helper
+// Save/Unpin multiple areas helper
 function savePinnedArea(districtId, districtName, feeder, area) {
-  pinnedArea = { districtId, districtName, feeder, area };
-  localStorage.setItem('pinned_dhbvn_outage', JSON.stringify(pinnedArea));
-  renderPinnedArea();
+  const exists = pinnedAreas.some(p => p.area === area && p.districtName === districtName);
+  if (!exists) {
+    pinnedAreas.unshift({ districtId, districtName, feeder, area });
+  }
+  localStorage.setItem('pinned_dhbvn_outages', JSON.stringify(pinnedAreas));
+  renderPinnedAreas();
   renderOutages();
 }
 
+window.unpinSingleArea = function (districtName, area) {
+  pinnedAreas = pinnedAreas.filter(p => !(p.area === area && p.districtName === districtName));
+  localStorage.setItem('pinned_dhbvn_outages', JSON.stringify(pinnedAreas));
+  renderPinnedAreas();
+  renderOutages();
+  if (currentSelectedQuickLocality) {
+    renderQuickStatusCard(currentSelectedQuickLocality.name, currentSelectedQuickLocality.district, currentSelectedQuickLocality.type);
+  }
+};
+
 window.unpinArea = function () {
+  localStorage.removeItem('pinned_dhbvn_outages');
   localStorage.removeItem('pinned_dhbvn_outage');
-  pinnedArea = null;
+  pinnedAreas = [];
   pinnedSection.classList.add('hidden');
   renderOutages();
 };
 
-// Render Pinned Dashboard Card
-function renderPinnedArea() {
-  if (!pinnedArea || !outagesData) {
+// Render Multiple Pinned Dashboard Cards
+function renderPinnedAreas() {
+  if (!pinnedAreas || pinnedAreas.length === 0 || !outagesData) {
     pinnedSection.classList.add('hidden');
+    if (pinnedCardsContainer) pinnedCardsContainer.innerHTML = '';
     return;
   }
 
   pinnedSection.classList.remove('hidden');
+  if (!pinnedCardsContainer) return;
 
-  // Search the district's outages list for this pinned area status
-  const list = outagesData.districts[pinnedArea.districtName] || [];
   const nowISTStr = new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata' });
   const nowIST = new Date(nowISTStr);
   const nowTime = nowIST.getTime();
 
-  const activeCut = list.find(item => {
-    if (item.feeder !== pinnedArea.feeder || item.area !== pinnedArea.area) return false;
-    const end = parseDHBVNDate(item.expected_restoration_time);
-    if (end && end.getTime() < nowTime) {
-      return false; // resolved/past
-    }
-    return true;
-  });
+  pinnedCardsContainer.innerHTML = pinnedAreas.map(pinnedItem => {
+    const list = (outagesData.districts && outagesData.districts[pinnedItem.districtName]) || [];
+    const activeCut = list.find(item => {
+      if (item.feeder !== pinnedItem.feeder || item.area !== pinnedItem.area) return false;
+      const end = parseDHBVNDate(item.expected_restoration_time);
+      if (end && end.getTime() < nowTime) {
+        return false; // resolved/past
+      }
+      return true;
+    });
 
-  pinnedCard.className = "pinned-card glass-card";
+    if (activeCut) {
+      const remarks = activeCut.remarks || '';
+      const isPlanned = isPlannedOutage(remarks);
+      const badgeClass = isPlanned ? 'badge-warning' : 'badge-danger';
+      const badgeText = isPlanned ? 'Planned Maintenance' : 'Unplanned Cut';
+      const badgeIcon = isPlanned ? 'fa-screwdriver-wrench' : 'fa-triangle-exclamation';
 
-  if (activeCut) {
-    pinnedCard.classList.add('active-outage');
-    const remarks = activeCut.remarks || '';
-    const isPlanned = isPlannedOutage(remarks);
-    const badgeClass = isPlanned ? 'badge-warning' : 'badge-danger';
-    const badgeText = isPlanned ? 'Planned Maintenance' : 'Unplanned Cut';
-    const badgeIcon = isPlanned ? 'fa-screwdriver-wrench' : 'fa-triangle-exclamation';
-
-    pinnedCard.innerHTML = `
-      <div class="pinned-card-header">
-        <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
-          <h3><i class="fa-solid fa-star" style="color: var(--warning-color);"></i> Pinned Locality</h3>
-          <span style="font-size: 11px; font-weight: 600; color: #38bdf8; background: rgba(56, 189, 248, 0.12); border: 1px solid rgba(56, 189, 248, 0.3); padding: 2px 8px; border-radius: 6px;">
-            <i class="fa-solid fa-map-pin" style="font-size: 9px;"></i> District: ${escapeHtml(pinnedArea.districtName)}
-          </span>
-        </div>
-        <div style="display: flex; gap: 12px; align-items: center;">
-          <button class="btn-refresh" style="background:rgba(245,158,11,0.15); border:1px solid rgba(245,158,11,0.3); color:var(--warning-color); cursor:pointer; display:flex; align-items:center; gap:4px; padding: 4px 8px; border-radius:6px; font-size:12px;" onclick="subscribeToAlerts('${pinnedArea.districtName}', '${pinnedArea.feeder}', '${pinnedArea.area}')" title="Get live push alerts"><i class="fa-solid fa-bell"></i> Get Alerts</button>
-          <button class="btn-refresh pinned-refresh-btn" style="background:none; border:none; color:var(--text-dim); cursor:pointer; display:flex; align-items:center; gap:4px;" onclick="handleLiveRefresh('${pinnedArea.districtId}')" title="Refresh live status"><i class="fa-solid fa-rotate"></i> Refresh</button>
-          <button class="btn-refresh" style="background:none; border:none; color:var(--text-dim); cursor:pointer; display:flex; align-items:center; gap:4px;" onclick="shareArea('${pinnedArea.districtId}', '${pinnedArea.districtName}', '${pinnedArea.feeder}', '${pinnedArea.area}')" title="Share live status link"><i class="fa-solid fa-share-nodes"></i> Share</button>
-          <button class="btn-refresh" style="background:none; border:none; color:var(--text-dim); cursor:pointer; display:flex; align-items:center; gap:4px;" onclick="unpinArea()"><i class="fa-solid fa-trash-can"></i> Unpin</button>
-        </div>
-      </div>
-      <div class="pinned-card-body">
-        <div class="pinned-item" style="grid-column: 1 / -1;">
-          <i class="fa-solid fa-house-laptop"></i>
-          <span><strong>Outage Detected:</strong> <span style="font-weight:700; color:#fff;">${escapeHtml(pinnedArea.area)}</span> <span style="color: var(--text-dim); font-size: 13px;">(Feeder: ${escapeHtml(pinnedArea.feeder)})</span></span>
-        </div>
-        <div class="pinned-item">
-          <i class="fa-solid fa-clock"></i>
-          <span><strong>Cut Started:</strong> ${formatTimeTo12Hr(activeCut.start_time) || 'N/A'}</span>
-        </div>
-        <div class="pinned-item">
-          <i class="fa-solid fa-circle-chevron-right"></i>
-          <span><strong>Est. Restoration:</strong> <span style="color:#67e8f9; font-weight:600;">${formatTimeTo12Hr(activeCut.expected_restoration_time) || 'Pending Estimate'}</span></span>
-        </div>
-        <div class="pinned-item">
-          <div class="status-badge ${badgeClass}">
-            <i class="fa-solid ${badgeIcon}"></i> ${badgeText}
-          </div>
-        </div>
-        <div class="pinned-item" style="grid-column: 1 / -1;">
-          <i class="fa-solid fa-circle-info"></i>
-          <span><strong>Remarks:</strong> <span style="font-style:italic;">${remarks}</span></span>
-        </div>
-        <div class="pinned-item" style="grid-column: 1 / -1; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 8px; margin-top: 4px; font-size: 12px; color: var(--text-muted);">
-          <i class="fa-solid fa-clock-rotate-left"></i> Last Checked: ${getLastUpdatedText()}
-        </div>
-      </div>
-    `;
-  } else {
-    pinnedCard.innerHTML = `
-      <div class="pinned-card-header">
-        <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
-          <h3><i class="fa-solid fa-star" style="color: var(--warning-color);"></i> Pinned Locality</h3>
-          <span style="font-size: 11px; font-weight: 600; color: #38bdf8; background: rgba(56, 189, 248, 0.12); border: 1px solid rgba(56, 189, 248, 0.3); padding: 2px 8px; border-radius: 6px;">
-            <i class="fa-solid fa-map-pin" style="font-size: 9px;"></i> District: ${escapeHtml(pinnedArea.districtName)}
-          </span>
-        </div>
-        <div style="display: flex; gap: 12px; align-items: center;">
-          <button class="btn-refresh" style="background:rgba(245,158,11,0.15); border:1px solid rgba(245,158,11,0.3); color:var(--warning-color); cursor:pointer; display:flex; align-items:center; gap:4px; padding: 4px 8px; border-radius:6px; font-size:12px;" onclick="subscribeToAlerts('${pinnedArea.districtName}', '${pinnedArea.feeder}', '${pinnedArea.area}')" title="Get live push alerts"><i class="fa-solid fa-bell"></i> Get Alerts</button>
-          <button class="btn-refresh pinned-refresh-btn" style="background:none; border:none; color:var(--text-dim); cursor:pointer; display:flex; align-items:center; gap:4px;" onclick="handleLiveRefresh('${pinnedArea.districtId}')" title="Refresh live status"><i class="fa-solid fa-rotate"></i> Refresh</button>
-          <button class="btn-refresh" style="background:none; border:none; color:var(--text-dim); cursor:pointer; display:flex; align-items:center; gap:4px;" onclick="shareArea('${pinnedArea.districtId}', '${pinnedArea.districtName}', '${pinnedArea.feeder}', '${pinnedArea.area}')" title="Share live status link"><i class="fa-solid fa-share-nodes"></i> Share</button>
-          <button class="btn-refresh" style="background:none; border:none; color:var(--text-dim); cursor:pointer; display:flex; align-items:center; gap:4px;" onclick="unpinArea()"><i class="fa-solid fa-trash-can"></i> Unpin</button>
-        </div>
-      </div>
-
-      <div class="pinned-card-body">
-        <div class="pinned-item" style="grid-column: 1 / -1; display:flex; flex-direction:column; gap: 8px;">
-          <div style="display:flex; align-items:center; gap: 14px; flex-wrap: wrap;">
-            <div class="status-badge badge-glow-green" style="font-size: 14px; padding: 6px 12px;">
-              <i class="fa-solid fa-circle-check"></i> No Active Outage
+      return `
+        <div class="pinned-card glass-card active-outage">
+          <div class="pinned-card-header">
+            <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+              <h3><i class="fa-solid fa-star" style="color: var(--warning-color);"></i> Pinned Locality</h3>
+              <span style="font-size: 11px; font-weight: 600; color: #38bdf8; background: rgba(56, 189, 248, 0.12); border: 1px solid rgba(56, 189, 248, 0.3); padding: 2px 8px; border-radius: 6px;">
+                <i class="fa-solid fa-map-pin" style="font-size: 9px;"></i> District: ${escapeHtml(pinnedItem.districtName)}
+              </span>
             </div>
-            <span style="font-size: 14px; color: var(--text-dim);">No outages are currently reported for <strong>${escapeHtml(pinnedArea.area)}</strong> (Feeder: ${escapeHtml(pinnedArea.feeder)}) on the DHBVN portal.</span>
+            <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+              <button class="btn-refresh" style="background:rgba(245,158,11,0.15); border:1px solid rgba(245,158,11,0.3); color:var(--warning-color); cursor:pointer; display:flex; align-items:center; gap:4px; padding: 4px 8px; border-radius:6px; font-size:12px;" onclick="subscribeToAlerts('${pinnedItem.districtName}', '${pinnedItem.feeder}', '${pinnedItem.area}')" title="Get live push alerts"><i class="fa-solid fa-bell"></i> Alerts</button>
+              <button class="btn-refresh" style="background:none; border:none; color:var(--text-dim); cursor:pointer; display:flex; align-items:center; gap:4px;" onclick="shareArea('${pinnedItem.districtId}', '${pinnedItem.districtName}', '${pinnedItem.feeder}', '${pinnedItem.area}')" title="Share live status link"><i class="fa-solid fa-share-nodes"></i> Share</button>
+              <button class="btn-refresh" style="background:none; border:none; color:var(--text-dim); cursor:pointer; display:flex; align-items:center; gap:4px;" onclick="unpinSingleArea('${pinnedItem.districtName.replace(/'/g, "\\'")}', '${pinnedItem.area.replace(/'/g, "\\'")}')" title="Unpin this area"><i class="fa-solid fa-trash-can"></i> Unpin</button>
+            </div>
           </div>
-          <div style="font-size: 12px; color: var(--text-muted); border-top: 1px solid rgba(255,255,255,0.05); padding-top: 8px; margin-top: 4px;">
-            <i class="fa-solid fa-clock-rotate-left"></i> Last Checked: ${getLastUpdatedText()}
+          <div class="pinned-card-body">
+            <div class="pinned-item" style="grid-column: 1 / -1;">
+              <i class="fa-solid fa-house-laptop"></i>
+              <span><strong>Outage Detected:</strong> <span style="font-weight:700; color:#fff;">${escapeHtml(pinnedItem.area)}</span> <span style="color: var(--text-dim); font-size: 13px;">(Feeder: ${escapeHtml(pinnedItem.feeder)})</span></span>
+            </div>
+            <div class="pinned-item">
+              <i class="fa-solid fa-clock"></i>
+              <span><strong>Cut Started:</strong> ${formatTimeTo12Hr(activeCut.start_time) || 'N/A'}</span>
+            </div>
+            <div class="pinned-item">
+              <i class="fa-solid fa-circle-chevron-right"></i>
+              <span><strong>Est. Restoration:</strong> <span style="color:#67e8f9; font-weight:600;">${formatTimeTo12Hr(activeCut.expected_restoration_time) || 'Pending Estimate'}</span></span>
+            </div>
+            <div class="pinned-item">
+              <div class="status-badge ${badgeClass}">
+                <i class="fa-solid ${badgeIcon}"></i> ${badgeText}
+              </div>
+            </div>
+            <div class="pinned-item" style="grid-column: 1 / -1;">
+              <i class="fa-solid fa-circle-info"></i>
+              <span><strong>Remarks:</strong> <span style="font-style:italic;">${remarks}</span></span>
+            </div>
+            <div class="pinned-item" style="grid-column: 1 / -1; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 8px; margin-top: 4px; font-size: 12px; color: var(--text-muted);">
+              <i class="fa-solid fa-clock-rotate-left"></i> Last Checked: ${getLastUpdatedText()}
+            </div>
           </div>
         </div>
-      </div>
-    `;
-  }
+      `;
+    } else {
+      return `
+        <div class="pinned-card glass-card">
+          <div class="pinned-card-header">
+            <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+              <h3><i class="fa-solid fa-star" style="color: var(--warning-color);"></i> Pinned Locality</h3>
+              <span style="font-size: 11px; font-weight: 600; color: #38bdf8; background: rgba(56, 189, 248, 0.12); border: 1px solid rgba(56, 189, 248, 0.3); padding: 2px 8px; border-radius: 6px;">
+                <i class="fa-solid fa-map-pin" style="font-size: 9px;"></i> District: ${escapeHtml(pinnedItem.districtName)}
+              </span>
+            </div>
+            <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+              <button class="btn-refresh" style="background:rgba(245,158,11,0.15); border:1px solid rgba(245,158,11,0.3); color:var(--warning-color); cursor:pointer; display:flex; align-items:center; gap:4px; padding: 4px 8px; border-radius:6px; font-size:12px;" onclick="subscribeToAlerts('${pinnedItem.districtName}', '${pinnedItem.feeder}', '${pinnedItem.area}')" title="Get live push alerts"><i class="fa-solid fa-bell"></i> Alerts</button>
+              <button class="btn-refresh" style="background:none; border:none; color:var(--text-dim); cursor:pointer; display:flex; align-items:center; gap:4px;" onclick="shareArea('${pinnedItem.districtId}', '${pinnedItem.districtName}', '${pinnedItem.feeder}', '${pinnedItem.area}')" title="Share live status link"><i class="fa-solid fa-share-nodes"></i> Share</button>
+              <button class="btn-refresh" style="background:none; border:none; color:var(--text-dim); cursor:pointer; display:flex; align-items:center; gap:4px;" onclick="unpinSingleArea('${pinnedItem.districtName.replace(/'/g, "\\'")}', '${pinnedItem.area.replace(/'/g, "\\'")}')" title="Unpin this area"><i class="fa-solid fa-trash-can"></i> Unpin</button>
+            </div>
+          </div>
+          <div class="pinned-card-body">
+            <div class="pinned-item" style="grid-column: 1 / -1; display:flex; flex-direction:column; gap: 8px;">
+              <div style="display:flex; align-items:center; gap: 14px; flex-wrap: wrap;">
+                <div class="status-badge badge-glow-green" style="font-size: 14px; padding: 6px 12px;">
+                  <i class="fa-solid fa-circle-check"></i> No Active Outage
+                </div>
+                <span style="font-size: 14px; color: var(--text-dim);">No outages are currently reported for <strong>${escapeHtml(pinnedItem.area)}</strong> (Feeder: ${escapeHtml(pinnedItem.feeder)}) on the DHBVN portal.</span>
+              </div>
+              <div style="font-size: 12px; color: var(--text-muted); border-top: 1px solid rgba(255,255,255,0.05); padding-top: 8px; margin-top: 4px;">
+                <i class="fa-solid fa-clock-rotate-left"></i> Last Checked: ${getLastUpdatedText()}
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+  }).join('');
 }
 
 // Handle Manual Selection
@@ -1016,10 +1041,11 @@ function renderOutages() {
     const severityLabel = severity.toUpperCase();
 
     // Is this row currently pinned?
-    const isPinned = pinnedArea &&
-      pinnedArea.districtName === currentDistrictName &&
-      pinnedArea.feeder === item.feeder &&
-      pinnedArea.area === item.area;
+    const isPinned = pinnedAreas.some(p =>
+      p.districtName === currentDistrictName &&
+      p.feeder === item.feeder &&
+      p.area === item.area
+    );
 
     const pinClass = isPinned ? 'pinned' : '';
     const pinIcon = isPinned ? 'fa-solid' : 'fa-regular';
@@ -1124,13 +1150,14 @@ function renderOutages() {
 
 // Toggle Pin Click Event
 window.togglePin = function (feeder, area) {
-  const isPinned = pinnedArea &&
-    pinnedArea.districtName === currentDistrictName &&
-    pinnedArea.feeder === feeder &&
-    pinnedArea.area === area;
+  const isPinned = pinnedAreas.some(p =>
+    p.districtName === currentDistrictName &&
+    p.feeder === feeder &&
+    p.area === area
+  );
 
   if (isPinned) {
-    unpinArea();
+    unpinSingleArea(currentDistrictName, area);
   } else {
     savePinnedArea(currentDistrictId, currentDistrictName, feeder, area);
   }
@@ -2669,7 +2696,7 @@ function renderQuickStatusCard(name, district, type) {
   const docKey = `${district}_${name}`.replace(/[^a-zA-Z0-9_]/g, '_').toLowerCase();
   const districtId = DISTRICT_NAME_TO_ID[district] || "11";
   const feederName = officialOutage ? officialOutage.feeder : (type === 'feeder' ? name : 'General Feeder');
-  const isPinned = pinnedArea && pinnedArea.area === name && pinnedArea.districtName === district;
+  const isPinned = pinnedAreas.some(p => p.area === name && p.districtName === district);
 
   // Initial Card Shell
   card.className = `quick-status-card ${officialOutage ? 'status-active-cut' : 'status-normal'}`;
@@ -2808,8 +2835,9 @@ function listenToCommunityReports(docKey, officialOutage) {
 }
 
 window.toggleQuickStarArea = function (districtId, districtName, feeder, area) {
-  if (pinnedArea && pinnedArea.area === area && pinnedArea.districtName === districtName) {
-    unpinArea();
+  const isPinned = pinnedAreas.some(p => p.area === area && p.districtName === districtName);
+  if (isPinned) {
+    unpinSingleArea(districtName, area);
   } else {
     savePinnedArea(districtId, districtName, feeder, area);
   }
