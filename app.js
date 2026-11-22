@@ -570,7 +570,7 @@ function renderPinnedAreas() {
             </div>
             <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
               <button class="btn-refresh" style="background:rgba(245,158,11,0.15); border:1px solid rgba(245,158,11,0.3); color:var(--warning-color); cursor:pointer; display:flex; align-items:center; gap:4px; padding: 4px 8px; border-radius:6px; font-size:12px;" onclick="subscribeToAlerts('${pinnedItem.districtName}', '${pinnedItem.feeder}', '${pinnedItem.area}')" title="Get live push alerts"><i class="fa-solid fa-bell"></i> Alerts</button>
-              <button class="btn-refresh pinned-refresh-btn" style="background:none; border:none; color:var(--text-dim); cursor:pointer; display:flex; align-items:center; gap:4px;" onclick="handleLiveRefresh('${pinnedItem.districtId}')" title="Refresh live status"><i class="fa-solid fa-rotate"></i> Refresh</button>
+              <button class="btn-refresh pinned-refresh-btn" style="background:none; border:none; color:var(--text-dim); cursor:pointer; display:flex; align-items:center; gap:4px;" onclick="handleLiveRefresh('${pinnedItem.districtId}', this)" title="Refresh live status"><i class="fa-solid fa-rotate"></i> Refresh</button>
               <button class="btn-refresh" style="background:none; border:none; color:var(--text-dim); cursor:pointer; display:flex; align-items:center; gap:4px;" onclick="shareArea('${pinnedItem.districtId}', '${pinnedItem.districtName}', '${pinnedItem.feeder}', '${pinnedItem.area}')" title="Share live status link"><i class="fa-solid fa-share-nodes"></i> Share</button>
               <button class="btn-refresh" style="background:none; border:none; color:var(--text-dim); cursor:pointer; display:flex; align-items:center; gap:4px;" onclick="unpinSingleArea('${pinnedItem.districtName.replace(/'/g, "\\'")}', '${pinnedItem.area.replace(/'/g, "\\'")}')" title="Unpin this area"><i class="fa-solid fa-trash-can"></i> Unpin</button>
             </div>
@@ -615,7 +615,7 @@ function renderPinnedAreas() {
             </div>
             <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
               <button class="btn-refresh" style="background:rgba(245,158,11,0.15); border:1px solid rgba(245,158,11,0.3); color:var(--warning-color); cursor:pointer; display:flex; align-items:center; gap:4px; padding: 4px 8px; border-radius:6px; font-size:12px;" onclick="subscribeToAlerts('${pinnedItem.districtName}', '${pinnedItem.feeder}', '${pinnedItem.area}')" title="Get live push alerts"><i class="fa-solid fa-bell"></i> Alerts</button>
-              <button class="btn-refresh pinned-refresh-btn" style="background:none; border:none; color:var(--text-dim); cursor:pointer; display:flex; align-items:center; gap:4px;" onclick="handleLiveRefresh('${pinnedItem.districtId}')" title="Refresh live status"><i class="fa-solid fa-rotate"></i> Refresh</button>
+              <button class="btn-refresh pinned-refresh-btn" style="background:none; border:none; color:var(--text-dim); cursor:pointer; display:flex; align-items:center; gap:4px;" onclick="handleLiveRefresh('${pinnedItem.districtId}', this)" title="Refresh live status"><i class="fa-solid fa-rotate"></i> Refresh</button>
               <button class="btn-refresh" style="background:none; border:none; color:var(--text-dim); cursor:pointer; display:flex; align-items:center; gap:4px;" onclick="shareArea('${pinnedItem.districtId}', '${pinnedItem.districtName}', '${pinnedItem.feeder}', '${pinnedItem.area}')" title="Share live status link"><i class="fa-solid fa-share-nodes"></i> Share</button>
               <button class="btn-refresh" style="background:none; border:none; color:var(--text-dim); cursor:pointer; display:flex; align-items:center; gap:4px;" onclick="unpinSingleArea('${pinnedItem.districtName.replace(/'/g, "\\'")}', '${pinnedItem.area.replace(/'/g, "\\'")}')" title="Unpin this area"><i class="fa-solid fa-trash-can"></i> Unpin</button>
             </div>
@@ -1335,7 +1335,7 @@ function checkLocalityOutages() {
 }
 
 // Live On-Demand Refresh
-window.handleLiveRefresh = async function (eOrDistrictId) {
+window.handleLiveRefresh = async function (eOrDistrictId, btnElement) {
   // Determine if called from event listener or programmatic call
   const targetDistrictId = (typeof eOrDistrictId === 'string' && eOrDistrictId) ? eOrDistrictId : currentDistrictId;
   const districtId = targetDistrictId || currentDistrictId;
@@ -1348,6 +1348,18 @@ window.handleLiveRefresh = async function (eOrDistrictId) {
     refreshBtn.disabled = true;
     refreshIcon.classList.add('spin-animation');
     refreshBtnText.textContent = "Checking...";
+  }
+
+  // Visual spin on the clicked button or all relevant pinned refresh buttons
+  let clickedBtn = btnElement;
+  if (!clickedBtn && typeof event !== 'undefined' && event && event.target) {
+    clickedBtn = event.target.closest('button');
+  }
+
+  if (clickedBtn) {
+    const icon = clickedBtn.querySelector('i');
+    if (icon) icon.classList.add('fa-spin');
+    clickedBtn.disabled = true;
   }
 
   const pinnedRefreshIcons = document.querySelectorAll('.pinned-refresh-btn i, .shared-refresh-btn i');
@@ -1407,6 +1419,8 @@ window.handleLiveRefresh = async function (eOrDistrictId) {
       if (res.ok) {
         const freshData = await res.json();
         outagesData = freshData;
+        // Stamp current live client check time so "Last Checked" reflects this exact moment
+        outagesData.last_updated = new Date().toISOString();
         liveDataLoaded = true;
       }
     } catch (err) {
@@ -1445,6 +1459,14 @@ window.handleLiveRefresh = async function (eOrDistrictId) {
       }, 2500);
     } else {
       refreshBtnText.textContent = "Refresh Live";
+    }
+  } else if (clickedBtn) {
+    clickedBtn.disabled = false;
+    if (liveDataLoaded) {
+      clickedBtn.innerHTML = `<i class="fa-solid fa-check" style="color: var(--success-color);"></i> <span style="color: var(--success-color); font-weight:600;">Refreshed ✓</span>`;
+      setTimeout(() => {
+        clickedBtn.innerHTML = `<i class="fa-solid fa-rotate"></i> Refresh`;
+      }, 2500);
     }
   }
   pinnedRefreshIcons.forEach(icon => icon.classList.remove('fa-spin'));
