@@ -1703,25 +1703,35 @@ function updateArtAndLeaderboard() {
 
   // 2. Hotspot Feeder Leaderboard (last 14 days)
   // Deduplicate by (feeder + start_time) so a feeder with 30 affected colonies is counted as 1 outage trip, not 30!
+  // Exclude Agricultural (AP) tubewell feeders so the leaderboard focuses strictly on residential & urban power reliability.
   const feederCounts = {};
   const localityCounts = {};
+  const localityFeeders = {};
   const seenFeederTrips = new Set();
 
   currentDistrictHistory.forEach(item => {
     const timestamp = item.timestamp || (item.start_time ? parseDHBVNDate(item.start_time)?.getTime() : null);
     if (!timestamp || timestamp < fourteenDaysAgo) return;
 
-    if (item.feeder) {
-      const feederName = item.feeder.trim();
+    const feederName = item.feeder ? item.feeder.trim() : '';
+    const areaName = item.area ? item.area.trim() : '';
+    const feederCat = getFeederCategory(feederName);
+
+    // Filter out Agriculture AP feeders
+    if (feederCat === 'agri') return;
+
+    if (feederName) {
       const tripKey = `${feederName}___${item.start_time}`;
       if (!seenFeederTrips.has(tripKey)) {
         seenFeederTrips.add(tripKey);
         feederCounts[feederName] = (feederCounts[feederName] || 0) + 1;
       }
     }
-    if (item.area && item.area.trim()) {
-      const areaName = item.area.trim();
+    if (areaName) {
       localityCounts[areaName] = (localityCounts[areaName] || 0) + 1;
+      if (!localityFeeders[areaName]) {
+        localityFeeders[areaName] = feederName;
+      }
     }
   });
 
@@ -1742,8 +1752,7 @@ function updateArtAndLeaderboard() {
         const cat = getFeederCategory(feeder);
         let catBadge = '';
         if (cat === 'urban') catBadge = '<span class="category-tag urban" style="font-size: 9px; padding: 1px 4px;"><i class="fa-solid fa-city"></i> Urban</span>';
-        else if (cat === 'agri') catBadge = '<span class="category-tag agri" style="font-size: 9px; padding: 1px 4px;"><i class="fa-solid fa-wheat-awn"></i> Agri</span>';
-        else catBadge = '<span class="category-tag rural" style="font-size: 9px; padding: 1px 4px;"><i class="fa-solid fa-house-chimney"></i> Dom</span>';
+        else catBadge = '<span class="category-tag dom" style="font-size: 9px; padding: 1px 4px;"><i class="fa-solid fa-house-chimney"></i> Dom</span>';
 
         html += `
           <div class="leaderboard-item">
@@ -1776,11 +1785,23 @@ function updateArtAndLeaderboard() {
       sortedLocalities.forEach(([area, count], index) => {
         const rank = index + 1;
         const rankDisplay = rank === 1 ? `<i class="fa-solid fa-triangle-exclamation" style="color: #ec4899;"></i>` : `#${rank}`;
+        const feeder = localityFeeders[area] || '';
+        const locCat = getLocalityCategory(area, feeder);
+        const locBadge = locCat === 'urban'
+          ? '<span class="category-tag urban" style="font-size: 9px; padding: 1px 4px;"><i class="fa-solid fa-city"></i> Urban</span>'
+          : '<span class="category-tag dom" style="font-size: 9px; padding: 1px 4px;"><i class="fa-solid fa-house-chimney"></i> Dom</span>';
+
         locHtml += `
           <div class="leaderboard-item">
             <div class="leaderboard-feeder-info">
               <span class="leaderboard-rank">${rankDisplay}</span>
-              <span class="leaderboard-feeder-name" title="${area}">${area}</span>
+              <div style="overflow: hidden;">
+                <span class="leaderboard-feeder-name" title="${area}">${area}</span>
+                <div style="margin-top: 2px; display: flex; align-items: center; gap: 6px;">
+                  ${locBadge}
+                  ${feeder ? `<span style="font-size: 10px; color: var(--text-dim); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${feeder}</span>` : ''}
+                </div>
+              </div>
             </div>
             <span class="leaderboard-count-badge" style="background: rgba(236, 72, 153, 0.1); color: #f472b6; border-color: rgba(236, 72, 153, 0.25);">${count} hits</span>
           </div>
@@ -2017,10 +2038,27 @@ function getFeederCategory(feederName) {
   if (name.includes(' AP') || name.includes('(AP)') || name.endsWith('AP') || name.includes('TUBEWELL') || name.includes('AGRICULTURE')) {
     return 'agri';
   }
-  if (name.includes('(U)') || name.includes(' URBAN') || name.includes('(URBAN)') || name.includes('CITY') || name.includes('TOWN')) {
+  // Rural Domestic Supply Feeders
+  if (name.includes(' DS') || name.endsWith('DS')) {
+    return 'rural';
+  }
+  if (name.includes('(U)') || name.includes(' URBAN') || name.includes('(URBAN)') || name.includes('CITY') || name.includes('TOWN') || name.includes('SECTOR') || name.includes('SECT') || name.includes('CAMP') || name.includes('GATE') || name.includes('ENCLAVE')) {
     return 'urban';
   }
   return 'rural';
+}
+
+// Helper: Classify Locality Category (Urban vs Domestic/Rural vs Agri)
+function getLocalityCategory(areaName, feederName) {
+  const fCat = feederName ? getFeederCategory(feederName) : null;
+  if (fCat === 'agri') return 'agri';
+
+  const a = (areaName || '').toUpperCase();
+  const isExplicitUrbanName = a.includes('COLONY') || a.includes('SECTOR') || a.includes('SECT') || a.includes('NAGAR') || a.includes('ENCLAVE') || a.includes('CAMP') || a.includes('VIHAR') || a.includes('GATE') || a.includes('BAZAR') || a.includes('MOHALLA');
+
+  if (isExplicitUrbanName) return 'urban';
+  if (fCat === 'rural') return 'dom';
+  return fCat === 'urban' ? 'urban' : 'dom';
 }
 
 // Helper: Classify Severity of Outage
