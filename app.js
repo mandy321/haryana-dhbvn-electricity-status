@@ -2585,20 +2585,38 @@ function renderQuickSearchResults(query) {
     return;
   }
 
-  dropdown.innerHTML = topResults.map(item => `
-    <div class="quick-search-item" onclick="selectQuickSearchResult('${encodeURIComponent(item.name)}', '${encodeURIComponent(item.district)}', '${item.type}')">
-      <div>
-        <div style="font-weight: 600; color: #fff; font-size: 13px;">
-          <i class="${item.type === 'feeder' ? 'fa-solid fa-bolt' : 'fa-solid fa-location-dot'}" style="color: #38bdf8; margin-right: 6px; font-size: 11px;"></i>
-          ${escapeHtml(item.name)}
+  dropdown.innerHTML = topResults.map(item => {
+    // Check if this specific item has an active DHBVN cut
+    let hasCut = false;
+    if (outagesData && outagesData[item.district]) {
+      hasCut = outagesData[item.district].some(r => {
+        const a = (r.area || '').toLowerCase();
+        const f = (r.feeder || '').toLowerCase();
+        const n = item.name.toLowerCase();
+        return a.includes(n) || n.includes(a) || f === n;
+      });
+    }
+
+    return `
+      <div class="quick-search-item" onclick="selectQuickSearchResult('${encodeURIComponent(item.name)}', '${encodeURIComponent(item.district)}', '${item.type}')">
+        <div>
+          <div class="item-title">
+            <i class="${item.type === 'feeder' ? 'fa-solid fa-bolt' : 'fa-solid fa-location-dot'}" style="color: ${item.type === 'feeder' ? '#fbbf24' : '#38bdf8'}; font-size: 13px;"></i>
+            <span>${escapeHtml(item.name)}</span>
+            ${hasCut ? '<span class="quick-badge-live-cut"><i class="fa-solid fa-circle-exclamation"></i> Outage Active</span>' : ''}
+          </div>
+          <div class="item-badges">
+            <span class="quick-badge-dist"><i class="fa-solid fa-map-pin" style="font-size: 9px;"></i> ${escapeHtml(item.district)}</span>
+            <span class="quick-badge-type">${item.type === 'feeder' ? '11kV Feeder' : 'Locality / Area'}</span>
+          </div>
         </div>
-        <div style="font-size: 11px; color: var(--text-dim); margin-top: 2px;">
-          ${item.type === 'feeder' ? 'Feeder' : 'Locality / Area'} &bull; District: <strong style="color: #94a3b8;">${item.district}</strong>
+        <div class="quick-search-select-btn">
+          <span>Check Status</span>
+          <i class="fa-solid fa-arrow-right" style="font-size: 11px;"></i>
         </div>
       </div>
-      <i class="fa-solid fa-arrow-right" style="color: rgba(255,255,255,0.2); font-size: 12px;"></i>
-    </div>
-  `).join('');
+    `;
+  }).join('');
 
   dropdown.classList.remove('hidden');
 }
