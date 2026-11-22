@@ -535,7 +535,12 @@ function renderPinnedArea() {
 
     pinnedCard.innerHTML = `
       <div class="pinned-card-header">
-        <h3><i class="fa-solid fa-star" style="color: var(--warning-color);"></i> Pinned Locality</h3>
+        <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+          <h3><i class="fa-solid fa-star" style="color: var(--warning-color);"></i> Pinned Locality</h3>
+          <span style="font-size: 11px; font-weight: 600; color: #38bdf8; background: rgba(56, 189, 248, 0.12); border: 1px solid rgba(56, 189, 248, 0.3); padding: 2px 8px; border-radius: 6px;">
+            <i class="fa-solid fa-map-pin" style="font-size: 9px;"></i> District: ${escapeHtml(pinnedArea.districtName)}
+          </span>
+        </div>
         <div style="display: flex; gap: 12px; align-items: center;">
           <button class="btn-refresh" style="background:rgba(245,158,11,0.15); border:1px solid rgba(245,158,11,0.3); color:var(--warning-color); cursor:pointer; display:flex; align-items:center; gap:4px; padding: 4px 8px; border-radius:6px; font-size:12px;" onclick="subscribeToAlerts('${pinnedArea.districtName}', '${pinnedArea.feeder}', '${pinnedArea.area}')" title="Get live push alerts"><i class="fa-solid fa-bell"></i> Get Alerts</button>
           <button class="btn-refresh pinned-refresh-btn" style="background:none; border:none; color:var(--text-dim); cursor:pointer; display:flex; align-items:center; gap:4px;" onclick="handleLiveRefresh('${pinnedArea.districtId}')" title="Refresh live status"><i class="fa-solid fa-rotate"></i> Refresh</button>
@@ -546,7 +551,7 @@ function renderPinnedArea() {
       <div class="pinned-card-body">
         <div class="pinned-item" style="grid-column: 1 / -1;">
           <i class="fa-solid fa-house-laptop"></i>
-          <span><strong>Outage Detected:</strong> <span style="font-weight:700; color:#fff;">${pinnedArea.area} (${pinnedArea.feeder})</span></span>
+          <span><strong>Outage Detected:</strong> <span style="font-weight:700; color:#fff;">${escapeHtml(pinnedArea.area)}</span> <span style="color: var(--text-dim); font-size: 13px;">(Feeder: ${escapeHtml(pinnedArea.feeder)})</span></span>
         </div>
         <div class="pinned-item">
           <i class="fa-solid fa-clock"></i>
@@ -573,7 +578,12 @@ function renderPinnedArea() {
   } else {
     pinnedCard.innerHTML = `
       <div class="pinned-card-header">
-        <h3><i class="fa-solid fa-star" style="color: var(--warning-color);"></i> Pinned Locality</h3>
+        <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+          <h3><i class="fa-solid fa-star" style="color: var(--warning-color);"></i> Pinned Locality</h3>
+          <span style="font-size: 11px; font-weight: 600; color: #38bdf8; background: rgba(56, 189, 248, 0.12); border: 1px solid rgba(56, 189, 248, 0.3); padding: 2px 8px; border-radius: 6px;">
+            <i class="fa-solid fa-map-pin" style="font-size: 9px;"></i> District: ${escapeHtml(pinnedArea.districtName)}
+          </span>
+        </div>
         <div style="display: flex; gap: 12px; align-items: center;">
           <button class="btn-refresh" style="background:rgba(245,158,11,0.15); border:1px solid rgba(245,158,11,0.3); color:var(--warning-color); cursor:pointer; display:flex; align-items:center; gap:4px; padding: 4px 8px; border-radius:6px; font-size:12px;" onclick="subscribeToAlerts('${pinnedArea.districtName}', '${pinnedArea.feeder}', '${pinnedArea.area}')" title="Get live push alerts"><i class="fa-solid fa-bell"></i> Get Alerts</button>
           <button class="btn-refresh pinned-refresh-btn" style="background:none; border:none; color:var(--text-dim); cursor:pointer; display:flex; align-items:center; gap:4px;" onclick="handleLiveRefresh('${pinnedArea.districtId}')" title="Refresh live status"><i class="fa-solid fa-rotate"></i> Refresh</button>
@@ -584,11 +594,11 @@ function renderPinnedArea() {
 
       <div class="pinned-card-body">
         <div class="pinned-item" style="grid-column: 1 / -1; display:flex; flex-direction:column; gap: 8px;">
-          <div style="display:flex; align-items:center; gap: 14px;">
+          <div style="display:flex; align-items:center; gap: 14px; flex-wrap: wrap;">
             <div class="status-badge badge-glow-green" style="font-size: 14px; padding: 6px 12px;">
               <i class="fa-solid fa-circle-check"></i> No Active Outage
             </div>
-            <span style="font-size: 14px; color: var(--text-dim);">No outages are currently reported for <strong>${pinnedArea.area} (${pinnedArea.feeder})</strong> on the DHBVN portal.</span>
+            <span style="font-size: 14px; color: var(--text-dim);">No outages are currently reported for <strong>${escapeHtml(pinnedArea.area)}</strong> (Feeder: ${escapeHtml(pinnedArea.feeder)}) on the DHBVN portal.</span>
           </div>
           <div style="font-size: 12px; color: var(--text-muted); border-top: 1px solid rgba(255,255,255,0.05); padding-top: 8px; margin-top: 4px;">
             <i class="fa-solid fa-clock-rotate-left"></i> Last Checked: ${getLastUpdatedText()}
