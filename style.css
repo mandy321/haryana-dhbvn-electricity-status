@@ -17,12 +17,12 @@
   --success-glow: rgba(16, 185, 129, 0.2);
   --warning-color: #f59e0b;
   --warning-glow: rgba(245, 158, 11, 0.2);
-  
+
   /* Text */
   --text-main: #f3f4f6;
   --text-muted: #9ca3af;
   --text-dim: #6b7280;
-  
+
   /* Transitions */
   --ease-soft: cubic-bezier(0.25, 0.8, 0.25, 1);
   --transition-fast: 0.2s var(--ease-soft);
@@ -53,13 +53,16 @@ body {
 ::-webkit-scrollbar {
   width: 8px;
 }
+
 ::-webkit-scrollbar-track {
   background: rgba(8, 9, 15, 0.5);
 }
+
 ::-webkit-scrollbar-thumb {
   background: rgba(255, 255, 255, 0.1);
   border-radius: 4px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.25);
 }
@@ -285,7 +288,7 @@ body {
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  box-shadow: inset 0 0 20px rgba(0,0,0,0.2);
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.2);
   transition: border-color var(--transition-fast);
 }
 
@@ -326,7 +329,7 @@ body {
   pointer-events: none;
   z-index: 10000;
   display: none;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
   font-family: var(--font-heading);
   line-height: 1.4;
 }
@@ -396,7 +399,7 @@ body {
   box-shadow: 0 0 0 3px var(--primary-glow);
 }
 
-#districtSelect:focus ~ .select-arrow {
+#districtSelect:focus~.select-arrow {
   transform: translateY(-50%) rotate(180deg);
 }
 
@@ -758,7 +761,8 @@ body {
   font-size: 14px;
 }
 
-#searchInput, #historySearchInput {
+#searchInput,
+#historySearchInput {
   width: 100%;
   background: rgba(16, 18, 30, 0.6);
   border: 1px solid var(--card-border);
@@ -771,7 +775,8 @@ body {
   transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
 }
 
-#searchInput:focus, #historySearchInput:focus {
+#searchInput:focus,
+#historySearchInput:focus {
   border-color: var(--primary-color);
   box-shadow: 0 0 0 3px var(--primary-glow);
 }
@@ -932,19 +937,24 @@ body {
   0% {
     box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.5);
   }
+
   70% {
     box-shadow: 0 0 0 8px rgba(16, 185, 129, 0);
   }
+
   100% {
     box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
   }
 }
 
 @keyframes logo-glow {
-  0%, 100% {
+
+  0%,
+  100% {
     text-shadow: 0 0 8px var(--primary-color);
     transform: scale(1);
   }
+
   50% {
     text-shadow: 0 0 20px var(--primary-color);
     transform: scale(1.1);
@@ -952,8 +962,13 @@ body {
 }
 
 @keyframes fade-in {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes slide-up {
@@ -961,6 +976,7 @@ body {
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -974,14 +990,14 @@ body {
   .app-container {
     padding: 12px;
   }
-  
+
   .app-header {
     flex-direction: column;
     gap: 12px;
     align-items: flex-start;
     padding: 16px;
   }
-  
+
   .live-indicator-container {
     align-self: flex-end;
   }
@@ -1112,8 +1128,13 @@ body {
 }
 
 @keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* ==========================================================================
@@ -1361,15 +1382,31 @@ body {
 }
 
 @keyframes pulse-green {
-  0% { box-shadow: 0 0 10px rgba(16, 185, 129, 0.2); }
-  50% { box-shadow: 0 0 20px rgba(16, 185, 129, 0.4); }
-  100% { box-shadow: 0 0 10px rgba(16, 185, 129, 0.2); }
+  0% {
+    box-shadow: 0 0 10px rgba(16, 185, 129, 0.2);
+  }
+
+  50% {
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
+  }
+
+  100% {
+    box-shadow: 0 0 10px rgba(16, 185, 129, 0.2);
+  }
 }
 
 @keyframes pulse-red {
-  0% { box-shadow: 0 0 10px rgba(244, 63, 94, 0.2); }
-  50% { box-shadow: 0 0 20px rgba(244, 63, 94, 0.4); }
-  100% { box-shadow: 0 0 10px rgba(244, 63, 94, 0.2); }
+  0% {
+    box-shadow: 0 0 10px rgba(244, 63, 94, 0.2);
+  }
+
+  50% {
+    box-shadow: 0 0 20px rgba(244, 63, 94, 0.4);
+  }
+
+  100% {
+    box-shadow: 0 0 10px rgba(244, 63, 94, 0.2);
+  }
 }
 
 .status-metrics {
@@ -1502,9 +1539,20 @@ body {
   border-radius: 50%;
 }
 
-.sev-dot.major { background: var(--danger-color); box-shadow: 0 0 6px var(--danger-color); }
-.sev-dot.moderate { background: var(--warning-color); box-shadow: 0 0 6px var(--warning-color); }
-.sev-dot.minor { background: var(--success-color); box-shadow: 0 0 6px var(--success-color); }
+.sev-dot.major {
+  background: var(--danger-color);
+  box-shadow: 0 0 6px var(--danger-color);
+}
+
+.sev-dot.moderate {
+  background: var(--warning-color);
+  box-shadow: 0 0 6px var(--warning-color);
+}
+
+.sev-dot.minor {
+  background: var(--success-color);
+  box-shadow: 0 0 6px var(--success-color);
+}
 
 /* ==========================================================================
    CSS Tooltip Implementation
@@ -1596,9 +1644,23 @@ body {
   text-align: center;
 }
 
-.sev-tag.major { background: rgba(244, 63, 94, 0.15); color: var(--danger-color); border: 1px solid rgba(244, 63, 94, 0.2); }
-.sev-tag.moderate { background: rgba(245, 158, 11, 0.15); color: var(--warning-color); border: 1px solid rgba(245, 158, 11, 0.2); }
-.sev-tag.minor { background: rgba(16, 185, 129, 0.15); color: var(--success-color); border: 1px solid rgba(16, 185, 129, 0.2); }
+.sev-tag.major {
+  background: rgba(244, 63, 94, 0.15);
+  color: var(--danger-color);
+  border: 1px solid rgba(244, 63, 94, 0.2);
+}
+
+.sev-tag.moderate {
+  background: rgba(245, 158, 11, 0.15);
+  color: var(--warning-color);
+  border: 1px solid rgba(245, 158, 11, 0.2);
+}
+
+.sev-tag.minor {
+  background: rgba(16, 185, 129, 0.15);
+  color: var(--success-color);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
 
 /* Disclaimer & Archive */
 .disclaimer {
@@ -1735,6 +1797,7 @@ mark.search-highlight {
 .quick-search-dropdown::-webkit-scrollbar {
   width: 5px;
 }
+
 .quick-search-dropdown::-webkit-scrollbar-thumb {
   background: rgba(255, 255, 255, 0.2);
   border-radius: 4px;
@@ -1757,7 +1820,8 @@ mark.search-highlight {
   margin-bottom: 0;
 }
 
-.quick-search-item:hover, .quick-search-item:focus {
+.quick-search-item:hover,
+.quick-search-item:focus {
   background: rgba(56, 189, 248, 0.14);
   border-color: rgba(56, 189, 248, 0.35);
   transform: translateX(3px);
@@ -1874,5 +1938,3 @@ mark.search-highlight {
   cursor: not-allowed;
   transform: none;
 }
-
-

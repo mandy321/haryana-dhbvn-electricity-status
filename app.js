@@ -1628,9 +1628,13 @@ function updateArtAndLeaderboard() {
       const feederUpper = (item.feeder || '').toUpperCase();
       const areaUpper = (item.area || '').toUpperCase();
 
-      if (feederUpper.includes(' AP') || feederUpper.includes('(AP)') || feederUpper.endsWith('AP') || feederUpper.includes('TUBEWELL') || feederUpper.includes('AGRICULTURE')) {
+      const isAgri = feederUpper.includes(' AP') || feederUpper.includes('(AP)') || feederUpper.endsWith('AP') || feederUpper.includes('TUBEWELL') || feederUpper.includes('AGRICULTURE') || areaUpper.includes('(AP)');
+      // Rural domestic feeders end with DS or contain ' DS ' (e.g. BEHROLA DS, MALUKA DS)
+      const isRuralDomesticFeeder = feederUpper.includes(' DS') || feederUpper.endsWith('DS');
+
+      if (isAgri) {
         agriDurations.push(hours);
-      } else if (feederUpper.includes('(U)') || feederUpper.includes(' URBAN') || feederUpper.includes('(URBAN)') || feederUpper.includes('CITY') || feederUpper.includes('TOWN') || feederUpper.includes('CAMP') || feederUpper.includes('GATE') || feederUpper.includes('ENCLAVE') || areaUpper.includes('COLONY') || areaUpper.includes('SECTOR') || areaUpper.includes('NAGAR') || areaUpper.includes('VIHAR')) {
+      } else if (!isRuralDomesticFeeder && (feederUpper.includes('(U)') || feederUpper.includes(' URBAN') || feederUpper.includes('(URBAN)') || feederUpper.includes('CITY') || feederUpper.includes('TOWN') || feederUpper.includes('CAMP') || feederUpper.includes('GATE') || feederUpper.includes('ENCLAVE') || feederUpper.includes('SECTOR') || areaUpper.includes('COLONY') || areaUpper.includes('SECTOR') || areaUpper.includes('NAGAR') || areaUpper.includes('VIHAR'))) {
         urbanDurations.push(hours);
       } else {
         ruralDurations.push(hours);
@@ -1698,8 +1702,10 @@ function updateArtAndLeaderboard() {
   }
 
   // 2. Hotspot Feeder Leaderboard (last 14 days)
+  // Deduplicate by (feeder + start_time) so a feeder with 30 affected colonies is counted as 1 outage trip, not 30!
   const feederCounts = {};
   const localityCounts = {};
+  const seenFeederTrips = new Set();
 
   currentDistrictHistory.forEach(item => {
     const timestamp = item.timestamp || (item.start_time ? parseDHBVNDate(item.start_time)?.getTime() : null);
@@ -1707,7 +1713,11 @@ function updateArtAndLeaderboard() {
 
     if (item.feeder) {
       const feederName = item.feeder.trim();
-      feederCounts[feederName] = (feederCounts[feederName] || 0) + 1;
+      const tripKey = `${feederName}___${item.start_time}`;
+      if (!seenFeederTrips.has(tripKey)) {
+        seenFeederTrips.add(tripKey);
+        feederCounts[feederName] = (feederCounts[feederName] || 0) + 1;
+      }
     }
     if (item.area && item.area.trim()) {
       const areaName = item.area.trim();
@@ -2084,7 +2094,8 @@ function renderOutageChart(historyData) {
     dailyCounts[dateLabel] = 0;
   }
 
-  // 2. Aggregate history data based on start_time or fallback to scraped_at
+  // 2. Aggregate history data based on unique feeder outage events (or fallback to scraped_at)
+  const seenDailyTrips = new Set();
   (historyData || []).forEach(item => {
     const dateObj = parseDHBVNDate(item.start_time) || parseDHBVNDate(item.scraped_at);
     if (dateObj) {
@@ -2094,7 +2105,11 @@ function renderOutageChart(historyData) {
         month: '2-digit'
       });
       if (dateLabel in dailyCounts) {
-        dailyCounts[dateLabel]++;
+        const tripKey = `${item.feeder || ''}___${item.start_time}`;
+        if (!seenDailyTrips.has(tripKey)) {
+          seenDailyTrips.add(tripKey);
+          dailyCounts[dateLabel]++;
+        }
       }
     }
   });
@@ -2201,12 +2216,17 @@ function renderHourlyRiskChart(historyData) {
   ];
   const hourlyCounts = Array(24).fill(0);
 
+  const seenHourlyTrips = new Set();
   (historyData || []).forEach(item => {
     const dateObj = parseDHBVNDate(item.start_time);
     if (dateObj && !isNaN(dateObj.getTime())) {
       const h = dateObj.getHours();
       if (h >= 0 && h < 24) {
-        hourlyCounts[h]++;
+        const tripKey = `${item.feeder || ''}___${item.start_time}`;
+        if (!seenHourlyTrips.has(tripKey)) {
+          seenHourlyTrips.add(tripKey);
+          hourlyCounts[h]++;
+        }
       }
     }
   });
