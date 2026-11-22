@@ -2705,16 +2705,16 @@ function renderQuickStatusCard(name, district, type) {
 
   const fixTimeAdvice = isUrbanLocality
     ? {
-        label: "Urban / Town Grid Expectation",
+        label: "Historical Urban Grid Average",
         typical: "~45 mins – 1.5 hrs",
         maintenance: "~5.2 hrs (Morning 8:30 AM – 2:00 PM)",
-        badge: "Urban Fast-Response"
+        badge: "Urban Historical Pattern"
       }
     : {
-        label: "Rural / Domestic Feeder Expectation",
+        label: "Historical Rural Grid Average",
         typical: "~4 – 8 hrs",
         maintenance: "~6 – 10 hrs (Heavy Clearance)",
-        badge: "Rural Sub-Division"
+        badge: "Rural Historical Pattern"
       };
 
   // Initial Card Shell
@@ -2765,14 +2765,19 @@ function renderQuickStatusCard(name, district, type) {
       </div>
 
       <!-- Urban vs Rural Historical Fix Time Breakdown -->
-      <div style="margin-top: 10px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px; font-size: 11px;">
-        <div style="display: flex; align-items: center; gap: 6px; color: var(--text-dim);">
-          <i class="fa-solid fa-clock-rotate-left" style="color: #38bdf8;"></i>
-          <span><strong>${fixTimeAdvice.label}:</strong> Unplanned fault: <span style="color: #67e8f9; font-weight: 600;">${fixTimeAdvice.typical}</span> | Scheduled work: <span style="color: #fbbf24; font-weight: 600;">${fixTimeAdvice.maintenance}</span></span>
+      <div style="margin-top: 10px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.05); font-size: 11px;">
+        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px;">
+          <div style="display: flex; align-items: center; gap: 6px; color: var(--text-dim);">
+            <i class="fa-solid fa-chart-line" style="color: #38bdf8;"></i>
+            <span><strong>${fixTimeAdvice.label}:</strong> Unplanned fault: <span style="color: #67e8f9; font-weight: 600;">${fixTimeAdvice.typical}</span> | Scheduled work: <span style="color: #fbbf24; font-weight: 600;">${fixTimeAdvice.maintenance}</span></span>
+          </div>
+          <span style="font-size: 10px; color: #94a3b8; background: rgba(255,255,255,0.06); padding: 2px 6px; border-radius: 4px;">
+            ${fixTimeAdvice.badge}
+          </span>
         </div>
-        <span style="font-size: 10px; color: #94a3b8; background: rgba(255,255,255,0.06); padding: 2px 6px; border-radius: 4px;">
-          ${fixTimeAdvice.badge}
-        </span>
+        <div style="font-size: 10px; color: var(--text-muted); margin-top: 4px; font-style: italic;">
+          <i class="fa-solid fa-circle-info" style="font-size: 9px;"></i> Note: Estimated from past DHBVN incident resolution records; not live status. Actual fix time may vary based on fault severity.
+        </div>
       </div>
     </div>
 
