@@ -2551,7 +2551,7 @@ function renderQuickSearchResults(query) {
   for (const item of quickSearchLocalityIndex) {
     let score = 0;
     const nameLower = item.name.toLowerCase();
-    
+
     // Exact or prefix matches get top boost
     if (nameLower === query) score += 100;
     else if (nameLower.startsWith(query)) score += 50;
@@ -2820,8 +2820,8 @@ window.handleCommunityVote = async function (docKey, name, district, type) {
     }, { merge: true });
 
     localStorage.setItem(lastVoteKey, now.toString());
-    alert(isCut 
-      ? `Report recorded! Your neighbours will now see that power is out in ${name}.` 
+    alert(isCut
+      ? `Report recorded! Your neighbours will now see that power is out in ${name}.`
       : `Marked! Thanks for confirming power is restored in ${name}.`);
   } catch (err) {
     console.error("Error submitting community report:", err);
