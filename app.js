@@ -1573,9 +1573,13 @@ function updateArtAndLeaderboard() {
   const sevenDaysAgo = nowTime - (7 * 24 * 60 * 60 * 1000);
   const fourteenDaysAgo = nowTime - (14 * 24 * 60 * 60 * 1000);
 
-  // 1. Calculate Typical (Median) Restoration Time separately for Domestic & Agricultural
-  const domDurations = [];
+  // 1. Calculate Typical (Median) Restoration Time separately for Urban/City, Rural/Domestic & Agricultural
+  const urbanDurations = [];
+  const ruralDurations = [];
   const agriDurations = [];
+
+  const statUrbanFixTime = document.getElementById('statUrbanFixTime');
+  const statUrbanArtGlow = document.getElementById('statUrbanArtGlow');
 
   currentDistrictHistory.forEach(item => {
     const timestamp = item.timestamp || (item.start_time ? parseDHBVNDate(item.start_time)?.getTime() : null);
@@ -1602,11 +1606,15 @@ function updateArtAndLeaderboard() {
     // Filter out anomalous durations (under 1 min or over 72 hours)
     if (diff > 60 * 1000 && diff < 72 * 60 * 60 * 1000) {
       const hours = diff / (1000 * 60 * 60);
-      const cat = getFeederCategory(item.feeder);
-      if (cat === 'agri') {
+      const feederUpper = (item.feeder || '').toUpperCase();
+      const areaUpper = (item.area || '').toUpperCase();
+
+      if (feederUpper.includes(' AP') || feederUpper.includes('(AP)') || feederUpper.endsWith('AP') || feederUpper.includes('TUBEWELL') || feederUpper.includes('AGRICULTURE')) {
         agriDurations.push(hours);
+      } else if (feederUpper.includes('(U)') || feederUpper.includes(' URBAN') || feederUpper.includes('(URBAN)') || feederUpper.includes('CITY') || feederUpper.includes('TOWN') || areaUpper.includes('COLONY') || areaUpper.includes('SECTOR') || areaUpper.includes('NAGAR') || areaUpper.includes('ENCLAVE') || areaUpper.includes('VIHAR') || areaUpper.includes('CAMP') || areaUpper.includes('BAZAR') || areaUpper.includes('GATE')) {
+        urbanDurations.push(hours);
       } else {
-        domDurations.push(hours);
+        ruralDurations.push(hours);
       }
     }
   });
@@ -1619,18 +1627,37 @@ function updateArtAndLeaderboard() {
     return sorted.length % 2 !== 0 ? sorted[mid] : (sorted[mid - 1] + sorted[mid]) / 2;
   };
 
-  // Domestic Typical (Median) ART
-  if (domDurations.length > 0) {
-    const medianDomHours = getMedian(domDurations);
+  // Urban / City Typical (Median) Fix Time
+  if (urbanDurations.length > 0) {
+    const medianUrbanHours = getMedian(urbanDurations);
+    if (statUrbanFixTime) {
+      statUrbanFixTime.textContent = `${medianUrbanHours.toFixed(1)} hrs`;
+    }
+    if (statUrbanArtGlow) {
+      if (medianUrbanHours < 2) {
+        statUrbanArtGlow.className = "stat-icon-wrapper green-glow";
+      } else if (medianUrbanHours <= 4) {
+        statUrbanArtGlow.className = "stat-icon-wrapper orange-glow";
+      } else {
+        statUrbanArtGlow.className = "stat-icon-wrapper red-glow";
+      }
+    }
+  } else {
+    if (statUrbanFixTime) statUrbanFixTime.textContent = "--";
+  }
+
+  // Domestic / Rural Typical (Median) Fix Time
+  if (ruralDurations.length > 0) {
+    const medianRuralHours = getMedian(ruralDurations);
     if (statAvgFixTime) {
-      statAvgFixTime.textContent = `${medianDomHours.toFixed(1)} hrs`;
+      statAvgFixTime.textContent = `${medianRuralHours.toFixed(1)} hrs`;
     }
 
     // Color code: Green (< 2 hrs), Amber (2-4 hrs), Red (> 4 hrs)
     if (statArtGlow) {
-      if (medianDomHours < 2) {
+      if (medianRuralHours < 2) {
         statArtGlow.className = "stat-icon-wrapper green-glow";
-      } else if (medianDomHours <= 4) {
+      } else if (medianRuralHours <= 4) {
         statArtGlow.className = "stat-icon-wrapper orange-glow";
       } else {
         statArtGlow.className = "stat-icon-wrapper red-glow";
