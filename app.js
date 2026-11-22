@@ -168,16 +168,16 @@ async function initApp() {
     // Check for query parameters for shared areas
     parseSharedUrl();
 
-    // Fetch data/outages.json (the pre-cached Action database)
-    const response = await fetch('data/outages.json');
+    // Fetch data/outages.json with cache buster to guarantee fresh data
+    const response = await fetch(`data/outages.json?t=${Date.now()}`);
     if (!response.ok) {
-      throw new Error('Outages data file not found.');
+      throw new Error(`Outages data file not found (${response.status}).`);
     }
     outagesData = await response.json();
 
     // Fetch feeder master baseline data
     try {
-      const masterRes = await fetch('data/feeder_master.json');
+      const masterRes = await fetch(`data/feeder_master.json?t=${Date.now()}`);
       if (masterRes.ok) {
         feederMasterData = await masterRes.json();
       }
