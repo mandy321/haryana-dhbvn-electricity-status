@@ -2567,6 +2567,11 @@ function renderQuickSearchResults(query) {
       }
     }
 
+    // Boost Palwal district so Palwal localities appear first
+    if (item.district === 'Palwal') {
+      score += 40;
+    }
+
     if (allTokens || score > 0) {
       matches.push({ ...item, score });
     }
@@ -2588,8 +2593,9 @@ function renderQuickSearchResults(query) {
   dropdown.innerHTML = topResults.map(item => {
     // Check if this specific item has an active DHBVN cut
     let hasCut = false;
-    if (outagesData && outagesData[item.district]) {
-      hasCut = outagesData[item.district].some(r => {
+    const districtList = (outagesData && outagesData.districts && outagesData.districts[item.district]) ? outagesData.districts[item.district] : [];
+    if (districtList.length > 0) {
+      hasCut = districtList.some(r => {
         const a = (r.area || '').toLowerCase();
         const f = (r.feeder || '').toLowerCase();
         const n = item.name.toLowerCase();
@@ -2637,11 +2643,11 @@ function renderQuickStatusCard(name, district, type) {
   const card = document.getElementById('quickSearchCard');
   if (!card) return;
 
-  // Check active DHBVN status
+  // Check active DHBVN status using outagesData.districts
   let officialOutage = null;
-  if (outagesData && outagesData[district]) {
-    const list = outagesData[district];
-    officialOutage = list.find(r => {
+  const districtList = (outagesData && outagesData.districts && outagesData.districts[district]) ? outagesData.districts[district] : [];
+  if (districtList.length > 0) {
+    officialOutage = districtList.find(r => {
       const a = (r.area || '').toLowerCase();
       const f = (r.feeder || '').toLowerCase();
       const n = name.toLowerCase();
@@ -2651,6 +2657,9 @@ function renderQuickStatusCard(name, district, type) {
 
   // Generate safe storage/firestore document key
   const docKey = `${district}_${name}`.replace(/[^a-zA-Z0-9_]/g, '_').toLowerCase();
+  const districtId = DISTRICT_NAME_TO_ID[district] || "11";
+  const feederName = officialOutage ? officialOutage.feeder : (type === 'feeder' ? name : 'General Feeder');
+  const isPinned = pinnedArea && pinnedArea.area === name && pinnedArea.districtName === district;
 
   // Initial Card Shell
   card.className = `quick-status-card ${officialOutage ? 'status-active-cut' : 'status-normal'}`;
@@ -2658,9 +2667,9 @@ function renderQuickStatusCard(name, district, type) {
     <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; flex-wrap: wrap;">
       <div>
         <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
-          <h3 style="font-size: 16px; font-weight: 700; color: #fff; margin: 0;">${name}</h3>
-          <span style="font-size: 11px; background: rgba(255,255,255,0.08); padding: 2px 8px; border-radius: 6px; color: #94a3b8;">${district}</span>
-          <span style="font-size: 11px; background: rgba(56, 189, 248, 0.15); color: #38bdf8; padding: 2px 8px; border-radius: 6px;">${type === 'feeder' ? 'Feeder' : 'Locality'}</span>
+          <h3 style="font-size: 16px; font-weight: 700; color: #fff; margin: 0;">${escapeHtml(name)}</h3>
+          <span style="font-size: 11px; background: rgba(56, 189, 248, 0.15); border: 1px solid rgba(56, 189, 248, 0.3); color: #38bdf8; padding: 2px 8px; border-radius: 6px; font-weight: 600;">${escapeHtml(district)}</span>
+          <span style="font-size: 11px; background: rgba(255,255,255,0.08); padding: 2px 8px; border-radius: 6px; color: #94a3b8;">${type === 'feeder' ? '11kV Feeder' : 'Locality'}</span>
         </div>
         <p style="font-size: 12px; color: var(--text-dim); margin: 4px 0 0 0;">
           Direct grid assessment for this area
@@ -2669,10 +2678,10 @@ function renderQuickStatusCard(name, district, type) {
 
       <!-- Quick Actions (Star / WhatsApp) -->
       <div style="display: flex; gap: 8px;">
-        <button onclick="pinArea('${name.replace(/'/g, "\\'")}', '${(officialOutage ? officialOutage.feeder : name).replace(/'/g, "\\'")}', '${district}')" class="btn" style="background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.35); color: #fbbf24; font-size: 11px; padding: 6px 10px; border-radius: 6px;">
-          <i class="fa-solid fa-star"></i> Star Area
+        <button id="quickStarBtn" onclick="toggleQuickStarArea('${districtId}', '${district.replace(/'/g, "\\'")}', '${feederName.replace(/'/g, "\\'")}', '${name.replace(/'/g, "\\'")}')" class="btn" style="background: ${isPinned ? 'rgba(245, 158, 11, 0.35)' : 'rgba(245, 158, 11, 0.15)'}; border: 1px solid rgba(245, 158, 11, 0.5); color: #fbbf24; font-size: 11px; padding: 6px 12px; border-radius: 8px; font-weight: 600; cursor: pointer;">
+          <i class="fa-${isPinned ? 'solid' : 'regular'} fa-star"></i> ${isPinned ? 'Pinned ★' : 'Star Area'}
         </button>
-        <button onclick="shareLocalityStatus('${name.replace(/'/g, "\\'")}', '${district}', ${officialOutage ? 'true' : 'false'})" class="btn" style="background: rgba(37, 211, 102, 0.15); border: 1px solid rgba(37, 211, 102, 0.35); color: #25D366; font-size: 11px; padding: 6px 10px; border-radius: 6px;">
+        <button onclick="shareLocalityStatus('${name.replace(/'/g, "\\'")}', '${district.replace(/'/g, "\\'")}', ${officialOutage ? 'true' : 'false'})" class="btn" style="background: rgba(37, 211, 102, 0.15); border: 1px solid rgba(37, 211, 102, 0.35); color: #25D366; font-size: 11px; padding: 6px 12px; border-radius: 8px; font-weight: 600; cursor: pointer;">
           <i class="fa-brands fa-whatsapp"></i> Share
         </button>
       </div>
@@ -2787,6 +2796,18 @@ function listenToCommunityReports(docKey, officialOutage) {
     console.warn("Firestore onSnapshot error:", err);
   });
 }
+
+window.toggleQuickStarArea = function (districtId, districtName, feeder, area) {
+  if (pinnedArea && pinnedArea.area === area && pinnedArea.districtName === districtName) {
+    unpinArea();
+  } else {
+    savePinnedArea(districtId, districtName, feeder, area);
+  }
+  // Re-render status card so button reflects updated state
+  if (currentSelectedQuickLocality) {
+    renderQuickStatusCard(currentSelectedQuickLocality.name, currentSelectedQuickLocality.district, currentSelectedQuickLocality.type);
+  }
+};
 
 window.handleCommunityVote = async function (docKey, name, district, type) {
   // Check local cooldown
