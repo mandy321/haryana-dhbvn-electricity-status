@@ -2698,6 +2698,25 @@ function renderQuickStatusCard(name, district, type) {
   const feederName = officialOutage ? officialOutage.feeder : (type === 'feeder' ? name : 'General Feeder');
   const isPinned = pinnedAreas.some(p => p.area === name && p.districtName === district);
 
+  // Check if this is an urban area/feeder
+  const isUrbanLocality = type === 'feeder' 
+    ? getFeederCategory(name) === 'urban'
+    : (name.toLowerCase().includes('colony') || name.toLowerCase().includes('sector') || name.toLowerCase().includes('nagar') || name.toLowerCase().includes('enclave') || name.toLowerCase().includes('camp') || name.toLowerCase().includes('vihar') || name.toLowerCase().includes('bazar') || name.toLowerCase().includes('gate'));
+
+  const fixTimeAdvice = isUrbanLocality
+    ? {
+        label: "Urban / Town Grid Expectation",
+        typical: "~45 mins – 1.5 hrs",
+        maintenance: "~5.2 hrs (Morning 8:30 AM – 2:00 PM)",
+        badge: "Urban Fast-Response"
+      }
+    : {
+        label: "Rural / Domestic Feeder Expectation",
+        typical: "~4 – 8 hrs",
+        maintenance: "~6 – 10 hrs (Heavy Clearance)",
+        badge: "Rural Sub-Division"
+      };
+
   // Initial Card Shell
   card.className = `quick-status-card ${officialOutage ? 'status-active-cut' : 'status-normal'}`;
   card.innerHTML = `
@@ -2740,9 +2759,20 @@ function renderQuickStatusCard(name, district, type) {
         </div>
         ${officialOutage ? `
           <div style="font-size: 12px; font-weight: 600; color: #f87171; background: rgba(239,68,68,0.15); padding: 4px 10px; border-radius: 6px;">
-            Est. Restoration: ${officialOutage.expected_restoration_time || '~1.5 to 5 hours'}
+            ETR: ${officialOutage.expected_restoration_time || (isUrbanLocality ? '~1.5h' : '~4h')}
           </div>
         ` : ''}
+      </div>
+
+      <!-- Urban vs Rural Historical Fix Time Breakdown -->
+      <div style="margin-top: 10px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px; font-size: 11px;">
+        <div style="display: flex; align-items: center; gap: 6px; color: var(--text-dim);">
+          <i class="fa-solid fa-clock-rotate-left" style="color: #38bdf8;"></i>
+          <span><strong>${fixTimeAdvice.label}:</strong> Unplanned fault: <span style="color: #67e8f9; font-weight: 600;">${fixTimeAdvice.typical}</span> | Scheduled work: <span style="color: #fbbf24; font-weight: 600;">${fixTimeAdvice.maintenance}</span></span>
+        </div>
+        <span style="font-size: 10px; color: #94a3b8; background: rgba(255,255,255,0.06); padding: 2px 6px; border-radius: 4px;">
+          ${fixTimeAdvice.badge}
+        </span>
       </div>
     </div>
 
