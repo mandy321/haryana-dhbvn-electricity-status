@@ -126,7 +126,6 @@ const healthPercentText = document.getElementById('healthPercentText');
 const districtHealthBar = document.getElementById('districtHealthBar');
 const statAvgFixTime = document.getElementById('statAvgFixTime');
 const statAgriFixTime = document.getElementById('statAgriFixTime');
-const statEstimatedComplaints = document.getElementById('statEstimatedComplaints');
 const statArtGlow = document.getElementById('statArtGlow');
 const leaderboardContent = document.getElementById('leaderboardContent');
 const localityLeaderboardContent = document.getElementById('localityLeaderboardContent');
@@ -842,19 +841,6 @@ function updateStats() {
   statTotalOutages.textContent = total;
   statActive.textContent = active;
   statPlanned.textContent = planned;
-
-  if (statEstimatedComplaints) {
-    // Total physical outages currently active across entire Haryana grid
-    let totalStatewideOutages = 0;
-    if (outagesData && outagesData.districts) {
-      Object.keys(outagesData.districts).forEach(d => {
-        totalStatewideOutages += (outagesData.districts[d] || []).length;
-      });
-    }
-    // Baseline scale: typically ~1.1 to 1.3 registered domestic complaint calls per feeder cut cluster
-    const estimatedDailyCalls = Math.max(1400, Math.round(totalStatewideOutages * 0.85));
-    statEstimatedComplaints.textContent = `${estimatedDailyCalls.toLocaleString()}+`;
-  }
 
   // 1. Get baseline (Method 2: master list)
   const masterFeeders = (feederMasterData && feederMasterData[currentDistrictName]?.feeders) || [];
