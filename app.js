@@ -1427,8 +1427,6 @@ window.handleLiveRefresh = async function (eOrDistrictId, btnElement) {
       if (res.ok) {
         const freshData = await res.json();
         outagesData = freshData;
-        // Stamp current live client check time so "Last Checked" reflects this exact moment
-        outagesData.last_updated = new Date().toISOString();
         liveDataLoaded = true;
       }
     } catch (err) {

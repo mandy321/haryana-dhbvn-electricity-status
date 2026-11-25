@@ -2,8 +2,8 @@ name: Scrape DHBVN Outages
 
 on:
   schedule:
-    # Multiple staggered crons help avoid congested top-of-hour GitHub scheduler delays
-    - cron: '3,23,43 * * * *'
+    # Staggered 30-min cron off top/bottom of hour to reduce GitHub scheduler delays
+    - cron: '7,37 * * * *'
   workflow_dispatch:      # Allow manual and webhook-based triggers
   repository_dispatch:    # Allow external cron services (cron-job.org / curl) to trigger on demand
     types: [scrape_dhbvn]
